@@ -1,4 +1,6 @@
-﻿namespace Emu_Sniffer
+﻿using Network_Analyzer.Localization;
+
+namespace Network_Analyzer
 {
     partial class Main
     {
@@ -45,7 +47,7 @@
             this.Received = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Send = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Disconnected = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gbWorkWithConnections = new System.Windows.Forms.GroupBox();
+            this.gbConnectionsGridWork = new System.Windows.Forms.GroupBox();
             this.btnClearConnentions = new System.Windows.Forms.Button();
             this.lblAllConnections = new System.Windows.Forms.Label();
             this.lblAllConnectionsText = new System.Windows.Forms.Label();
@@ -59,7 +61,7 @@
             this.gbConnectionsWork.SuspendLayout();
             this.gbConnections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
-            this.gbWorkWithConnections.SuspendLayout();
+            this.gbConnectionsGridWork.SuspendLayout();
             this.gbControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +81,7 @@
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(81, 13);
             this.lblVersion.TabIndex = 12;
-            this.lblVersion.Text = "Version: 0.0.0.0";
+            this.lblVersion.Text = "Main.Version".Localize();
             // 
             // gbConnectionsWork
             // 
@@ -90,7 +92,7 @@
             this.gbConnectionsWork.Size = new System.Drawing.Size(202, 77);
             this.gbConnectionsWork.TabIndex = 8;
             this.gbConnectionsWork.TabStop = false;
-            this.gbConnectionsWork.Text = "Работа с дампами";
+            this.gbConnectionsWork.Text = "Main.ConnectionsWork".Localize();
             // 
             // btnSaveConnections
             // 
@@ -98,7 +100,7 @@
             this.btnSaveConnections.Name = "btnSaveConnections";
             this.btnSaveConnections.Size = new System.Drawing.Size(190, 23);
             this.btnSaveConnections.TabIndex = 1;
-            this.btnSaveConnections.Text = "Сохранить соединения";
+            this.btnSaveConnections.Text = "Main.SaveConnections".Localize();
             this.btnSaveConnections.UseVisualStyleBackColor = true;
             // 
             // btnLoadConnections
@@ -107,7 +109,7 @@
             this.btnLoadConnections.Name = "btnLoadConnections";
             this.btnLoadConnections.Size = new System.Drawing.Size(190, 23);
             this.btnLoadConnections.TabIndex = 0;
-            this.btnLoadConnections.Text = "Загрузить соединения";
+            this.btnLoadConnections.Text = "Main.LoadConnections".Localize();
             this.btnLoadConnections.UseVisualStyleBackColor = true;
             // 
             // lblInformation
@@ -117,7 +119,7 @@
             this.lblInformation.Name = "lblInformation";
             this.lblInformation.Size = new System.Drawing.Size(160, 13);
             this.lblInformation.TabIndex = 11;
-            this.lblInformation.Text = "Дополнительная информация";
+            this.lblInformation.Text = "Main.Information".Localize();
             // 
             // gbConnections
             // 
@@ -127,7 +129,7 @@
             this.gbConnections.Size = new System.Drawing.Size(638, 334);
             this.gbConnections.TabIndex = 10;
             this.gbConnections.TabStop = false;
-            this.gbConnections.Text = "Соединения";
+            this.gbConnections.Text = "Main.Connections".Localize();
             // 
             // dgvConnections
             // 
@@ -183,7 +185,7 @@
             // 
             // ClientAddress
             // 
-            this.ClientAddress.HeaderText = "Адрес клиента";
+            this.ClientAddress.HeaderText = "Main.Connections.ClientAddress".Localize();
             this.ClientAddress.Name = "ClientAddress";
             this.ClientAddress.ReadOnly = true;
             this.ClientAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -191,7 +193,7 @@
             // 
             // ServerAddress
             // 
-            this.ServerAddress.HeaderText = "Адрес сервера";
+            this.ServerAddress.HeaderText = "Main.Connections.ServerAddress".Localize();
             this.ServerAddress.Name = "ServerAddress";
             this.ServerAddress.ReadOnly = true;
             this.ServerAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -199,7 +201,7 @@
             // 
             // Received
             // 
-            this.Received.HeaderText = "Получено";
+            this.Received.HeaderText = "Main.Connections.Received".Localize();
             this.Received.Name = "Received";
             this.Received.ReadOnly = true;
             this.Received.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -207,7 +209,7 @@
             // 
             // Send
             // 
-            this.Send.HeaderText = "Отправлено";
+            this.Send.HeaderText = "Main.Connections.Send".Localize();
             this.Send.Name = "Send";
             this.Send.ReadOnly = true;
             this.Send.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -215,26 +217,26 @@
             // 
             // Disconnected
             // 
-            this.Disconnected.HeaderText = "Отключен";
+            this.Disconnected.HeaderText = "Main.Connections.Disconnected".Localize();
             this.Disconnected.Name = "Disconnected";
             this.Disconnected.ReadOnly = true;
             this.Disconnected.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Disconnected.Width = 86;
             // 
-            // gbWorkWithConnections
+            // gbConnectionsGridWork
             // 
-            this.gbWorkWithConnections.Controls.Add(this.btnClearConnentions);
-            this.gbWorkWithConnections.Controls.Add(this.lblAllConnections);
-            this.gbWorkWithConnections.Controls.Add(this.lblAllConnectionsText);
-            this.gbWorkWithConnections.Controls.Add(this.btnUpdateDataGridView);
-            this.gbWorkWithConnections.Controls.Add(this.btnClearDataGridView);
-            this.gbWorkWithConnections.Controls.Add(this.cbAutoUpdateDataGridView);
-            this.gbWorkWithConnections.Location = new System.Drawing.Point(12, 193);
-            this.gbWorkWithConnections.Name = "gbWorkWithConnections";
-            this.gbWorkWithConnections.Size = new System.Drawing.Size(202, 168);
-            this.gbWorkWithConnections.TabIndex = 9;
-            this.gbWorkWithConnections.TabStop = false;
-            this.gbWorkWithConnections.Text = "Дополнительно";
+            this.gbConnectionsGridWork.Controls.Add(this.btnClearConnentions);
+            this.gbConnectionsGridWork.Controls.Add(this.lblAllConnections);
+            this.gbConnectionsGridWork.Controls.Add(this.lblAllConnectionsText);
+            this.gbConnectionsGridWork.Controls.Add(this.btnUpdateDataGridView);
+            this.gbConnectionsGridWork.Controls.Add(this.btnClearDataGridView);
+            this.gbConnectionsGridWork.Controls.Add(this.cbAutoUpdateDataGridView);
+            this.gbConnectionsGridWork.Location = new System.Drawing.Point(12, 193);
+            this.gbConnectionsGridWork.Name = "gbConnectionsGridWork";
+            this.gbConnectionsGridWork.Size = new System.Drawing.Size(202, 168);
+            this.gbConnectionsGridWork.TabIndex = 9;
+            this.gbConnectionsGridWork.TabStop = false;
+            this.gbConnectionsGridWork.Text = "Main.ConnectionsGridWork".Localize();
             // 
             // btnClearConnentions
             // 
@@ -242,7 +244,7 @@
             this.btnClearConnentions.Name = "btnClearConnentions";
             this.btnClearConnentions.Size = new System.Drawing.Size(190, 23);
             this.btnClearConnentions.TabIndex = 9;
-            this.btnClearConnentions.Text = "Очистить соединения";
+            this.btnClearConnentions.Text = "Main.ClearConnentions".Localize();
             this.btnClearConnentions.UseVisualStyleBackColor = true;
             // 
             // lblAllConnections
@@ -261,7 +263,7 @@
             this.lblAllConnectionsText.Name = "lblAllConnectionsText";
             this.lblAllConnectionsText.Size = new System.Drawing.Size(103, 13);
             this.lblAllConnectionsText.TabIndex = 7;
-            this.lblAllConnectionsText.Text = "Всего соединений:";
+            this.lblAllConnectionsText.Text = "Main.AllConnections".Localize();
             // 
             // btnUpdateDataGridView
             // 
@@ -269,7 +271,7 @@
             this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
             this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
             this.btnUpdateDataGridView.TabIndex = 6;
-            this.btnUpdateDataGridView.Text = "Обновить грид";
+            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView".Localize();
             this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
             // 
             // btnClearDataGridView
@@ -278,7 +280,7 @@
             this.btnClearDataGridView.Name = "btnClearDataGridView";
             this.btnClearDataGridView.Size = new System.Drawing.Size(190, 23);
             this.btnClearDataGridView.TabIndex = 5;
-            this.btnClearDataGridView.Text = "Очистить грид";
+            this.btnClearDataGridView.Text = "Main.ClearDataGridView".Localize();
             this.btnClearDataGridView.UseVisualStyleBackColor = true;
             // 
             // cbAutoUpdateDataGridView
@@ -288,7 +290,7 @@
             this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
             this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(173, 17);
             this.cbAutoUpdateDataGridView.TabIndex = 3;
-            this.cbAutoUpdateDataGridView.Text = "Автоматическое обновление";
+            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView".Localize();
             this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
             // 
             // gbControl
@@ -301,7 +303,7 @@
             this.gbControl.Size = new System.Drawing.Size(202, 77);
             this.gbControl.TabIndex = 7;
             this.gbControl.TabStop = false;
-            this.gbControl.Text = "Управление";
+            this.gbControl.Text = "Main.Control".Localize();
             // 
             // btnRollToTray
             // 
@@ -310,7 +312,7 @@
             this.btnRollToTray.Name = "btnRollToTray";
             this.btnRollToTray.Size = new System.Drawing.Size(190, 23);
             this.btnRollToTray.TabIndex = 2;
-            this.btnRollToTray.Text = "Свернуть в трей";
+            this.btnRollToTray.Text = "Main.RollToTray".Localize();
             this.btnRollToTray.UseVisualStyleBackColor = true;
             // 
             // btnStopListener
@@ -320,7 +322,7 @@
             this.btnStopListener.Name = "btnStopListener";
             this.btnStopListener.Size = new System.Drawing.Size(92, 23);
             this.btnStopListener.TabIndex = 1;
-            this.btnStopListener.Text = "Остановить";
+            this.btnStopListener.Text = "Main.StopListener".Localize();
             this.btnStopListener.UseVisualStyleBackColor = true;
             // 
             // btnStartListener
@@ -329,7 +331,7 @@
             this.btnStartListener.Name = "btnStartListener";
             this.btnStartListener.Size = new System.Drawing.Size(92, 23);
             this.btnStartListener.TabIndex = 0;
-            this.btnStartListener.Text = "Запустить";
+            this.btnStartListener.Text = "Main.StartListener".Localize();
             this.btnStartListener.UseVisualStyleBackColor = true;
             // 
             // Main
@@ -341,17 +343,17 @@
             this.Controls.Add(this.gbConnectionsWork);
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.gbConnections);
-            this.Controls.Add(this.gbWorkWithConnections);
+            this.Controls.Add(this.gbConnectionsGridWork);
             this.Controls.Add(this.gbControl);
             this.Controls.Add(this.msMenu);
             this.MainMenuStrip = this.msMenu;
             this.Name = "Main";
-            this.Text = "Emu Sniffer | 2019 © Bo0m21";
+            this.Text = "Main.Text".Localize();
             this.gbConnectionsWork.ResumeLayout(false);
             this.gbConnections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
-            this.gbWorkWithConnections.ResumeLayout(false);
-            this.gbWorkWithConnections.PerformLayout();
+            this.gbConnectionsGridWork.ResumeLayout(false);
+            this.gbConnectionsGridWork.PerformLayout();
             this.gbControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -375,7 +377,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Received;
         private System.Windows.Forms.DataGridViewTextBoxColumn Send;
         private System.Windows.Forms.DataGridViewTextBoxColumn Disconnected;
-        private System.Windows.Forms.GroupBox gbWorkWithConnections;
+        private System.Windows.Forms.GroupBox gbConnectionsGridWork;
         private System.Windows.Forms.Button btnClearConnentions;
         private System.Windows.Forms.Label lblAllConnections;
         private System.Windows.Forms.Label lblAllConnectionsText;

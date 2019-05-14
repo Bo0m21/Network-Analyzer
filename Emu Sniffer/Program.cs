@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Network_Analyzer.Localization;
 
-namespace Emu_Sniffer
+namespace Network_Analyzer
 {
     static class Program
     {
@@ -14,6 +12,11 @@ namespace Emu_Sniffer
         [STAThread]
         static void Main()
         {
+            // Установка соответствующей локали
+            // TODO Сделать загрузку из конфигов!
+            Localizer.InitLocalizedResource("ru", "Network_Analyzer.Localization.Languages.Resource");
+            var localized = "String1".Localize();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
