@@ -81,7 +81,7 @@ namespace Network_Analyzer
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(81, 13);
             this.lblVersion.TabIndex = 12;
-            this.lblVersion.Text = "Main.Version".Localize();
+            this.lblVersion.Text = "Main.Version";
             // 
             // gbConnectionsWork
             // 
@@ -92,7 +92,7 @@ namespace Network_Analyzer
             this.gbConnectionsWork.Size = new System.Drawing.Size(202, 77);
             this.gbConnectionsWork.TabIndex = 8;
             this.gbConnectionsWork.TabStop = false;
-            this.gbConnectionsWork.Text = "Main.ConnectionsWork".Localize();
+            this.gbConnectionsWork.Text = "Main.ConnectionsWork";
             // 
             // btnSaveConnections
             // 
@@ -100,7 +100,7 @@ namespace Network_Analyzer
             this.btnSaveConnections.Name = "btnSaveConnections";
             this.btnSaveConnections.Size = new System.Drawing.Size(190, 23);
             this.btnSaveConnections.TabIndex = 1;
-            this.btnSaveConnections.Text = "Main.SaveConnections".Localize();
+            this.btnSaveConnections.Text = "Main.SaveConnections";
             this.btnSaveConnections.UseVisualStyleBackColor = true;
             // 
             // btnLoadConnections
@@ -109,7 +109,7 @@ namespace Network_Analyzer
             this.btnLoadConnections.Name = "btnLoadConnections";
             this.btnLoadConnections.Size = new System.Drawing.Size(190, 23);
             this.btnLoadConnections.TabIndex = 0;
-            this.btnLoadConnections.Text = "Main.LoadConnections".Localize();
+            this.btnLoadConnections.Text = "Main.LoadConnections";
             this.btnLoadConnections.UseVisualStyleBackColor = true;
             // 
             // lblInformation
@@ -119,7 +119,7 @@ namespace Network_Analyzer
             this.lblInformation.Name = "lblInformation";
             this.lblInformation.Size = new System.Drawing.Size(160, 13);
             this.lblInformation.TabIndex = 11;
-            this.lblInformation.Text = "Main.Information".Localize();
+            this.lblInformation.Text = "Main.Information";
             // 
             // gbConnections
             // 
@@ -129,7 +129,7 @@ namespace Network_Analyzer
             this.gbConnections.Size = new System.Drawing.Size(638, 334);
             this.gbConnections.TabIndex = 10;
             this.gbConnections.TabStop = false;
-            this.gbConnections.Text = "Main.Connections".Localize();
+            this.gbConnections.Text = "Main.Connections";
             // 
             // dgvConnections
             // 
@@ -185,7 +185,7 @@ namespace Network_Analyzer
             // 
             // ClientAddress
             // 
-            this.ClientAddress.HeaderText = "Main.Connections.ClientAddress".Localize();
+            this.ClientAddress.HeaderText = "Main.Connections.ClientAddress";
             this.ClientAddress.Name = "ClientAddress";
             this.ClientAddress.ReadOnly = true;
             this.ClientAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -193,7 +193,7 @@ namespace Network_Analyzer
             // 
             // ServerAddress
             // 
-            this.ServerAddress.HeaderText = "Main.Connections.ServerAddress".Localize();
+            this.ServerAddress.HeaderText = "Main.Connections.ServerAddress";
             this.ServerAddress.Name = "ServerAddress";
             this.ServerAddress.ReadOnly = true;
             this.ServerAddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -201,7 +201,7 @@ namespace Network_Analyzer
             // 
             // Received
             // 
-            this.Received.HeaderText = "Main.Connections.Received".Localize();
+            this.Received.HeaderText = "Main.Connections.Received";
             this.Received.Name = "Received";
             this.Received.ReadOnly = true;
             this.Received.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -209,7 +209,7 @@ namespace Network_Analyzer
             // 
             // Send
             // 
-            this.Send.HeaderText = "Main.Connections.Send".Localize();
+            this.Send.HeaderText = "Main.Connections.Send";
             this.Send.Name = "Send";
             this.Send.ReadOnly = true;
             this.Send.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -217,7 +217,7 @@ namespace Network_Analyzer
             // 
             // Disconnected
             // 
-            this.Disconnected.HeaderText = "Main.Connections.Disconnected".Localize();
+            this.Disconnected.HeaderText = "Main.Connections.Disconnected";
             this.Disconnected.Name = "Disconnected";
             this.Disconnected.ReadOnly = true;
             this.Disconnected.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -236,7 +236,7 @@ namespace Network_Analyzer
             this.gbConnectionsGridWork.Size = new System.Drawing.Size(202, 168);
             this.gbConnectionsGridWork.TabIndex = 9;
             this.gbConnectionsGridWork.TabStop = false;
-            this.gbConnectionsGridWork.Text = "Main.ConnectionsGridWork".Localize();
+            this.gbConnectionsGridWork.Text = "Main.ConnectionsGridWork";
             // 
             // btnClearConnentions
             // 
@@ -244,7 +244,7 @@ namespace Network_Analyzer
             this.btnClearConnentions.Name = "btnClearConnentions";
             this.btnClearConnentions.Size = new System.Drawing.Size(190, 23);
             this.btnClearConnentions.TabIndex = 9;
-            this.btnClearConnentions.Text = "Main.ClearConnentions".Localize();
+            this.btnClearConnentions.Text = "Main.ClearConnentions";
             this.btnClearConnentions.UseVisualStyleBackColor = true;
             // 
             // lblAllConnections
@@ -263,7 +263,7 @@ namespace Network_Analyzer
             this.lblAllConnectionsText.Name = "lblAllConnectionsText";
             this.lblAllConnectionsText.Size = new System.Drawing.Size(103, 13);
             this.lblAllConnectionsText.TabIndex = 7;
-            this.lblAllConnectionsText.Text = "Main.AllConnections".Localize();
+            this.lblAllConnectionsText.Text = "Main.AllConnections";
             // 
             // btnUpdateDataGridView
             // 
@@ -271,7 +271,7 @@ namespace Network_Analyzer
             this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
             this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
             this.btnUpdateDataGridView.TabIndex = 6;
-            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView".Localize();
+            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
             this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
             // 
             // btnClearDataGridView
@@ -280,7 +280,7 @@ namespace Network_Analyzer
             this.btnClearDataGridView.Name = "btnClearDataGridView";
             this.btnClearDataGridView.Size = new System.Drawing.Size(190, 23);
             this.btnClearDataGridView.TabIndex = 5;
-            this.btnClearDataGridView.Text = "Main.ClearDataGridView".Localize();
+            this.btnClearDataGridView.Text = "Main.ClearDataGridView";
             this.btnClearDataGridView.UseVisualStyleBackColor = true;
             // 
             // cbAutoUpdateDataGridView
@@ -290,7 +290,7 @@ namespace Network_Analyzer
             this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
             this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(173, 17);
             this.cbAutoUpdateDataGridView.TabIndex = 3;
-            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView".Localize();
+            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
             this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
             // 
             // gbControl
@@ -303,7 +303,7 @@ namespace Network_Analyzer
             this.gbControl.Size = new System.Drawing.Size(202, 77);
             this.gbControl.TabIndex = 7;
             this.gbControl.TabStop = false;
-            this.gbControl.Text = "Main.Control".Localize();
+            this.gbControl.Text = "Main.Control";
             // 
             // btnRollToTray
             // 
@@ -312,7 +312,7 @@ namespace Network_Analyzer
             this.btnRollToTray.Name = "btnRollToTray";
             this.btnRollToTray.Size = new System.Drawing.Size(190, 23);
             this.btnRollToTray.TabIndex = 2;
-            this.btnRollToTray.Text = "Main.RollToTray".Localize();
+            this.btnRollToTray.Text = "Main.RollToTray";
             this.btnRollToTray.UseVisualStyleBackColor = true;
             // 
             // btnStopListener
@@ -322,7 +322,7 @@ namespace Network_Analyzer
             this.btnStopListener.Name = "btnStopListener";
             this.btnStopListener.Size = new System.Drawing.Size(92, 23);
             this.btnStopListener.TabIndex = 1;
-            this.btnStopListener.Text = "Main.StopListener".Localize();
+            this.btnStopListener.Text = "Main.StopListener";
             this.btnStopListener.UseVisualStyleBackColor = true;
             // 
             // btnStartListener
@@ -331,7 +331,7 @@ namespace Network_Analyzer
             this.btnStartListener.Name = "btnStartListener";
             this.btnStartListener.Size = new System.Drawing.Size(92, 23);
             this.btnStartListener.TabIndex = 0;
-            this.btnStartListener.Text = "Main.StartListener".Localize();
+            this.btnStartListener.Text = "Main.StartListener";
             this.btnStartListener.UseVisualStyleBackColor = true;
             // 
             // Main
@@ -348,7 +348,7 @@ namespace Network_Analyzer
             this.Controls.Add(this.msMenu);
             this.MainMenuStrip = this.msMenu;
             this.Name = "Main";
-            this.Text = "Main.Text".Localize();
+            this.Text = "Main.Text";
             this.gbConnectionsWork.ResumeLayout(false);
             this.gbConnections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();

@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Windows.Forms;
 
 namespace Network_Analyzer.Localization
 {
@@ -30,6 +32,12 @@ namespace Network_Analyzer.Localization
             _mainResourse = new ResourceManager(fullResourseName, assembly);
         }
 
+        public static void Local(Form form)
+        {
+            
+
+        }
+
         /// <summary>
         /// Метод для локализации ресурсов
         /// </summary>
@@ -45,7 +53,7 @@ namespace Network_Analyzer.Localization
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static string GetString(string name)
+        private static string GetString(string name)
         {
             try
             {
@@ -59,6 +67,36 @@ namespace Network_Analyzer.Localization
             {
                 return name;
             }
+        }
+
+        /// <summary>
+        /// Метод для локализации ресурсов
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        public static string LocalizeForm(this Form form)
+        {
+            var controls = GetAllControls(form.Controls);
+
+            return GetAllControls(str);
+        }
+
+        /// <summary>
+        /// Получение всех контролов на форме
+        /// </summary>
+        /// <param name="controlCollection"></param>
+        /// <returns></returns>
+        private static List<Control> GetAllControls(Control.ControlCollection controlCollection)
+        {
+            var list = new List<Control>();
+
+            foreach (Control control in controlCollection)
+            {
+                list.Add(control);
+                list.AddRange(GetAllControls(control.Controls));
+            }
+
+            return list;
         }
     }
 }
