@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Network_Analyzer.Localization;
+using System.Windows.Forms;
 
 namespace Network_Analyzer
 {
@@ -7,6 +8,7 @@ namespace Network_Analyzer
         public Main()
         {
             InitializeComponent();
+            Localizer.LocalizeForm(this);
         }
     }
 }

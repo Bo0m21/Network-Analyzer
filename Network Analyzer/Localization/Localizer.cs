@@ -32,24 +32,18 @@ namespace Network_Analyzer.Localization
             _mainResourse = new ResourceManager(fullResourseName, assembly);
         }
 
-        public static void Local(Form form)
-        {
-            
-
-        }
-
         /// <summary>
-        /// Метод для локализации ресурсов
+        /// Метод для локализации строки
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string Localize(this string str)
+        public static string LocalizeString(string str)
         {
             return GetString(str);
         }
 
         /// <summary>
-        /// метод для получения конкретной строки из ресурсов
+        /// Метод для получения конкретной строки из ресурсов
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -70,15 +64,26 @@ namespace Network_Analyzer.Localization
         }
 
         /// <summary>
-        /// Метод для локализации ресурсов
+        /// Метод для локализации формы
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
-        public static string LocalizeForm(this Form form)
+        public static void LocalizeForm(Form form)
         {
             var controls = GetAllControls(form.Controls);
 
-            return GetAllControls(str);
+            foreach (var control in controls)
+            {
+                control.Text = LocalizeString(control.Text);
+
+                if (control is DataGridView)
+                {
+                    foreach (DataGridViewColumn column in ((DataGridView)control).Columns)
+                    {
+                        column.HeaderText = LocalizeString(column.HeaderText);
+                    }
+                }
+            }
         }
 
         /// <summary>

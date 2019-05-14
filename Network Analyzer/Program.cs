@@ -15,7 +15,6 @@ namespace Network_Analyzer
             // Установка соответствующей локали
             // TODO Сделать загрузку из конфигов!
             Localizer.InitLocalizedResource("ru", "Network_Analyzer.Localization.Languages.Resource");
-            var localized = "String1".Localize();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
