@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Main.AllConnections" xml:space="preserve">
-    <value>Всего соединений:</value>
+    <value>Всего соединений</value>
   </data>
   <data name="Main.AutoUpdateDataGridView" xml:space="preserve">
     <value>Автоматическое обновление</value>
@@ -168,6 +168,9 @@
   <data name="Main.LoadConnections" xml:space="preserve">
     <value>Загрузить соединения</value>
   </data>
+  <data name="Main.LoadedSuccessfully" xml:space="preserve">
+    <value>Программа успешно загружена</value>
+  </data>
   <data name="Main.RollToTray" xml:space="preserve">
     <value>Свернуть в трей</value>
   </data>
@@ -187,6 +190,6 @@
     <value>Обновить грид</value>
   </data>
   <data name="Main.Version" xml:space="preserve">
-    <value>Версия:</value>
+    <value>Версия</value>
   </data>
 </root>

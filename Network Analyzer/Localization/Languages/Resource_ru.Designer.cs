@@ -61,7 +61,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Всего соединений:.
+        ///   Ищет локализованную строку, похожую на Всего соединений.
         /// </summary>
         internal static string Main_AllConnections {
             get {
@@ -214,6 +214,15 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Программа успешно загружена.
+        /// </summary>
+        internal static string Main_LoadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Main.LoadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Свернуть в трей.
         /// </summary>
         internal static string Main_RollToTray {
@@ -268,7 +277,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Версия:.
+        ///   Ищет локализованную строку, похожую на Версия.
         /// </summary>
         internal static string Main_Version {
             get {

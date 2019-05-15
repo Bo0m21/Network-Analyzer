@@ -30,8 +30,9 @@ namespace Network_Analyzer
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
@@ -79,7 +80,7 @@ namespace Network_Analyzer
             this.lblVersion.AutoSize = true;
             this.lblVersion.Location = new System.Drawing.Point(777, 364);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(81, 13);
+            this.lblVersion.Size = new System.Drawing.Size(68, 13);
             this.lblVersion.TabIndex = 12;
             this.lblVersion.Text = "Main.Version";
             // 
@@ -117,7 +118,7 @@ namespace Network_Analyzer
             this.lblInformation.AutoSize = true;
             this.lblInformation.Location = new System.Drawing.Point(12, 364);
             this.lblInformation.Name = "lblInformation";
-            this.lblInformation.Size = new System.Drawing.Size(160, 13);
+            this.lblInformation.Size = new System.Drawing.Size(85, 13);
             this.lblInformation.TabIndex = 11;
             this.lblInformation.Text = "Main.Information";
             // 
@@ -140,14 +141,14 @@ namespace Network_Analyzer
             this.dgvConnections.AllowUserToResizeColumns = false;
             this.dgvConnections.AllowUserToResizeRows = false;
             this.dgvConnections.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvConnections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvConnections.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConnections.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
@@ -161,8 +162,8 @@ namespace Network_Analyzer
             this.dgvConnections.Name = "dgvConnections";
             this.dgvConnections.ReadOnly = true;
             this.dgvConnections.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvConnections.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvConnections.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConnections.Size = new System.Drawing.Size(626, 309);
             this.dgvConnections.TabIndex = 1;
@@ -288,7 +289,7 @@ namespace Network_Analyzer
             this.cbAutoUpdateDataGridView.AutoSize = true;
             this.cbAutoUpdateDataGridView.Location = new System.Drawing.Point(6, 144);
             this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
-            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(173, 17);
+            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(174, 17);
             this.cbAutoUpdateDataGridView.TabIndex = 3;
             this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
             this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
@@ -346,9 +347,11 @@ namespace Network_Analyzer
             this.Controls.Add(this.gbConnectionsGridWork);
             this.Controls.Add(this.gbControl);
             this.Controls.Add(this.msMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
             this.Name = "Main";
             this.Text = "Main.Text";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.gbConnectionsWork.ResumeLayout(false);
             this.gbConnections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
