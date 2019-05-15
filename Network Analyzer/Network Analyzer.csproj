@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Connections.cs" />
     <Compile Include="Localization\Languages\Resource_ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -58,6 +59,20 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConnectionModel.cs" />
+    <Compile Include="Models\Packets\PacketModel.cs" />
+    <Compile Include="Models\Packets\PacketType.cs" />
+    <Compile Include="Network\Authentication\AuthBase.cs" />
+    <Compile Include="Network\Authentication\AuthenticationList.cs" />
+    <Compile Include="Network\Authentication\AuthNone.cs" />
+    <Compile Include="Network\Authentication\AuthUserPass.cs" />
+    <Compile Include="Network\Clients\Client.cs" />
+    <Compile Include="Network\Clients\SocksClient.cs" />
+    <Compile Include="Network\Handlers\Socks4Handler.cs" />
+    <Compile Include="Network\Handlers\Socks5Handler.cs" />
+    <Compile Include="Network\Handlers\SocksHandler.cs" />
+    <Compile Include="Network\Listeners\Listener.cs" />
+    <Compile Include="Network\Listeners\SocksListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Localization\Languages\Resource_ru.resx">
@@ -93,5 +108,6 @@
   <ItemGroup>
     <Content Include="Ico.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
