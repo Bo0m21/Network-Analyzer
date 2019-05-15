@@ -223,6 +223,24 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Запустить слушатель.
+        /// </summary>
+        internal static string Main_MsStartListener {
+            get {
+                return ResourceManager.GetString("Main.MsStartListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Остановить слушатель.
+        /// </summary>
+        internal static string Main_MsStopListener {
+            get {
+                return ResourceManager.GetString("Main.MsStopListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Свернуть в трей.
         /// </summary>
         internal static string Main_RollToTray {

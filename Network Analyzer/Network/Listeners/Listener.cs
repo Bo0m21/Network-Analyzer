@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Net;
 using System.Net.Sockets;
-using Mutliplayer_Sniffer.Network.Clients;
+using Network_Analyzer.Network.Clients;
 
-namespace Mutliplayer_Sniffer.Network.Listeners
+namespace Network_Analyzer.Network.Listeners
 {
     /// <summary>
     ///     Specifies the basic methods and properties of a <c>Listener</c> object. This is an abstract class and must be

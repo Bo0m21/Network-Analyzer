@@ -171,6 +171,12 @@
   <data name="Main.LoadedSuccessfully" xml:space="preserve">
     <value>Программа успешно загружена</value>
   </data>
+  <data name="Main.MsStartListener" xml:space="preserve">
+    <value>Запустить слушатель</value>
+  </data>
+  <data name="Main.MsStopListener" xml:space="preserve">
+    <value>Остановить слушатель</value>
+  </data>
   <data name="Main.RollToTray" xml:space="preserve">
     <value>Свернуть в трей</value>
   </data>

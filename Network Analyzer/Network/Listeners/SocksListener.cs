@@ -1,9 +1,9 @@
 using System;
 using System.Net;
-using Mutliplayer_Sniffer.Network.Authentication;
-using Mutliplayer_Sniffer.Network.Clients;
+using Network_Analyzer.Network.Authentication;
+using Network_Analyzer.Network.Clients;
 
-namespace Mutliplayer_Sniffer.Network.Listeners
+namespace Network_Analyzer.Network.Listeners
 {
     /// <summary>Listens on a specific port on the proxy server for incoming SOCKS4 and SOCKS5 requests.</summary>
     /// <remarks>This class also implements the SOCKS4a protocol.</remarks>

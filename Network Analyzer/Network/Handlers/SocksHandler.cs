@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Mutliplayer_Sniffer.Network.Handlers
+namespace Network_Analyzer.Network.Handlers
 {
     /// <summary>Defines the signature of the method that's called when the SOCKS negotiation is complete.</summary>
     /// <param name="success">Indicates whether the negotiation was successful or not.</param>

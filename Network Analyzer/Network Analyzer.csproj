@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Connections.cs" />
+    <Compile Include="Extensions\ArrayExtension.cs" />
+    <Compile Include="Network\Data\Connections.cs" />
     <Compile Include="Localization\Languages\Resource_ru.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,7 +1,7 @@
 using System;
 using System.Net.Sockets;
 
-namespace Mutliplayer_Sniffer.Network.Authentication
+namespace Network_Analyzer.Network.Authentication
 {
     /// <summary>Defines the signature of the method to be called when the authentication is complete.</summary>
     /// <param name="success">Specifies whether the authentication was successfull or not.</param>

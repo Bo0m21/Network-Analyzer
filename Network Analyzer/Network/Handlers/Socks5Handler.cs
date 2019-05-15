@@ -2,10 +2,10 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Mutliplayer_Sniffer.Network.Authentication;
-using Mutliplayer_Sniffer.Network.Listeners;
+using Network_Analyzer.Network.Authentication;
+using Network_Analyzer.Network.Listeners;
 
-namespace Mutliplayer_Sniffer.Network.Handlers
+namespace Network_Analyzer.Network.Handlers
 {
     /// <summary>Implements the SOCKS5 protocol.</summary>
     internal sealed class Socks5Handler : SocksHandler

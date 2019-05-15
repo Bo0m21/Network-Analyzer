@@ -1,10 +1,9 @@
-﻿using Network_Analyzer.Models;
-using Network_Analyzer.Models.Packets;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Network_Analyzer.Models;
+using Network_Analyzer.Models.Packets;
 
-namespace Network_Analyzer.Data
+namespace Network_Analyzer.Network.Data
 {
     /// <summary>This is class connections which save data</summary>
     public static class Connections
@@ -12,11 +11,21 @@ namespace Network_Analyzer.Data
         /// <summary>Array connections and packets</summary>
         private static List<ConnectionModel> _connections = new List<ConnectionModel>();
 
-        /// <summary>Array connections and packets</summary>
-        private static long _clinetsCount = 0;
+        /// <summary>Get new connection id</summary>
+        /// <returns>New connection id</returns>
+        public static long GetNewConnectionId()
+        {
+            return _connections.Count + 1;
+        }
 
-        /// <summary>Array connections and packets</summary>
-        private static long _packetsCount = 0;
+        /// <summary>Get new packet id for connection</summary>
+        /// <param name="connectionId">Connection id</param>
+        /// <returns>New packet id for connection</returns>
+        public static long GetNewPacketId(long connectionId)
+        {
+            var connection = GetConnection(connectionId);
+            return connection.ConnectionPackets.Count + 1;
+        }
 
         /// <summary>Get all connections</summary>
         /// <returns>List connections</returns>
@@ -53,6 +62,7 @@ namespace Network_Analyzer.Data
             if (connection == null)
             {
                 _connections.Add(newConnection);
+                // TODO: Сделать ивент по приходу новых соединений
             }
         }
 
@@ -67,6 +77,7 @@ namespace Network_Analyzer.Data
                 if (connection == null)
                 {
                     _connections.Add(newConnection);
+                    // TODO: Сделать ивент по приходу новых соединений
                 }
             }
         }
@@ -90,6 +101,9 @@ namespace Network_Analyzer.Data
                 {
                     connection.Received += newPacket.Data.Length;
                 }
+
+                // TODO: Сделать ивент по приходу новых пакетов
+                // Этот ивент будет служить перехватчиком для редактирования пакетов
             }
         }
 
@@ -102,6 +116,9 @@ namespace Network_Analyzer.Data
             if (connection != null)
             {
                 connection.IsDisconnected = true;
+                // TODO: Сделать ивент по приходу разрыва соединения
+                // Если мы ждем пакет от сервера и нам пришел дистконнект то выходим из ожидания
+                // Служит так же для перехвата и редактирования пакетов
             }
         }
 

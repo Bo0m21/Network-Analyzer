@@ -72,15 +72,30 @@ namespace Network_Analyzer.Localization
         {
             var controls = GetAllControls(form.Controls);
 
+            form.Text = LocalizeString(form.Text);
+
             foreach (var control in controls)
             {
                 control.Text = LocalizeString(control.Text);
 
                 if (control is DataGridView)
                 {
-                    foreach (DataGridViewColumn column in ((DataGridView)control).Columns)
+                    foreach (DataGridViewColumn dataGridViewColumn in ((DataGridView)control).Columns)
                     {
-                        column.HeaderText = LocalizeString(column.HeaderText);
+                        dataGridViewColumn.HeaderText = LocalizeString(dataGridViewColumn.HeaderText);
+                    }
+                }
+
+                if (control is MenuStrip)
+                {
+                    foreach (ToolStripItem toolStripItem in ((MenuStrip)control).Items)
+                    {
+                        toolStripItem.Text = LocalizeString(toolStripItem.Text);
+
+                        foreach (ToolStripMenuItem toolStripMenuItem in ((ToolStripMenuItem)toolStripItem).DropDownItems)
+                        {
+                            toolStripMenuItem.Text = LocalizeString(toolStripMenuItem.Text);
+                        }
                     }
                 }
             }

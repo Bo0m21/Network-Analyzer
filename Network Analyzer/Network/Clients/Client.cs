@@ -1,8 +1,11 @@
-using Network_Analyzer.Data;
 using System;
 using System.Net.Sockets;
+using Network_Analyzer.Extensions;
+using Network_Analyzer.Models;
+using Network_Analyzer.Models.Packets;
+using Network_Analyzer.Network.Data;
 
-namespace Mutliplayer_Sniffer.Network.Clients
+namespace Network_Analyzer.Network.Clients
 {
     /// <summary>
     ///     Specifies the basic methods and properties of a <c>Client</c> object. This is class and must be inherited.
@@ -31,7 +34,7 @@ namespace Mutliplayer_Sniffer.Network.Clients
 
         /// <summary>Unique identity Client.</summary>
         /// <returns>Return unique identity about this Client.</returns>
-        public Guid Id { get; } = Guid.NewGuid();
+        public long Id { get; set; }
 
         /// <summary>Gets the buffer to store all the incoming data from the local client.</summary>
         /// <value>An array of bytes that can be used to store all the incoming data from the local client.</value>
@@ -125,14 +128,19 @@ namespace Mutliplayer_Sniffer.Network.Clients
         {
             try
             {
-                var connection = new ConnectionModel
+                lock (_syncLock)
                 {
-                    Id = Id,
-                    SourceAddress = DestinationSocket.LocalEndPoint.ToString(),
-                    DestinationAddress = DestinationSocket.RemoteEndPoint.ToString()
-                };
+                    Id = Connections.GetNewConnectionId();
 
-                Connections.AddConnection(connection);
+                    var connection = new ConnectionModel
+                    {
+                        Id = Id,
+                        SourceAddress = DestinationSocket.LocalEndPoint.ToString(),
+                        DestinationAddress = DestinationSocket.RemoteEndPoint.ToString()
+                    };
+
+                    Connections.AddConnection(connection);
+                }
 
                 ClientSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, OnClientReceive, ClientSocket);
                 DestinationSocket.BeginReceive(RemoteBuffer, 0, RemoteBuffer.Length, SocketFlags.None, OnRemoteReceive, DestinationSocket);
@@ -161,9 +169,11 @@ namespace Mutliplayer_Sniffer.Network.Clients
 
                 lock (_syncLock)
                 {
+                    var packetId = Connections.GetNewPacketId(Id);
+
                     var packet = new PacketModel()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = packetId,
                         Data = Buffer.ResizeByteArray(countReturn),
                         Type = PacketType.ClientToServer
                     };
@@ -222,9 +232,11 @@ namespace Mutliplayer_Sniffer.Network.Clients
 
                 lock (_syncLock)
                 {
+                    var packetId = Connections.GetNewPacketId(Id);
+
                     var packet = new PacketModel()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = packetId,
                         Data = RemoteBuffer.ResizeByteArray(countReturn),
                         Type = PacketType.ServerToClient
                     };

@@ -34,6 +34,9 @@ namespace Network_Analyzer
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.msMenu = new System.Windows.Forms.MenuStrip();
+            this.connectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startListenerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopListenerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
             this.btnSaveConnections = new System.Windows.Forms.Button();
@@ -59,6 +62,7 @@ namespace Network_Analyzer
             this.btnRollToTray = new System.Windows.Forms.Button();
             this.btnStopListener = new System.Windows.Forms.Button();
             this.btnStartListener = new System.Windows.Forms.Button();
+            this.msMenu.SuspendLayout();
             this.gbConnectionsWork.SuspendLayout();
             this.gbConnections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
@@ -69,11 +73,34 @@ namespace Network_Analyzer
             // msMenu
             // 
             this.msMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectionsToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(870, 24);
             this.msMenu.TabIndex = 0;
             this.msMenu.Text = "menuStrip1";
+            // 
+            // connectionsToolStripMenuItem
+            // 
+            this.connectionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startListenerToolStripMenuItem,
+            this.stopListenerToolStripMenuItem});
+            this.connectionsToolStripMenuItem.Name = "connectionsToolStripMenuItem";
+            this.connectionsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.connectionsToolStripMenuItem.Text = "Main.Connections";
+            // 
+            // startListenerToolStripMenuItem
+            // 
+            this.startListenerToolStripMenuItem.Name = "startListenerToolStripMenuItem";
+            this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.startListenerToolStripMenuItem.Text = "Main.MsStartListener";
+            // 
+            // stopListenerToolStripMenuItem
+            // 
+            this.stopListenerToolStripMenuItem.Name = "stopListenerToolStripMenuItem";
+            this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.stopListenerToolStripMenuItem.Text = "Main.MsStopListener";
             // 
             // lblVersion
             // 
@@ -351,7 +378,10 @@ namespace Network_Analyzer
             this.MainMenuStrip = this.msMenu;
             this.Name = "Main";
             this.Text = "Main.Text";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.msMenu.ResumeLayout(false);
+            this.msMenu.PerformLayout();
             this.gbConnectionsWork.ResumeLayout(false);
             this.gbConnections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
@@ -391,6 +421,9 @@ namespace Network_Analyzer
         private System.Windows.Forms.Button btnRollToTray;
         private System.Windows.Forms.Button btnStopListener;
         private System.Windows.Forms.Button btnStartListener;
+        private System.Windows.Forms.ToolStripMenuItem connectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startListenerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopListenerToolStripMenuItem;
     }
 }
 
