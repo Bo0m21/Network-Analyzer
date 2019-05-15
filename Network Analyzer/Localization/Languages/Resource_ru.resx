@@ -126,9 +126,6 @@
   <data name="Main.ClearConnentions" xml:space="preserve">
     <value>Очистить соединения</value>
   </data>
-  <data name="Main.ClearDataGridView" xml:space="preserve">
-    <value>Очистить грид</value>
-  </data>
   <data name="Main.Connections" xml:space="preserve">
     <value>Соединения</value>
   </data>
@@ -154,16 +151,31 @@
     <value>Да</value>
   </data>
   <data name="Main.ConnectionsGridWork" xml:space="preserve">
-    <value>Дополнительно</value>
+    <value>Работа с гридом соединений</value>
   </data>
   <data name="Main.ConnectionsWork" xml:space="preserve">
     <value>Работа с соединениями</value>
   </data>
-  <data name="Main.Control" xml:space="preserve">
-    <value>Управление</value>
+  <data name="Main.ErrorsStartingListener" xml:space="preserve">
+    <value>Ошибки при запуске слушателя</value>
+  </data>
+  <data name="Main.ErrorsStoppingListener" xml:space="preserve">
+    <value>Ошибки при остановке слушателя</value>
   </data>
   <data name="Main.Information" xml:space="preserve">
     <value>Информация</value>
+  </data>
+  <data name="Main.ListenerAlreadyStarted" xml:space="preserve">
+    <value>Слушатель соединений уже запущен</value>
+  </data>
+  <data name="Main.ListenerSuccessfullyLaunched" xml:space="preserve">
+    <value>Слушатель успешно запущен</value>
+  </data>
+  <data name="Main.ListenerSuccessfullyStopped" xml:space="preserve">
+    <value>Слушатель успешно остановлен</value>
+  </data>
+  <data name="Main.ListenerWork" xml:space="preserve">
+    <value>Управление слушателем</value>
   </data>
   <data name="Main.LoadConnections" xml:space="preserve">
     <value>Загрузить соединения</value>
@@ -171,29 +183,20 @@
   <data name="Main.LoadedSuccessfully" xml:space="preserve">
     <value>Программа успешно загружена</value>
   </data>
-  <data name="Main.MsStartListener" xml:space="preserve">
-    <value>Запустить слушатель</value>
-  </data>
-  <data name="Main.MsStopListener" xml:space="preserve">
-    <value>Остановить слушатель</value>
-  </data>
-  <data name="Main.RollToTray" xml:space="preserve">
-    <value>Свернуть в трей</value>
-  </data>
   <data name="Main.SaveConnections" xml:space="preserve">
     <value>Сохранить соединения</value>
   </data>
   <data name="Main.StartListener" xml:space="preserve">
-    <value>Запустить</value>
+    <value>Запустить слушатель</value>
   </data>
   <data name="Main.StopListener" xml:space="preserve">
-    <value>Остановить</value>
+    <value>Остановить слушатель</value>
   </data>
   <data name="Main.Text" xml:space="preserve">
     <value>Network Analyzer - Соединения | 2019 © Bo0m21</value>
   </data>
   <data name="Main.UpdateDataGridView" xml:space="preserve">
-    <value>Обновить грид</value>
+    <value>Обновить грид соединений</value>
   </data>
   <data name="Main.Version" xml:space="preserve">
     <value>Версия</value>

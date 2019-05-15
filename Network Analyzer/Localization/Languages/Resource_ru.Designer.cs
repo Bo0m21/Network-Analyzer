@@ -88,15 +88,6 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Очистить грид.
-        /// </summary>
-        internal static string Main_ClearDataGridView {
-            get {
-                return ResourceManager.GetString("Main.ClearDataGridView", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Соединения.
         /// </summary>
         internal static string Main_Connections {
@@ -169,7 +160,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Дополнительно.
+        ///   Ищет локализованную строку, похожую на Работа с гридом соединений.
         /// </summary>
         internal static string Main_ConnectionsGridWork {
             get {
@@ -187,11 +178,20 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Управление.
+        ///   Ищет локализованную строку, похожую на Ошибки при запуске слушателя.
         /// </summary>
-        internal static string Main_Control {
+        internal static string Main_ErrorsStartingListener {
             get {
-                return ResourceManager.GetString("Main.Control", resourceCulture);
+                return ResourceManager.GetString("Main.ErrorsStartingListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при остановке слушателя.
+        /// </summary>
+        internal static string Main_ErrorsStoppingListener {
+            get {
+                return ResourceManager.GetString("Main.ErrorsStoppingListener", resourceCulture);
             }
         }
         
@@ -201,6 +201,42 @@ namespace Network_Analyzer.Localization.Languages {
         internal static string Main_Information {
             get {
                 return ResourceManager.GetString("Main.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Слушатель соединений уже запущен.
+        /// </summary>
+        internal static string Main_ListenerAlreadyStarted {
+            get {
+                return ResourceManager.GetString("Main.ListenerAlreadyStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Слушатель успешно запущен.
+        /// </summary>
+        internal static string Main_ListenerSuccessfullyLaunched {
+            get {
+                return ResourceManager.GetString("Main.ListenerSuccessfullyLaunched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Слушатель успешно остановлен.
+        /// </summary>
+        internal static string Main_ListenerSuccessfullyStopped {
+            get {
+                return ResourceManager.GetString("Main.ListenerSuccessfullyStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Управление слушателем.
+        /// </summary>
+        internal static string Main_ListenerWork {
+            get {
+                return ResourceManager.GetString("Main.ListenerWork", resourceCulture);
             }
         }
         
@@ -223,33 +259,6 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Запустить слушатель.
-        /// </summary>
-        internal static string Main_MsStartListener {
-            get {
-                return ResourceManager.GetString("Main.MsStartListener", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Остановить слушатель.
-        /// </summary>
-        internal static string Main_MsStopListener {
-            get {
-                return ResourceManager.GetString("Main.MsStopListener", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Свернуть в трей.
-        /// </summary>
-        internal static string Main_RollToTray {
-            get {
-                return ResourceManager.GetString("Main.RollToTray", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Сохранить соединения.
         /// </summary>
         internal static string Main_SaveConnections {
@@ -259,7 +268,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Запустить.
+        ///   Ищет локализованную строку, похожую на Запустить слушатель.
         /// </summary>
         internal static string Main_StartListener {
             get {
@@ -268,7 +277,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Остановить.
+        ///   Ищет локализованную строку, похожую на Остановить слушатель.
         /// </summary>
         internal static string Main_StopListener {
             get {
@@ -286,7 +295,7 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Обновить грид.
+        ///   Ищет локализованную строку, похожую на Обновить грид соединений.
         /// </summary>
         internal static string Main_UpdateDataGridView {
             get {

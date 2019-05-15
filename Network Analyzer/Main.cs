@@ -34,18 +34,19 @@ namespace Network_Analyzer
             m_TimerDataGridViewUpdate.Stop();
         }
 
-        private void bStartListener_Click(object sender, EventArgs e)
+        private void BtnStartListener_Click(object sender, EventArgs e)
         {
             try
             {
                 if (m_SocksListener != null && !m_SocksListener.IsDisposed && m_SocksListener.Listening)
                 {
-                    lblInformation.Text = "Сервис уже запущен";
+                    lblInformation.Text = Localizer.LocalizeString("Main.ListenerAlreadyStarted");
                     return;
                 }
 
                 m_SocksListener?.Dispose();
 
+                // TODO Перенести в настройки
                 m_SocksListener = new SocksListener(System.Net.IPAddress.Parse("127.0.0.1"), 30000);
                 m_SocksListener.Start();
 
@@ -58,13 +59,12 @@ namespace Network_Analyzer
                 btnSaveConnections.Enabled = false;
                 btnLoadConnections.Enabled = false;
 
-                //saveDumpToolStripMenuItem.Enabled = false;
-                //loadDumpToolStripMenuItem.Enabled = false;
+                saveConnectionsToolStripMenuItem.Enabled = false;
+                loadConnectionsToolStripMenuItem.Enabled = false;
 
-                btnClearDataGridView.Enabled = false;
                 btnClearConnentions.Enabled = false;
 
-                lblInformation.Text = "Сервис успешно запущен";
+                lblInformation.Text = Localizer.LocalizeString("Main.ListenerSuccessfullyLaunched");
             }
             catch (Exception ex)
             {
@@ -80,16 +80,65 @@ namespace Network_Analyzer
                 btnSaveConnections.Enabled = true;
                 btnLoadConnections.Enabled = true;
 
-                //saveDumpToolStripMenuItem.Enabled = true;
-                //loadDumpToolStripMenuItem.Enabled = true;
+                saveConnectionsToolStripMenuItem.Enabled = true;
+                loadConnectionsToolStripMenuItem.Enabled = true;
 
                 if (!cbAutoUpdateDataGridView.Checked)
                 {
-                    btnClearDataGridView.Enabled = true;
                     btnClearConnentions.Enabled = true;
                 }
 
-                lblInformation.Text = "Ошибки при запуске сервиса";
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsStartingListener");
+            }
+        }
+
+        private void BtnStopListener_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                m_SocksListener?.Dispose();
+
+                btnStartListener.Enabled = true;
+                btnStopListener.Enabled = false;
+
+                startListenerToolStripMenuItem.Enabled = true;
+                stopListenerToolStripMenuItem.Enabled = false;
+
+                btnSaveConnections.Enabled = true;
+                btnLoadConnections.Enabled = true;
+
+                saveConnectionsToolStripMenuItem.Enabled = true;
+                loadConnectionsToolStripMenuItem.Enabled = true;
+
+                if (!cbAutoUpdateDataGridView.Checked)
+                {
+                    btnClearConnentions.Enabled = true;
+                }
+
+                lblInformation.Text = Localizer.LocalizeString("Main.ListenerSuccessfullyStopped");
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+
+                btnStartListener.Enabled = true;
+                btnStopListener.Enabled = false;
+
+                startListenerToolStripMenuItem.Enabled = true;
+                stopListenerToolStripMenuItem.Enabled = false;
+
+                btnSaveConnections.Enabled = true;
+                btnLoadConnections.Enabled = true;
+
+                saveConnectionsToolStripMenuItem.Enabled = true;
+                loadConnectionsToolStripMenuItem.Enabled = true;
+
+                if (!cbAutoUpdateDataGridView.Checked)
+                {
+                    btnClearConnentions.Enabled = true;
+                }
+
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsStoppingListener");
             }
         }
     }
