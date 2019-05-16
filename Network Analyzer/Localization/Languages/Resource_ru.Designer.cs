@@ -214,6 +214,15 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при выборе соединения.
+        /// </summary>
+        internal static string Main_ErrorsChoosingConnection {
+            get {
+                return ResourceManager.GetString("Main.ErrorsChoosingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибки при запуске слушателя.
         /// </summary>
         internal static string Main_ErrorsStartingListener {
@@ -304,11 +313,29 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не найдено соединение для редактирования.
+        /// </summary>
+        internal static string Main_NoConnectionFoundForEditing {
+            get {
+                return ResourceManager.GetString("Main.NoConnectionFoundForEditing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сохранить соединения.
         /// </summary>
         internal static string Main_SaveConnections {
             get {
                 return ResourceManager.GetString("Main.SaveConnections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки.
+        /// </summary>
+        internal static string Main_Settings {
+            get {
+                return ResourceManager.GetString("Main.Settings", resourceCulture);
             }
         }
         
@@ -354,6 +381,69 @@ namespace Network_Analyzer.Localization.Languages {
         internal static string Main_Version {
             get {
                 return ResourceManager.GetString("Main.Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ип слушателя.
+        /// </summary>
+        internal static string Settings_AddressListener {
+            get {
+                return ResourceManager.GetString("Settings.AddressListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отмена.
+        /// </summary>
+        internal static string Settings_Cancel {
+            get {
+                return ResourceManager.GetString("Settings.Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Основные настройки.
+        /// </summary>
+        internal static string Settings_GeneralSettings {
+            get {
+                return ResourceManager.GetString("Settings.GeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Порт слушателя.
+        /// </summary>
+        internal static string Settings_PortListener {
+            get {
+                return ResourceManager.GetString("Settings.PortListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Язык программы.
+        /// </summary>
+        internal static string Settings_ProgramLanguage {
+            get {
+                return ResourceManager.GetString("Settings.ProgramLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить.
+        /// </summary>
+        internal static string Settings_Save {
+            get {
+                return ResourceManager.GetString("Settings.Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки программы.
+        /// </summary>
+        internal static string Settings_Text {
+            get {
+                return ResourceManager.GetString("Settings.Text", resourceCulture);
             }
         }
     }

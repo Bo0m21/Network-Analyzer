@@ -1,11 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using Network_Analyzer.Localization;
-using Network_Analyzer.Network.Listeners;
-using System.Reflection;
-using System.Windows.Forms;
+﻿using Network_Analyzer.Localization;
 using Network_Analyzer.Network.Data;
+using Network_Analyzer.Network.Listeners;
+using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
+using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
 namespace Network_Analyzer
@@ -14,7 +14,7 @@ namespace Network_Analyzer
     {
         private SocksListener m_SocksListener;
         private Timer m_TimerDataGridViewUpdate;
-        private object m_TimerDataGridViewUpdateLock = new object();
+        private readonly object m_TimerDataGridViewUpdateLock = new object();
 
         public Main()
         {
@@ -148,6 +148,16 @@ namespace Network_Analyzer
             }
         }
 
+        private void BtnLoadConnections_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("TODO");
+        }
+
+        private void BtnSaveConnections_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("TODO");
+        }
+
         private void BtnClearConnentions_Click(object sender, EventArgs e)
         {
             Connections.Clear();
@@ -155,14 +165,14 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
 
-            lblAllConnections.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullyCleanedUpdated");
+            lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullyCleanedUpdated");
         }
 
         private void BtnUpdateDataGridView_Click(object sender, EventArgs e)
         {
             DataGridViewUpdate();
 
-            lblAllConnections.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullyUpdated");
+            lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullyUpdated");
         }
 
         private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
@@ -257,7 +267,7 @@ namespace Network_Analyzer
 
                 if (connection != null)
                 {
-                    MessageBox.Show("Open editor");
+                    MessageBox.Show("TODO");
                     //using (var editor = new Editor(connection.Id))
                     //{
                     //    Hide();
@@ -267,12 +277,20 @@ namespace Network_Analyzer
                 }
                 else
                 {
-                    lInformation.Text = "Не найдено соединение для редактирования";
+                    lblInformation.Text = Localizer.LocalizeString("Main.NoConnectionFoundForEditing");
                 }
             }
             else
             {
-                lInformation.Text = "Ошибки при выборе соединения";
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsChoosingConnection");
+            }
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Settings settings = new Settings())
+            {
+                settings.ShowDialog();
             }
         }
     }

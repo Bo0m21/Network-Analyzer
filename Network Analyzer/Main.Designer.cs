@@ -40,6 +40,10 @@ namespace Network_Analyzer
             this.connectionsWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectionsGridWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearConnentionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateDataGridViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
             this.btnSaveConnections = new System.Windows.Forms.Button();
@@ -75,7 +79,9 @@ namespace Network_Analyzer
             this.msMenu.BackColor = System.Drawing.SystemColors.Control;
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listenerWorkToolStripMenuItem,
-            this.connectionsWorkToolStripMenuItem});
+            this.connectionsWorkToolStripMenuItem,
+            this.connectionsGridWorkToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(870, 24);
@@ -119,12 +125,44 @@ namespace Network_Analyzer
             this.loadConnectionsToolStripMenuItem.Name = "loadConnectionsToolStripMenuItem";
             this.loadConnectionsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.loadConnectionsToolStripMenuItem.Text = "Main.LoadConnections";
+            this.loadConnectionsToolStripMenuItem.Click += new System.EventHandler(this.BtnLoadConnections_Click);
             // 
             // saveConnectionsToolStripMenuItem
             // 
             this.saveConnectionsToolStripMenuItem.Name = "saveConnectionsToolStripMenuItem";
             this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.saveConnectionsToolStripMenuItem.Text = "Main.SaveConnections";
+            this.saveConnectionsToolStripMenuItem.Click += new System.EventHandler(this.BtnSaveConnections_Click);
+            // 
+            // connectionsGridWorkToolStripMenuItem
+            // 
+            this.connectionsGridWorkToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearConnentionsToolStripMenuItem,
+            this.updateDataGridViewToolStripMenuItem});
+            this.connectionsGridWorkToolStripMenuItem.Name = "connectionsGridWorkToolStripMenuItem";
+            this.connectionsGridWorkToolStripMenuItem.Size = new System.Drawing.Size(166, 20);
+            this.connectionsGridWorkToolStripMenuItem.Text = "Main.ConnectionsGridWork";
+            // 
+            // clearConnentionsToolStripMenuItem
+            // 
+            this.clearConnentionsToolStripMenuItem.Name = "clearConnentionsToolStripMenuItem";
+            this.clearConnentionsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.clearConnentionsToolStripMenuItem.Text = "Main.ClearConnentions";
+            this.clearConnentionsToolStripMenuItem.Click += new System.EventHandler(this.BtnClearConnentions_Click);
+            // 
+            // updateDataGridViewToolStripMenuItem
+            // 
+            this.updateDataGridViewToolStripMenuItem.Name = "updateDataGridViewToolStripMenuItem";
+            this.updateDataGridViewToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.updateDataGridViewToolStripMenuItem.Text = "Main.UpdateDataGridView";
+            this.updateDataGridViewToolStripMenuItem.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.settingsToolStripMenuItem.Text = "Main.Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // lblVersion
             // 
@@ -154,6 +192,7 @@ namespace Network_Analyzer
             this.btnSaveConnections.TabIndex = 1;
             this.btnSaveConnections.Text = "Main.SaveConnections";
             this.btnSaveConnections.UseVisualStyleBackColor = true;
+            this.btnSaveConnections.Click += new System.EventHandler(this.BtnSaveConnections_Click);
             // 
             // btnLoadConnections
             // 
@@ -163,6 +202,7 @@ namespace Network_Analyzer
             this.btnLoadConnections.TabIndex = 0;
             this.btnLoadConnections.Text = "Main.LoadConnections";
             this.btnLoadConnections.UseVisualStyleBackColor = true;
+            this.btnLoadConnections.Click += new System.EventHandler(this.BtnLoadConnections_Click);
             // 
             // lblInformation
             // 
@@ -424,6 +464,10 @@ namespace Network_Analyzer
         private System.Windows.Forms.ToolStripMenuItem connectionsWorkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadConnectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveConnectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionsGridWorkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearConnentionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateDataGridViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

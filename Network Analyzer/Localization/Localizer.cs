@@ -7,19 +7,19 @@ using System.Windows.Forms;
 namespace Network_Analyzer.Localization
 {
     /// <summary>
-    /// Класс для перевода строковых значений
+    /// Класс для перевода проекта
     /// </summary>
     public static class Localizer
     {
         private static ResourceManager _mainResourse = null;
 
         /// <summary>
-        /// Метод для загрузки ресурсов
+        /// Инициализация локализатора
         /// </summary>
         /// <param name="languagePrefix"></param>
         /// <param name="resourseBase"></param>
         /// <param name="delimeter"></param>
-        public static void InitLocalizedResource(string languagePrefix, string resourseBase, string delimeter = "_")
+        public static void InitLocalizer(string languagePrefix, string resourseBase, string delimeter = "_")
         {
             var fullResourseName = resourseBase;
             var assembly = Assembly.GetExecutingAssembly();
