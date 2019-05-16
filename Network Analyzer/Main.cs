@@ -53,7 +53,7 @@ namespace Network_Analyzer
                 m_SocksListener?.Dispose();
 
                 // TODO Перенести в настройки
-                m_SocksListener = new SocksListener(System.Net.IPAddress.Parse("127.0.0.1"), 30000);
+                m_SocksListener = new SocksListener(System.Net.IPAddress.Parse(Configuration.Address), Configuration.Port);
                 m_SocksListener.Start();
 
                 btnStartListener.Enabled = false;

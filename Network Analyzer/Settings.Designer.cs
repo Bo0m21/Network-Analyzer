@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.gbGeneralSettings = new System.Windows.Forms.GroupBox();
+            this.lblPortListener = new System.Windows.Forms.Label();
+            this.tbPortListener = new System.Windows.Forms.TextBox();
+            this.lblAddressListener = new System.Windows.Forms.Label();
+            this.tbAddressListener = new System.Windows.Forms.TextBox();
+            this.cbProgramLanguage = new System.Windows.Forms.ComboBox();
+            this.lblProgramLanguage = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.lblProgramLanguage = new System.Windows.Forms.Label();
-            this.cbProgramLanguage = new System.Windows.Forms.ComboBox();
-            this.tbAddressListener = new System.Windows.Forms.TextBox();
-            this.lblAddressListener = new System.Windows.Forms.Label();
-            this.tbPortListener = new System.Windows.Forms.TextBox();
-            this.lblPortListener = new System.Windows.Forms.Label();
+            this.lblInformation = new System.Windows.Forms.Label();
             this.gbGeneralSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +56,56 @@
             this.gbGeneralSettings.TabIndex = 0;
             this.gbGeneralSettings.TabStop = false;
             this.gbGeneralSettings.Text = "Settings.GeneralSettings";
+            // 
+            // lblPortListener
+            // 
+            this.lblPortListener.AutoSize = true;
+            this.lblPortListener.Location = new System.Drawing.Point(6, 75);
+            this.lblPortListener.Name = "lblPortListener";
+            this.lblPortListener.Size = new System.Drawing.Size(104, 13);
+            this.lblPortListener.TabIndex = 5;
+            this.lblPortListener.Text = "Settings.PortListener";
+            // 
+            // tbPortListener
+            // 
+            this.tbPortListener.Location = new System.Drawing.Point(166, 72);
+            this.tbPortListener.Name = "tbPortListener";
+            this.tbPortListener.Size = new System.Drawing.Size(125, 20);
+            this.tbPortListener.TabIndex = 4;
+            // 
+            // lblAddressListener
+            // 
+            this.lblAddressListener.AutoSize = true;
+            this.lblAddressListener.Location = new System.Drawing.Point(6, 49);
+            this.lblAddressListener.Name = "lblAddressListener";
+            this.lblAddressListener.Size = new System.Drawing.Size(123, 13);
+            this.lblAddressListener.TabIndex = 3;
+            this.lblAddressListener.Text = "Settings.AddressListener";
+            // 
+            // tbAddressListener
+            // 
+            this.tbAddressListener.Location = new System.Drawing.Point(166, 46);
+            this.tbAddressListener.Name = "tbAddressListener";
+            this.tbAddressListener.Size = new System.Drawing.Size(125, 20);
+            this.tbAddressListener.TabIndex = 2;
+            // 
+            // cbProgramLanguage
+            // 
+            this.cbProgramLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProgramLanguage.FormattingEnabled = true;
+            this.cbProgramLanguage.Location = new System.Drawing.Point(166, 19);
+            this.cbProgramLanguage.Name = "cbProgramLanguage";
+            this.cbProgramLanguage.Size = new System.Drawing.Size(125, 21);
+            this.cbProgramLanguage.TabIndex = 1;
+            // 
+            // lblProgramLanguage
+            // 
+            this.lblProgramLanguage.AutoSize = true;
+            this.lblProgramLanguage.Location = new System.Drawing.Point(6, 22);
+            this.lblProgramLanguage.Name = "lblProgramLanguage";
+            this.lblProgramLanguage.Size = new System.Drawing.Size(135, 13);
+            this.lblProgramLanguage.TabIndex = 0;
+            this.lblProgramLanguage.Text = "Settings.ProgramLanguage";
             // 
             // btnCancel
             // 
@@ -75,75 +127,33 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // lblProgramLanguage
+            // lblInformation
             // 
-            this.lblProgramLanguage.AutoSize = true;
-            this.lblProgramLanguage.Location = new System.Drawing.Point(6, 22);
-            this.lblProgramLanguage.Name = "lblProgramLanguage";
-            this.lblProgramLanguage.Size = new System.Drawing.Size(135, 13);
-            this.lblProgramLanguage.TabIndex = 0;
-            this.lblProgramLanguage.Text = "Settings.ProgramLanguage";
-            // 
-            // cbProgramLanguage
-            // 
-            this.cbProgramLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProgramLanguage.FormattingEnabled = true;
-            this.cbProgramLanguage.Items.AddRange(new object[] {
-            "English",
-            "Русский"});
-            this.cbProgramLanguage.Location = new System.Drawing.Point(166, 19);
-            this.cbProgramLanguage.Name = "cbProgramLanguage";
-            this.cbProgramLanguage.Size = new System.Drawing.Size(125, 21);
-            this.cbProgramLanguage.TabIndex = 1;
-            // 
-            // tbAddressListener
-            // 
-            this.tbAddressListener.Location = new System.Drawing.Point(166, 46);
-            this.tbAddressListener.Name = "tbAddressListener";
-            this.tbAddressListener.Size = new System.Drawing.Size(125, 20);
-            this.tbAddressListener.TabIndex = 2;
-            // 
-            // lblAddressListener
-            // 
-            this.lblAddressListener.AutoSize = true;
-            this.lblAddressListener.Location = new System.Drawing.Point(6, 49);
-            this.lblAddressListener.Name = "lblAddressListener";
-            this.lblAddressListener.Size = new System.Drawing.Size(123, 13);
-            this.lblAddressListener.TabIndex = 3;
-            this.lblAddressListener.Text = "Settings.AddressListener";
-            // 
-            // tbPortListener
-            // 
-            this.tbPortListener.Location = new System.Drawing.Point(166, 72);
-            this.tbPortListener.Name = "tbPortListener";
-            this.tbPortListener.Size = new System.Drawing.Size(125, 20);
-            this.tbPortListener.TabIndex = 4;
-            // 
-            // lblPortListener
-            // 
-            this.lblPortListener.AutoSize = true;
-            this.lblPortListener.Location = new System.Drawing.Point(6, 75);
-            this.lblPortListener.Name = "lblPortListener";
-            this.lblPortListener.Size = new System.Drawing.Size(104, 13);
-            this.lblPortListener.TabIndex = 5;
-            this.lblPortListener.Text = "Settings.PortListener";
+            this.lblInformation.AutoSize = true;
+            this.lblInformation.Location = new System.Drawing.Point(12, 144);
+            this.lblInformation.Name = "lblInformation";
+            this.lblInformation.Size = new System.Drawing.Size(100, 13);
+            this.lblInformation.TabIndex = 12;
+            this.lblInformation.Text = "Settings.Information";
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 151);
+            this.ClientSize = new System.Drawing.Size(321, 166);
+            this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.gbGeneralSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
             this.Text = "Settings.Text";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.gbGeneralSettings.ResumeLayout(false);
             this.gbGeneralSettings.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -158,5 +168,6 @@
         private System.Windows.Forms.TextBox tbAddressListener;
         private System.Windows.Forms.Label lblPortListener;
         private System.Windows.Forms.TextBox tbPortListener;
+        private System.Windows.Forms.Label lblInformation;
     }
 }

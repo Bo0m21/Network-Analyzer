@@ -14,12 +14,12 @@ namespace Network_Analyzer.Localization
         private static ResourceManager _mainResourse = null;
 
         /// <summary>
-        /// Инициализация локализатора
+        /// Загрузка локализатора
         /// </summary>
         /// <param name="languagePrefix"></param>
         /// <param name="resourseBase"></param>
         /// <param name="delimeter"></param>
-        public static void InitLocalizer(string languagePrefix, string resourseBase, string delimeter = "_")
+        public static void LoadLocalizer(string languagePrefix, string resourseBase, string delimeter = "_")
         {
             var fullResourseName = resourseBase;
             var assembly = Assembly.GetExecutingAssembly();

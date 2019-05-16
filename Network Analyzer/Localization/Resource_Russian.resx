@@ -231,8 +231,14 @@
   <data name="Settings.Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="Settings.ErrorsSavingSettings" xml:space="preserve">
+    <value>Ошибки при сохранении настроек</value>
+  </data>
   <data name="Settings.GeneralSettings" xml:space="preserve">
     <value>Основные настройки</value>
+  </data>
+  <data name="Settings.Information" xml:space="preserve">
+    <value>Информация</value>
   </data>
   <data name="Settings.PortListener" xml:space="preserve">
     <value>Порт слушателя</value>
@@ -242,6 +248,12 @@
   </data>
   <data name="Settings.Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="Settings.SettingsLoadedSuccessfully" xml:space="preserve">
+    <value>Настройки успешно загружены</value>
+  </data>
+  <data name="Settings.SettingsSavedSuccessfully" xml:space="preserve">
+    <value>Настройки успешно сохранены</value>
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Настройки программы</value>

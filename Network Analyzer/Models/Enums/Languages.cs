@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Network_Analyzer
 {
-    /// <summary>
-    /// Перечисление всех доступных языков
-    /// </summary>
-    public enum LanguagesEnums
+    /// <summary>Перечисление всех доступных языков</summary>
+    public enum Languages
     {
         English,
         Russian

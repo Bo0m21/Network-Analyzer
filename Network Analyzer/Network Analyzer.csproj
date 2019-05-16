@@ -47,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
+    <Compile Include="Services\Configuration.cs" />
     <Compile Include="Extensions\ArrayExtension.cs" />
-    <Compile Include="LanguageEnums.cs" />
+    <Compile Include="Models\Enums\Languages.cs" />
     <Compile Include="Network\Data\Connections.cs" />
-    <Compile Include="Localization\Languages\Resource_ru.Designer.cs">
+    <Compile Include="Localization\Resource_Russian.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resource_ru.resx</DependentUpon>
+      <DependentUpon>Resource_Russian.resx</DependentUpon>
     </Compile>
-    <Compile Include="Localization\Localizer.cs" />
+    <Compile Include="Services\Localizer.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,8 +64,8 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionModel.cs" />
-    <Compile Include="Models\Packets\PacketModel.cs" />
-    <Compile Include="Models\Packets\PacketType.cs" />
+    <Compile Include="Models\PacketModel.cs" />
+    <Compile Include="Models\Enums\PacketType.cs" />
     <Compile Include="Network\Authentication\AuthBase.cs" />
     <Compile Include="Network\Authentication\AuthenticationList.cs" />
     <Compile Include="Network\Authentication\AuthNone.cs" />
@@ -85,9 +85,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Localization\Languages\Resource_ru.resx">
+    <EmbeddedResource Include="Localization\Resource_Russian.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource_ru.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource_Russian.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

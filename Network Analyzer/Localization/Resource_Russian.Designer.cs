@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Network_Analyzer.Localization.Languages {
+namespace Network_Analyzer.Localization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Network_Analyzer.Localization.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource_ru {
+    internal class Resource_Russian {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource_ru() {
+        internal Resource_Russian() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Network_Analyzer.Localization.Languages {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Network_Analyzer.Localization.Languages.Resource_ru", typeof(Resource_ru).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Network_Analyzer.Localization.Resource_Russian", typeof(Resource_Russian).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -403,11 +403,29 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при сохранении настроек.
+        /// </summary>
+        internal static string Settings_ErrorsSavingSettings {
+            get {
+                return ResourceManager.GetString("Settings.ErrorsSavingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Основные настройки.
         /// </summary>
         internal static string Settings_GeneralSettings {
             get {
                 return ResourceManager.GetString("Settings.GeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string Settings_Information {
+            get {
+                return ResourceManager.GetString("Settings.Information", resourceCulture);
             }
         }
         
@@ -435,6 +453,24 @@ namespace Network_Analyzer.Localization.Languages {
         internal static string Settings_Save {
             get {
                 return ResourceManager.GetString("Settings.Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки успешно загружены.
+        /// </summary>
+        internal static string Settings_SettingsLoadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Settings.SettingsLoadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки успешно сохранены.
+        /// </summary>
+        internal static string Settings_SettingsSavedSuccessfully {
+            get {
+                return ResourceManager.GetString("Settings.SettingsSavedSuccessfully", resourceCulture);
             }
         }
         

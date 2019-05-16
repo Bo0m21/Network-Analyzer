@@ -12,15 +12,21 @@ namespace Network_Analyzer
         [STAThread]
         static void Main()
         {
-            // Установка соответствующей локали
-            // TODO Сделать загрузку из конфигов!
             // Загрузка конфигураций
             Configuration.LoadConfiguration();
-            Localizer.InitLocalizer("ru", "Network_Analyzer.Localization.Languages.Resource");
+
+            // Загрузка локализатора из ресурсов
+            Localizer.LoadLocalizer("Russian", "Network_Analyzer.Localization.Resource");
+
+            // TODO Исправить когдп будет английский язык
+            //Localizer.LoadLocalizer(Configuration.Language.ToString(), "Network_Analyzer.Localization.Resource");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
+
+            // Сохранение конфигураций
+            Configuration.SaveConfiguration();
         }
     }
 }
