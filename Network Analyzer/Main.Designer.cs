@@ -96,12 +96,14 @@ namespace Network_Analyzer
             this.startListenerToolStripMenuItem.Name = "startListenerToolStripMenuItem";
             this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.startListenerToolStripMenuItem.Text = "Main.StartListener";
+            this.startListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStartListener_Click);
             // 
             // stopListenerToolStripMenuItem
             // 
             this.stopListenerToolStripMenuItem.Name = "stopListenerToolStripMenuItem";
             this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.stopListenerToolStripMenuItem.Text = "Main.StopListener";
+            this.stopListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStopListener_Click);
             // 
             // connectionsWorkToolStripMenuItem
             // 
@@ -126,12 +128,12 @@ namespace Network_Analyzer
             // 
             // lblVersion
             // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(772, 296);
+            this.lblVersion.Location = new System.Drawing.Point(727, 298);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(68, 13);
+            this.lblVersion.Size = new System.Drawing.Size(125, 13);
             this.lblVersion.TabIndex = 12;
             this.lblVersion.Text = "Main.Version";
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // gbConnectionsWork
             // 
@@ -165,7 +167,7 @@ namespace Network_Analyzer
             // lblInformation
             // 
             this.lblInformation.AutoSize = true;
-            this.lblInformation.Location = new System.Drawing.Point(15, 296);
+            this.lblInformation.Location = new System.Drawing.Point(15, 298);
             this.lblInformation.Name = "lblInformation";
             this.lblInformation.Size = new System.Drawing.Size(85, 13);
             this.lblInformation.TabIndex = 11;
@@ -217,6 +219,8 @@ namespace Network_Analyzer
             this.dgvConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConnections.Size = new System.Drawing.Size(626, 243);
             this.dgvConnections.TabIndex = 1;
+            this.dgvConnections.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConnections_CellDoubleClick);
+            this.dgvConnections.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvConnections_KeyDown);
             // 
             // Number
             // 
@@ -276,12 +280,12 @@ namespace Network_Analyzer
             // 
             // lblAllConnections
             // 
-            this.lblAllConnections.AutoSize = true;
-            this.lblAllConnections.Location = new System.Drawing.Point(505, 0);
+            this.lblAllConnections.Location = new System.Drawing.Point(497, 0);
             this.lblAllConnections.Name = "lblAllConnections";
-            this.lblAllConnections.Size = new System.Drawing.Size(103, 13);
+            this.lblAllConnections.Size = new System.Drawing.Size(135, 13);
             this.lblAllConnections.TabIndex = 7;
             this.lblAllConnections.Text = "Main.AllConnections";
+            this.lblAllConnections.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // gbConnectionsGridWork
             // 
@@ -303,6 +307,7 @@ namespace Network_Analyzer
             this.btnClearConnentions.TabIndex = 9;
             this.btnClearConnentions.Text = "Main.ClearConnentions";
             this.btnClearConnentions.UseVisualStyleBackColor = true;
+            this.btnClearConnentions.Click += new System.EventHandler(this.BtnClearConnentions_Click);
             // 
             // btnUpdateDataGridView
             // 
@@ -312,6 +317,7 @@ namespace Network_Analyzer
             this.btnUpdateDataGridView.TabIndex = 6;
             this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
             this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.btnUpdateDataGridView.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
             // 
             // cbAutoUpdateDataGridView
             // 
@@ -322,6 +328,7 @@ namespace Network_Analyzer
             this.cbAutoUpdateDataGridView.TabIndex = 3;
             this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
             this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.cbAutoUpdateDataGridView.CheckedChanged += new System.EventHandler(this.CbAutoUpdateDataGridView_CheckedChanged);
             // 
             // gbControl
             // 
@@ -359,7 +366,7 @@ namespace Network_Analyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 318);
+            this.ClientSize = new System.Drawing.Size(870, 320);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.gbConnectionsWork);
             this.Controls.Add(this.lblInformation);
@@ -377,7 +384,6 @@ namespace Network_Analyzer
             this.msMenu.PerformLayout();
             this.gbConnectionsWork.ResumeLayout(false);
             this.gbConnections.ResumeLayout(false);
-            this.gbConnections.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
             this.gbConnectionsGridWork.ResumeLayout(false);
             this.gbConnectionsGridWork.PerformLayout();

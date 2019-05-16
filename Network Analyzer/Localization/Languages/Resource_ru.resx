@@ -123,6 +123,12 @@
   <data name="Main.AutoUpdateDataGridView" xml:space="preserve">
     <value>Автоматическое обновление</value>
   </data>
+  <data name="Main.AutoUpdatePackagesDisabled" xml:space="preserve">
+    <value>Автообновление пакетов отключено</value>
+  </data>
+  <data name="Main.AutoUpdatePackagesEnabled" xml:space="preserve">
+    <value>Автообновление пакетов включено</value>
+  </data>
   <data name="Main.ClearConnentions" xml:space="preserve">
     <value>Очистить соединения</value>
   </data>
@@ -153,6 +159,12 @@
   <data name="Main.ConnectionsGridWork" xml:space="preserve">
     <value>Работа с гридом соединений</value>
   </data>
+  <data name="Main.ConnectionsSuccessfullyCleanedUpdated" xml:space="preserve">
+    <value>Соединения успешно очищены и обновлены</value>
+  </data>
+  <data name="Main.ConnectionsSuccessfullyUpdated" xml:space="preserve">
+    <value>Соединения успешно обновлены</value>
+  </data>
   <data name="Main.ConnectionsWork" xml:space="preserve">
     <value>Работа с соединениями</value>
   </data>
@@ -161,6 +173,9 @@
   </data>
   <data name="Main.ErrorsStoppingListener" xml:space="preserve">
     <value>Ошибки при остановке слушателя</value>
+  </data>
+  <data name="Main.ErrorsUpdatingConnections" xml:space="preserve">
+    <value>Ошибка при обновлении соединений</value>
   </data>
   <data name="Main.Information" xml:space="preserve">
     <value>Информация</value>

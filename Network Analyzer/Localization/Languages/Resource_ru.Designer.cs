@@ -79,6 +79,24 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Автообновление пакетов отключено.
+        /// </summary>
+        internal static string Main_AutoUpdatePackagesDisabled {
+            get {
+                return ResourceManager.GetString("Main.AutoUpdatePackagesDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автообновление пакетов включено.
+        /// </summary>
+        internal static string Main_AutoUpdatePackagesEnabled {
+            get {
+                return ResourceManager.GetString("Main.AutoUpdatePackagesEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Очистить соединения.
         /// </summary>
         internal static string Main_ClearConnentions {
@@ -169,6 +187,24 @@ namespace Network_Analyzer.Localization.Languages {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения успешно очищены и обновлены.
+        /// </summary>
+        internal static string Main_ConnectionsSuccessfullyCleanedUpdated {
+            get {
+                return ResourceManager.GetString("Main.ConnectionsSuccessfullyCleanedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения успешно обновлены.
+        /// </summary>
+        internal static string Main_ConnectionsSuccessfullyUpdated {
+            get {
+                return ResourceManager.GetString("Main.ConnectionsSuccessfullyUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Работа с соединениями.
         /// </summary>
         internal static string Main_ConnectionsWork {
@@ -192,6 +228,15 @@ namespace Network_Analyzer.Localization.Languages {
         internal static string Main_ErrorsStoppingListener {
             get {
                 return ResourceManager.GetString("Main.ErrorsStoppingListener", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка при обновлении соединений.
+        /// </summary>
+        internal static string Main_ErrorsUpdatingConnections {
+            get {
+                return ResourceManager.GetString("Main.ErrorsUpdatingConnections", resourceCulture);
             }
         }
         

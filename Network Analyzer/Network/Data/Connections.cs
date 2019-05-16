@@ -29,7 +29,7 @@ namespace Network_Analyzer.Network.Data
 
         /// <summary>Get all connections</summary>
         /// <returns>List connections</returns>
-        public static IEnumerable<ConnectionModel> GetConnections()
+        public static List<ConnectionModel> GetConnections()
         {
             return _connections;
         }
