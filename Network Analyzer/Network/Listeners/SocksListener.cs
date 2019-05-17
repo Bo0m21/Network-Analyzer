@@ -1,7 +1,7 @@
 using System;
 using System.Net;
-using Network_Analyzer.Network.Authentication;
-using Network_Analyzer.Network.Clients;
+using Network_Analyzer.Network.Listeners.Authentication;
+using Network_Analyzer.Network.Listeners.Clients;
 
 namespace Network_Analyzer.Network.Listeners
 {

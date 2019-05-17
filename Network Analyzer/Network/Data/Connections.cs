@@ -1,24 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Network_Analyzer.Models;
-using Network_Analyzer.Models.Packets;
+using Network_Analyzer.Models.Enums;
 
 namespace Network_Analyzer.Network.Data
 {
-    /// <summary>This is class connections which save data</summary>
+    /// <summary>
+    ///     This is class connections which save data
+    /// </summary>
     public static class Connections
     {
-        /// <summary>Array connections and packets</summary>
-        private static List<ConnectionModel> _connections = new List<ConnectionModel>();
+        /// <summary>
+        ///     Array connections and packets
+        /// </summary>
+        private static readonly List<ConnectionModel> _connections = new List<ConnectionModel>();
 
-        /// <summary>Get new connection id</summary>
+        /// <summary>
+        ///     Get new connection id
+        /// </summary>
         /// <returns>New connection id</returns>
         public static long GetNewConnectionId()
         {
             return _connections.Count + 1;
         }
 
-        /// <summary>Get new packet id for connection</summary>
+        /// <summary>
+        ///     Get new packet id for connection
+        /// </summary>
         /// <param name="connectionId">Connection id</param>
         /// <returns>New packet id for connection</returns>
         public static long GetNewPacketId(long connectionId)
@@ -27,14 +35,18 @@ namespace Network_Analyzer.Network.Data
             return connection.ConnectionPackets.Count + 1;
         }
 
-        /// <summary>Get all connections</summary>
+        /// <summary>
+        ///     Get all connections
+        /// </summary>
         /// <returns>List connections</returns>
         public static List<ConnectionModel> GetConnections()
         {
             return _connections;
         }
 
-        /// <summary>Get connection at id</summary>
+        /// <summary>
+        ///     Get connection at id
+        /// </summary>
         /// <param name="id">Id connection in collection</param>
         /// <returns>Return connection or null</returns>
         public static ConnectionModel GetConnection(long id)
@@ -42,18 +54,24 @@ namespace Network_Analyzer.Network.Data
             return _connections.FirstOrDefault(c => c.Id == id);
         }
 
-        /// <summary>Get connection at index</summary>
+        /// <summary>
+        ///     Get connection at index
+        /// </summary>
         /// <param name="index">Index connection in collection</param>
         /// <returns>Return connection or null</returns>
         public static ConnectionModel GetConnectionAtIndex(int index)
         {
             if (index < 0 || index >= _connections.Count)
+            {
                 return null;
+            }
 
             return _connections[index];
         }
 
-        /// <summary>Add new connection</summary>
+        /// <summary>
+        ///     Add new connection
+        /// </summary>
         /// <param name="newConnection">New connection</param>
         public static void AddConnection(ConnectionModel newConnection)
         {
@@ -66,7 +84,9 @@ namespace Network_Analyzer.Network.Data
             }
         }
 
-        /// <summary>Add new connections</summary>
+        /// <summary>
+        ///     Add new connections
+        /// </summary>
         /// <param name="newConnections">New connections</param>
         public static void AddConnectionList(List<ConnectionModel> newConnections)
         {
@@ -82,7 +102,9 @@ namespace Network_Analyzer.Network.Data
             }
         }
 
-        /// <summary>Add new packet for connection</summary>
+        /// <summary>
+        ///     Add new packet for connection
+        /// </summary>
         /// <param name="id">Id connection</param>
         /// <param name="newPacket">New packet</param>
         public static void AddConnectionPacket(long id, PacketModel newPacket)
@@ -107,7 +129,9 @@ namespace Network_Analyzer.Network.Data
             }
         }
 
-        /// <summary>Update flag IsDisconnected if connection was close</summary>
+        /// <summary>
+        ///     Update flag IsDisconnected if connection was close
+        /// </summary>
         /// <param name="id">Id connection</param>
         public static void DisconnectedConnection(long id)
         {
@@ -122,14 +146,18 @@ namespace Network_Analyzer.Network.Data
             }
         }
 
-        /// <summary>Get count connections</summary>
+        /// <summary>
+        ///     Get count connections
+        /// </summary>
         /// <returns>Count connections</returns>
         public static int GetCount()
         {
             return _connections.Count;
         }
 
-        /// <summary>Clear all connections</summary>
+        /// <summary>
+        ///     Clear all connections
+        /// </summary>
         public static void Clear()
         {
             _connections.Clear();

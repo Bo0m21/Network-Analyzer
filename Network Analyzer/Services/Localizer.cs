@@ -4,17 +4,17 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace Network_Analyzer.Localization
+namespace Network_Analyzer.Services
 {
     /// <summary>
-    /// Класс для перевода проекта
+    ///     Class for translate project
     /// </summary>
     public static class Localizer
     {
-        private static ResourceManager _mainResourse = null;
+        private static ResourceManager _mainResourse;
 
         /// <summary>
-        /// Загрузка локализатора
+        ///     Loading resources for translate
         /// </summary>
         /// <param name="languagePrefix"></param>
         /// <param name="resourseBase"></param>
@@ -27,13 +27,15 @@ namespace Network_Analyzer.Localization
             var resList = assembly.GetManifestResourceNames().ToList();
 
             if (resList.Count(x => x.Equals(fullResourseName + delimeter + languagePrefix + ".resources")) == 1)
+            {
                 fullResourseName += delimeter + languagePrefix;
+            }
 
             _mainResourse = new ResourceManager(fullResourseName, assembly);
         }
 
         /// <summary>
-        /// Метод для локализации строки
+        ///     Method for translate string
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -43,7 +45,7 @@ namespace Network_Analyzer.Localization
         }
 
         /// <summary>
-        /// Метод для получения конкретной строки из ресурсов
+        ///     Method for get string in resources
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -52,10 +54,11 @@ namespace Network_Analyzer.Localization
             try
             {
                 if (_mainResourse == null)
+                {
                     return name;
+                }
 
-                var result = _mainResourse.GetString(name);
-                return result ?? name;
+                return _mainResourse.GetString(name) ?? name;
             }
             catch
             {
@@ -64,7 +67,7 @@ namespace Network_Analyzer.Localization
         }
 
         /// <summary>
-        /// Метод для локализации формы
+        ///     Method for translation form
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
@@ -80,7 +83,7 @@ namespace Network_Analyzer.Localization
 
                 if (control is DataGridView)
                 {
-                    foreach (DataGridViewColumn dataGridViewColumn in ((DataGridView)control).Columns)
+                    foreach (DataGridViewColumn dataGridViewColumn in ((DataGridView) control).Columns)
                     {
                         dataGridViewColumn.HeaderText = LocalizeString(dataGridViewColumn.HeaderText);
                     }
@@ -88,11 +91,12 @@ namespace Network_Analyzer.Localization
 
                 if (control is MenuStrip)
                 {
-                    foreach (ToolStripItem toolStripItem in ((MenuStrip)control).Items)
+                    foreach (ToolStripItem toolStripItem in ((MenuStrip) control).Items)
                     {
                         toolStripItem.Text = LocalizeString(toolStripItem.Text);
 
-                        foreach (ToolStripMenuItem toolStripMenuItem in ((ToolStripMenuItem)toolStripItem).DropDownItems)
+                        foreach (ToolStripMenuItem toolStripMenuItem in ((ToolStripMenuItem) toolStripItem)
+                            .DropDownItems)
                         {
                             toolStripMenuItem.Text = LocalizeString(toolStripMenuItem.Text);
                         }
@@ -102,7 +106,7 @@ namespace Network_Analyzer.Localization
         }
 
         /// <summary>
-        /// Получение всех контролов на форме
+        ///     Get all controls in form
         /// </summary>
         /// <param name="controlCollection"></param>
         /// <returns></returns>

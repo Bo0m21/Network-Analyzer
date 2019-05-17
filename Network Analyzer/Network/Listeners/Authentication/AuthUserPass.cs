@@ -2,7 +2,7 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Network_Analyzer.Network.Authentication
+namespace Network_Analyzer.Network.Listeners.Authentication
 {
     /// <summary>Authenticates a user on a SOCKS5 server according to the username/password authentication subprotocol.</summary>
     internal sealed class AuthUserPass : AuthBase

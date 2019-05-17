@@ -1,11 +1,11 @@
-﻿using Network_Analyzer.Localization;
-using Network_Analyzer.Network.Data;
+﻿using Network_Analyzer.Network.Data;
 using Network_Analyzer.Network.Listeners;
 using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Network_Analyzer.Services;
 using Timer = System.Windows.Forms.Timer;
 
 namespace Network_Analyzer
@@ -52,8 +52,7 @@ namespace Network_Analyzer
 
                 m_SocksListener?.Dispose();
 
-                // TODO Перенести в настройки
-                m_SocksListener = new SocksListener(System.Net.IPAddress.Parse(Configuration.Address), Configuration.Port);
+                m_SocksListener = new SocksListener(System.Net.IPAddress.Parse(Configuration.Address), int.Parse(Configuration.Port));
                 m_SocksListener.Start();
 
                 btnStartListener.Enabled = false;

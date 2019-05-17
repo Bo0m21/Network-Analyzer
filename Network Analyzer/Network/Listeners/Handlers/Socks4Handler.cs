@@ -2,9 +2,8 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Network_Analyzer.Network.Listeners;
 
-namespace Network_Analyzer.Network.Handlers
+namespace Network_Analyzer.Network.Listeners.Handlers
 {
     /// <summary>Implements the SOCKS4 and SOCKS4a protocols.</summary>
     internal sealed class Socks4Handler : SocksHandler

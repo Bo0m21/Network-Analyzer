@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Network_Analyzer
+﻿namespace Network_Analyzer.Models.Enums
 {
-    /// <summary>Перечисление всех доступных языков</summary>
+    /// <summary>
+    ///     Listing all available languages
+    /// </summary>
     public enum Languages
     {
         English,

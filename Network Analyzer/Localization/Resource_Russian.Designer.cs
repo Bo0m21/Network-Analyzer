@@ -412,6 +412,33 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при валидации адреса.
+        /// </summary>
+        internal static string Settings_ErrorsValidationAddress {
+            get {
+                return ResourceManager.GetString("Settings.ErrorsValidationAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при валидации языка.
+        /// </summary>
+        internal static string Settings_ErrorsValidationLanguage {
+            get {
+                return ResourceManager.GetString("Settings.ErrorsValidationLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при валидации порта.
+        /// </summary>
+        internal static string Settings_ErrorsValidationPort {
+            get {
+                return ResourceManager.GetString("Settings.ErrorsValidationPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Основные настройки.
         /// </summary>
         internal static string Settings_GeneralSettings {

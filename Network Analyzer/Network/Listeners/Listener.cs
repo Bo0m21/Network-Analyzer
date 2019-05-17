@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Net;
 using System.Net.Sockets;
-using Network_Analyzer.Network.Clients;
+using Network_Analyzer.Network.Listeners.Clients;
 
 namespace Network_Analyzer.Network.Listeners
 {

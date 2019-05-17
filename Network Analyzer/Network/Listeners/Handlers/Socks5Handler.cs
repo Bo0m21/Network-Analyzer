@@ -2,10 +2,9 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Network_Analyzer.Network.Authentication;
-using Network_Analyzer.Network.Listeners;
+using Network_Analyzer.Network.Listeners.Authentication;
 
-namespace Network_Analyzer.Network.Handlers
+namespace Network_Analyzer.Network.Listeners.Handlers
 {
     /// <summary>Implements the SOCKS5 protocol.</summary>
     internal sealed class Socks5Handler : SocksHandler

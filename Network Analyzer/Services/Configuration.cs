@@ -1,68 +1,52 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
+using Network_Analyzer.Extensions;
+using Network_Analyzer.Models.Enums;
 
-namespace Network_Analyzer
+namespace Network_Analyzer.Services
 {
     /// <summary>
-    /// Калсс для работы с сонфигурационными занчениями
+    ///     Class for work with configuration values
     /// </summary>
     public static class Configuration
     {
-        public static string Language { get; set; }
-        public static string Address { get; set; }
-        public static string Port { get; set; }
+        // Private variables
+        private static string _language;
+        private static string _address;
+        private static string _port;
 
-        /// <summary>
-        /// Загрузка конфигураций
-        /// </summary>
-        public static void LoadConfiguration()
+        // Properties
+        public static string Language
         {
-            var language = ConfigurationManager.AppSettings["Language"];
-            var address = ConfigurationManager.AppSettings["Address"];
-            var port = ConfigurationManager.AppSettings["Port"];
+            get => _language;
+            set => _language = value.ValidateLanguage() ? value : Languages.English.ToString();
+        }
 
-            if (string.IsNullOrEmpty(language))
-            {
-                Language = Languages.English;
-            }
-            else
-            {
-                Enum.TryParse(language, out Languages parseLanguage);
-                Language = parseLanguage;
-            }
+        public static string Address
+        {
+            get => _address;
+            set => _address = value.ValidateAddress() ? value : "127.0.0.1";
+        }
 
-            if (string.IsNullOrEmpty(address))
-            {
-                Address = "127.0.0.1";
-            }
-            else
-            {
-                Address = address;
-            }
-
-            if (string.IsNullOrEmpty(port))
-            {
-                Port = 30000;
-            }
-            else
-            {
-                int.TryParse(port, out int parsePort);
-
-                if (parsePort > 0 && parsePort < 65535)
-                {
-                    Port = parsePort;
-                }
-                else
-                {
-                    Port = 30000;
-                }
-            }
+        public static string Port
+        {
+            get => _port;
+            set => _port = value.ValidatePort() ? value : "35000";
         }
 
         /// <summary>
-        /// Сохранение конфигураций
+        ///     Loading configuration
+        /// </summary>
+        public static void LoadConfiguration()
+        {
+            Language = ConfigurationManager.AppSettings["Language"];
+            Address = ConfigurationManager.AppSettings["Address"];
+            Port = ConfigurationManager.AppSettings["Port"];
+        }
+
+        /// <summary>
+        ///     Save configuration
         /// </summary>
         public static void SaveConfiguration()
         {
@@ -70,11 +54,11 @@ namespace Network_Analyzer
 
             if (configuration.AppSettings.Settings.AllKeys.Any(k => k == "Language"))
             {
-                configuration.AppSettings.Settings["Language"].Value = Language.ToString();
+                configuration.AppSettings.Settings["Language"].Value = Language;
             }
             else
             {
-                configuration.AppSettings.Settings.Add("Language", Language.ToString());
+                configuration.AppSettings.Settings.Add("Language", Language);
             }
 
             if (configuration.AppSettings.Settings.AllKeys.Any(k => k == "Address"))
@@ -88,11 +72,11 @@ namespace Network_Analyzer
 
             if (configuration.AppSettings.Settings.AllKeys.Any(k => k == "Port"))
             {
-                configuration.AppSettings.Settings["Port"].Value = Port.ToString();
+                configuration.AppSettings.Settings["Port"].Value = Port;
             }
             else
             {
-                configuration.AppSettings.Settings.Add("Port", Port.ToString());
+                configuration.AppSettings.Settings.Add("Port", Port);
             }
 
             configuration.Save(ConfigurationSaveMode.Modified);

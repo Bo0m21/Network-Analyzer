@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Windows.Forms;
-using Network_Analyzer.Localization;
+using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
     static class Program
     {
         /// <summary>
-        /// Главная точка входа для приложения.
+        /// Main entry point for the application
         /// </summary>
         [STAThread]
         static void Main()
         {
-            // Загрузка конфигураций
+            // Download configurations
             Configuration.LoadConfiguration();
 
-            // Загрузка локализатора из ресурсов
-            Localizer.LoadLocalizer("Russian", "Network_Analyzer.Localization.Resource");
+            // Loading localizer from resources
+            Localizer.LoadLocalizer(Configuration.Language, "Network_Analyzer.Localization.Resource");
 
-            // TODO Исправить когдп будет английский язык
-            //Localizer.LoadLocalizer(Configuration.Language.ToString(), "Network_Analyzer.Localization.Resource");
-
+            // Loading form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
 
-            // Сохранение конфигураций
+            // Saving configurations
             Configuration.SaveConfiguration();
         }
     }

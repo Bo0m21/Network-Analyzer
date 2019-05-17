@@ -1,6 +1,8 @@
-﻿namespace Network_Analyzer.Models.Packets
+﻿namespace Network_Analyzer.Models.Enums
 {
-    /// <summary>Type packet connection</summary>
+    /// <summary>
+    ///     Type packet connection
+    /// </summary>
     public enum PacketType
     {
         ClientToServer = 1,

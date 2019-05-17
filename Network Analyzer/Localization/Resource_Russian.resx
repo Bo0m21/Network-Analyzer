@@ -234,6 +234,15 @@
   <data name="Settings.ErrorsSavingSettings" xml:space="preserve">
     <value>Ошибки при сохранении настроек</value>
   </data>
+  <data name="Settings.ErrorsValidationAddress" xml:space="preserve">
+    <value>Ошибки при валидации адреса</value>
+  </data>
+  <data name="Settings.ErrorsValidationLanguage" xml:space="preserve">
+    <value>Ошибки при валидации языка</value>
+  </data>
+  <data name="Settings.ErrorsValidationPort" xml:space="preserve">
+    <value>Ошибки при валидации порта</value>
+  </data>
   <data name="Settings.GeneralSettings" xml:space="preserve">
     <value>Основные настройки</value>
   </data>

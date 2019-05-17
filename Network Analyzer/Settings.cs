@@ -1,7 +1,9 @@
-﻿using Network_Analyzer.Localization;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Network_Analyzer.Extensions;
+using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
@@ -36,10 +38,27 @@ namespace Network_Analyzer
         {
             try
             {
-                // TODO переписать это чтобы не было дублирования кода
-                Configuration.Language = (Languages)Enum.Parse(typeof(Languages), cbProgramLanguage.Text);
+                if (!cbProgramLanguage.Text.ValidateLanguage())
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Settings.ErrorsValidationLanguage");
+                    return;
+                }
+
+                if (!tbAddressListener.Text.ValidateAddress())
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Settings.ErrorsValidationAddress");
+                    return;
+                }
+
+                if (!tbPortListener.Text.ValidatePort())
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Settings.ErrorsValidationPort");
+                    return;
+                }
+
+                Configuration.Language = cbProgramLanguage.Text;
                 Configuration.Address = tbAddressListener.Text;
-                Configuration.Port = int.Parse(tbPortListener.Text);
+                Configuration.Port = tbPortListener.Text;
 
                 Configuration.SaveConfiguration();
 
