@@ -156,11 +156,20 @@
   <data name="Main.Connections.Yes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="Main.ConnectionsEmpty" xml:space="preserve">
+    <value>Соединения не могут быть пустыми</value>
+  </data>
   <data name="Main.ConnectionsGridWork" xml:space="preserve">
     <value>Работа с гридом соединений</value>
   </data>
   <data name="Main.ConnectionsSuccessfullyCleanedUpdated" xml:space="preserve">
     <value>Соединения успешно очищены и обновлены</value>
+  </data>
+  <data name="Main.ConnectionsSuccessfullyLoaded" xml:space="preserve">
+    <value>Соединения успешно загружены</value>
+  </data>
+  <data name="Main.ConnectionsSuccessfullySaved" xml:space="preserve">
+    <value>Соединения успешно сохранены</value>
   </data>
   <data name="Main.ConnectionsSuccessfullyUpdated" xml:space="preserve">
     <value>Соединения успешно обновлены</value>
@@ -168,8 +177,17 @@
   <data name="Main.ConnectionsWork" xml:space="preserve">
     <value>Работа с соединениями</value>
   </data>
+  <data name="Main.DeserializationResultEmpty" xml:space="preserve">
+    <value>Результат загрузки не может быть пустым</value>
+  </data>
   <data name="Main.ErrorsChoosingConnection" xml:space="preserve">
     <value>Ошибки при выборе соединения</value>
+  </data>
+  <data name="Main.ErrorsLoadingConnections" xml:space="preserve">
+    <value>Ошибки при загрузке соединений</value>
+  </data>
+  <data name="Main.ErrorsSavingConnections" xml:space="preserve">
+    <value>Ошибки при сохранении соединений</value>
   </data>
   <data name="Main.ErrorsStartingListener" xml:space="preserve">
     <value>Ошибки при запуске слушателя</value>
@@ -204,8 +222,14 @@
   <data name="Main.NoConnectionFoundForEditing" xml:space="preserve">
     <value>Не найдено соединение для редактирования</value>
   </data>
+  <data name="Main.NotSelectFile" xml:space="preserve">
+    <value>Вы не выбрали файл</value>
+  </data>
   <data name="Main.SaveConnections" xml:space="preserve">
     <value>Сохранить соединения</value>
+  </data>
+  <data name="Main.SerializationResultEmpty" xml:space="preserve">
+    <value>Результат сохранения не может быть пустым</value>
   </data>
   <data name="Main.Settings" xml:space="preserve">
     <value>Настройки</value>
@@ -237,17 +261,26 @@
   <data name="Settings.ErrorsValidationAddress" xml:space="preserve">
     <value>Ошибки при валидации адреса</value>
   </data>
+  <data name="Settings.ErrorsValidationFolder" xml:space="preserve">
+    <value>Ошибки при валидации папки</value>
+  </data>
   <data name="Settings.ErrorsValidationLanguage" xml:space="preserve">
     <value>Ошибки при валидации языка</value>
   </data>
   <data name="Settings.ErrorsValidationPort" xml:space="preserve">
     <value>Ошибки при валидации порта</value>
   </data>
+  <data name="Settings.FolderSaved" xml:space="preserve">
+    <value>Папка сохранения</value>
+  </data>
   <data name="Settings.GeneralSettings" xml:space="preserve">
     <value>Основные настройки</value>
   </data>
   <data name="Settings.Information" xml:space="preserve">
     <value>Информация</value>
+  </data>
+  <data name="Settings.ListenerSettings" xml:space="preserve">
+    <value>Настройки слушателя</value>
   </data>
   <data name="Settings.PortListener" xml:space="preserve">
     <value>Порт слушателя</value>

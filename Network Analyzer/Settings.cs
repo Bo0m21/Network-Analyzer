@@ -15,7 +15,7 @@ namespace Network_Analyzer
             Localizer.LocalizeForm(this);
         }
 
-        private void Settings_Load(object sender, System.EventArgs e)
+        private void Settings_Load(object sender, EventArgs e)
         {
             foreach (Languages language in Enum.GetValues(typeof(Languages)))
             {
@@ -25,16 +25,17 @@ namespace Network_Analyzer
             cbProgramLanguage.Text = Configuration.Language;
             tbAddressListener.Text = Configuration.Address;
             tbPortListener.Text = Configuration.Port;
+            tbFolderSaved.Text = Configuration.Folder;
 
             lblInformation.Text = Localizer.LocalizeString("Settings.SettingsLoadedSuccessfully");
         }
 
-        private void BtnCancel_Click(object sender, System.EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void BtnSave_Click(object sender, System.EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -56,9 +57,16 @@ namespace Network_Analyzer
                     return;
                 }
 
+                if (!tbFolderSaved.Text.ValidateFolder())
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Settings.ErrorsValidationFolder");
+                    return;
+                }
+
                 Configuration.Language = cbProgramLanguage.Text;
                 Configuration.Address = tbAddressListener.Text;
                 Configuration.Port = tbPortListener.Text;
+                Configuration.Folder = tbFolderSaved.Text;
 
                 Configuration.SaveConfiguration();
 

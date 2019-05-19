@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Windows.Forms;
+using Network_Analyzer.Models.Enums;
 using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// Main entry point for the application
+        ///     Main entry point for the application
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             // Download configurations
             Configuration.LoadConfiguration();
 
             // Loading localizer from resources
-            Localizer.LoadLocalizer(Configuration.Language, "Network_Analyzer.Localization.Resource");
+            //Localizer.LoadLocalizer(Configuration.Language, "Network_Analyzer.Localization.Resource");
+
+            // TODO Сейчас стоит только русский язык
+            Localizer.LoadLocalizer(Languages.Russian.ToString(), "Network_Analyzer.Localization.Resource");
 
             // Loading form
             Application.EnableVisualStyles();

@@ -178,6 +178,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения не могут быть пустыми.
+        /// </summary>
+        internal static string Main_ConnectionsEmpty {
+            get {
+                return ResourceManager.GetString("Main.ConnectionsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Работа с гридом соединений.
         /// </summary>
         internal static string Main_ConnectionsGridWork {
@@ -192,6 +201,24 @@ namespace Network_Analyzer.Localization {
         internal static string Main_ConnectionsSuccessfullyCleanedUpdated {
             get {
                 return ResourceManager.GetString("Main.ConnectionsSuccessfullyCleanedUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения успешно загружены.
+        /// </summary>
+        internal static string Main_ConnectionsSuccessfullyLoaded {
+            get {
+                return ResourceManager.GetString("Main.ConnectionsSuccessfullyLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения успешно сохранены.
+        /// </summary>
+        internal static string Main_ConnectionsSuccessfullySaved {
+            get {
+                return ResourceManager.GetString("Main.ConnectionsSuccessfullySaved", resourceCulture);
             }
         }
         
@@ -214,11 +241,38 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Результат загрузки не может быть пустым.
+        /// </summary>
+        internal static string Main_DeserializationResultEmpty {
+            get {
+                return ResourceManager.GetString("Main.DeserializationResultEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибки при выборе соединения.
         /// </summary>
         internal static string Main_ErrorsChoosingConnection {
             get {
                 return ResourceManager.GetString("Main.ErrorsChoosingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при загрузке соединений.
+        /// </summary>
+        internal static string Main_ErrorsLoadingConnections {
+            get {
+                return ResourceManager.GetString("Main.ErrorsLoadingConnections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при сохранении соединений.
+        /// </summary>
+        internal static string Main_ErrorsSavingConnections {
+            get {
+                return ResourceManager.GetString("Main.ErrorsSavingConnections", resourceCulture);
             }
         }
         
@@ -322,11 +376,29 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не выбрали файл.
+        /// </summary>
+        internal static string Main_NotSelectFile {
+            get {
+                return ResourceManager.GetString("Main.NotSelectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сохранить соединения.
         /// </summary>
         internal static string Main_SaveConnections {
             get {
                 return ResourceManager.GetString("Main.SaveConnections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Результат сохранения не может быть пустым.
+        /// </summary>
+        internal static string Main_SerializationResultEmpty {
+            get {
+                return ResourceManager.GetString("Main.SerializationResultEmpty", resourceCulture);
             }
         }
         
@@ -421,6 +493,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при валидации папки.
+        /// </summary>
+        internal static string Settings_ErrorsValidationFolder {
+            get {
+                return ResourceManager.GetString("Settings.ErrorsValidationFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибки при валидации языка.
         /// </summary>
         internal static string Settings_ErrorsValidationLanguage {
@@ -439,6 +520,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Папка сохранения.
+        /// </summary>
+        internal static string Settings_FolderSaved {
+            get {
+                return ResourceManager.GetString("Settings.FolderSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Основные настройки.
         /// </summary>
         internal static string Settings_GeneralSettings {
@@ -453,6 +543,15 @@ namespace Network_Analyzer.Localization {
         internal static string Settings_Information {
             get {
                 return ResourceManager.GetString("Settings.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Настройки слушателя.
+        /// </summary>
+        internal static string Settings_ListenerSettings {
+            get {
+                return ResourceManager.GetString("Settings.ListenerSettings", resourceCulture);
             }
         }
         

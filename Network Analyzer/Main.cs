@@ -1,20 +1,24 @@
-﻿using Network_Analyzer.Network.Data;
-using Network_Analyzer.Network.Listeners;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Network_Analyzer.Models;
+using Network_Analyzer.Network.Data;
+using Network_Analyzer.Network.Listeners;
 using Network_Analyzer.Services;
-using Timer = System.Windows.Forms.Timer;
+using Newtonsoft.Json;
 
 namespace Network_Analyzer
 {
     public partial class Main : Form
     {
+        private readonly object m_TimerDataGridViewUpdateLock = new object();
         private SocksListener m_SocksListener;
         private Timer m_TimerDataGridViewUpdate;
-        private readonly object m_TimerDataGridViewUpdateLock = new object();
 
         public Main()
         {
@@ -22,16 +26,17 @@ namespace Network_Analyzer
             Localizer.LocalizeForm(this);
         }
 
-        private void Main_Load(object sender, System.EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
             m_TimerDataGridViewUpdate = new Timer();
             m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
 
             var connections = Connections.GetConnections();
-            lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count.ToString();
+            lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
             lblInformation.Text = Localizer.LocalizeString("Main.LoadedSuccessfully");
-            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " + Assembly.GetEntryAssembly()?.GetName().Version;
+            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " +
+                              Assembly.GetEntryAssembly()?.GetName().Version;
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -52,7 +57,8 @@ namespace Network_Analyzer
 
                 m_SocksListener?.Dispose();
 
-                m_SocksListener = new SocksListener(System.Net.IPAddress.Parse(Configuration.Address), int.Parse(Configuration.Port));
+                m_SocksListener =
+                    new SocksListener(IPAddress.Parse(Configuration.Address), int.Parse(Configuration.Port));
                 m_SocksListener.Start();
 
                 btnStartListener.Enabled = false;
@@ -149,12 +155,88 @@ namespace Network_Analyzer
 
         private void BtnLoadConnections_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO");
+            var fileName = "";
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileName = openFileDialog.FileName;
+                }
+                else
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Main.NotSelectFile");
+                    return;
+                }
+            }
+
+            var connectionsJson = File.ReadAllText(fileName);
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                lblInformation.Text = Localizer.LocalizeString("Main.DeserializationResultEmpty");
+                return;
+            }
+
+            try
+            {
+                var connectionsList = JsonConvert.DeserializeObject<List<ConnectionModel>>(connectionsJson);
+
+                if (connectionsList == null || connectionsList.Count == 0)
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsEmpty");
+                    return;
+                }
+
+                Connections.AddConnectionList(connectionsList);
+                DataGridViewUpdate();
+
+                lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullyLoaded");
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsLoadingConnections");
+            }
         }
 
         private void BtnSaveConnections_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO");
+            if (Connections.GetCount() == 0)
+            {
+                lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsEmpty");
+                return;
+            }
+
+            try
+            {
+                var connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
+
+                if (string.IsNullOrEmpty(connectionsJson))
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Main.SerializationResultEmpty");
+                    return;
+                }
+
+                using (var saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllText(saveFileDialog.FileName, connectionsJson);
+                        lblInformation.Text = Localizer.LocalizeString("Main.ConnectionsSuccessfullySaved");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsSavingConnections");
+            }
         }
 
         private void BtnClearConnentions_Click(object sender, EventArgs e)
@@ -213,7 +295,7 @@ namespace Network_Analyzer
             try
             {
                 var connections = Connections.GetConnections();
-                lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count.ToString();
+                lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
                 for (var i = 0; i < connections.Count; i++)
                 {
@@ -228,7 +310,9 @@ namespace Network_Analyzer
                     dgvConnections.Rows[i].Cells["ServerAddress"].Value = connections[i].DestinationAddress;
                     dgvConnections.Rows[i].Cells["Received"].Value = connections[i].Received;
                     dgvConnections.Rows[i].Cells["Send"].Value = connections[i].Send;
-                    dgvConnections.Rows[i].Cells["Disconnected"].Value = connections[i].IsDisconnected ? Localizer.LocalizeString("Main.Connections.Yes") : Localizer.LocalizeString("Main.Connections.No");
+                    dgvConnections.Rows[i].Cells["Disconnected"].Value = connections[i].IsDisconnected
+                        ? Localizer.LocalizeString("Main.Connections.Yes")
+                        : Localizer.LocalizeString("Main.Connections.No");
                 }
             }
             catch (Exception ex)
@@ -287,7 +371,7 @@ namespace Network_Analyzer
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Settings settings = new Settings())
+            using (var settings = new Settings())
             {
                 settings.ShowDialog();
             }

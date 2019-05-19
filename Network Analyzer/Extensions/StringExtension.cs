@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using Network_Analyzer.Models.Enums;
@@ -35,7 +36,7 @@ namespace Network_Analyzer.Extensions
         /// <returns></returns>
         public static bool ValidateAddress(this string address)
         {
-            if (address.Count(c => c == '.') != 3)
+            if (address == null || address.Count(c => c == '.') != 3)
             {
                 return false;
             }
@@ -44,7 +45,7 @@ namespace Network_Analyzer.Extensions
         }
 
         /// <summary>
-        ///     Check strong parsing port
+        ///     Check string parsing port
         /// </summary>
         /// <param name="port"></param>
         /// <returns></returns>
@@ -59,6 +60,30 @@ namespace Network_Analyzer.Extensions
             }
 
             return false;
+        }
+
+        /// <summary>
+        ///     Check string parsing folder
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        public static bool ValidateFolder(this string folder)
+        {
+            try
+            {
+                var existDirectory = Directory.Exists(folder);
+
+                if (!existDirectory)
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

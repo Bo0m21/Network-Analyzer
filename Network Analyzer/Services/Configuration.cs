@@ -11,28 +11,60 @@ namespace Network_Analyzer.Services
     /// </summary>
     public static class Configuration
     {
-        // Private variables
+        /// <summary>
+        ///     Langeuage private variable
+        /// </summary>
         private static string _language;
+
+        /// <summary>
+        ///     Address private variable
+        /// </summary>
         private static string _address;
+
+        /// <summary>
+        ///     Port private variable
+        /// </summary>
         private static string _port;
 
-        // Properties
+        /// <summary>
+        ///     Port private variable
+        /// </summary>
+        private static string _folder;
+
+        /// <summary>
+        ///     Language property and validation
+        /// </summary>
         public static string Language
         {
             get => _language;
             set => _language = value.ValidateLanguage() ? value : Languages.English.ToString();
         }
 
+        /// <summary>
+        ///     Adreess property and validation
+        /// </summary>
         public static string Address
         {
             get => _address;
             set => _address = value.ValidateAddress() ? value : "127.0.0.1";
         }
 
+        /// <summary>
+        ///     Port property and validation
+        /// </summary>
         public static string Port
         {
             get => _port;
             set => _port = value.ValidatePort() ? value : "35000";
+        }
+
+        /// <summary>
+        ///     Folder property and validation
+        /// </summary>
+        public static string Folder
+        {
+            get => _folder;
+            set => _folder = value.ValidateFolder() ? value : "Connections";
         }
 
         /// <summary>
@@ -43,6 +75,7 @@ namespace Network_Analyzer.Services
             Language = ConfigurationManager.AppSettings["Language"];
             Address = ConfigurationManager.AppSettings["Address"];
             Port = ConfigurationManager.AppSettings["Port"];
+            Folder = ConfigurationManager.AppSettings["Folder"];
         }
 
         /// <summary>
@@ -77,6 +110,15 @@ namespace Network_Analyzer.Services
             else
             {
                 configuration.AppSettings.Settings.Add("Port", Port);
+            }
+
+            if (configuration.AppSettings.Settings.AllKeys.Any(k => k == "Folder"))
+            {
+                configuration.AppSettings.Settings["Folder"].Value = Folder;
+            }
+            else
+            {
+                configuration.AppSettings.Settings.Add("Folder", Folder);
             }
 
             configuration.Save(ConfigurationSaveMode.Modified);
