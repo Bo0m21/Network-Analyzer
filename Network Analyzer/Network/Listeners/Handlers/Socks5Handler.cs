@@ -21,7 +21,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
         ///     If the AuthList parameter is null, no authentication will be required when a client connects to the proxy
         ///     server.
         /// </remarks>
-        public Socks5Handler(Socket clientConnection, NegotiationCompleteDelegate callback, AuthenticationList authList) : base(clientConnection, callback)
+        public Socks5Handler(Socket clientConnection, NegotiationCompleteDelegate callback, AuthenticationList authList)
+            : base(clientConnection, callback)
         {
             AuthList = authList;
         }
@@ -30,7 +31,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
         /// <param name="clientConnection">The connection with the client.</param>
         /// <param name="callback">The method to call when the SOCKS negotiation is complete.</param>
         /// <exception cref="ArgumentNullException"><c>Callback</c> is null.</exception>
-        public Socks5Handler(Socket clientConnection, NegotiationCompleteDelegate callback) : this(clientConnection, callback, null)
+        public Socks5Handler(Socket clientConnection, NegotiationCompleteDelegate callback) : this(clientConnection,
+            callback, null)
         {
         }
 

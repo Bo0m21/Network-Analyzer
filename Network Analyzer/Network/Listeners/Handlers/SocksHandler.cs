@@ -12,14 +12,14 @@ namespace Network_Analyzer.Network.Listeners.Handlers
     /// <summary>Implements a specific version of the SOCKS protocol.</summary>
     internal abstract class SocksHandler
     {
+        /// <summary>Holds the address of the method to call when the SOCKS negotiation is complete.</summary>
+        private readonly NegotiationCompleteDelegate m_Signaler;
+
         /// <summary>Holds the value of the Connection property.</summary>
         private Socket m_Connection;
 
         /// <summary>Holds the value of the RemoteConnection property.</summary>
         private Socket m_RemoteConnection;
-
-        /// <summary>Holds the address of the method to call when the SOCKS negotiation is complete.</summary>
-        private readonly NegotiationCompleteDelegate m_Signaler;
 
         /// <summary>Holds the value of the Username property.</summary>
         private string m_Username;

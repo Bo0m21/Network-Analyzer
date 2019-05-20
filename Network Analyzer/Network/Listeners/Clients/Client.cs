@@ -16,12 +16,15 @@ namespace Network_Analyzer.Network.Listeners.Clients
     /// </remarks>
     public abstract class Client : IDisposable
     {
-        /// <summary>References the callback method to be called when the <c>Client</c> object disconnects from the local client and the remote server.</summary>
+        /// <summary>
+        ///     References the callback method to be called when the <c>Client</c> object disconnects from the local client
+        ///     and the remote server.
+        /// </summary>
         /// <param name="client">The <c>Client</c> that has closed its connections.</param>
         public delegate void DestroyDelegate(Client client);
 
-        /// <summary>Holds the address of the method to call when this client is ready to be destroyed.</summary>
-        private DestroyDelegate m_Destroyer;
+        /// <summary>Synchronize array list locker.</summary>
+        private static readonly object _syncLock = new object();
 
         /// <summary>Holds the value of the ClientSocket property.</summary>
         private Socket m_ClientSocket;
@@ -29,8 +32,23 @@ namespace Network_Analyzer.Network.Listeners.Clients
         /// <summary>Holds the value of the DestinationSocket property.</summary>
         private Socket m_DestinationSocket;
 
-        /// <summary>Synchronize array list locker.</summary>
-        private static object _syncLock = new object();
+        /// <summary>Holds the address of the method to call when this client is ready to be destroyed.</summary>
+        private readonly DestroyDelegate m_Destroyer;
+
+        /// <summary>Initializes a new instance of the Client class.</summary>
+        /// <param name="clientSocket">
+        ///     The <see cref="Socket">Socket</see> connection between this proxy server and the local
+        ///     client.
+        /// </param>
+        /// <param name="destroyer">
+        ///     The callback method to be called when this Client object disconnects from the local client and
+        ///     the remote server.
+        /// </param>
+        public Client(Socket clientSocket, DestroyDelegate destroyer)
+        {
+            ClientSocket = clientSocket;
+            m_Destroyer = destroyer;
+        }
 
         /// <summary>Unique identity Client.</summary>
         /// <returns>Return unique identity about this Client.</returns>
@@ -45,15 +63,6 @@ namespace Network_Analyzer.Network.Listeners.Clients
         /// <value>An array of bytes that can be used to store all the incoming data from the remote host.</value>
         /// <seealso cref="Buffer" />
         protected byte[] RemoteBuffer { get; } = new byte[0x16384];
-
-        /// <summary>Initializes a new instance of the Client class.</summary>
-        /// <param name="clientSocket">The <see cref ="Socket">Socket</see> connection between this proxy server and the local client.</param>
-        /// <param name="destroyer">The callback method to be called when this Client object disconnects from the local client and the remote server.</param>
-        public Client(Socket clientSocket, DestroyDelegate destroyer)
-        {
-            ClientSocket = clientSocket;
-            m_Destroyer = destroyer;
-        }
 
         /// <summary>Gets or sets the Socket connection between the proxy server and the local client.</summary>
         /// <value>A Socket instance defining the connection between the proxy server and the local client.</value>
@@ -143,7 +152,8 @@ namespace Network_Analyzer.Network.Listeners.Clients
                 }
 
                 ClientSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, OnClientReceive, ClientSocket);
-                DestinationSocket.BeginReceive(RemoteBuffer, 0, RemoteBuffer.Length, SocketFlags.None, OnRemoteReceive, DestinationSocket);
+                DestinationSocket.BeginReceive(RemoteBuffer, 0, RemoteBuffer.Length, SocketFlags.None, OnRemoteReceive,
+                    DestinationSocket);
             }
             catch
             {
@@ -171,7 +181,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
                 {
                     var packetId = Connections.GetNewPacketId(Id);
 
-                    var packet = new PacketModel()
+                    var packet = new PacketModel
                     {
                         Id = packetId,
                         Data = Buffer.ResizeByteArray(countReturn),
@@ -234,7 +244,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
                 {
                     var packetId = Connections.GetNewPacketId(Id);
 
-                    var packet = new PacketModel()
+                    var packet = new PacketModel
                     {
                         Id = packetId,
                         Data = RemoteBuffer.ResizeByteArray(countReturn),

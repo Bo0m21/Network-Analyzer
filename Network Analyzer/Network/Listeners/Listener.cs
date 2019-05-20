@@ -16,23 +16,26 @@ namespace Network_Analyzer.Network.Listeners
     /// </remarks>
     public abstract class Listener : IDisposable
     {
-        /// <summary>Holds the value of the ListenSocket property.</summary>
-        private Socket m_ListenSocket;
-
         /// <summary>Holds the value of the Address property.</summary>
         private IPAddress m_Address;
+
+        /// <summary>Gets the list of connected clients.</summary>
+        /// <value>An instance of the ArrayList class that's used to store all the connections.</value>
+        private readonly ArrayList m_Clients = new ArrayList();
+
+        /// <summary>Holds the value of the ListenSocket property.</summary>
+        private Socket m_ListenSocket;
 
         /// <summary>Holds the value of the Port property.</summary>
         private int m_Port;
 
-        /// <summary>Gets the list of connected clients.</summary>
-        /// <value>An instance of the ArrayList class that's used to store all the connections.</value>
-        private ArrayList m_Clients = new ArrayList();
-
         /// <summary>Initializes a new instance of the Listener class.</summary>
         /// <param name="port">The port to listen on.</param>
         /// <param name="address">The address to listen on. You can specify IPAddress.Any to listen on all installed network cards.</param>
-        /// <remarks>For the security of your server, try to avoid to listen on every network card (IPAddress.Any). Listening on a local IP address is usually sufficient and much more secure.</remarks>
+        /// <remarks>
+        ///     For the security of your server, try to avoid to listen on every network card (IPAddress.Any). Listening on a
+        ///     local IP address is usually sufficient and much more secure.
+        /// </remarks>
         public Listener(int port, IPAddress address)
         {
             Port = port;
@@ -85,6 +88,35 @@ namespace Network_Analyzer.Network.Listeners
         /// <summary>Gets a value indicating whether the Listener is currently listening or not.</summary>
         /// <value>A boolean that indicates whether the Listener is currently listening or not.</value>
         public bool Listening => ListenSocket != null;
+
+        /// <summary>Disposes of the resources (other than memory) used by the Listener.</summary>
+        /// <remarks>
+        ///     Stops listening and disposes <em>all</em> the client objects. Once disposed, this object should not be used
+        ///     anymore.
+        /// </remarks>
+        /// <seealso cref="System.IDisposable" />
+        public void Dispose()
+        {
+            if (IsDisposed)
+                return;
+
+            while (m_Clients.Count > 0)
+            {
+                ((Client) m_Clients[0]).Dispose();
+            }
+
+            try
+            {
+                ListenSocket.Shutdown(SocketShutdown.Both);
+            }
+            catch
+            {
+                // ignored
+            }
+
+            ListenSocket?.Close();
+            IsDisposed = true;
+        }
 
         /// <summary>Starts listening on the selected IP address and port.</summary>
         /// <exception cref="SocketException">There was an error while creating the listening socket.</exception>
@@ -149,33 +181,7 @@ namespace Network_Analyzer.Network.Listeners
             if (index < 0 || index >= GetClientCount())
                 return null;
 
-            return (Client)m_Clients[index];
-        }
-
-        /// <summary>Disposes of the resources (other than memory) used by the Listener.</summary>
-        /// <remarks>Stops listening and disposes <em>all</em> the client objects. Once disposed, this object should not be used anymore.</remarks>
-        /// <seealso cref="System.IDisposable" />
-        public void Dispose()
-        {
-            if (IsDisposed)
-                return;
-
-            while (m_Clients.Count > 0)
-            {
-                ((Client)m_Clients[0]).Dispose();
-            }
-
-            try
-            {
-                ListenSocket.Shutdown(SocketShutdown.Both);
-            }
-            catch
-            {
-                // ignored
-            }
-
-            ListenSocket?.Close();
-            IsDisposed = true;
+            return (Client) m_Clients[index];
         }
 
         /// <summary>Finalizes the Listener.</summary>
@@ -186,7 +192,10 @@ namespace Network_Analyzer.Network.Listeners
         }
 
         /// <summary>Returns an external IP address of this computer, if present.</summary>
-        /// <returns>Returns an external IP address of this computer; if this computer does not have an external IP address, it returns the first local IP address it can find.</returns>
+        /// <returns>
+        ///     Returns an external IP address of this computer; if this computer does not have an external IP address, it
+        ///     returns the first local IP address it can find.
+        /// </returns>
         /// <remarks>If this computer does not have any configured IP address, this method returns the IP address 0.0.0.0.</remarks>
         public static IPAddress GetLocalExternalIp()
         {
@@ -209,8 +218,8 @@ namespace Network_Analyzer.Network.Listeners
         /// <returns>True if the specified IP address is a remote address, false otherwise.</returns>
         protected static bool IsRemoteIp(IPAddress ip)
         {
-            var First = (byte)(ip.Address % 256);
-            var Second = (byte)(ip.Address % 65536 / 256);
+            var First = (byte) (ip.Address % 256);
+            var Second = (byte) (ip.Address % 65536 / 256);
             //Not 10.x.x.x And Not 172.16.x.x <-> 172.31.x.x And Not 192.168.x.x
             //And Not Any And Not Loopback And Not Broadcast
             return First != 10 &&
@@ -226,8 +235,8 @@ namespace Network_Analyzer.Network.Listeners
         /// <returns>True if the specified IP address is a local address, false otherwise.</returns>
         protected static bool IsLocalIp(IPAddress ip)
         {
-            var First = (byte)(ip.Address % 256);
-            var Second = (byte)(ip.Address % 65536 / 256);
+            var First = (byte) (ip.Address % 256);
+            var Second = (byte) (ip.Address % 65536 / 256);
             //10.x.x.x Or 172.16.x.x <-> 172.31.x.x Or 192.168.x.x
             return First == 10 ||
                    First == 172 && Second >= 16 && Second <= 31 ||
@@ -235,7 +244,10 @@ namespace Network_Analyzer.Network.Listeners
         }
 
         /// <summary>Returns an internal IP address of this computer, if present.</summary>
-        /// <returns>Returns an internal IP address of this computer; if this computer does not have an internal IP address, it returns the first local IP address it can find.</returns>
+        /// <returns>
+        ///     Returns an internal IP address of this computer; if this computer does not have an internal IP address, it
+        ///     returns the first local IP address it can find.
+        /// </returns>
         /// <remarks>If this computer does not have any configured IP address, this method returns the IP address 0.0.0.0.</remarks>
         public static IPAddress GetLocalInternalIp()
         {

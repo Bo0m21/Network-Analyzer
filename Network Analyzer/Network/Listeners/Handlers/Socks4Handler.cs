@@ -12,7 +12,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
         /// <param name="clientConnection">The connection with the client.</param>
         /// <param name="callback">The method to call when the SOCKS negotiation is complete.</param>
         /// <exception cref="ArgumentNullException"><c>Callback</c> is null.</exception>
-        public Socks4Handler(Socket clientConnection, NegotiationCompleteDelegate callback) : base(clientConnection, callback)
+        public Socks4Handler(Socket clientConnection, NegotiationCompleteDelegate callback) : base(clientConnection,
+            callback)
         {
         }
 
@@ -69,7 +70,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                         // Use remote DNS
                         countReturn = Array.IndexOf(request, (byte) 0, countReturn + 1);
                         RemoteIp = Dns
-                            .Resolve(Encoding.ASCII.GetString(request, Username.Length + 8, countReturn - Username.Length - 8))
+                            .Resolve(Encoding.ASCII.GetString(request, Username.Length + 8,
+                                countReturn - Username.Length - 8))
                             .AddressList[0];
                     }
                     else

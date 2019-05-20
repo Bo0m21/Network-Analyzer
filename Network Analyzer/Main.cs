@@ -17,13 +17,13 @@ namespace Network_Analyzer
 {
     public partial class Main : Form
     {
-        private readonly object m_TimerDataGridViewUpdateLock = new object();
         private readonly object m_TimerAutoSaveConnectionsLock = new object();
-        private SocksListener m_SocksListener;
-        private Timer m_TimerDataGridViewUpdate;
-        private Timer m_TimerAutoSaveConnections;
+        private readonly object m_TimerDataGridViewUpdateLock = new object();
 
-        private string m_autoSaveConnectionsFileName;
+        private string m_autoSaveConnectionsPath;
+        private SocksListener m_SocksListener;
+        private Timer m_TimerAutoSaveConnections;
+        private Timer m_TimerDataGridViewUpdate;
 
         public Main()
         {
@@ -256,7 +256,7 @@ namespace Network_Analyzer
         {
             if (cbAutoSaveConnections.Checked)
             {
-                m_autoSaveConnectionsFileName = "Connections-" + DateTime.Now.ToString("MM/dd/yyyy HH-mm-ss") + ".json";
+                m_autoSaveConnectionsPath = Configuration.Folder + "//" + "Connections-" + DateTime.Now.ToString("MM/dd/yyyy HH-mm-ss") + ".json";
                 m_TimerAutoSaveConnections.Start();
 
                 btnLoadConnections.Enabled = false;
@@ -300,7 +300,7 @@ namespace Network_Analyzer
                     return;
                 }
 
-                File.WriteAllText(Configuration.Folder + "//" + m_autoSaveConnectionsFileName, connectionsJson);
+                File.WriteAllText(m_autoSaveConnectionsPath, connectionsJson);
             }
             catch (Exception ex)
             {

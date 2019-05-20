@@ -18,10 +18,17 @@ namespace Network_Analyzer.Network.Listeners.Clients
 
         /// <summary>Initializes a new instance of the SocksClient class.</summary>
         /// <param name="clientSocket">The Socket connection between this proxy server and the local client.</param>
-        /// <param name="destroyer">The method to be called when this SocksClient object disconnects from the local client and the remote server.</param>
+        /// <param name="destroyer">
+        ///     The method to be called when this SocksClient object disconnects from the local client and the
+        ///     remote server.
+        /// </param>
         /// <param name="authList">The list with valid username/password combinations.</param>
-        /// <remarks>If the AuthList is non-null, every client has to authenticate before he can use this proxy server to relay data. If it is null, the clients don't have to authenticate.</remarks>
-        public SocksClient(Socket clientSocket, DestroyDelegate destroyer, AuthenticationList authList) : base(clientSocket, destroyer)
+        /// <remarks>
+        ///     If the AuthList is non-null, every client has to authenticate before he can use this proxy server to relay
+        ///     data. If it is null, the clients don't have to authenticate.
+        /// </remarks>
+        public SocksClient(Socket clientSocket, DestroyDelegate destroyer, AuthenticationList authList) : base(
+            clientSocket, destroyer)
         {
             AuthList = authList;
         }
@@ -36,7 +43,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
 
         /// <summary>Gets or sets the SOCKS handler to be used when communicating with the client.</summary>
         /// <value>The SocksHandler to be used when communicating with the client.</value>
-        private bool MustAuthenticate { get; set; } = false;
+        private bool MustAuthenticate { get; } = false;
 
         /// <summary>Gets or sets the AuthenticationList to use when a computer tries to authenticate on the proxy server.</summary>
         /// <value>An instance of the AuthenticationList class that contains all the valid username/password combinations.</value>

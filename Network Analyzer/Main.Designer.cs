@@ -427,6 +427,7 @@ namespace Network_Analyzer
             this.Controls.Add(this.gbConnectionsGridWork);
             this.Controls.Add(this.gbControl);
             this.Controls.Add(this.msMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
             this.Name = "Main";
