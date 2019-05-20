@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Services\Configuration.cs" />
     <Compile Include="Extensions\ArrayExtension.cs" />
@@ -89,6 +95,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Editor.resx">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Resource_Russian.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource_Russian.Designer.cs</LastGenOutput>

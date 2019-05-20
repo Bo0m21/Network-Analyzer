@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Editor.Packets" xml:space="preserve">
+    <value>Пакеты</value>
+  </data>
+  <data name="Editor.Text" xml:space="preserve">
+    <value>Network Analyzer - Редактор | 2019 © Bo0m21</value>
+  </data>
   <data name="Main.AllConnections" xml:space="preserve">
     <value>Всего соединений</value>
   </data>

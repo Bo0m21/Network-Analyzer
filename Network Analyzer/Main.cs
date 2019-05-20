@@ -426,13 +426,12 @@ namespace Network_Analyzer
 
                 if (connection != null)
                 {
-                    MessageBox.Show("TODO");
-                    //using (var editor = new Editor(connection.Id))
-                    //{
-                    //    Hide();
-                    //    editor.ShowDialog();
-                    //    Show();
-                    //}
+                    using (var editor = new Editor(connection.Id))
+                    {
+                        Hide();
+                        editor.ShowDialog();
+                        Show();
+                    }
                 }
                 else
                 {

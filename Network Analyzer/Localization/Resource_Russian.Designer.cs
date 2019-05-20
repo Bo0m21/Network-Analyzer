@@ -61,6 +61,24 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Пакеты.
+        /// </summary>
+        internal static string Editor_Packets {
+            get {
+                return ResourceManager.GetString("Editor.Packets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Network Analyzer - Редактор | 2019 © Bo0m21.
+        /// </summary>
+        internal static string Editor_Text {
+            get {
+                return ResourceManager.GetString("Editor.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Всего соединений.
         /// </summary>
         internal static string Main_AllConnections {
