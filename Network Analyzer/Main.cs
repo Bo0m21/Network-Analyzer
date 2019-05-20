@@ -11,14 +11,19 @@ using Network_Analyzer.Network.Data;
 using Network_Analyzer.Network.Listeners;
 using Network_Analyzer.Services;
 using Newtonsoft.Json;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Network_Analyzer
 {
     public partial class Main : Form
     {
         private readonly object m_TimerDataGridViewUpdateLock = new object();
+        private readonly object m_TimerAutoSaveConnectionsLock = new object();
         private SocksListener m_SocksListener;
         private Timer m_TimerDataGridViewUpdate;
+        private Timer m_TimerAutoSaveConnections;
+
+        private string m_autoSaveConnectionsFileName;
 
         public Main()
         {
@@ -30,6 +35,9 @@ namespace Network_Analyzer
         {
             m_TimerDataGridViewUpdate = new Timer();
             m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
+
+            m_TimerAutoSaveConnections = new Timer();
+            m_TimerAutoSaveConnections.Tick += TimerAutoSaveConnections_Tick;
 
             var connections = Connections.GetConnections();
             lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
@@ -67,7 +75,6 @@ namespace Network_Analyzer
                 startListenerToolStripMenuItem.Enabled = false;
                 stopListenerToolStripMenuItem.Enabled = true;
 
-                btnSaveConnections.Enabled = false;
                 btnLoadConnections.Enabled = false;
 
                 saveConnectionsToolStripMenuItem.Enabled = false;
@@ -88,8 +95,10 @@ namespace Network_Analyzer
                 startListenerToolStripMenuItem.Enabled = true;
                 stopListenerToolStripMenuItem.Enabled = false;
 
-                btnSaveConnections.Enabled = true;
-                btnLoadConnections.Enabled = true;
+                if (!cbAutoSaveConnections.Checked)
+                {
+                    btnLoadConnections.Enabled = true;
+                }
 
                 saveConnectionsToolStripMenuItem.Enabled = true;
                 loadConnectionsToolStripMenuItem.Enabled = true;
@@ -115,8 +124,10 @@ namespace Network_Analyzer
                 startListenerToolStripMenuItem.Enabled = true;
                 stopListenerToolStripMenuItem.Enabled = false;
 
-                btnSaveConnections.Enabled = true;
-                btnLoadConnections.Enabled = true;
+                if (!cbAutoSaveConnections.Checked)
+                {
+                    btnLoadConnections.Enabled = true;
+                }
 
                 saveConnectionsToolStripMenuItem.Enabled = true;
                 loadConnectionsToolStripMenuItem.Enabled = true;
@@ -138,8 +149,10 @@ namespace Network_Analyzer
                 startListenerToolStripMenuItem.Enabled = true;
                 stopListenerToolStripMenuItem.Enabled = false;
 
-                btnSaveConnections.Enabled = true;
-                btnLoadConnections.Enabled = true;
+                if (!cbAutoSaveConnections.Checked)
+                {
+                    btnLoadConnections.Enabled = true;
+                }
 
                 saveConnectionsToolStripMenuItem.Enabled = true;
                 loadConnectionsToolStripMenuItem.Enabled = true;
@@ -239,6 +252,67 @@ namespace Network_Analyzer
             }
         }
 
+        private void CbAutoSaveConnections_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAutoSaveConnections.Checked)
+            {
+                m_autoSaveConnectionsFileName = "Connections-" + DateTime.Now.ToString("MM/dd/yyyy HH-mm-ss") + ".json";
+                m_TimerAutoSaveConnections.Start();
+
+                btnLoadConnections.Enabled = false;
+                btnSaveConnections.Enabled = false;
+
+                lblInformation.Text = Localizer.LocalizeString("Main.AutoSaveConnectionsEnabled");
+            }
+            else
+            {
+                m_TimerAutoSaveConnections.Stop();
+
+                if (m_SocksListener == null || m_SocksListener.IsDisposed || !m_SocksListener.Listening)
+                {
+                    btnLoadConnections.Enabled = true;
+                }
+
+                btnSaveConnections.Enabled = true;
+
+                lblInformation.Text = Localizer.LocalizeString("Main.AutoSaveConnectionsDisabled");
+            }
+        }
+
+        private void TimerAutoSaveConnections_Tick(object sender, EventArgs e)
+        {
+            if (!Monitor.TryEnter(m_TimerAutoSaveConnectionsLock))
+            {
+                return;
+            }
+
+            if (Connections.GetCount() == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                var connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
+
+                if (string.IsNullOrEmpty(connectionsJson))
+                {
+                    return;
+                }
+
+                File.WriteAllText(Configuration.Folder + "//" + m_autoSaveConnectionsFileName, connectionsJson);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                lblInformation.Text = Localizer.LocalizeString("Main.ErrorsSavingConnections");
+            }
+            finally
+            {
+                Monitor.Exit(m_TimerAutoSaveConnectionsLock);
+            }
+        }
+
         private void BtnClearConnentions_Click(object sender, EventArgs e)
         {
             Connections.Clear();
@@ -290,7 +364,9 @@ namespace Network_Analyzer
         private void DataGridViewUpdate()
         {
             if (!Monitor.TryEnter(m_TimerDataGridViewUpdateLock))
+            {
                 return;
+            }
 
             try
             {

@@ -120,6 +120,15 @@
   <data name="Main.AllConnections" xml:space="preserve">
     <value>Всего соединений</value>
   </data>
+  <data name="Main.AutoSaveConnections" xml:space="preserve">
+    <value>Автоматическое сохранение</value>
+  </data>
+  <data name="Main.AutoSaveConnectionsDisabled" xml:space="preserve">
+    <value>Автосохранение пакетов отключено</value>
+  </data>
+  <data name="Main.AutoSaveConnectionsEnabled" xml:space="preserve">
+    <value>Автосохранение пакетов включено</value>
+  </data>
   <data name="Main.AutoUpdateDataGridView" xml:space="preserve">
     <value>Автоматическое обновление</value>
   </data>

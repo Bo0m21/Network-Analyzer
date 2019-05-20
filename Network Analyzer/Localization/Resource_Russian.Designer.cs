@@ -70,6 +70,33 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоматическое сохранение.
+        /// </summary>
+        internal static string Main_AutoSaveConnections {
+            get {
+                return ResourceManager.GetString("Main.AutoSaveConnections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение пакетов отключено.
+        /// </summary>
+        internal static string Main_AutoSaveConnectionsDisabled {
+            get {
+                return ResourceManager.GetString("Main.AutoSaveConnectionsDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосохранение пакетов включено.
+        /// </summary>
+        internal static string Main_AutoSaveConnectionsEnabled {
+            get {
+                return ResourceManager.GetString("Main.AutoSaveConnectionsEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Автоматическое обновление.
         /// </summary>
         internal static string Main_AutoUpdateDataGridView {

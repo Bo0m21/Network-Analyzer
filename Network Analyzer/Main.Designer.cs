@@ -46,6 +46,7 @@ namespace Network_Analyzer
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
+            this.cbAutoSaveConnections = new System.Windows.Forms.CheckBox();
             this.btnSaveConnections = new System.Windows.Forms.Button();
             this.btnLoadConnections = new System.Windows.Forms.Button();
             this.lblInformation = new System.Windows.Forms.Label();
@@ -166,7 +167,7 @@ namespace Network_Analyzer
             // 
             // lblVersion
             // 
-            this.lblVersion.Location = new System.Drawing.Point(727, 298);
+            this.lblVersion.Location = new System.Drawing.Point(727, 320);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(125, 13);
             this.lblVersion.TabIndex = 12;
@@ -175,14 +176,26 @@ namespace Network_Analyzer
             // 
             // gbConnectionsWork
             // 
+            this.gbConnectionsWork.Controls.Add(this.cbAutoSaveConnections);
             this.gbConnectionsWork.Controls.Add(this.btnSaveConnections);
             this.gbConnectionsWork.Controls.Add(this.btnLoadConnections);
             this.gbConnectionsWork.Location = new System.Drawing.Point(12, 111);
             this.gbConnectionsWork.Name = "gbConnectionsWork";
-            this.gbConnectionsWork.Size = new System.Drawing.Size(202, 78);
+            this.gbConnectionsWork.Size = new System.Drawing.Size(202, 100);
             this.gbConnectionsWork.TabIndex = 8;
             this.gbConnectionsWork.TabStop = false;
             this.gbConnectionsWork.Text = "Main.ConnectionsWork";
+            // 
+            // cbAutoSaveConnections
+            // 
+            this.cbAutoSaveConnections.AutoSize = true;
+            this.cbAutoSaveConnections.Location = new System.Drawing.Point(6, 77);
+            this.cbAutoSaveConnections.Name = "cbAutoSaveConnections";
+            this.cbAutoSaveConnections.Size = new System.Drawing.Size(158, 17);
+            this.cbAutoSaveConnections.TabIndex = 4;
+            this.cbAutoSaveConnections.Text = "Main.AutoSaveConnections";
+            this.cbAutoSaveConnections.UseVisualStyleBackColor = true;
+            this.cbAutoSaveConnections.CheckedChanged += new System.EventHandler(this.CbAutoSaveConnections_CheckedChanged);
             // 
             // btnSaveConnections
             // 
@@ -207,7 +220,7 @@ namespace Network_Analyzer
             // lblInformation
             // 
             this.lblInformation.AutoSize = true;
-            this.lblInformation.Location = new System.Drawing.Point(15, 298);
+            this.lblInformation.Location = new System.Drawing.Point(12, 320);
             this.lblInformation.Name = "lblInformation";
             this.lblInformation.Size = new System.Drawing.Size(85, 13);
             this.lblInformation.TabIndex = 11;
@@ -219,7 +232,7 @@ namespace Network_Analyzer
             this.gbConnections.Controls.Add(this.lblAllConnections);
             this.gbConnections.Location = new System.Drawing.Point(220, 27);
             this.gbConnections.Name = "gbConnections";
-            this.gbConnections.Size = new System.Drawing.Size(638, 268);
+            this.gbConnections.Size = new System.Drawing.Size(638, 290);
             this.gbConnections.TabIndex = 10;
             this.gbConnections.TabStop = false;
             this.gbConnections.Text = "Main.Connections";
@@ -257,7 +270,7 @@ namespace Network_Analyzer
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvConnections.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConnections.Size = new System.Drawing.Size(626, 243);
+            this.dgvConnections.Size = new System.Drawing.Size(626, 265);
             this.dgvConnections.TabIndex = 1;
             this.dgvConnections.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConnections_CellDoubleClick);
             this.dgvConnections.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvConnections_KeyDown);
@@ -332,7 +345,7 @@ namespace Network_Analyzer
             this.gbConnectionsGridWork.Controls.Add(this.btnClearConnentions);
             this.gbConnectionsGridWork.Controls.Add(this.btnUpdateDataGridView);
             this.gbConnectionsGridWork.Controls.Add(this.cbAutoUpdateDataGridView);
-            this.gbConnectionsGridWork.Location = new System.Drawing.Point(12, 195);
+            this.gbConnectionsGridWork.Location = new System.Drawing.Point(12, 217);
             this.gbConnectionsGridWork.Name = "gbConnectionsGridWork";
             this.gbConnectionsGridWork.Size = new System.Drawing.Size(202, 100);
             this.gbConnectionsGridWork.TabIndex = 9;
@@ -406,7 +419,7 @@ namespace Network_Analyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 320);
+            this.ClientSize = new System.Drawing.Size(870, 342);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.gbConnectionsWork);
             this.Controls.Add(this.lblInformation);
@@ -423,6 +436,7 @@ namespace Network_Analyzer
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.gbConnectionsWork.ResumeLayout(false);
+            this.gbConnectionsWork.PerformLayout();
             this.gbConnections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).EndInit();
             this.gbConnectionsGridWork.ResumeLayout(false);
@@ -468,6 +482,7 @@ namespace Network_Analyzer
         private System.Windows.Forms.ToolStripMenuItem clearConnentionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateDataGridViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbAutoSaveConnections;
     }
 }
 
