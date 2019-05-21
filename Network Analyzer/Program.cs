@@ -25,6 +25,7 @@ namespace Network_Analyzer
             // Loading form
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Editor(100));
             Application.Run(new Main());
 
             // Saving configurations

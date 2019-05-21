@@ -61,6 +61,96 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Все пакеты.
+        /// </summary>
+        internal static string Editor_AllPackets {
+            get {
+                return ResourceManager.GetString("Editor.AllPackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоматический скролл.
+        /// </summary>
+        internal static string Editor_AutoScroll {
+            get {
+                return ResourceManager.GetString("Editor.AutoScroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автоматическое обновление.
+        /// </summary>
+        internal static string Editor_AutoUpdateDataGridView {
+            get {
+                return ResourceManager.GetString("Editor.AutoUpdateDataGridView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Очистить пакеты.
+        /// </summary>
+        internal static string Editor_ClearPackets {
+            get {
+                return ResourceManager.GetString("Editor.ClearPackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на От клиента к серверу.
+        /// </summary>
+        internal static string Editor_ClientToServer {
+            get {
+                return ResourceManager.GetString("Editor.ClientToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Расшифрованные.
+        /// </summary>
+        internal static string Editor_Decrypted {
+            get {
+                return ResourceManager.GetString("Editor.Decrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Зашифрованные.
+        /// </summary>
+        internal static string Editor_Encrypted {
+            get {
+                return ResourceManager.GetString("Editor.Encrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string Editor_Information {
+            get {
+                return ResourceManager.GetString("Editor.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название.
+        /// </summary>
+        internal static string Editor_PacketName {
+            get {
+                return ResourceManager.GetString("Editor.PacketName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Опкод.
+        /// </summary>
+        internal static string Editor_PacketOpcode {
+            get {
+                return ResourceManager.GetString("Editor.PacketOpcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Пакеты.
         /// </summary>
         internal static string Editor_Packets {
@@ -70,11 +160,38 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип пакета.
+        /// </summary>
+        internal static string Editor_PacketType {
+            get {
+                return ResourceManager.GetString("Editor.PacketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на От сервера к клиенту.
+        /// </summary>
+        internal static string Editor_ServerToClient {
+            get {
+                return ResourceManager.GetString("Editor.ServerToClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Network Analyzer - Редактор | 2019 © Bo0m21.
         /// </summary>
         internal static string Editor_Text {
             get {
                 return ResourceManager.GetString("Editor.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Обновить пакеты.
+        /// </summary>
+        internal static string Editor_UpdatePackets {
+            get {
+                return ResourceManager.GetString("Editor.UpdatePackets", resourceCulture);
             }
         }
         

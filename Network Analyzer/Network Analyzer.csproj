@@ -57,9 +57,13 @@
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
+    <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
+    <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\Search\SelectedSearchType.cs" />
     <Compile Include="Services\Configuration.cs" />
     <Compile Include="Extensions\ArrayExtension.cs" />
-    <Compile Include="Models\Enums\Languages.cs" />
+    <Compile Include="Models\Languages.cs" />
     <Compile Include="Network\Data\Connections.cs" />
     <Compile Include="Localization\Resource_Russian.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -74,8 +78,8 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ConnectionModel.cs" />
-    <Compile Include="Models\PacketModel.cs" />
-    <Compile Include="Models\Enums\PacketType.cs" />
+    <Compile Include="Models\Packets\PacketModel.cs" />
+    <Compile Include="Models\Packets\PacketType.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthBase.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthenticationList.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthNone.cs" />

@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Editor.AutoScroll" xml:space="preserve">
+    <value>Автоматический скролл</value>
+  </data>
+  <data name="Editor.AutoUpdateDataGridView" xml:space="preserve">
+    <value>Автоматическое обновление</value>
+  </data>
+  <data name="Editor.ClearPackets" xml:space="preserve">
+    <value>Очистить пакеты</value>
+  </data>
+  <data name="Editor.Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Editor.PacketName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Editor.PacketOpcode" xml:space="preserve">
+    <value>Опкод</value>
+  </data>
   <data name="Editor.Packets" xml:space="preserve">
     <value>Пакеты</value>
   </data>
+  <data name="Editor.PacketType" xml:space="preserve">
+    <value>Тип пакета</value>
+  </data>
   <data name="Editor.Text" xml:space="preserve">
     <value>Network Analyzer - Редактор | 2019 © Bo0m21</value>
+  </data>
+  <data name="Editor.UpdatePackets" xml:space="preserve">
+    <value>Обновить пакеты</value>
   </data>
   <data name="Main.AllConnections" xml:space="preserve">
     <value>Всего соединений</value>
@@ -314,5 +338,20 @@
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Настройки программы</value>
+  </data>
+  <data name="Editor.AllPackets" xml:space="preserve">
+    <value>Все пакеты</value>
+  </data>
+  <data name="Editor.ClientToServer" xml:space="preserve">
+    <value>От клиента к серверу</value>
+  </data>
+  <data name="Editor.Decrypted" xml:space="preserve">
+    <value>Расшифрованные</value>
+  </data>
+  <data name="Editor.Encrypted" xml:space="preserve">
+    <value>Зашифрованные</value>
+  </data>
+  <data name="Editor.ServerToClient" xml:space="preserve">
+    <value>От сервера к клиенту</value>
   </data>
 </root>
