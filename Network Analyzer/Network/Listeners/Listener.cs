@@ -16,12 +16,12 @@ namespace Network_Analyzer.Network.Listeners
     /// </remarks>
     public abstract class Listener : IDisposable
     {
-        /// <summary>Holds the value of the Address property.</summary>
-        private IPAddress m_Address;
-
         /// <summary>Gets the list of connected clients.</summary>
         /// <value>An instance of the ArrayList class that's used to store all the connections.</value>
         private readonly ArrayList m_Clients = new ArrayList();
+
+        /// <summary>Holds the value of the Address property.</summary>
+        private IPAddress m_Address;
 
         /// <summary>Holds the value of the ListenSocket property.</summary>
         private Socket m_ListenSocket;

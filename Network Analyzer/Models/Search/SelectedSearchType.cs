@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Network_Analyzer.Models.Search
+﻿namespace Network_Analyzer.Models.Search
 {
     /// <summary>
-    /// Selected type search
+    ///     Selected type search
     /// </summary>
     public enum SelectedSearchType
     {

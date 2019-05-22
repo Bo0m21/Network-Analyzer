@@ -105,11 +105,11 @@ namespace Network_Analyzer.Services
 
                 if (control is ComboBox)
                 {
-                    for (int i = 0; i < ((ComboBox)control).Items.Count; i++)
+                    for (var i = 0; i < ((ComboBox) control).Items.Count; i++)
                     {
-                        if (((ComboBox)control).Items[i] is string)
+                        if (((ComboBox) control).Items[i] is string)
                         {
-                            ((ComboBox)control).Items[i] = LocalizeString((string)((ComboBox)control).Items[i]);
+                            ((ComboBox) control).Items[i] = LocalizeString((string) ((ComboBox) control).Items[i]);
                         }
                     }
                 }

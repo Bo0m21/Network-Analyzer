@@ -26,14 +26,14 @@ namespace Network_Analyzer.Network.Listeners.Clients
         /// <summary>Synchronize array list locker.</summary>
         private static readonly object _syncLock = new object();
 
+        /// <summary>Holds the address of the method to call when this client is ready to be destroyed.</summary>
+        private readonly DestroyDelegate m_Destroyer;
+
         /// <summary>Holds the value of the ClientSocket property.</summary>
         private Socket m_ClientSocket;
 
         /// <summary>Holds the value of the DestinationSocket property.</summary>
         private Socket m_DestinationSocket;
-
-        /// <summary>Holds the address of the method to call when this client is ready to be destroyed.</summary>
-        private readonly DestroyDelegate m_Destroyer;
 
         /// <summary>Initializes a new instance of the Client class.</summary>
         /// <param name="clientSocket">
