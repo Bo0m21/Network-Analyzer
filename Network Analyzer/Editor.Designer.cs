@@ -1,4 +1,6 @@
-﻿namespace Network_Analyzer
+﻿using HexBoxForm;
+
+namespace Network_Analyzer
 {
     partial class Editor
     {
@@ -47,16 +49,23 @@
             this.PacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInformation = new System.Windows.Forms.Label();
+            this.gbHexEditor = new System.Windows.Forms.GroupBox();
+            this.hbHexEditor = new HexBoxForm.HexBox();
+            this.bSearchClear = new System.Windows.Forms.Button();
+            this.bSearchStart = new System.Windows.Forms.Button();
+            this.cbSearchType = new System.Windows.Forms.ComboBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tpPackets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).BeginInit();
+            this.gbHexEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMenu
             // 
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(1184, 24);
+            this.msMenu.Size = new System.Drawing.Size(1283, 24);
             this.msMenu.TabIndex = 0;
             this.msMenu.Text = "menuStrip1";
             // 
@@ -239,11 +248,84 @@
             this.lblInformation.TabIndex = 12;
             this.lblInformation.Text = "Editor.Information";
             // 
+            // gbHexEditor
+            // 
+            this.gbHexEditor.Controls.Add(this.bSearchClear);
+            this.gbHexEditor.Controls.Add(this.bSearchStart);
+            this.gbHexEditor.Controls.Add(this.cbSearchType);
+            this.gbHexEditor.Controls.Add(this.tbSearch);
+            this.gbHexEditor.Controls.Add(this.hbHexEditor);
+            this.gbHexEditor.Location = new System.Drawing.Point(348, 27);
+            this.gbHexEditor.Name = "gbHexEditor";
+            this.gbHexEditor.Size = new System.Drawing.Size(574, 603);
+            this.gbHexEditor.TabIndex = 13;
+            this.gbHexEditor.TabStop = false;
+            this.gbHexEditor.Text = "Editor.HexEditor";
+            // 
+            // hbHexEditor
+            // 
+            this.hbHexEditor.AllowDrop = true;
+            this.hbHexEditor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.hbHexEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.hbHexEditor.ColumnInfoVisible = true;
+            this.hbHexEditor.Font = new System.Drawing.Font("Consolas", 9F);
+            this.hbHexEditor.HexCasing = HexBoxForm.HexCasing.Lower;
+            this.hbHexEditor.LineInfoVisible = true;
+            this.hbHexEditor.Location = new System.Drawing.Point(7, 19);
+            this.hbHexEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.hbHexEditor.Name = "hbHexEditor";
+            this.hbHexEditor.ReadOnly = true;
+            this.hbHexEditor.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hbHexEditor.Size = new System.Drawing.Size(560, 549);
+            this.hbHexEditor.StringViewVisible = true;
+            this.hbHexEditor.TabIndex = 9;
+            this.hbHexEditor.UseFixedBytesPerLine = true;
+            this.hbHexEditor.VScrollBarVisible = true;
+            // 
+            // bSearchClear
+            // 
+            this.bSearchClear.Location = new System.Drawing.Point(492, 574);
+            this.bSearchClear.Name = "bSearchClear";
+            this.bSearchClear.Size = new System.Drawing.Size(75, 23);
+            this.bSearchClear.TabIndex = 14;
+            this.bSearchClear.Text = "Очистить";
+            this.bSearchClear.UseVisualStyleBackColor = true;
+            // 
+            // bSearchStart
+            // 
+            this.bSearchStart.Location = new System.Drawing.Point(412, 574);
+            this.bSearchStart.Name = "bSearchStart";
+            this.bSearchStart.Size = new System.Drawing.Size(75, 23);
+            this.bSearchStart.TabIndex = 12;
+            this.bSearchStart.Text = "Поиск";
+            this.bSearchStart.UseVisualStyleBackColor = true;
+            // 
+            // cbSearchType
+            // 
+            this.cbSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSearchType.FormattingEnabled = true;
+            this.cbSearchType.Items.AddRange(new object[] {
+            "Опкод",
+            "Текст",
+            "Байты"});
+            this.cbSearchType.Location = new System.Drawing.Point(6, 576);
+            this.cbSearchType.Name = "cbSearchType";
+            this.cbSearchType.Size = new System.Drawing.Size(121, 21);
+            this.cbSearchType.TabIndex = 13;
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Location = new System.Drawing.Point(133, 576);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(273, 20);
+            this.tbSearch.TabIndex = 11;
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 655);
+            this.ClientSize = new System.Drawing.Size(1283, 655);
+            this.Controls.Add(this.gbHexEditor);
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.msMenu);
@@ -257,6 +339,8 @@
             this.tpPackets.ResumeLayout(false);
             this.tpPackets.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).EndInit();
+            this.gbHexEditor.ResumeLayout(false);
+            this.gbHexEditor.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +364,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PacketType;
         private System.Windows.Forms.DataGridViewTextBoxColumn PacketOpcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn PacketName;
+        private System.Windows.Forms.GroupBox gbHexEditor;
+        private HexBox hbHexEditor;
+        private System.Windows.Forms.Button bSearchClear;
+        private System.Windows.Forms.Button bSearchStart;
+        private System.Windows.Forms.ComboBox cbSearchType;
+        private System.Windows.Forms.TextBox tbSearch;
     }
 }

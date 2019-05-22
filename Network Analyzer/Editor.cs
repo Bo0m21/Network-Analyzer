@@ -14,6 +14,7 @@ using Network_Analyzer.Models.Enums;
 using System.Threading;
 using Network_Analyzer.Models.Search;
 using System.Diagnostics;
+using HexBoxForm;
 using Network_Analyzer.Extensions;
 
 namespace Network_Analyzer
@@ -21,17 +22,17 @@ namespace Network_Analyzer
     public partial class Editor : Form
     {
         private ConnectionModel m_ConnectionModel;
-        //private IDecryptor m_Decryptor;
+        //////private IDecryptor m_Decryptor;
 
         private SelectedPacketEncryptionType m_SelectedPacketEncryptionType;
         private SelectedPacketType m_SelectedPacketType;
 
         private SearchModel m_SearchModel;
 
-        //private List<ConfigurationModel> m_ConfigurationModels;
+        //////private List<ConfigurationModel> m_ConfigurationModels;
 
-        //private System.Windows.Forms.Timer m_TimerDecryptPacketsUpdate;
-        //private object m_TimerDecryptPacketsUpdateLock = new object();
+        //////private System.Windows.Forms.Timer m_TimerDecryptPacketsUpdate;
+        //////private object m_TimerDecryptPacketsUpdateLock = new object();
 
         private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
         private object m_TimerDataGridViewUpdateLock = new object();
@@ -51,13 +52,13 @@ namespace Network_Analyzer
 
             cbTypePackets.SelectedIndex = 0;
             cbTypeEncryptionPackets.SelectedIndex = 0;
-            //cbSearchType.SelectedIndex = 0;
-            //cbSequenceType.SelectedIndex = 0;
+            //////cbSearchType.SelectedIndex = 0;
+            //////cbSequenceType.SelectedIndex = 0;
 
-            //((Control)tpConfiguration).Enabled = false;
+            //////((Control)tpConfiguration).Enabled = false;
 
-            //m_TimerDecryptPacketsUpdate = new System.Windows.Forms.Timer();
-            //m_TimerDecryptPacketsUpdate.Tick += timerDecryptPacketsUpdate_Tick;
+            //////m_TimerDecryptPacketsUpdate = new System.Windows.Forms.Timer();
+            //////m_TimerDecryptPacketsUpdate.Tick += timerDecryptPacketsUpdate_Tick;
 
             m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
             m_TimerDataGridViewUpdate.Tick += timerDataGridViewUpdate_Tick;
@@ -114,20 +115,65 @@ namespace Network_Analyzer
             if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
             {
                 var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket1);
-                ///////////////////LoadPacketForView(packet?.Data);
+                LoadPacketForView(packet?.Data);
             }
             else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
             {
                 var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket1);
-                ///////////////////LoadPacketForView(packet?.Data);
+                LoadPacketForView(packet?.Data);
 
-                ///////////////////ConfigurationGridView();
+                ConfigurationGridView();
             }
+        }
+
+        private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAutoUpdateDataGridView.Checked)
+            {
+                m_TimerDataGridViewUpdate.Start();
+
+                btnUpdatePackets.Enabled = false;
+                btnClearPackets.Enabled = false;
+            }
+            else
+            {
+                m_TimerDataGridViewUpdate.Stop();
+
+                btnUpdatePackets.Enabled = true;
+                btnClearPackets.Enabled = true;
+            }
+        }
+
+        private void BtnUpdatePackets_Click(object sender, EventArgs e)
+        {
+            DataGridViewUpdate();
+        }
+
+        private void BtnClearPackets_Click(object sender, EventArgs e)
+        {
+            m_ConnectionModel.ConnectionPackets.Clear();
+            m_ConnectionModel.DecryptedPackets.Clear();
+
+            dgvPackets.Rows.Clear();
+            hbHexEditor.ByteProvider = null;
+        }
+
+        #endregion
+
+        #region Timers
+
+        //////timerDecryptPacketsUpdate_Tick
+
+        private void timerDataGridViewUpdate_Tick(object sender, EventArgs e)
+        {
+            Invoke(new Action(DataGridViewUpdate));
         }
 
         #endregion
 
         #region Methods
+
+        //////DecryptPacketsUpdate
 
         private void DataGridViewUpdate()
         {
@@ -164,7 +210,7 @@ namespace Network_Analyzer
                 {
                     if (m_SearchModel.Type == SelectedSearchType.Opcode)
                     {
-                        /////////////////packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
+                        //////packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
                     }
                     else if (m_SearchModel.Type == SelectedSearchType.Bytes)
                     {
@@ -180,7 +226,7 @@ namespace Network_Analyzer
 
                 for (var i = 0; i < packets.Count; i++)
                 {
-                    /////////////////lblAllPackets.Text = packets.Count.ToString();
+                    //////lblAllPackets.Text = packets.Count.ToString();
 
                     while (dgvPackets.Rows.Count < i + 1)
                     {
@@ -207,14 +253,14 @@ namespace Network_Analyzer
                     }
                     else
                     {
-                        dgvPackets.Rows[i].Cells["PacketType"].Value = "Ошибка";
+                        //////dgvPackets.Rows[i].Cells["PacketType"].Value = "Ошибка";
                         dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 255, 0);
                     }
 
                     if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
                     {
                         dgvPackets.Rows[i].Cells["PacketOpcode"].Value = null;
-                        dgvPackets.Rows[i].Cells["PacketName"].Value = "Не расшифровано";
+                        //////dgvPackets.Rows[i].Cells["PacketName"].Value = "Не расшифровано";
                     }
                     else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
                     {
@@ -231,7 +277,7 @@ namespace Network_Analyzer
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
-                lblInformation.Text = "Ошибки при обновлении пакетов";
+                //////lblInformation.Text = "Ошибки при обновлении пакетов";
             }
             finally
             {
@@ -239,46 +285,23 @@ namespace Network_Analyzer
             }
         }
 
-        private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
+        private void LoadPacketForView(byte[] bytes)
         {
-            if (cbAutoUpdateDataGridView.Checked)
+            try
             {
-                m_TimerDataGridViewUpdate.Start();
+                var dynamicByteProvider = new DynamicByteProvider(bytes);
+                hbHexEditor.ByteProvider = dynamicByteProvider;
 
-                btnUpdatePackets.Enabled = false;
-                btnClearPackets.Enabled = false;
+                //////lblLengthPacket.Text = bytes.Length.ToString();
             }
-            else
+            catch (Exception ex)
             {
-                m_TimerDataGridViewUpdate.Stop();
-
-                btnUpdatePackets.Enabled = true;
-                btnClearPackets.Enabled = true;
+                Trace.TraceError(ex.Message);
+                //////lblInformation.Text = "Ошибки при загрузке пакета";
             }
         }
 
-        private void BtnUpdatePackets_Click(object sender, EventArgs e)
-        {
-            DataGridViewUpdate();
-        }
-
-        private void BtnClearPackets_Click(object sender, EventArgs e)
-        {
-            m_ConnectionModel.ConnectionPackets.Clear();
-            m_ConnectionModel.DecryptedPackets.Clear();
-
-            dgvPackets.Rows.Clear();
-            /////////////hbHexEditor.ByteProvider = null;
-        }
-
-        #endregion
-
-        #region Timers
-
-        private void timerDataGridViewUpdate_Tick(object sender, EventArgs e)
-        {
-            Invoke(new Action(DataGridViewUpdate));
-        }
+        //////ConverterUpdate
 
         #endregion
     }

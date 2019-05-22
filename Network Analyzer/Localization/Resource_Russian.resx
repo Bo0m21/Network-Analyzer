@@ -354,4 +354,7 @@
   <data name="Editor.ServerToClient" xml:space="preserve">
     <value>От сервера к клиенту</value>
   </data>
+  <data name="Editor.HexEditor" xml:space="preserve">
+    <value>Hex редактор</value>
+  </data>
 </root>

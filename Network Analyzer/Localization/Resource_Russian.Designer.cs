@@ -124,6 +124,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Hex редактор.
+        /// </summary>
+        internal static string Editor_HexEditor {
+            get {
+                return ResourceManager.GetString("Editor.HexEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Информация.
         /// </summary>
         internal static string Editor_Information {
