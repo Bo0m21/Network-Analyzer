@@ -61,7 +61,7 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Все пакеты.
+        ///   Ищет локализованную строку, похожую на Всего пакетов.
         /// </summary>
         internal static string Editor_AllPackets {
             get {
@@ -97,29 +97,20 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на От клиента к серверу.
+        ///   Ищет локализованную строку, похожую на Ошибка.
         /// </summary>
-        internal static string Editor_ClientToServer {
+        internal static string Editor_Error {
             get {
-                return ResourceManager.GetString("Editor.ClientToServer", resourceCulture);
+                return ResourceManager.GetString("Editor.Error", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Расшифрованные.
+        ///   Ищет локализованную строку, похожую на Ошибки при обновлении пакетов.
         /// </summary>
-        internal static string Editor_Decrypted {
+        internal static string Editor_ErrorsUpdatePackets {
             get {
-                return ResourceManager.GetString("Editor.Decrypted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Зашифрованные.
-        /// </summary>
-        internal static string Editor_Encrypted {
-            get {
-                return ResourceManager.GetString("Editor.Encrypted", resourceCulture);
+                return ResourceManager.GetString("Editor.ErrorsUpdatePackets", resourceCulture);
             }
         }
         
@@ -138,6 +129,15 @@ namespace Network_Analyzer.Localization {
         internal static string Editor_Information {
             get {
                 return ResourceManager.GetString("Editor.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не расшифровано.
+        /// </summary>
+        internal static string Editor_NotDecrypted {
+            get {
+                return ResourceManager.GetString("Editor.NotDecrypted", resourceCulture);
             }
         }
         
@@ -178,11 +178,47 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Все пакеты.
+        /// </summary>
+        internal static string Editor_SelectAllPackets {
+            get {
+                return ResourceManager.GetString("Editor.SelectAllPackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на От клиента к серверу.
+        /// </summary>
+        internal static string Editor_SelectClientToServer {
+            get {
+                return ResourceManager.GetString("Editor.SelectClientToServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Расшифрованные.
+        /// </summary>
+        internal static string Editor_SelectDecrypted {
+            get {
+                return ResourceManager.GetString("Editor.SelectDecrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Зашифрованные.
+        /// </summary>
+        internal static string Editor_SelectEncrypted {
+            get {
+                return ResourceManager.GetString("Editor.SelectEncrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на От сервера к клиенту.
         /// </summary>
-        internal static string Editor_ServerToClient {
+        internal static string Editor_SelectServerToClient {
             get {
-                return ResourceManager.GetString("Editor.ServerToClient", resourceCulture);
+                return ResourceManager.GetString("Editor.SelectServerToClient", resourceCulture);
             }
         }
         

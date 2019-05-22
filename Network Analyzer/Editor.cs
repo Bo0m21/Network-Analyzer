@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Network_Analyzer.Models;
 using Network_Analyzer.Network.Data;
@@ -105,24 +101,20 @@ namespace Network_Analyzer
             if (cbAutoScroll.Checked)
                 cbAutoScroll.Checked = false;
 
-            var idPacket = dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
-
-            if (idPacket == null)
+            if (dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value == null)
                 return;
 
-            var idPacket1 = long.Parse(idPacket.ToString());
+            var idPacket = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
 
             if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
             {
-                var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket1);
+                var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket);
                 LoadPacketForView(packet?.Data);
             }
             else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
             {
-                var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket1);
+                var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
                 LoadPacketForView(packet?.Data);
-
-                ConfigurationGridView();
             }
         }
 
@@ -156,6 +148,8 @@ namespace Network_Analyzer
 
             dgvPackets.Rows.Clear();
             hbHexEditor.ByteProvider = null;
+
+            DataGridViewUpdate();
         }
 
         #endregion
@@ -210,7 +204,7 @@ namespace Network_Analyzer
                 {
                     if (m_SearchModel.Type == SelectedSearchType.Opcode)
                     {
-                        //////packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
+                        packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
                     }
                     else if (m_SearchModel.Type == SelectedSearchType.Bytes)
                     {
@@ -218,16 +212,18 @@ namespace Network_Analyzer
                     }
                 }
 
+                lblAllPackets.Text = Localizer.LocalizeString("Editor.AllPackets") + " " + packets.Count;
+
                 if (packets.Count == 0)
                 {
                     dgvPackets.Rows.Clear();
+                    hbHexEditor.ByteProvider = null;
+
                     return;
                 }
 
                 for (var i = 0; i < packets.Count; i++)
                 {
-                    //////lblAllPackets.Text = packets.Count.ToString();
-
                     while (dgvPackets.Rows.Count < i + 1)
                     {
                         dgvPackets.Rows.Add();
@@ -243,28 +239,23 @@ namespace Network_Analyzer
 
                     if (packets[i].Type == Models.Enums.PacketType.ClientToServer)
                     {
-                        dgvPackets.Rows[i].Cells["PacketType"].Value = "К => С";
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0, 91, 255);
+                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x90, 0xEE, 0x90);
                     }
                     else if (packets[i].Type == Models.Enums.PacketType.ServerToClient)
                     {
-                        dgvPackets.Rows[i].Cells["PacketType"].Value = "К <= С";
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0, 255, 127);
+                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x00, 0x00, 0xCD);
                     }
                     else
                     {
-                        //////dgvPackets.Rows[i].Cells["PacketType"].Value = "Ошибка";
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 255, 0);
+                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 0, 0);
                     }
 
                     if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
                     {
-                        dgvPackets.Rows[i].Cells["PacketOpcode"].Value = null;
-                        //////dgvPackets.Rows[i].Cells["PacketName"].Value = "Не расшифровано";
+                        dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotDecrypted");
                     }
                     else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
                     {
-                        dgvPackets.Rows[i].Cells["PacketOpcode"].Value = packets[i].Opcode;
                         dgvPackets.Rows[i].Cells["PacketName"].Value = packets[i].Opcode;
                     }
                 }
@@ -277,7 +268,7 @@ namespace Network_Analyzer
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
-                //////lblInformation.Text = "Ошибки при обновлении пакетов";
+                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsUpdatePackets");
             }
             finally
             {

@@ -43,18 +43,17 @@ namespace Network_Analyzer
             this.cbTypeEncryptionPackets = new System.Windows.Forms.ComboBox();
             this.cbTypePackets = new System.Windows.Forms.ComboBox();
             this.dgvPackets = new System.Windows.Forms.DataGridView();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PacketType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInformation = new System.Windows.Forms.Label();
             this.gbHexEditor = new System.Windows.Forms.GroupBox();
-            this.hbHexEditor = new HexBoxForm.HexBox();
             this.bSearchClear = new System.Windows.Forms.Button();
             this.bSearchStart = new System.Windows.Forms.Button();
             this.cbSearchType = new System.Windows.Forms.ComboBox();
             this.tbSearch = new System.Windows.Forms.TextBox();
+            this.hbHexEditor = new HexBoxForm.HexBox();
+            this.lblAllPackets = new System.Windows.Forms.Label();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tpPackets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).BeginInit();
@@ -141,8 +140,8 @@ namespace Network_Analyzer
             this.cbTypeEncryptionPackets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeEncryptionPackets.FormattingEnabled = true;
             this.cbTypeEncryptionPackets.Items.AddRange(new object[] {
-            "Editor.Encrypted",
-            "Editor.Decrypted"});
+            "Editor.SelectEncrypted",
+            "Editor.SelectDecrypted"});
             this.cbTypeEncryptionPackets.Location = new System.Drawing.Point(6, 6);
             this.cbTypeEncryptionPackets.Name = "cbTypeEncryptionPackets";
             this.cbTypeEncryptionPackets.Size = new System.Drawing.Size(137, 21);
@@ -154,9 +153,9 @@ namespace Network_Analyzer
             this.cbTypePackets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypePackets.FormattingEnabled = true;
             this.cbTypePackets.Items.AddRange(new object[] {
-            "Editor.AllPackets",
-            "Editor.ClientToServer",
-            "Editor.ServerToClient"});
+            "Editor.SelectAllPackets",
+            "Editor.SelectClientToServer",
+            "Editor.SelectServerToClient"});
             this.cbTypePackets.Location = new System.Drawing.Point(149, 6);
             this.cbTypePackets.Name = "cbTypePackets";
             this.cbTypePackets.Size = new System.Drawing.Size(167, 21);
@@ -184,8 +183,6 @@ namespace Network_Analyzer
             this.dgvPackets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.Id,
-            this.PacketType,
-            this.PacketOpcode,
             this.PacketName});
             this.dgvPackets.Location = new System.Drawing.Point(6, 33);
             this.dgvPackets.Name = "dgvPackets";
@@ -197,47 +194,6 @@ namespace Network_Analyzer
             this.dgvPackets.Size = new System.Drawing.Size(310, 463);
             this.dgvPackets.TabIndex = 3;
             this.dgvPackets.SelectionChanged += new System.EventHandler(this.DgvPackets_SelectionChanged);
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "№";
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Number.Width = 50;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Id.Visible = false;
-            // 
-            // PacketType
-            // 
-            this.PacketType.HeaderText = "Editor.PacketType";
-            this.PacketType.Name = "PacketType";
-            this.PacketType.ReadOnly = true;
-            this.PacketType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.PacketType.Width = 80;
-            // 
-            // PacketOpcode
-            // 
-            this.PacketOpcode.HeaderText = "Editor.PacketOpcode";
-            this.PacketOpcode.Name = "PacketOpcode";
-            this.PacketOpcode.ReadOnly = true;
-            this.PacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.PacketOpcode.Visible = false;
-            this.PacketOpcode.Width = 160;
-            // 
-            // PacketName
-            // 
-            this.PacketName.HeaderText = "Editor.PacketName";
-            this.PacketName.Name = "PacketName";
-            this.PacketName.ReadOnly = true;
-            this.PacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.PacketName.Width = 160;
             // 
             // lblInformation
             // 
@@ -261,26 +217,6 @@ namespace Network_Analyzer
             this.gbHexEditor.TabIndex = 13;
             this.gbHexEditor.TabStop = false;
             this.gbHexEditor.Text = "Editor.HexEditor";
-            // 
-            // hbHexEditor
-            // 
-            this.hbHexEditor.AllowDrop = true;
-            this.hbHexEditor.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.hbHexEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.hbHexEditor.ColumnInfoVisible = true;
-            this.hbHexEditor.Font = new System.Drawing.Font("Consolas", 9F);
-            this.hbHexEditor.HexCasing = HexBoxForm.HexCasing.Lower;
-            this.hbHexEditor.LineInfoVisible = true;
-            this.hbHexEditor.Location = new System.Drawing.Point(7, 19);
-            this.hbHexEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.hbHexEditor.Name = "hbHexEditor";
-            this.hbHexEditor.ReadOnly = true;
-            this.hbHexEditor.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hbHexEditor.Size = new System.Drawing.Size(560, 549);
-            this.hbHexEditor.StringViewVisible = true;
-            this.hbHexEditor.TabIndex = 9;
-            this.hbHexEditor.UseFixedBytesPerLine = true;
-            this.hbHexEditor.VScrollBarVisible = true;
             // 
             // bSearchClear
             // 
@@ -320,11 +256,66 @@ namespace Network_Analyzer
             this.tbSearch.Size = new System.Drawing.Size(273, 20);
             this.tbSearch.TabIndex = 11;
             // 
+            // hbHexEditor
+            // 
+            this.hbHexEditor.AllowDrop = true;
+            this.hbHexEditor.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.hbHexEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.hbHexEditor.ColumnInfoVisible = true;
+            this.hbHexEditor.Font = new System.Drawing.Font("Consolas", 9F);
+            this.hbHexEditor.HexCasing = HexBoxForm.HexCasing.Lower;
+            this.hbHexEditor.LineInfoVisible = true;
+            this.hbHexEditor.Location = new System.Drawing.Point(7, 19);
+            this.hbHexEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.hbHexEditor.Name = "hbHexEditor";
+            this.hbHexEditor.ReadOnly = true;
+            this.hbHexEditor.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hbHexEditor.Size = new System.Drawing.Size(560, 549);
+            this.hbHexEditor.StringViewVisible = true;
+            this.hbHexEditor.TabIndex = 9;
+            this.hbHexEditor.UseFixedBytesPerLine = true;
+            this.hbHexEditor.VScrollBarVisible = true;
+            // 
+            // lblAllPackets
+            // 
+            this.lblAllPackets.AutoSize = true;
+            this.lblAllPackets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblAllPackets.Location = new System.Drawing.Point(952, 61);
+            this.lblAllPackets.Name = "lblAllPackets";
+            this.lblAllPackets.Size = new System.Drawing.Size(98, 15);
+            this.lblAllPackets.TabIndex = 14;
+            this.lblAllPackets.Text = "Editor.AllPackets";
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "№";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Number.Width = 50;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Id.Visible = false;
+            // 
+            // PacketName
+            // 
+            this.PacketName.HeaderText = "Editor.PacketName";
+            this.PacketName.Name = "PacketName";
+            this.PacketName.ReadOnly = true;
+            this.PacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PacketName.Width = 160;
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 655);
+            this.Controls.Add(this.lblAllPackets);
             this.Controls.Add(this.gbHexEditor);
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.tabControl1);
@@ -359,16 +350,15 @@ namespace Network_Analyzer
         private System.Windows.Forms.ComboBox cbTypeEncryptionPackets;
         private System.Windows.Forms.ComboBox cbTypePackets;
         private System.Windows.Forms.Label lblInformation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PacketType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PacketOpcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PacketName;
         private System.Windows.Forms.GroupBox gbHexEditor;
         private HexBox hbHexEditor;
         private System.Windows.Forms.Button bSearchClear;
         private System.Windows.Forms.Button bSearchStart;
         private System.Windows.Forms.ComboBox cbSearchType;
         private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.Label lblAllPackets;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PacketName;
     }
 }

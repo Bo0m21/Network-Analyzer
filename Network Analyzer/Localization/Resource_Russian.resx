@@ -339,22 +339,34 @@
   <data name="Settings.Text" xml:space="preserve">
     <value>Настройки программы</value>
   </data>
-  <data name="Editor.AllPackets" xml:space="preserve">
+  <data name="Editor.SelectAllPackets" xml:space="preserve">
     <value>Все пакеты</value>
   </data>
-  <data name="Editor.ClientToServer" xml:space="preserve">
+  <data name="Editor.SelectClientToServer" xml:space="preserve">
     <value>От клиента к серверу</value>
   </data>
-  <data name="Editor.Decrypted" xml:space="preserve">
+  <data name="Editor.SelectDecrypted" xml:space="preserve">
     <value>Расшифрованные</value>
   </data>
-  <data name="Editor.Encrypted" xml:space="preserve">
+  <data name="Editor.SelectEncrypted" xml:space="preserve">
     <value>Зашифрованные</value>
   </data>
-  <data name="Editor.ServerToClient" xml:space="preserve">
+  <data name="Editor.SelectServerToClient" xml:space="preserve">
     <value>От сервера к клиенту</value>
   </data>
   <data name="Editor.HexEditor" xml:space="preserve">
     <value>Hex редактор</value>
+  </data>
+  <data name="Editor.AllPackets" xml:space="preserve">
+    <value>Всего пакетов</value>
+  </data>
+  <data name="Editor.Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Editor.ErrorsUpdatePackets" xml:space="preserve">
+    <value>Ошибки при обновлении пакетов</value>
+  </data>
+  <data name="Editor.NotDecrypted" xml:space="preserve">
+    <value>Не расшифровано</value>
   </data>
 </root>
