@@ -369,4 +369,115 @@
   <data name="Editor.NotDecrypted" xml:space="preserve">
     <value>Не расшифровано</value>
   </data>
+  <data name="Editor.ByteType" xml:space="preserve">
+    <value>Byte</value>
+  </data>
+  <data name="Editor.DataTypes" xml:space="preserve">
+    <value>Типы данных</value>
+  </data>
+  <data name="Editor.Decryptor" xml:space="preserve">
+    <value>Декриптор</value>
+  </data>
+  <data name="Editor.DecryptorLoadedSuccessfully" xml:space="preserve">
+    <value>Декриптор успешно загружен</value>
+  </data>
+  <data name="Editor.DecryptorUnloadedSuccessfully" xml:space="preserve">
+    <value>Декриптор успешно выгружен</value>
+  </data>
+  <data name="Editor.DoubleType" xml:space="preserve">
+    <value>Double</value>
+  </data>
+  <data name="Editor.EncodingAscii" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="Editor.EncodingUnicode" xml:space="preserve">
+    <value>Unicode</value>
+  </data>
+  <data name="Editor.EncodingUTF8" xml:space="preserve">
+    <value>UTF8</value>
+  </data>
+  <data name="Editor.EncodingWindows1251" xml:space="preserve">
+    <value>Windows-1251</value>
+  </data>
+  <data name="Editor.ErrorLoadingPacket" xml:space="preserve">
+    <value>Ошибки при загрузке пакета</value>
+  </data>
+  <data name="Editor.ErrorNotFillSerchField" xml:space="preserve">
+    <value>Заполните поле поиска</value>
+  </data>
+  <data name="Editor.ErrorSelectSearchType" xml:space="preserve">
+    <value>Выберите тип поиска</value>
+  </data>
+  <data name="Editor.ErrorsSelectEncoding" xml:space="preserve">
+    <value>Ошибки при выборе кодировки</value>
+  </data>
+  <data name="Editor.ErrorsValidation" xml:space="preserve">
+    <value>Ошибки при валидации</value>
+  </data>
+  <data name="Editor.FloatType" xml:space="preserve">
+    <value>Float</value>
+  </data>
+  <data name="Editor.GeneralInformation" xml:space="preserve">
+    <value>Основная информация</value>
+  </data>
+  <data name="Editor.HexEditorEncoding" xml:space="preserve">
+    <value>Кодировка</value>
+  </data>
+  <data name="Editor.IntType" xml:space="preserve">
+    <value>Int</value>
+  </data>
+  <data name="Editor.LengthPacket" xml:space="preserve">
+    <value>Длина пакета </value>
+  </data>
+  <data name="Editor.LoadDecryptor" xml:space="preserve">
+    <value>Загрузить декриптор</value>
+  </data>
+  <data name="Editor.LongType" xml:space="preserve">
+    <value>Long</value>
+  </data>
+  <data name="Editor.PacketInformation" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Editor.SbyteType" xml:space="preserve">
+    <value>Sbyte</value>
+  </data>
+  <data name="Editor.SearchBytes" xml:space="preserve">
+    <value>Байты</value>
+  </data>
+  <data name="Editor.SearchClear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="Editor.SearchOpcode" xml:space="preserve">
+    <value>Опкод</value>
+  </data>
+  <data name="Editor.SearchStart" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Editor.SearchSuccessfullyApplied" xml:space="preserve">
+    <value>Поиск успешно применен</value>
+  </data>
+  <data name="Editor.SearchSuccessfullyCleared" xml:space="preserve">
+    <value>Поиск успешно очищен</value>
+  </data>
+  <data name="Editor.SelectedIndex" xml:space="preserve">
+    <value>Индекс байта </value>
+  </data>
+  <data name="Editor.SelectedLength" xml:space="preserve">
+    <value>Выбрано байт</value>
+  </data>
+  <data name="Editor.ShortType" xml:space="preserve">
+    <value>Short</value>
+  </data>
+  <data name="Editor.UintType" xml:space="preserve">
+    <value>Uint</value>
+  </data>
+  <data name="Editor.UlongType" xml:space="preserve">
+    <value>Ulong</value>
+  </data>
+  <data name="Editor.UnloadDecryptor" xml:space="preserve">
+    <value>Выгрузить декриптор</value>
+  </data>
+  <data name="Editor.UshortType" xml:space="preserve">
+    <value>Ushort</value>
+  </data>
 </root>

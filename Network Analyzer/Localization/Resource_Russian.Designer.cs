@@ -88,11 +88,101 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Byte.
+        /// </summary>
+        internal static string Editor_ByteType {
+            get {
+                return ResourceManager.GetString("Editor.ByteType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Очистить пакеты.
         /// </summary>
         internal static string Editor_ClearPackets {
             get {
                 return ResourceManager.GetString("Editor.ClearPackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Типы данных.
+        /// </summary>
+        internal static string Editor_DataTypes {
+            get {
+                return ResourceManager.GetString("Editor.DataTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Декриптор.
+        /// </summary>
+        internal static string Editor_Decryptor {
+            get {
+                return ResourceManager.GetString("Editor.Decryptor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Декриптор успешно загружен.
+        /// </summary>
+        internal static string Editor_DecryptorLoadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Editor.DecryptorLoadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Декриптор успешно выгружен.
+        /// </summary>
+        internal static string Editor_DecryptorUnloadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Editor.DecryptorUnloadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Double.
+        /// </summary>
+        internal static string Editor_DoubleType {
+            get {
+                return ResourceManager.GetString("Editor.DoubleType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ASCII.
+        /// </summary>
+        internal static string Editor_EncodingAscii {
+            get {
+                return ResourceManager.GetString("Editor.EncodingAscii", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Unicode.
+        /// </summary>
+        internal static string Editor_EncodingUnicode {
+            get {
+                return ResourceManager.GetString("Editor.EncodingUnicode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на UTF8.
+        /// </summary>
+        internal static string Editor_EncodingUTF8 {
+            get {
+                return ResourceManager.GetString("Editor.EncodingUTF8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Windows-1251.
+        /// </summary>
+        internal static string Editor_EncodingWindows1251 {
+            get {
+                return ResourceManager.GetString("Editor.EncodingWindows1251", resourceCulture);
             }
         }
         
@@ -106,11 +196,74 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при загрузке пакета.
+        /// </summary>
+        internal static string Editor_ErrorLoadingPacket {
+            get {
+                return ResourceManager.GetString("Editor.ErrorLoadingPacket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заполните поле поиска.
+        /// </summary>
+        internal static string Editor_ErrorNotFillSerchField {
+            get {
+                return ResourceManager.GetString("Editor.ErrorNotFillSerchField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите тип поиска.
+        /// </summary>
+        internal static string Editor_ErrorSelectSearchType {
+            get {
+                return ResourceManager.GetString("Editor.ErrorSelectSearchType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при выборе кодировки.
+        /// </summary>
+        internal static string Editor_ErrorsSelectEncoding {
+            get {
+                return ResourceManager.GetString("Editor.ErrorsSelectEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибки при обновлении пакетов.
         /// </summary>
         internal static string Editor_ErrorsUpdatePackets {
             get {
                 return ResourceManager.GetString("Editor.ErrorsUpdatePackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при валидации.
+        /// </summary>
+        internal static string Editor_ErrorsValidation {
+            get {
+                return ResourceManager.GetString("Editor.ErrorsValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Float.
+        /// </summary>
+        internal static string Editor_FloatType {
+            get {
+                return ResourceManager.GetString("Editor.FloatType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Основная информация.
+        /// </summary>
+        internal static string Editor_GeneralInformation {
+            get {
+                return ResourceManager.GetString("Editor.GeneralInformation", resourceCulture);
             }
         }
         
@@ -124,6 +277,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Кодировка.
+        /// </summary>
+        internal static string Editor_HexEditorEncoding {
+            get {
+                return ResourceManager.GetString("Editor.HexEditorEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Информация.
         /// </summary>
         internal static string Editor_Information {
@@ -133,11 +295,56 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Int.
+        /// </summary>
+        internal static string Editor_IntType {
+            get {
+                return ResourceManager.GetString("Editor.IntType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Длина пакета .
+        /// </summary>
+        internal static string Editor_LengthPacket {
+            get {
+                return ResourceManager.GetString("Editor.LengthPacket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Загрузить декриптор.
+        /// </summary>
+        internal static string Editor_LoadDecryptor {
+            get {
+                return ResourceManager.GetString("Editor.LoadDecryptor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Long.
+        /// </summary>
+        internal static string Editor_LongType {
+            get {
+                return ResourceManager.GetString("Editor.LongType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Не расшифровано.
         /// </summary>
         internal static string Editor_NotDecrypted {
             get {
                 return ResourceManager.GetString("Editor.NotDecrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string Editor_PacketInformation {
+            get {
+                return ResourceManager.GetString("Editor.PacketInformation", resourceCulture);
             }
         }
         
@@ -178,6 +385,69 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Sbyte.
+        /// </summary>
+        internal static string Editor_SbyteType {
+            get {
+                return ResourceManager.GetString("Editor.SbyteType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Байты.
+        /// </summary>
+        internal static string Editor_SearchBytes {
+            get {
+                return ResourceManager.GetString("Editor.SearchBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Очистить.
+        /// </summary>
+        internal static string Editor_SearchClear {
+            get {
+                return ResourceManager.GetString("Editor.SearchClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Опкод.
+        /// </summary>
+        internal static string Editor_SearchOpcode {
+            get {
+                return ResourceManager.GetString("Editor.SearchOpcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск.
+        /// </summary>
+        internal static string Editor_SearchStart {
+            get {
+                return ResourceManager.GetString("Editor.SearchStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск успешно применен.
+        /// </summary>
+        internal static string Editor_SearchSuccessfullyApplied {
+            get {
+                return ResourceManager.GetString("Editor.SearchSuccessfullyApplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск успешно очищен.
+        /// </summary>
+        internal static string Editor_SearchSuccessfullyCleared {
+            get {
+                return ResourceManager.GetString("Editor.SearchSuccessfullyCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Все пакеты.
         /// </summary>
         internal static string Editor_SelectAllPackets {
@@ -205,6 +475,24 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Индекс байта .
+        /// </summary>
+        internal static string Editor_SelectedIndex {
+            get {
+                return ResourceManager.GetString("Editor.SelectedIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбрано байт.
+        /// </summary>
+        internal static string Editor_SelectedLength {
+            get {
+                return ResourceManager.GetString("Editor.SelectedLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Зашифрованные.
         /// </summary>
         internal static string Editor_SelectEncrypted {
@@ -223,6 +511,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Short.
+        /// </summary>
+        internal static string Editor_ShortType {
+            get {
+                return ResourceManager.GetString("Editor.ShortType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Network Analyzer - Редактор | 2019 © Bo0m21.
         /// </summary>
         internal static string Editor_Text {
@@ -232,11 +529,47 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Uint.
+        /// </summary>
+        internal static string Editor_UintType {
+            get {
+                return ResourceManager.GetString("Editor.UintType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ulong.
+        /// </summary>
+        internal static string Editor_UlongType {
+            get {
+                return ResourceManager.GetString("Editor.UlongType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выгрузить декриптор.
+        /// </summary>
+        internal static string Editor_UnloadDecryptor {
+            get {
+                return ResourceManager.GetString("Editor.UnloadDecryptor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Обновить пакеты.
         /// </summary>
         internal static string Editor_UpdatePackets {
             get {
                 return ResourceManager.GetString("Editor.UpdatePackets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ushort.
+        /// </summary>
+        internal static string Editor_UshortType {
+            get {
+                return ResourceManager.GetString("Editor.UshortType", resourceCulture);
             }
         }
         

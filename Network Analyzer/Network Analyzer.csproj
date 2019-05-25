@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,12 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decryptor\DecryptorModel.cs" />
+    <Compile Include="Decryptor\Decryptors\R2Decryptor.cs" />
+    <Compile Include="Decryptor\IDecryptor.cs" />
     <Compile Include="Editor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ConverterExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />

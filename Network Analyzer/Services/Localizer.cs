@@ -91,15 +91,11 @@ namespace Network_Analyzer.Services
 
                 if (control is MenuStrip)
                 {
-                    foreach (ToolStripItem toolStripItem in ((MenuStrip) control).Items)
-                    {
-                        toolStripItem.Text = LocalizeString(toolStripItem.Text);
+					var toolStripItems = GetAllMenuItems(((MenuStrip)control).Items);
 
-                        foreach (ToolStripMenuItem toolStripMenuItem in ((ToolStripMenuItem) toolStripItem)
-                            .DropDownItems)
-                        {
-                            toolStripMenuItem.Text = LocalizeString(toolStripMenuItem.Text);
-                        }
+					foreach (ToolStripItem toolStripItem in toolStripItems)
+                    {
+						toolStripItem.Text = LocalizeString(toolStripItem.Text);
                     }
                 }
 
@@ -133,5 +129,23 @@ namespace Network_Analyzer.Services
 
             return list;
         }
+
+		/// <summary>
+		///		Get all menu items in menu
+		/// </summary>
+		/// <param name="toolStripItemCollection"></param>
+		/// <returns></returns>
+		private static List<ToolStripMenuItem> GetAllMenuItems(ToolStripItemCollection toolStripItemCollection)
+		{
+			var list = new List<ToolStripMenuItem>();
+
+			foreach (ToolStripMenuItem toolStripMenuItem in toolStripItemCollection)
+			{
+				list.Add(toolStripMenuItem);
+				list.AddRange(GetAllMenuItems(toolStripMenuItem.DropDownItems));
+			}
+
+			return list;
+		}
     }
 }
