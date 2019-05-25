@@ -1,66 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using Network_Analyzer.Models;
-using Network_Analyzer.Network.Data;
-using Network_Analyzer.Services;
-using Network_Analyzer.Models.Enums;
-using System.Threading;
-using Network_Analyzer.Models.Search;
 using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
 using HexBoxForm;
-using Network_Analyzer.Extensions;
 using Network_Analyzer.Decryptor;
 using Network_Analyzer.Decryptor.Decryptors;
-using System.Text.RegularExpressions;
-using System.Globalization;
+using Network_Analyzer.Extensions;
+using Network_Analyzer.Models;
+using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Models.Search;
+using Network_Analyzer.Network.Data;
+using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
-    public partial class Editor : Form
-    {
-        private ConnectionModel m_ConnectionModel;
-        private IDecryptor m_Decryptor;
+	public partial class Editor : Form
+	{
+		private readonly ConnectionModel m_ConnectionModel;
+		private IDecryptor m_Decryptor;
+
+		private SearchModel m_SearchModel;
 
 		private SelectedPacketEncryptionType m_SelectedPacketEncryptionType;
-        private SelectedPacketType m_SelectedPacketType;
+		private SelectedPacketType m_SelectedPacketType;
 
-        private SearchModel m_SearchModel;
+		private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
+		private readonly object m_TimerDataGridViewUpdateLock = new object();
 
-        private System.Windows.Forms.Timer m_TimerDecryptPacketsUpdate;
-        private object m_TimerDecryptPacketsUpdateLock = new object();
+		private System.Windows.Forms.Timer m_TimerDecryptPacketsUpdate;
+		private readonly object m_TimerDecryptPacketsUpdateLock = new object();
 
-        private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
-        private object m_TimerDataGridViewUpdateLock = new object();
+		public Editor(long connectionId)
+		{
+			InitializeComponent();
+			Localizer.LocalizeForm(this);
 
-        public Editor(long connectionId)
-        {
-            InitializeComponent();
-            Localizer.LocalizeForm(this);
+			m_ConnectionModel = Connections.GetConnection(connectionId);
+		}
 
-            m_ConnectionModel = Connections.GetConnection(connectionId);
-        }
+		private void Editor_Load(object sender, EventArgs e)
+		{
+			m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
+			m_SelectedPacketType = SelectedPacketType.AllPackets;
 
-        private void Editor_Load(object sender, EventArgs e)
-        {
-            m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
-            m_SelectedPacketType = SelectedPacketType.AllPackets;
+			cbTypePackets.SelectedIndex = 0;
+			cbTypeEncryptionPackets.SelectedIndex = 0;
+			cbSearchType.SelectedIndex = 0;
+			cbSequenceType.SelectedIndex = 0;
 
-            cbTypePackets.SelectedIndex = 0;
-            cbTypeEncryptionPackets.SelectedIndex = 0;
-            cbSearchType.SelectedIndex = 0;
-            cbSequenceType.SelectedIndex = 0;
+			m_TimerDecryptPacketsUpdate = new System.Windows.Forms.Timer();
+			m_TimerDecryptPacketsUpdate.Tick += timerDecryptPacketsUpdate_Tick;
 
-            m_TimerDecryptPacketsUpdate = new System.Windows.Forms.Timer();
-            m_TimerDecryptPacketsUpdate.Tick += timerDecryptPacketsUpdate_Tick;
+			m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
+			m_TimerDataGridViewUpdate.Tick += timerDataGridViewUpdate_Tick;
 
-            m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
-            m_TimerDataGridViewUpdate.Tick += timerDataGridViewUpdate_Tick;
-
-            DataGridViewUpdate();
-        }
+			DataGridViewUpdate();
+		}
 
 		private void Editor_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -72,7 +72,7 @@ namespace Network_Analyzer
 
 		private void EncodingInstall_Click(object sender, EventArgs e)
 		{
-			var item = (ToolStripMenuItem)sender;
+			var item = (ToolStripMenuItem) sender;
 
 			if (item.Text == Localizer.LocalizeString("Editor.EncodingAscii"))
 			{
@@ -126,104 +126,104 @@ namespace Network_Analyzer
 		#region Packets
 
 		private void CbTypeEncryptionPackets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTypeEncryptionPackets.SelectedIndex == 0)
-            {
-                m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
-            }
-            else if (cbTypeEncryptionPackets.SelectedIndex == 1)
-            {
-                m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Decrypted;
-            }
-
-            DataGridViewUpdate();
-        }
-
-        private void CbTypePackets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTypePackets.SelectedIndex == 0)
-            {
-                m_SelectedPacketType = SelectedPacketType.AllPackets;
-            }
-            else if (cbTypePackets.SelectedIndex == 1)
-            {
-                m_SelectedPacketType = SelectedPacketType.ClientToServer;
-            }
-            else if (cbTypePackets.SelectedIndex == 2)
-            {
-                m_SelectedPacketType = SelectedPacketType.ServerToClient;
-            }
-
-            DataGridViewUpdate();
-        }
-
-        private void DgvPackets_SelectionChanged(object sender, EventArgs e)
-        {
-			if (cbAutoScroll.Checked)
-			{ 
-				cbAutoScroll.Checked = false;
-			} 
-
-            if (dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value == null)
+		{
+			if (cbTypeEncryptionPackets.SelectedIndex == 0)
 			{
-                return;
+				m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
+			}
+			else if (cbTypeEncryptionPackets.SelectedIndex == 1)
+			{
+				m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Decrypted;
 			}
 
-            var idPacket = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+			DataGridViewUpdate();
+		}
 
-            if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
-            {
-                var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket);
+		private void CbTypePackets_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cbTypePackets.SelectedIndex == 0)
+			{
+				m_SelectedPacketType = SelectedPacketType.AllPackets;
+			}
+			else if (cbTypePackets.SelectedIndex == 1)
+			{
+				m_SelectedPacketType = SelectedPacketType.ClientToServer;
+			}
+			else if (cbTypePackets.SelectedIndex == 2)
+			{
+				m_SelectedPacketType = SelectedPacketType.ServerToClient;
+			}
 
-				if (packet != null && packet.Data != null)
-				{ 
-					LoadPacketForView(packet?.Data);
-				}
-            }
-            else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
-            {
-                var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
+			DataGridViewUpdate();
+		}
+
+		private void DgvPackets_SelectionChanged(object sender, EventArgs e)
+		{
+			if (cbAutoScroll.Checked)
+			{
+				cbAutoScroll.Checked = false;
+			}
+
+			if (dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value == null)
+			{
+				return;
+			}
+
+			var idPacket = (long) dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+
+			if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
+			{
+				var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket);
 
 				if (packet != null && packet.Data != null)
 				{
 					LoadPacketForView(packet?.Data);
 				}
-            }
-        }
+			}
+			else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
+			{
+				var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
 
-        private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbAutoUpdateDataGridView.Checked)
-            {
-                m_TimerDataGridViewUpdate.Start();
+				if (packet != null && packet.Data != null)
+				{
+					LoadPacketForView(packet?.Data);
+				}
+			}
+		}
 
-                btnUpdatePackets.Enabled = false;
-                btnClearPackets.Enabled = false;
-            }
-            else
-            {
-                m_TimerDataGridViewUpdate.Stop();
+		private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
+		{
+			if (cbAutoUpdateDataGridView.Checked)
+			{
+				m_TimerDataGridViewUpdate.Start();
 
-                btnUpdatePackets.Enabled = true;
-                btnClearPackets.Enabled = true;
-            }
-        }
+				btnUpdatePackets.Enabled = false;
+				btnClearPackets.Enabled = false;
+			}
+			else
+			{
+				m_TimerDataGridViewUpdate.Stop();
 
-        private void BtnUpdatePackets_Click(object sender, EventArgs e)
-        {
-            DataGridViewUpdate();
-        }
+				btnUpdatePackets.Enabled = true;
+				btnClearPackets.Enabled = true;
+			}
+		}
 
-        private void BtnClearPackets_Click(object sender, EventArgs e)
-        {
-            m_ConnectionModel.ConnectionPackets.Clear();
-            m_ConnectionModel.DecryptedPackets.Clear();
+		private void BtnUpdatePackets_Click(object sender, EventArgs e)
+		{
+			DataGridViewUpdate();
+		}
 
-            dgvPackets.Rows.Clear();
-            hbHexEditor.ByteProvider = null;
+		private void BtnClearPackets_Click(object sender, EventArgs e)
+		{
+			m_ConnectionModel.ConnectionPackets.Clear();
+			m_ConnectionModel.DecryptedPackets.Clear();
 
-            DataGridViewUpdate();
-        }
+			dgvPackets.Rows.Clear();
+			hbHexEditor.ByteProvider = null;
+
+			DataGridViewUpdate();
+		}
 
 		#endregion
 
@@ -268,12 +268,13 @@ namespace Network_Analyzer
 				}
 
 				var bytesString = from Match match in Regex.Matches(searchTextReplace, "..")
-								  select match.Value;
+					select match.Value;
 
 				var bytes = new List<byte>();
 				foreach (var byteString in bytesString)
 				{
-					if (byte.TryParse(byteString, NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat, out var byteArray))
+					if (byte.TryParse(byteString, NumberStyles.HexNumber, CultureInfo.InvariantCulture.NumberFormat,
+						out var byteArray))
 					{
 						bytes.Add(byteArray);
 					}
@@ -304,17 +305,18 @@ namespace Network_Analyzer
 		#endregion
 
 		#region Information and converter
-		
+
 		private void HbHexEditor_SelectionStartChanged_1(object sender, EventArgs e)
 		{
-			lblSelectedIndex.Text = Localizer.LocalizeString("Editor.SelectedIndex") + " " + hbHexEditor.SelectionStart.ToString();
+			lblSelectedIndex.Text = Localizer.LocalizeString("Editor.SelectedIndex") + " " + hbHexEditor.SelectionStart;
 
 			ConverterUpdate();
 		}
 
 		private void HbHexEditor_SelectionLengthChanged_1(object sender, EventArgs e)
 		{
-			lblSelectedLength.Text = Localizer.LocalizeString("Editor.SelectedLength") + " " + hbHexEditor.SelectionLength.ToString();
+			lblSelectedLength.Text =
+				Localizer.LocalizeString("Editor.SelectedLength") + " " + hbHexEditor.SelectionLength;
 		}
 
 		private void CbSequenceType_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -332,9 +334,9 @@ namespace Network_Analyzer
 		}
 
 		private void timerDataGridViewUpdate_Tick(object sender, EventArgs e)
-        {
-            Invoke(new Action(DataGridViewUpdate));
-        }
+		{
+			Invoke(new Action(DataGridViewUpdate));
+		}
 
 		#endregion
 
@@ -344,7 +346,7 @@ namespace Network_Analyzer
 		private void DecryptPacketsUpdate()
 		{
 			if (!Monitor.TryEnter(m_TimerDecryptPacketsUpdateLock))
-			{ 
+			{
 				return;
 			}
 
@@ -355,7 +357,7 @@ namespace Network_Analyzer
 					foreach (var packet in m_ConnectionModel.ConnectionPackets)
 					{
 						if (packet.IsDecrypted)
-						{ 
+						{
 							continue;
 						}
 
@@ -370,18 +372,21 @@ namespace Network_Analyzer
 							}
 							else
 							{
-								var indexPacket = m_ConnectionModel.ConnectionPackets.FindIndex(p => p.Id == idPackets.Last());
-								var packetNext = m_ConnectionModel.ConnectionPackets.Skip(indexPacket + 1).FirstOrDefault(p => p.Type == packet.Type);
+								var indexPacket =
+									m_ConnectionModel.ConnectionPackets.FindIndex(p => p.Id == idPackets.Last());
+								var packetNext = m_ConnectionModel.ConnectionPackets.Skip(indexPacket + 1)
+									.FirstOrDefault(p => p.Type == packet.Type);
 
 								if (packetNext == null)
-								{ 
+								{
 									return;
 								}
 
 								idPackets.Add(packetNext.Id);
 							}
 
-							var packetsData = m_ConnectionModel.ConnectionPackets.Where(p => idPackets.Contains(p.Id)).SelectMany(p => p.Data).ToArray();
+							var packetsData = m_ConnectionModel.ConnectionPackets.Where(p => idPackets.Contains(p.Id))
+								.SelectMany(p => p.Data).ToArray();
 							decryptedPackets = m_Decryptor.Parse(packetsData);
 						}
 
@@ -398,19 +403,18 @@ namespace Network_Analyzer
 						}
 
 						var packetsForUpdate = m_ConnectionModel.ConnectionPackets.Where(p => idPackets.Contains(p.Id));
-						
+
 						foreach (var packetForUpdate in packetsForUpdate)
-						{ 
+						{
 							packetForUpdate.IsDecrypted = true;
 						}
 
-						for (int i = 0; i < m_ConnectionModel.DecryptedPackets.Count; i++)
+						for (var i = 0; i < m_ConnectionModel.DecryptedPackets.Count; i++)
 						{
 							m_ConnectionModel.DecryptedPackets[i].Id = i + 1;
 						}
 					}
 				}
-
 			}
 			catch (Exception ex)
 			{
@@ -423,129 +427,130 @@ namespace Network_Analyzer
 		}
 
 		private void DataGridViewUpdate()
-        {
+		{
 			if (!Monitor.TryEnter(m_TimerDataGridViewUpdateLock))
-			{ 
-                return;
+			{
+				return;
 			}
 
-            try
-            {
-                List<PacketModel> packets = null;
+			try
+			{
+				List<PacketModel> packets = null;
 
-                if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
-                {
-                    packets = m_ConnectionModel.ConnectionPackets;
-                }
-                else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
-                {
-                    packets = m_ConnectionModel.DecryptedPackets;
-                }
+				if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
+				{
+					packets = m_ConnectionModel.ConnectionPackets;
+				}
+				else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
+				{
+					packets = m_ConnectionModel.DecryptedPackets;
+				}
 
-                if (m_SelectedPacketType == SelectedPacketType.AllPackets)
-                {
-                    packets = packets.Where(p => p.Type == Models.Enums.PacketType.ClientToServer || p.Type == Models.Enums.PacketType.ServerToClient).ToList();
-                }
-                else if (m_SelectedPacketType == SelectedPacketType.ClientToServer)
-                {
-                    packets = packets.Where(p => p.Type == Models.Enums.PacketType.ClientToServer).ToList();
-                }
-                else if (m_SelectedPacketType == SelectedPacketType.ServerToClient)
-                {
-                    packets = packets.Where(p => p.Type == Models.Enums.PacketType.ServerToClient).ToList();
-                }
+				if (m_SelectedPacketType == SelectedPacketType.AllPackets)
+				{
+					packets = packets.Where(p =>
+						p.Type == PacketType.ClientToServer || p.Type == PacketType.ServerToClient).ToList();
+				}
+				else if (m_SelectedPacketType == SelectedPacketType.ClientToServer)
+				{
+					packets = packets.Where(p => p.Type == PacketType.ClientToServer).ToList();
+				}
+				else if (m_SelectedPacketType == SelectedPacketType.ServerToClient)
+				{
+					packets = packets.Where(p => p.Type == PacketType.ServerToClient).ToList();
+				}
 
-                if (m_SearchModel != null)
-                {
-                    if (m_SearchModel.Type == SelectedSearchType.Opcode)
-                    {
-                        packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
-                    }
-                    else if (m_SearchModel.Type == SelectedSearchType.Bytes)
-                    {
-                        packets = packets.Where(p => p.Data.Search(m_SearchModel.Bytes).Length != 0).ToList();
-                    }
-                }
+				if (m_SearchModel != null)
+				{
+					if (m_SearchModel.Type == SelectedSearchType.Opcode)
+					{
+						packets = packets.Where(p => p.Opcode == m_SearchModel.Opcode).ToList();
+					}
+					else if (m_SearchModel.Type == SelectedSearchType.Bytes)
+					{
+						packets = packets.Where(p => p.Data.Search(m_SearchModel.Bytes).Length != 0).ToList();
+					}
+				}
 
-                lblAllPackets.Text = Localizer.LocalizeString("Editor.AllPackets") + " " + packets.Count;
+				lblAllPackets.Text = Localizer.LocalizeString("Editor.AllPackets") + " " + packets.Count;
 
-                if (packets.Count == 0)
-                {
-                    dgvPackets.Rows.Clear();
-                    hbHexEditor.ByteProvider = null;
+				if (packets.Count == 0)
+				{
+					dgvPackets.Rows.Clear();
+					hbHexEditor.ByteProvider = null;
 
-                    return;
-                }
+					return;
+				}
 
-                for (var i = 0; i < packets.Count; i++)
-                {
-                    while (dgvPackets.Rows.Count < i + 1)
-                    {
-                        dgvPackets.Rows.Add();
-                    }
+				for (var i = 0; i < packets.Count; i++)
+				{
+					while (dgvPackets.Rows.Count < i + 1)
+					{
+						dgvPackets.Rows.Add();
+					}
 
-                    while (dgvPackets.Rows.Count > packets.Count)
-                    {
-                        dgvPackets.Rows.RemoveAt(dgvPackets.Rows.Count - 1);
-                    }
+					while (dgvPackets.Rows.Count > packets.Count)
+					{
+						dgvPackets.Rows.RemoveAt(dgvPackets.Rows.Count - 1);
+					}
 
-                    dgvPackets.Rows[i].Cells["Number"].Value = i + 1;
-                    dgvPackets.Rows[i].Cells["Id"].Value = packets[i].Id;
+					dgvPackets.Rows[i].Cells["Number"].Value = i + 1;
+					dgvPackets.Rows[i].Cells["Id"].Value = packets[i].Id;
 
-                    if (packets[i].Type == Models.Enums.PacketType.ClientToServer)
-                    {
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x90, 0xEE, 0x90);
-                    }
-                    else if (packets[i].Type == Models.Enums.PacketType.ServerToClient)
-                    {
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x00, 0x00, 0xCD);
-                    }
-                    else
-                    {
-                        dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 0, 0);
-                    }
+					if (packets[i].Type == PacketType.ClientToServer)
+					{
+						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x90, 0xEE, 0x90);
+					}
+					else if (packets[i].Type == PacketType.ServerToClient)
+					{
+						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x00, 0x00, 0xCD);
+					}
+					else
+					{
+						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 0, 0);
+					}
 
-                    if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
-                    {
-                        dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotDecrypted");
-                    }
-                    else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
-                    {
-                        dgvPackets.Rows[i].Cells["PacketName"].Value = packets[i].Opcode;
-                    }
-                }
+					if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
+					{
+						dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotDecrypted");
+					}
+					else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
+					{
+						dgvPackets.Rows[i].Cells["PacketName"].Value = packets[i].Opcode;
+					}
+				}
 
-                if (cbAutoScroll.Checked)
-                {
-                    dgvPackets.FirstDisplayedScrollingRowIndex = dgvPackets.Rows.Count - 1;
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError(ex.Message);
-                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsUpdatePackets");
-            }
-            finally
-            {
-                Monitor.Exit(m_TimerDataGridViewUpdateLock);
-            }
-        }
+				if (cbAutoScroll.Checked)
+				{
+					dgvPackets.FirstDisplayedScrollingRowIndex = dgvPackets.Rows.Count - 1;
+				}
+			}
+			catch (Exception ex)
+			{
+				Trace.TraceError(ex.Message);
+				lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsUpdatePackets");
+			}
+			finally
+			{
+				Monitor.Exit(m_TimerDataGridViewUpdateLock);
+			}
+		}
 
-        private void LoadPacketForView(byte[] bytes)
-        {
-            try
-            {
+		private void LoadPacketForView(byte[] bytes)
+		{
+			try
+			{
 				var dynamicByteProvider = new DynamicByteProvider(bytes);
-                hbHexEditor.ByteProvider = dynamicByteProvider;
+				hbHexEditor.ByteProvider = dynamicByteProvider;
 
-                lblLengthPacket.Text = Localizer.LocalizeString("Editor.LengthPacket") + " " + bytes.Length.ToString();
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError(ex.Message);
-                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingPacket");
-            }
-        }
+				lblLengthPacket.Text = Localizer.LocalizeString("Editor.LengthPacket") + " " + bytes.Length;
+			}
+			catch (Exception ex)
+			{
+				Trace.TraceError(ex.Message);
+				lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingPacket");
+			}
+		}
 
 		private void ConverterUpdate()
 		{
@@ -554,7 +559,7 @@ namespace Network_Analyzer
 				return;
 			}
 
-			var idPacket = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+			var idPacket = (long) dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
 			PacketModel packet = null;
 
 			if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
@@ -588,27 +593,37 @@ namespace Network_Analyzer
 
 			var reverse = cbSequenceType.SelectedIndex == 0 ? false : true;
 
-			lblByteType.Text = Localizer.LocalizeString("Editor.ByteType") + " " + packet.Data.ReadByte((int)hbHexEditor.SelectionStart).ToString();
-			lblSbyteType.Text = Localizer.LocalizeString("Editor.SbyteType") + " " + packet.Data.ReadSbyte((int)hbHexEditor.SelectionStart).ToString();
+			lblByteType.Text = Localizer.LocalizeString("Editor.ByteType") + " " +
+			                   packet.Data.ReadByte((int) hbHexEditor.SelectionStart);
+			lblSbyteType.Text = Localizer.LocalizeString("Editor.SbyteType") + " " +
+			                    packet.Data.ReadSbyte((int) hbHexEditor.SelectionStart);
 
 			if (hbHexEditor.SelectionStart + 1 < packet.Data.Length)
 			{
-				lblShortType.Text = Localizer.LocalizeString("Editor.ShortType") + " " + packet.Data.ReadShort((int)hbHexEditor.SelectionStart, reverse).ToString();
-				lblUshortType.Text = Localizer.LocalizeString("Editor.UshortType") + " " + packet.Data.ReadUshort((int)hbHexEditor.SelectionStart, reverse).ToString();
+				lblShortType.Text = Localizer.LocalizeString("Editor.ShortType") + " " +
+				                    packet.Data.ReadShort((int) hbHexEditor.SelectionStart, reverse);
+				lblUshortType.Text = Localizer.LocalizeString("Editor.UshortType") + " " +
+				                     packet.Data.ReadUshort((int) hbHexEditor.SelectionStart, reverse);
 			}
 
 			if (hbHexEditor.SelectionStart + 3 < packet.Data.Length)
 			{
-				lblIntType.Text = Localizer.LocalizeString("Editor.IntType") + " " + packet.Data.ReadInt((int)hbHexEditor.SelectionStart, reverse).ToString();
-				lblUintType.Text = Localizer.LocalizeString("Editor.UintType") + " " + packet.Data.ReadUint((int)hbHexEditor.SelectionStart, reverse).ToString();
-				lblFloatType.Text = Localizer.LocalizeString("Editor.FloatType") + " " + packet.Data.ReadFloat((int)hbHexEditor.SelectionStart, reverse).ToString();
+				lblIntType.Text = Localizer.LocalizeString("Editor.IntType") + " " +
+				                  packet.Data.ReadInt((int) hbHexEditor.SelectionStart, reverse);
+				lblUintType.Text = Localizer.LocalizeString("Editor.UintType") + " " +
+				                   packet.Data.ReadUint((int) hbHexEditor.SelectionStart, reverse);
+				lblFloatType.Text = Localizer.LocalizeString("Editor.FloatType") + " " +
+				                    packet.Data.ReadFloat((int) hbHexEditor.SelectionStart, reverse);
 			}
 
 			if (hbHexEditor.SelectionStart + 7 < packet.Data.Length)
 			{
-				lblLongType.Text = Localizer.LocalizeString("Editor.LongType") + " " + packet.Data.ReadLong((int)hbHexEditor.SelectionStart, reverse).ToString();
-				lblUlongType.Text = Localizer.LocalizeString("Editor.UlongType") + " " + packet.Data.ReadUlong((int)hbHexEditor.SelectionStart, reverse).ToString();
-				lblDoubleType.Text = Localizer.LocalizeString("Editor.DoubleType") + " " + packet.Data.ReadDouble((int)hbHexEditor.SelectionStart, reverse).ToString();
+				lblLongType.Text = Localizer.LocalizeString("Editor.LongType") + " " +
+				                   packet.Data.ReadLong((int) hbHexEditor.SelectionStart, reverse);
+				lblUlongType.Text = Localizer.LocalizeString("Editor.UlongType") + " " +
+				                    packet.Data.ReadUlong((int) hbHexEditor.SelectionStart, reverse);
+				lblDoubleType.Text = Localizer.LocalizeString("Editor.DoubleType") + " " +
+				                     packet.Data.ReadDouble((int) hbHexEditor.SelectionStart, reverse);
 			}
 		}
 

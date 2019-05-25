@@ -3,13 +3,13 @@
 namespace Network_Analyzer.Extensions
 {
 	/// <summary>
-	///		This is class work with converter
+	///     This is class work with converter
 	/// </summary>
 	public static class ConverterExtension
 	{
 		public static sbyte ReadSbyte(this byte[] data, int index)
 		{
-			return (sbyte)data[index];
+			return (sbyte) data[index];
 		}
 
 		public static byte ReadByte(this byte[] data, int index)

@@ -1,7 +1,7 @@
 ﻿namespace Network_Analyzer.Decryptor
 {
 	/// <summary>
-	/// Class decryptor model
+	///     Class decryptor model
 	/// </summary>
 	public class DecryptorModel
 	{

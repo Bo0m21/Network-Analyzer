@@ -31,8 +31,7 @@ namespace Network_Analyzer.Decryptor.Decryptors
 
 				packets.Add(arr);
 				packetData = packetData.Skip(lengthPacket).ToArray();
-			}
-			while (packetData.Length != 0);
+			} while (packetData.Length != 0);
 
 			foreach (var packet in packets)
 			{
@@ -77,9 +76,10 @@ namespace Network_Analyzer.Decryptor.Decryptors
 			return buffer;
 		}
 
-		private unsafe byte[] Cryptographer(byte[] packet)
+		private byte[] Cryptographer(byte[] packet)
 		{
-			byte[] key = {
+			byte[] key =
+			{
 				0x00, 0x00, 0x90, 0x9A, 0xE2, 0xF4, 0x51, 0xBB, 0xB2, 0x13, 0xD6, 0x48, 0x0E, 0xE3, 0x59, 0x04,
 				0x07, 0x03, 0xDA, 0x19, 0x47, 0xCF, 0x81, 0xA4, 0x41, 0x37, 0x40, 0xAB, 0xA6, 0xDC, 0xE1, 0x0A,
 				0x63, 0x4D, 0x20, 0x53, 0xFD, 0x15, 0xFB, 0x11, 0xF3, 0x79, 0xA1, 0x10, 0xF5, 0x58, 0x38, 0x5C,
@@ -115,12 +115,12 @@ namespace Network_Analyzer.Decryptor.Decryptors
 			{
 				for (var i = 0; i < resultPacket.Length; i++)
 				{
-					pointerKey = (byte)(pointerKey + 1);
+					pointerKey = (byte) (pointerKey + 1);
 					v7 = key[pointerKey + 2];
-					v6 = (byte)(v7 + v6);
+					v6 = (byte) (v7 + v6);
 					v8 = key[v6 + 2];
 					key[pointerKey + 2] = v8;
-					resultPacket[i] ^= key[(byte)(v7 + v8) + 2];
+					resultPacket[i] ^= key[(byte) (v7 + v8) + 2];
 					key[v6 + 2] = v7;
 				}
 			}

@@ -3,7 +3,7 @@
 namespace Network_Analyzer.Decryptor
 {
 	/// <summary>
-	/// This interfave for about decryptor
+	///     This interfave for about decryptor
 	/// </summary>
 	public interface IDecryptor
 	{
