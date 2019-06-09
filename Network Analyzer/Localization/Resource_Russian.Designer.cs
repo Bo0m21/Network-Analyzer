@@ -61,6 +61,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить поле.
+        /// </summary>
+        internal static string Editor_AddFieldConfiguration {
+            get {
+                return ResourceManager.GetString("Editor.AddFieldConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Всего пакетов.
         /// </summary>
         internal static string Editor_AllPackets {
@@ -106,6 +115,60 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Конфигурация.
+        /// </summary>
+        internal static string Editor_Configuration {
+            get {
+                return ResourceManager.GetString("Editor.Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название.
+        /// </summary>
+        internal static string Editor_ConfigurationName {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Описание конфигурации пакета.
+        /// </summary>
+        internal static string Editor_ConfigurationPacketDescription {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationPacketDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название конфигурации пакета.
+        /// </summary>
+        internal static string Editor_ConfigurationPacketName {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationPacketName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Позиция.
+        /// </summary>
+        internal static string Editor_ConfigurationPosition {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип.
+        /// </summary>
+        internal static string Editor_ConfigurationType {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Типы данных.
         /// </summary>
         internal static string Editor_DataTypes {
@@ -138,6 +201,15 @@ namespace Network_Analyzer.Localization {
         internal static string Editor_DecryptorUnloadedSuccessfully {
             get {
                 return ResourceManager.GetString("Editor.DecryptorUnloadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить поле.
+        /// </summary>
+        internal static string Editor_DeleteFieldConfiguration {
+            get {
+                return ResourceManager.GetString("Editor.DeleteFieldConfiguration", resourceCulture);
             }
         }
         

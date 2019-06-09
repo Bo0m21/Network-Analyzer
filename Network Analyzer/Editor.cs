@@ -59,6 +59,8 @@ namespace Network_Analyzer
 			m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
 			m_TimerDataGridViewUpdate.Tick += timerDataGridViewUpdate_Tick;
 
+			dgvFieldsConfiguration.Rows.Add();
+
 			DataGridViewUpdate();
 		}
 
@@ -499,15 +501,11 @@ namespace Network_Analyzer
 
 					if (packets[i].Type == PacketType.ClientToServer)
 					{
-						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x90, 0xEE, 0x90);
+						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(135, 255, 135);
 					}
 					else if (packets[i].Type == PacketType.ServerToClient)
 					{
-						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(0x00, 0x00, 0xCD);
-					}
-					else
-					{
-						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(255, 0, 0);
+						dgvPackets.Rows[i].Cells["Number"].Style.BackColor = Color.FromArgb(135, 255, 255);
 					}
 
 					if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
@@ -542,8 +540,9 @@ namespace Network_Analyzer
 			{
 				var dynamicByteProvider = new DynamicByteProvider(bytes);
 				hbHexEditor.ByteProvider = dynamicByteProvider;
+                hbHexEditor.StringViewVisible = true;
 
-				lblLengthPacket.Text = Localizer.LocalizeString("Editor.LengthPacket") + " " + bytes.Length;
+                lblLengthPacket.Text = Localizer.LocalizeString("Editor.LengthPacket") + " " + bytes.Length;
 			}
 			catch (Exception ex)
 			{
@@ -627,6 +626,28 @@ namespace Network_Analyzer
 			}
 		}
 
-		#endregion
-	}
+        #endregion
+
+        private void HbHexEditor_Paint(object sender, PaintEventArgs e)
+        {
+            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.Green));
+            hbHexEditor.FillPaint(e.Graphics, 3, 1, new SolidBrush(Color.Red));
+
+            //var asdasd = hbHexEditor.GetGridBytePoint(1);
+            //var bytePointF = hbHexEditor.GetBytePointF(asdasd);
+
+            //var asda = (HexBox)sender;
+
+            //float bcWidth =  asda.CharSize.Width * 2;
+
+            //Brush selBrush = new SolidBrush(Color.Red);
+            //e.Graphics.FillRectangle(selBrush, bytePointF.X, bytePointF.Y, bcWidth, asda.CharSize.Height);
+
+            //Rectangle ee = new Rectangle((int)bytePointF.X, (int)bytePointF.Y, asda.Bounds.X + 10, asda.Bounds.Y + 10);
+            //using (Pen pen = new Pen(Color.Red, 2))
+            //{
+            //    e.Graphics.DrawRectangle(pen, ee);
+            //}
+        }
+    }
 }

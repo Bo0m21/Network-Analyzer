@@ -2357,7 +2357,6 @@ namespace HexBoxForm
 
 			UpdateVisibilityBytes();
 
-
 			if (_lineInfoVisible)
 				PaintLineInfo(e.Graphics, _startByte, _endByte);
 
@@ -2368,17 +2367,36 @@ namespace HexBoxForm
 			else
 			{
 				PaintHexAndStringView(e.Graphics, _startByte, _endByte);
+
 				if (_shadowSelectionVisible)
 					PaintCurrentBytesSign(e.Graphics);
 			}
+
 			if (_columnInfoVisible)
 				PaintHeaderRow(e.Graphics);
+
 			if (_groupSeparatorVisible)
 				PaintColumnSeparator(e.Graphics);
-		}
+        }
 
+        public void FillPaint(Graphics g, long start, long length, Brush brush)
+        {
+            if (_byteProvider == null)
+                return;
 
-		void PaintLineInfo(Graphics g, long startByte, long endByte)
+            for (long i = 0; i < length; i++)
+            {
+                Point gridPoint = GetGridBytePoint(start + i);
+                PointF bytePointF = GetBytePointF(gridPoint);
+
+                bool isLastLineChar = length == i + 1;
+                float bcWidth = (isLastLineChar) ? _charSize.Width * 2 : _charSize.Width * 3;
+
+                g.FillRectangle(brush, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
+            }
+        }
+
+        void PaintLineInfo(Graphics g, long startByte, long endByte)
 		{
 			// Ensure endByte isn't > length of array.
 			endByte = Math.Min(_byteProvider.Length - 1, endByte);
@@ -2736,7 +2754,8 @@ namespace HexBoxForm
 			else
 				return Color.Gray;
 		}
-		void UpdateVisibilityBytes()
+
+        void UpdateVisibilityBytes()
 		{
 			if (_byteProvider == null || _byteProvider.Length == 0)
 				return;
@@ -2876,6 +2895,7 @@ namespace HexBoxForm
 
 			return new PointF(x, y);
 		}
+
 		PointF GetColumnInfoPointF(int col)
 		{
 			Point gp = GetGridBytePoint(col);

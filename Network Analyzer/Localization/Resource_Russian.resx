@@ -480,4 +480,28 @@
   <data name="Editor.UshortType" xml:space="preserve">
     <value>Ushort</value>
   </data>
+  <data name="Editor.AddFieldConfiguration" xml:space="preserve">
+    <value>Добавить поле</value>
+  </data>
+  <data name="Editor.Configuration" xml:space="preserve">
+    <value>Конфигурация</value>
+  </data>
+  <data name="Editor.ConfigurationName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Editor.ConfigurationPacketDescription" xml:space="preserve">
+    <value>Описание конфигурации пакета</value>
+  </data>
+  <data name="Editor.ConfigurationPacketName" xml:space="preserve">
+    <value>Название конфигурации пакета</value>
+  </data>
+  <data name="Editor.ConfigurationPosition" xml:space="preserve">
+    <value>Позиция</value>
+  </data>
+  <data name="Editor.ConfigurationType" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Editor.DeleteFieldConfiguration" xml:space="preserve">
+    <value>Удалить поле</value>
+  </data>
 </root>
