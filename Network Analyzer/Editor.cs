@@ -630,24 +630,8 @@ namespace Network_Analyzer
 
         private void HbHexEditor_Paint(object sender, PaintEventArgs e)
         {
-            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.Green));
-            hbHexEditor.FillPaint(e.Graphics, 3, 1, new SolidBrush(Color.Red));
-
-            //var asdasd = hbHexEditor.GetGridBytePoint(1);
-            //var bytePointF = hbHexEditor.GetBytePointF(asdasd);
-
-            //var asda = (HexBox)sender;
-
-            //float bcWidth =  asda.CharSize.Width * 2;
-
-            //Brush selBrush = new SolidBrush(Color.Red);
-            //e.Graphics.FillRectangle(selBrush, bytePointF.X, bytePointF.Y, bcWidth, asda.CharSize.Height);
-
-            //Rectangle ee = new Rectangle((int)bytePointF.X, (int)bytePointF.Y, asda.Bounds.X + 10, asda.Bounds.Y + 10);
-            //using (Pen pen = new Pen(Color.Red, 2))
-            //{
-            //    e.Graphics.DrawRectangle(pen, ee);
-            //}
+            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.FromArgb(89, 202, 250)));
+            hbHexEditor.FillPaint(e.Graphics, 2, 2, new SolidBrush(Color.FromArgb(146, 250, 91)));
         }
     }
 }

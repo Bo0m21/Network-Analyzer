@@ -2336,7 +2336,6 @@ namespace HexBoxForm
 			}
 		}
 
-
 		/// <summary>
 		/// Paints the hex box.
 		/// </summary>
@@ -2386,11 +2385,14 @@ namespace HexBoxForm
 
             for (long i = 0; i < length; i++)
             {
+                if (_byteProvider.Length <= start + i)
+                    return;
+
                 Point gridPoint = GetGridBytePoint(start + i);
                 PointF bytePointF = GetBytePointF(gridPoint);
 
-                bool isLastLineChar = length == i + 1;
-                float bcWidth = (isLastLineChar) ? _charSize.Width * 2 : _charSize.Width * 3;
+                bool isLastChar = length == i + 1 || _byteProvider.Length <= start + i + 1;
+                float bcWidth = (isLastChar) ? _charSize.Width * 2 : _charSize.Width * 3;
 
                 g.FillRectangle(brush, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
             }
