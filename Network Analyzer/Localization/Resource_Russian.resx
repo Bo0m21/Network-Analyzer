@@ -504,4 +504,19 @@
   <data name="Editor.DeleteFieldConfiguration" xml:space="preserve">
     <value>Удалить поле</value>
   </data>
+  <data name="ConfigurationField.Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ConfigurationField.Geleral" xml:space="preserve">
+    <value>Описание поля</value>
+  </data>
+  <data name="ConfigurationField.Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="ConfigurationField.Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="ConfigurationField.Text" xml:space="preserve">
+    <value>Конфигурация поля</value>
+  </data>
 </root>

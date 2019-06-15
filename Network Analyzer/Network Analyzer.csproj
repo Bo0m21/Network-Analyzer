@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\ConfigurationField.Designer.cs">
+      <DependentUpon>ConfigurationField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Decryptor\DecryptorModel.cs" />
     <Compile Include="Decryptor\Decryptors\R2Decryptor.cs" />
     <Compile Include="Decryptor\IDecryptor.cs" />
@@ -66,7 +72,7 @@
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Models\Search\SelectedSearchType.cs" />
-    <Compile Include="Services\Configuration.cs" />
+    <Compile Include="Services\Settings.cs" />
     <Compile Include="Extensions\ArrayExtension.cs" />
     <Compile Include="Models\Languages.cs" />
     <Compile Include="Network\Data\Connections.cs" />
@@ -104,6 +110,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Configuration\ConfigurationField.resx">
+      <DependentUpon>ConfigurationField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +158,9 @@
       <Project>{26c5f25f-b450-4caf-ad8b-b8d11ae73457}</Project>
       <Name>HexBoxForm</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

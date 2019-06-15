@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using HexBoxForm;
+using Network_Analyzer.Configuration;
 using Network_Analyzer.Decryptor;
 using Network_Analyzer.Decryptor.Decryptors;
 using Network_Analyzer.Extensions;
@@ -21,13 +22,15 @@ namespace Network_Analyzer
 {
 	public partial class Editor : Form
 	{
-		private readonly ConnectionModel m_ConnectionModel;
+		private ConnectionModel m_ConnectionModel;
 		private IDecryptor m_Decryptor;
 
 		private SearchModel m_SearchModel;
 
 		private SelectedPacketEncryptionType m_SelectedPacketEncryptionType;
 		private SelectedPacketType m_SelectedPacketType;
+
+        private ConfigurationField m_ConfigurationField { get; set; }
 
 		private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
 		private readonly object m_TimerDataGridViewUpdateLock = new object();
@@ -135,7 +138,13 @@ namespace Network_Analyzer
 			}
 			else if (cbTypeEncryptionPackets.SelectedIndex == 1)
 			{
-				m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Decrypted;
+                if (m_Decryptor == null)
+                {
+                    cbTypeEncryptionPackets.SelectedIndex = 0;
+                    return;
+                }
+
+                m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Decrypted;
 			}
 
 			DataGridViewUpdate();
@@ -304,11 +313,17 @@ namespace Network_Analyzer
 			DataGridViewUpdate();
 		}
 
-		#endregion
+        private void HbHexEditor_Paint(object sender, PaintEventArgs e)
+        {
+            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.FromArgb(89, 202, 250)));
+            hbHexEditor.FillPaint(e.Graphics, 2, 2, new SolidBrush(Color.FromArgb(146, 250, 91)));
+        }
 
-		#region Information and converter
+        #endregion
 
-		private void HbHexEditor_SelectionStartChanged_1(object sender, EventArgs e)
+        #region Information and converter
+
+        private void HbHexEditor_SelectionStartChanged_1(object sender, EventArgs e)
 		{
 			lblSelectedIndex.Text = Localizer.LocalizeString("Editor.SelectedIndex") + " " + hbHexEditor.SelectionStart;
 
@@ -326,11 +341,31 @@ namespace Network_Analyzer
 			ConverterUpdate();
 		}
 
-		#endregion
+        #endregion
 
-		#region Timers
+        #region Configuration
 
-		private void timerDecryptPacketsUpdate_Tick(object sender, EventArgs e)
+        private void BtnAddFieldConfiguration_Click(object sender, EventArgs e)
+        {
+            if (m_ConfigurationField == null || m_ConfigurationField.IsDisposed)
+            {
+                m_ConfigurationField = new ConfigurationField(hbHexEditor.SelectionStart);
+            }
+
+            m_ConfigurationField.Hide();
+            m_ConfigurationField.Show();
+        }
+
+        private void BtnDeleteFieldConfiguration_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Timers
+
+        private void timerDecryptPacketsUpdate_Tick(object sender, EventArgs e)
 		{
 			Invoke(new Action(DecryptPacketsUpdate));
 		}
@@ -627,11 +662,5 @@ namespace Network_Analyzer
 		}
 
         #endregion
-
-        private void HbHexEditor_Paint(object sender, PaintEventArgs e)
-        {
-            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.FromArgb(89, 202, 250)));
-            hbHexEditor.FillPaint(e.Graphics, 2, 2, new SolidBrush(Color.FromArgb(146, 250, 91)));
-        }
     }
 }

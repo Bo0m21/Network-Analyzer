@@ -415,8 +415,6 @@ namespace Network_Analyzer
             this.hbHexEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.hbHexEditor.Name = "hbHexEditor";
             this.hbHexEditor.ReadOnly = true;
-            this.hbHexEditor.SelectionBackColor = System.Drawing.Color.Coral;
-            this.hbHexEditor.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbHexEditor.Size = new System.Drawing.Size(560, 549);
             this.hbHexEditor.StringViewVisible = true;
             this.hbHexEditor.TabIndex = 9;
@@ -659,6 +657,7 @@ namespace Network_Analyzer
             this.btnDeleteFieldConfiguration.TabIndex = 23;
             this.btnDeleteFieldConfiguration.Text = "Editor.DeleteFieldConfiguration";
             this.btnDeleteFieldConfiguration.UseVisualStyleBackColor = true;
+            this.btnDeleteFieldConfiguration.Click += new System.EventHandler(this.BtnDeleteFieldConfiguration_Click);
             // 
             // btnAddFieldConfiguration
             // 
@@ -668,6 +667,7 @@ namespace Network_Analyzer
             this.btnAddFieldConfiguration.TabIndex = 22;
             this.btnAddFieldConfiguration.Text = "Editor.AddFieldConfiguration";
             this.btnAddFieldConfiguration.UseVisualStyleBackColor = true;
+            this.btnAddFieldConfiguration.Click += new System.EventHandler(this.BtnAddFieldConfiguration_Click);
             // 
             // dgvFieldsConfiguration
             // 

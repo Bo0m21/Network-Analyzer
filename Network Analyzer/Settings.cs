@@ -22,10 +22,10 @@ namespace Network_Analyzer
 				cbProgramLanguage.Items.Add(language.ToString());
 			}
 
-			cbProgramLanguage.Text = Configuration.Language;
-			tbAddressListener.Text = Configuration.Address;
-			tbPortListener.Text = Configuration.Port;
-			tbFolderSaved.Text = Configuration.Folder;
+			cbProgramLanguage.Text = Services.Settings.Language;
+			tbAddressListener.Text = Services.Settings.Address;
+			tbPortListener.Text = Services.Settings.Port;
+			tbFolderSaved.Text = Services.Settings.Folder;
 
 			lblInformation.Text = Localizer.LocalizeString("Settings.SettingsLoadedSuccessfully");
 		}
@@ -63,12 +63,12 @@ namespace Network_Analyzer
 					return;
 				}
 
-				Configuration.Language = cbProgramLanguage.Text;
-				Configuration.Address = tbAddressListener.Text;
-				Configuration.Port = tbPortListener.Text;
-				Configuration.Folder = tbFolderSaved.Text;
+                Services.Settings.Language = cbProgramLanguage.Text;
+                Services.Settings.Address = tbAddressListener.Text;
+                Services.Settings.Port = tbPortListener.Text;
+                Services.Settings.Folder = tbFolderSaved.Text;
 
-				Configuration.SaveConfiguration();
+                Services.Settings.SaveSettings();
 
 				lblInformation.Text = Localizer.LocalizeString("Settings.SettingsSavedSuccessfully");
 			}

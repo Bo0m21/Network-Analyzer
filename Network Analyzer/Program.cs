@@ -13,8 +13,8 @@ namespace Network_Analyzer
 		[STAThread]
 		private static void Main()
 		{
-			// Download configurations
-			Configuration.LoadConfiguration();
+            // Loading settings
+            Services.Settings.LoadSettings();
 
 			// Loading localizer from resources
 			//Localizer.LoadLocalizer(Configuration.Language, "Network_Analyzer.Localization.Resource");
@@ -25,11 +25,10 @@ namespace Network_Analyzer
 			// Loading form
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new Editor(100));
 			Application.Run(new Main());
 
-			// Saving configurations
-			Configuration.SaveConfiguration();
+            // Saving settings
+            Services.Settings.SaveSettings();
 		}
 	}
 }

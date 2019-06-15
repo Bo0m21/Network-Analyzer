@@ -61,6 +61,51 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отмена.
+        /// </summary>
+        internal static string ConfigurationField_Cancel {
+            get {
+                return ResourceManager.GetString("ConfigurationField.Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Описание поля.
+        /// </summary>
+        internal static string ConfigurationField_Geleral {
+            get {
+                return ResourceManager.GetString("ConfigurationField.Geleral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string ConfigurationField_Information {
+            get {
+                return ResourceManager.GetString("ConfigurationField.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить.
+        /// </summary>
+        internal static string ConfigurationField_Save {
+            get {
+                return ResourceManager.GetString("ConfigurationField.Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Конфигурация поля.
+        /// </summary>
+        internal static string ConfigurationField_Text {
+            get {
+                return ResourceManager.GetString("ConfigurationField.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Добавить поле.
         /// </summary>
         internal static string Editor_AddFieldConfiguration {

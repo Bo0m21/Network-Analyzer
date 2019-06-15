@@ -7,9 +7,9 @@ using Network_Analyzer.Models.Enums;
 namespace Network_Analyzer.Services
 {
 	/// <summary>
-	///     Class for work with configuration values
+	///     Class for work with setting values
 	/// </summary>
-	public static class Configuration
+	public static class Settings
 	{
 		/// <summary>
 		///     Langeuage private variable
@@ -68,9 +68,9 @@ namespace Network_Analyzer.Services
 		}
 
 		/// <summary>
-		///     Loading configuration
+		///     Loading settings
 		/// </summary>
-		public static void LoadConfiguration()
+		public static void LoadSettings()
 		{
 			Language = ConfigurationManager.AppSettings["Language"];
 			Address = ConfigurationManager.AppSettings["Address"];
@@ -78,10 +78,10 @@ namespace Network_Analyzer.Services
 			Folder = ConfigurationManager.AppSettings["Folder"];
 		}
 
-		/// <summary>
-		///     Save configuration
-		/// </summary>
-		public static void SaveConfiguration()
+        /// <summary>
+        ///     Save settings
+        /// </summary>
+        public static void SaveSettings()
 		{
 			var configuration = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
 

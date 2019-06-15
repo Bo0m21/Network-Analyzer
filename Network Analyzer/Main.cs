@@ -65,7 +65,7 @@ namespace Network_Analyzer
 				m_SocksListener?.Dispose();
 
 				m_SocksListener =
-					new SocksListener(IPAddress.Parse(Configuration.Address), int.Parse(Configuration.Port));
+					new SocksListener(IPAddress.Parse(Services.Settings.Address), int.Parse(Services.Settings.Port));
 				m_SocksListener.Start();
 
 				btnStartListener.Enabled = false;
@@ -255,7 +255,7 @@ namespace Network_Analyzer
 		{
 			if (cbAutoSaveConnections.Checked)
 			{
-				m_autoSaveConnectionsPath = Configuration.Folder + "//" + "Connections-" +
+				m_autoSaveConnectionsPath = Services.Settings.Folder + "//" + "Connections-" +
 				                            DateTime.Now.ToString("MM/dd/yyyy HH-mm-ss") + ".json";
 				m_TimerAutoSaveConnections.Start();
 
