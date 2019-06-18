@@ -30,18 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.gbGeneralSettings = new System.Windows.Forms.GroupBox();
+            this.cbProgramLanguage = new System.Windows.Forms.ComboBox();
+            this.lblProgramLanguage = new System.Windows.Forms.Label();
             this.lblPortListener = new System.Windows.Forms.Label();
             this.tbPortListener = new System.Windows.Forms.TextBox();
             this.lblAddressListener = new System.Windows.Forms.Label();
             this.tbAddressListener = new System.Windows.Forms.TextBox();
-            this.cbProgramLanguage = new System.Windows.Forms.ComboBox();
-            this.lblProgramLanguage = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblInformation = new System.Windows.Forms.Label();
             this.gbListenerSettings = new System.Windows.Forms.GroupBox();
-            this.tbFolderSaved = new System.Windows.Forms.TextBox();
             this.lblFolderSaved = new System.Windows.Forms.Label();
+            this.tbFolderSaved = new System.Windows.Forms.TextBox();
             this.gbGeneralSettings.SuspendLayout();
             this.gbListenerSettings.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,24 @@
             this.gbGeneralSettings.TabIndex = 0;
             this.gbGeneralSettings.TabStop = false;
             this.gbGeneralSettings.Text = "Settings.GeneralSettings";
+            // 
+            // cbProgramLanguage
+            // 
+            this.cbProgramLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProgramLanguage.FormattingEnabled = true;
+            this.cbProgramLanguage.Location = new System.Drawing.Point(147, 19);
+            this.cbProgramLanguage.Name = "cbProgramLanguage";
+            this.cbProgramLanguage.Size = new System.Drawing.Size(150, 21);
+            this.cbProgramLanguage.TabIndex = 1;
+            // 
+            // lblProgramLanguage
+            // 
+            this.lblProgramLanguage.AutoSize = true;
+            this.lblProgramLanguage.Location = new System.Drawing.Point(6, 22);
+            this.lblProgramLanguage.Name = "lblProgramLanguage";
+            this.lblProgramLanguage.Size = new System.Drawing.Size(135, 13);
+            this.lblProgramLanguage.TabIndex = 0;
+            this.lblProgramLanguage.Text = "Settings.ProgramLanguage";
             // 
             // lblPortListener
             // 
@@ -88,24 +106,6 @@
             this.tbAddressListener.Name = "tbAddressListener";
             this.tbAddressListener.Size = new System.Drawing.Size(150, 20);
             this.tbAddressListener.TabIndex = 2;
-            // 
-            // cbProgramLanguage
-            // 
-            this.cbProgramLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProgramLanguage.FormattingEnabled = true;
-            this.cbProgramLanguage.Location = new System.Drawing.Point(147, 19);
-            this.cbProgramLanguage.Name = "cbProgramLanguage";
-            this.cbProgramLanguage.Size = new System.Drawing.Size(150, 21);
-            this.cbProgramLanguage.TabIndex = 1;
-            // 
-            // lblProgramLanguage
-            // 
-            this.lblProgramLanguage.AutoSize = true;
-            this.lblProgramLanguage.Location = new System.Drawing.Point(6, 22);
-            this.lblProgramLanguage.Name = "lblProgramLanguage";
-            this.lblProgramLanguage.Size = new System.Drawing.Size(135, 13);
-            this.lblProgramLanguage.TabIndex = 0;
-            this.lblProgramLanguage.Text = "Settings.ProgramLanguage";
             // 
             // btnCancel
             // 
@@ -151,13 +151,6 @@
             this.gbListenerSettings.TabStop = false;
             this.gbListenerSettings.Text = "Settings.ListenerSettings";
             // 
-            // tbFolderSaved
-            // 
-            this.tbFolderSaved.Location = new System.Drawing.Point(147, 71);
-            this.tbFolderSaved.Name = "tbFolderSaved";
-            this.tbFolderSaved.Size = new System.Drawing.Size(150, 20);
-            this.tbFolderSaved.TabIndex = 6;
-            // 
             // lblFolderSaved
             // 
             this.lblFolderSaved.AutoSize = true;
@@ -166,6 +159,13 @@
             this.lblFolderSaved.Size = new System.Drawing.Size(108, 13);
             this.lblFolderSaved.TabIndex = 7;
             this.lblFolderSaved.Text = "Settings.FolderSaved";
+            // 
+            // tbFolderSaved
+            // 
+            this.tbFolderSaved.Location = new System.Drawing.Point(147, 71);
+            this.tbFolderSaved.Name = "tbFolderSaved";
+            this.tbFolderSaved.Size = new System.Drawing.Size(150, 20);
+            this.tbFolderSaved.TabIndex = 6;
             // 
             // Settings
             // 
@@ -179,6 +179,7 @@
             this.Controls.Add(this.gbGeneralSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Settings";
             this.Text = "Settings.Text";
             this.Load += new System.EventHandler(this.Settings_Load);

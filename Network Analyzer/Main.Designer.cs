@@ -430,6 +430,7 @@ namespace Network_Analyzer
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Main.Text";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);

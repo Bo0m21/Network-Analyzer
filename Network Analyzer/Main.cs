@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Network_Analyzer.Models;
+using Network_Analyzer.Models.Connection;
 using Network_Analyzer.Network.Data;
 using Network_Analyzer.Network.Listeners;
 using Network_Analyzer.Services;
