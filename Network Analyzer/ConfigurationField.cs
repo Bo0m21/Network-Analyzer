@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models.Connection;
 using Network_Analyzer.Services;
@@ -19,7 +20,7 @@ namespace Network_Analyzer
             m_StartIndex = startIndex;
         }
 
-        private void ConfigurationField_Load(object sender, System.EventArgs e)
+        private void ConfigurationField_Load(object sender, EventArgs e)
         {
             if (m_StartIndex != -1)
             {
@@ -32,9 +33,9 @@ namespace Network_Analyzer
             lblInformation.Text = Localizer.LocalizeString("ConfigurationField.LoadedSuccessfully");
         }
 
-        private void CbType_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
+            if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
             {
                 cbLength.Enabled = true;
             }
@@ -46,17 +47,17 @@ namespace Network_Analyzer
             UpdateValue();
         }
 
-        private void CbSequenceType_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void CbSequenceType_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateValue();
         }
 
-        private void TbStartIndex_TextChanged(object sender, System.EventArgs e)
+        private void TbStartIndex_TextChanged(object sender, EventArgs e)
         {
             UpdateValue();
         }
 
-        private void CbLength_TextChanged(object sender, System.EventArgs e)
+        private void CbLength_TextChanged(object sender, EventArgs e)
         {
             UpdateValue();
         }
@@ -65,78 +66,78 @@ namespace Network_Analyzer
         {
             var reverse = cbSequenceType.SelectedIndex == 0 ? false : true;
 
-            if (!long.TryParse(tbStartIndex.Text, out long startindex))
+            if (!long.TryParse(tbStartIndex.Text, out var startindex))
             {
                 lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsStartIndex");
                 return;
             }
 
-            if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Byte"))
+            if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Byte"))
             {
                 lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                   m_PacketModel.Data.ReadByte((int)startindex);
+                                m_PacketModel.Data.ReadByte((int) startindex);
             }
 
-            if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Sbyte"))
+            if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Sbyte"))
             {
                 lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                   m_PacketModel.Data.ReadSbyte((int)startindex);
+                                m_PacketModel.Data.ReadSbyte((int) startindex);
             }
 
             if (m_StartIndex + 1 < m_PacketModel.Data.Length)
             {
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Short"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Short"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                        m_PacketModel.Data.ReadShort((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadShort((int) startindex, reverse);
                 }
 
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Ushort"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Ushort"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                       m_PacketModel.Data.ReadUshort((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadUshort((int) startindex, reverse);
                 }
             }
 
             if (m_StartIndex + 3 < m_PacketModel.Data.Length)
             {
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Int"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Int"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                        m_PacketModel.Data.ReadInt((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadInt((int) startindex, reverse);
                 }
 
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Uint"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Uint"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                       m_PacketModel.Data.ReadUint((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadUint((int) startindex, reverse);
                 }
 
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Float"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Float"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                       m_PacketModel.Data.ReadFloat((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadFloat((int) startindex, reverse);
                 }
             }
 
             if (m_StartIndex + 7 < m_PacketModel.Data.Length)
             {
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Long"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Long"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                        m_PacketModel.Data.ReadLong((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadLong((int) startindex, reverse);
                 }
 
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Ulong"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Ulong"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                       m_PacketModel.Data.ReadUlong((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadUlong((int) startindex, reverse);
                 }
 
-                if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Double"))
+                if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.Double"))
                 {
                     lblValue.Text = Localizer.LocalizeString("ConfigurationField.Value") + " " +
-                       m_PacketModel.Data.ReadDouble((int)startindex, reverse);
+                                    m_PacketModel.Data.ReadDouble((int) startindex, reverse);
                 }
             }
         }
