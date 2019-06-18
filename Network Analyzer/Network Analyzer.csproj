@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConfigurationField.cs">
+    <Compile Include="ConfigurationField.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuration\ConfigurationField.Designer.cs">
+    <Compile Include="ConfigurationField.Designer.cs">
       <DependentUpon>ConfigurationField.cs</DependentUpon>
     </Compile>
     <Compile Include="Decryptor\DecryptorModel.cs" />
@@ -68,6 +68,8 @@
     </Compile>
     <Compile Include="Extensions\ConverterExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Models\Configuration\ConfigurationFieldModel.cs" />
+    <Compile Include="Models\Configuration\ConfigurationModel.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
@@ -88,9 +90,9 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConnectionModel.cs" />
-    <Compile Include="Models\Packets\PacketModel.cs" />
-    <Compile Include="Models\Packets\PacketType.cs" />
+    <Compile Include="Models\Connection\ConnectionModel.cs" />
+    <Compile Include="Models\Connection\ConnectionPacketModel.cs" />
+    <Compile Include="Models\Connection\ConnectionPacketType.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthBase.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthenticationList.cs" />
     <Compile Include="Network\Listeners\Authentication\AuthNone.cs" />
@@ -110,7 +112,7 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Configuration\ConfigurationField.resx">
+    <EmbeddedResource Include="ConfigurationField.resx">
       <DependentUpon>ConfigurationField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.resx">
@@ -159,8 +161,6 @@
       <Name>HexBoxForm</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

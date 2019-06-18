@@ -45,6 +45,10 @@ namespace Network_Analyzer
             this.decryptorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadDecryptorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unloadDecryptorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpPackets = new System.Windows.Forms.TabPage();
             this.cbAutoScroll = new System.Windows.Forms.CheckBox();
@@ -111,7 +115,8 @@ namespace Network_Analyzer
             // 
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hexEditorToolStripMenuItem,
-            this.decryptorToolStripMenuItem});
+            this.decryptorToolStripMenuItem,
+            this.configurationToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(1290, 24);
@@ -123,7 +128,7 @@ namespace Network_Analyzer
             this.hexEditorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hexEditorEncodingToolStripMenuItem});
             this.hexEditorToolStripMenuItem.Name = "hexEditorToolStripMenuItem";
-            this.hexEditorToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
+            this.hexEditorToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.hexEditorToolStripMenuItem.Text = "Editor.HexEditor";
             // 
             // hexEditorEncodingToolStripMenuItem
@@ -134,7 +139,7 @@ namespace Network_Analyzer
             this.encodingUTF8ToolStripMenuItem,
             this.encodingWindows1251ToolStripMenuItem});
             this.hexEditorEncodingToolStripMenuItem.Name = "hexEditorEncodingToolStripMenuItem";
-            this.hexEditorEncodingToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.hexEditorEncodingToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.hexEditorEncodingToolStripMenuItem.Text = "Editor.HexEditorEncoding";
             // 
             // encodingAsciiToolStripMenuItem
@@ -188,6 +193,37 @@ namespace Network_Analyzer
             this.unloadDecryptorToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.unloadDecryptorToolStripMenuItem.Text = "Editor.UnloadDecryptor";
             this.unloadDecryptorToolStripMenuItem.Click += new System.EventHandler(this.UnloadDecryptorToolStripMenuItem_Click);
+            // 
+            // configurationToolStripMenuItem
+            // 
+            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadConfigurationToolStripMenuItem,
+            this.saveConfigurationToolStripMenuItem,
+            this.createConfigurationToolStripMenuItem});
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
+            this.configurationToolStripMenuItem.Text = "Editor.Configuration";
+            // 
+            // loadConfigurationToolStripMenuItem
+            // 
+            this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.loadConfigurationToolStripMenuItem.Text = "Editor.LoadConfiguration";
+            this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.LoadConfigurationToolStripMenuItem_Click);
+            // 
+            // saveConfigurationToolStripMenuItem
+            // 
+            this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.saveConfigurationToolStripMenuItem.Text = "Editor.SaveConfiguration";
+            this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.SaveConfigurationToolStripMenuItem_Click);
+            // 
+            // createConfigurationToolStripMenuItem
+            // 
+            this.createConfigurationToolStripMenuItem.Name = "createConfigurationToolStripMenuItem";
+            this.createConfigurationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.createConfigurationToolStripMenuItem.Text = "Editor.CreateConfiguration";
+            this.createConfigurationToolStripMenuItem.Click += new System.EventHandler(this.CreateConfigurationToolStripMenuItem_Click);
             // 
             // tabControl1
             // 
@@ -415,13 +451,14 @@ namespace Network_Analyzer
             this.hbHexEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.hbHexEditor.Name = "hbHexEditor";
             this.hbHexEditor.ReadOnly = true;
+            this.hbHexEditor.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbHexEditor.Size = new System.Drawing.Size(560, 549);
             this.hbHexEditor.StringViewVisible = true;
             this.hbHexEditor.TabIndex = 9;
             this.hbHexEditor.UseFixedBytesPerLine = true;
             this.hbHexEditor.VScrollBarVisible = true;
-            this.hbHexEditor.SelectionStartChanged += new System.EventHandler(this.HbHexEditor_SelectionStartChanged_1);
-            this.hbHexEditor.SelectionLengthChanged += new System.EventHandler(this.HbHexEditor_SelectionLengthChanged_1);
+            this.hbHexEditor.SelectionStartChanged += new System.EventHandler(this.HbHexEditor_SelectionStartChanged);
+            this.hbHexEditor.SelectionLengthChanged += new System.EventHandler(this.HbHexEditor_SelectionLengthChanged);
             this.hbHexEditor.Paint += new System.Windows.Forms.PaintEventHandler(this.HbHexEditor_Paint);
             // 
             // tpPacketInformation
@@ -464,7 +501,7 @@ namespace Network_Analyzer
             this.lblDoubleType.Name = "lblDoubleType";
             this.lblDoubleType.Size = new System.Drawing.Size(108, 15);
             this.lblDoubleType.TabIndex = 23;
-            this.lblDoubleType.Text = "Editor.DoubleType";
+            this.lblDoubleType.Text = "Types.Double";
             // 
             // lblFloatType
             // 
@@ -474,7 +511,7 @@ namespace Network_Analyzer
             this.lblFloatType.Name = "lblFloatType";
             this.lblFloatType.Size = new System.Drawing.Size(95, 15);
             this.lblFloatType.TabIndex = 22;
-            this.lblFloatType.Text = "Editor.FloatType";
+            this.lblFloatType.Text = "Types.Float";
             // 
             // lblUlongType
             // 
@@ -484,7 +521,7 @@ namespace Network_Analyzer
             this.lblUlongType.Name = "lblUlongType";
             this.lblUlongType.Size = new System.Drawing.Size(101, 15);
             this.lblUlongType.TabIndex = 21;
-            this.lblUlongType.Text = "Editor.UlongType";
+            this.lblUlongType.Text = "Types.Ulong";
             // 
             // lblLongType
             // 
@@ -494,7 +531,7 @@ namespace Network_Analyzer
             this.lblLongType.Name = "lblLongType";
             this.lblLongType.Size = new System.Drawing.Size(96, 15);
             this.lblLongType.TabIndex = 20;
-            this.lblLongType.Text = "Editor.LongType";
+            this.lblLongType.Text = "Types.Long";
             // 
             // lblUintType
             // 
@@ -504,7 +541,7 @@ namespace Network_Analyzer
             this.lblUintType.Name = "lblUintType";
             this.lblUintType.Size = new System.Drawing.Size(90, 15);
             this.lblUintType.TabIndex = 19;
-            this.lblUintType.Text = "Editor.UintType";
+            this.lblUintType.Text = "Types.Uint";
             // 
             // lblIntType
             // 
@@ -514,7 +551,7 @@ namespace Network_Analyzer
             this.lblIntType.Name = "lblIntType";
             this.lblIntType.Size = new System.Drawing.Size(81, 15);
             this.lblIntType.TabIndex = 18;
-            this.lblIntType.Text = "Editor.IntType";
+            this.lblIntType.Text = "Types.Int";
             // 
             // lblUshortType
             // 
@@ -524,7 +561,7 @@ namespace Network_Analyzer
             this.lblUshortType.Name = "lblUshortType";
             this.lblUshortType.Size = new System.Drawing.Size(104, 15);
             this.lblUshortType.TabIndex = 17;
-            this.lblUshortType.Text = "Editor.UshortType";
+            this.lblUshortType.Text = "Types.Ushort";
             // 
             // lblShortType
             // 
@@ -534,7 +571,7 @@ namespace Network_Analyzer
             this.lblShortType.Name = "lblShortType";
             this.lblShortType.Size = new System.Drawing.Size(97, 15);
             this.lblShortType.TabIndex = 16;
-            this.lblShortType.Text = "Editor.ShortType";
+            this.lblShortType.Text = "Types.Short";
             // 
             // lblSbyteType
             // 
@@ -544,7 +581,7 @@ namespace Network_Analyzer
             this.lblSbyteType.Name = "lblSbyteType";
             this.lblSbyteType.Size = new System.Drawing.Size(98, 15);
             this.lblSbyteType.TabIndex = 15;
-            this.lblSbyteType.Text = "Editor.SbyteType";
+            this.lblSbyteType.Text = "Types.Sbyte";
             // 
             // lblByteType
             // 
@@ -554,7 +591,7 @@ namespace Network_Analyzer
             this.lblByteType.Name = "lblByteType";
             this.lblByteType.Size = new System.Drawing.Size(91, 15);
             this.lblByteType.TabIndex = 14;
-            this.lblByteType.Text = "Editor.ByteType";
+            this.lblByteType.Text = "Types.Byte";
             // 
             // cbSequenceType
             // 
@@ -567,7 +604,7 @@ namespace Network_Analyzer
             this.cbSequenceType.Name = "cbSequenceType";
             this.cbSequenceType.Size = new System.Drawing.Size(330, 21);
             this.cbSequenceType.TabIndex = 39;
-            this.cbSequenceType.SelectedIndexChanged += new System.EventHandler(this.CbSequenceType_SelectedIndexChanged_1);
+            this.cbSequenceType.SelectedIndexChanged += new System.EventHandler(this.CbSequenceType_SelectedIndexChanged);
             // 
             // gbGeneralInformation
             // 
@@ -768,6 +805,7 @@ namespace Network_Analyzer
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
+            this.MaximizeBox = false;
             this.Name = "Editor";
             this.Text = "Editor.Text";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Editor_FormClosing);
@@ -855,5 +893,9 @@ namespace Network_Analyzer
 		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationName;
 		private System.Windows.Forms.Button btnDeleteFieldConfiguration;
 		private System.Windows.Forms.Button btnAddFieldConfiguration;
-	}
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createConfigurationToolStripMenuItem;
+    }
 }

@@ -369,7 +369,7 @@
   <data name="Editor.NotDecrypted" xml:space="preserve">
     <value>Не расшифровано</value>
   </data>
-  <data name="Editor.ByteType" xml:space="preserve">
+  <data name="Types.Byte" xml:space="preserve">
     <value>Byte</value>
   </data>
   <data name="Editor.DataTypes" xml:space="preserve">
@@ -384,7 +384,7 @@
   <data name="Editor.DecryptorUnloadedSuccessfully" xml:space="preserve">
     <value>Декриптор успешно выгружен</value>
   </data>
-  <data name="Editor.DoubleType" xml:space="preserve">
+  <data name="Types.Double" xml:space="preserve">
     <value>Double</value>
   </data>
   <data name="Editor.EncodingAscii" xml:space="preserve">
@@ -414,7 +414,7 @@
   <data name="Editor.ErrorsValidation" xml:space="preserve">
     <value>Ошибки при валидации</value>
   </data>
-  <data name="Editor.FloatType" xml:space="preserve">
+  <data name="Types.Float" xml:space="preserve">
     <value>Float</value>
   </data>
   <data name="Editor.GeneralInformation" xml:space="preserve">
@@ -423,7 +423,7 @@
   <data name="Editor.HexEditorEncoding" xml:space="preserve">
     <value>Кодировка</value>
   </data>
-  <data name="Editor.IntType" xml:space="preserve">
+  <data name="Types.Int" xml:space="preserve">
     <value>Int</value>
   </data>
   <data name="Editor.LengthPacket" xml:space="preserve">
@@ -432,13 +432,13 @@
   <data name="Editor.LoadDecryptor" xml:space="preserve">
     <value>Загрузить декриптор</value>
   </data>
-  <data name="Editor.LongType" xml:space="preserve">
+  <data name="Types.Long" xml:space="preserve">
     <value>Long</value>
   </data>
   <data name="Editor.PacketInformation" xml:space="preserve">
     <value>Информация</value>
   </data>
-  <data name="Editor.SbyteType" xml:space="preserve">
+  <data name="Types.Sbyte" xml:space="preserve">
     <value>Sbyte</value>
   </data>
   <data name="Editor.SearchBytes" xml:space="preserve">
@@ -465,19 +465,19 @@
   <data name="Editor.SelectedLength" xml:space="preserve">
     <value>Выбрано байт</value>
   </data>
-  <data name="Editor.ShortType" xml:space="preserve">
+  <data name="Types.Short" xml:space="preserve">
     <value>Short</value>
   </data>
-  <data name="Editor.UintType" xml:space="preserve">
+  <data name="Types.Uint" xml:space="preserve">
     <value>Uint</value>
   </data>
-  <data name="Editor.UlongType" xml:space="preserve">
+  <data name="Types.Ulong" xml:space="preserve">
     <value>Ulong</value>
   </data>
   <data name="Editor.UnloadDecryptor" xml:space="preserve">
     <value>Выгрузить декриптор</value>
   </data>
-  <data name="Editor.UshortType" xml:space="preserve">
+  <data name="Types.Ushort" xml:space="preserve">
     <value>Ushort</value>
   </data>
   <data name="Editor.AddFieldConfiguration" xml:space="preserve">
@@ -518,5 +518,50 @@
   </data>
   <data name="ConfigurationField.Text" xml:space="preserve">
     <value>Конфигурация поля</value>
+  </data>
+  <data name="ConfigurationField.Description" xml:space="preserve">
+    <value>Описание переменной</value>
+  </data>
+  <data name="ConfigurationField.Length" xml:space="preserve">
+    <value>Длина</value>
+  </data>
+  <data name="ConfigurationField.Name" xml:space="preserve">
+    <value>Название переменной</value>
+  </data>
+  <data name="ConfigurationField.StartIndex" xml:space="preserve">
+    <value>Начальный индекс</value>
+  </data>
+  <data name="ConfigurationField.Type" xml:space="preserve">
+    <value>Тип переменной</value>
+  </data>
+  <data name="Editor.CreateConfiguration" xml:space="preserve">
+    <value>Создать конфигурацию</value>
+  </data>
+  <data name="Editor.LoadConfiguration" xml:space="preserve">
+    <value>Загрузить конфигурацию</value>
+  </data>
+  <data name="Editor.SaveConfiguration" xml:space="preserve">
+    <value>Сохранить конфигурацию</value>
+  </data>
+  <data name="Types.String" xml:space="preserve">
+    <value>String</value>
+  </data>
+  <data name="ConfigurationField.LoadedSuccessfully" xml:space="preserve">
+    <value>Редактирование поля успешно загружено</value>
+  </data>
+  <data name="ConfigurationField.SequenceType" xml:space="preserve">
+    <value>Порядок байтов</value>
+  </data>
+  <data name="ConfigurationField.Value" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="Editor.ErrorsSelectDecryptedPackages" xml:space="preserve">
+    <value>Выберите расшифровынные пакеты</value>
+  </data>
+  <data name="Editor.ErrorsStartIndex" xml:space="preserve">
+    <value>Ошибки в начальном индексе</value>
+  </data>
+  <data name="Editor.LoadedSuccessfully" xml:space="preserve">
+    <value>Редактор успешно загружен</value>
   </data>
 </root>
