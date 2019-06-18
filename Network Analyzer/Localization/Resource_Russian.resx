@@ -564,4 +564,13 @@
   <data name="Editor.LoadedSuccessfully" xml:space="preserve">
     <value>Редактор успешно загружен</value>
   </data>
+  <data name="Editor.ConfigurationCreateSuccessfully" xml:space="preserve">
+    <value>Конфигурация успешно создана</value>
+  </data>
+  <data name="Editor.ConfigurationLoadedSuccessfully" xml:space="preserve">
+    <value>Конфигурация успешно загружена</value>
+  </data>
+  <data name="Editor.ErrorLoadingDecryptor" xml:space="preserve">
+    <value>Вы не загрузили декриптор</value>
+  </data>
 </root>

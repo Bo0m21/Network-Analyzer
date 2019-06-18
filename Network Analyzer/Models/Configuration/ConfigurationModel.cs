@@ -7,6 +7,11 @@ namespace Network_Analyzer.Models.Configuration
     /// </summary>
     public class ConfigurationModel
     {
+        public ConfigurationModel()
+        {
+            ConfigurationFields = new List<ConfigurationFieldModel>();
+        }
+
         /// <summary>
         ///     Configuration name
         /// </summary>

@@ -28,6 +28,8 @@ namespace Network_Analyzer
         private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
         private System.Windows.Forms.Timer m_TimerDecryptPacketsUpdate;
 
+        private ConfigurationField m_ConfigurationField;
+
         private ConnectionModel m_ConnectionModel;
         private ConfigurationModel m_ConfigurationModel;
 
@@ -61,7 +63,7 @@ namespace Network_Analyzer
             m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
             m_TimerDataGridViewUpdate.Tick += timerDataGridViewUpdate_Tick;
 
-            //((Control)tpConfiguration).Enabled = false;
+            ((Control)tpConfiguration).Enabled = false;
 
             DataGridViewUpdate();
 
@@ -129,20 +131,37 @@ namespace Network_Analyzer
 
         private void LoadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (m_Decryptor == null)
+            {
+                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingDecryptor");
+                return;
+            }
+
+            m_ConfigurationModel = new ConfigurationModel();
+            ((Control)tpConfiguration).Enabled = true;
+
             // TODO
-            MessageBox.Show("TODO");
+
+            lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationLoadedSuccessfully");
         }
 
         private void SaveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO
-            MessageBox.Show("TODO");
         }
 
         private void CreateConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO
-            MessageBox.Show("TODO");
+            if (m_Decryptor == null)
+            {
+                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingDecryptor");
+                return;
+            }
+
+            m_ConfigurationModel = new ConfigurationModel();
+            ((Control)tpConfiguration).Enabled = true;
+
+            lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationCreateSuccessfully");
         }
 
         #endregion
@@ -151,6 +170,11 @@ namespace Network_Analyzer
 
         private void CbTypeEncryptionPackets_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (m_ConfigurationField != null && !m_ConfigurationField.IsDisposed)
+            {
+                m_ConfigurationField.Close();
+            }
+
             if (cbTypeEncryptionPackets.SelectedIndex == 0)
             {
                 m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
@@ -160,6 +184,8 @@ namespace Network_Analyzer
                 if (m_Decryptor == null)
                 {
                     cbTypeEncryptionPackets.SelectedIndex = 0;
+
+                    lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingDecryptor");
                     return;
                 }
 
@@ -167,10 +193,21 @@ namespace Network_Analyzer
             }
 
             DataGridViewUpdate();
+
+            if (dgvPackets.Rows.Count != 0)
+            {
+                var idPacket = (long)dgvPackets.Rows[0].Cells["Id"].Value;
+                PrepareDataForLoadPacketForView(idPacket);
+            }
         }
 
         private void CbTypePackets_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (m_ConfigurationField != null && !m_ConfigurationField.IsDisposed)
+            {
+                m_ConfigurationField.Close();
+            }
+
             if (cbTypePackets.SelectedIndex == 0)
             {
                 m_SelectedPacketType = SelectedPacketType.AllPackets;
@@ -185,6 +222,12 @@ namespace Network_Analyzer
             }
 
             DataGridViewUpdate();
+
+            if (dgvPackets.Rows.Count != 0)
+            {
+                var idPacket = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+                PrepareDataForLoadPacketForView(idPacket);
+            }
         }
 
         private void DgvPackets_SelectionChanged(object sender, EventArgs e)
@@ -194,31 +237,18 @@ namespace Network_Analyzer
                 cbAutoScroll.Checked = false;
             }
 
+            if (m_ConfigurationField != null && !m_ConfigurationField.IsDisposed)
+            {
+                m_ConfigurationField.Close();
+            }
+
             if (dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value == null)
             {
                 return;
             }
 
             var idPacket = (long) dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
-
-            if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
-            {
-                var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket);
-
-                if (packet != null && packet.Data != null)
-                {
-                    LoadPacketForView(packet?.Data);
-                }
-            }
-            else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
-            {
-                var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
-
-                if (packet != null && packet.Data != null)
-                {
-                    LoadPacketForView(packet?.Data);
-                }
-            }
+            PrepareDataForLoadPacketForView(idPacket);
         }
 
         private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
@@ -384,10 +414,15 @@ namespace Network_Analyzer
                 return;
             }
 
-            using (var configurationField = new ConfigurationField(packet, hbHexEditor.SelectionStart))
+            if (m_ConfigurationField == null || m_ConfigurationField.IsDisposed)
             {
-                configurationField.ShowDialog();
+                m_ConfigurationField = new ConfigurationField(packet);
             }
+
+            m_ConfigurationField.SetSettings(hbHexEditor.SelectionStart);
+
+            m_ConfigurationField.Hide();
+            m_ConfigurationField.Show();
         }
 
         private void BtnDeleteFieldConfiguration_Click(object sender, EventArgs e)
@@ -602,6 +637,28 @@ namespace Network_Analyzer
             finally
             {
                 Monitor.Exit(m_TimerDataGridViewUpdateLock);
+            }
+        }
+
+        private void PrepareDataForLoadPacketForView(long idPacket)
+        {
+            if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
+            {
+                var packet = m_ConnectionModel.ConnectionPackets.FirstOrDefault(p => p.Id == idPacket);
+
+                if (packet != null && packet.Data != null)
+                {
+                    LoadPacketForView(packet?.Data);
+                }
+            }
+            else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
+            {
+                var packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
+
+                if (packet != null && packet.Data != null)
+                {
+                    LoadPacketForView(packet?.Data);
+                }
             }
         }
 

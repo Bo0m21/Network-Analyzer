@@ -8,29 +8,34 @@ namespace Network_Analyzer
 {
     public partial class ConfigurationField : Form
     {
-        private readonly ConnectionPacketModel m_PacketModel;
-        private readonly long m_StartIndex;
+        private ConnectionPacketModel m_PacketModel;
+        private long m_StartIndex;
 
-        public ConfigurationField(ConnectionPacketModel packet, long startIndex)
+        public ConfigurationField(ConnectionPacketModel packet)
         {
             InitializeComponent();
             Localizer.LocalizeForm(this);
 
             m_PacketModel = packet;
-            m_StartIndex = startIndex;
         }
 
         private void ConfigurationField_Load(object sender, EventArgs e)
         {
-            if (m_StartIndex != -1)
-            {
-                tbStartIndex.Text = m_StartIndex.ToString();
-            }
-
             cbSequenceType.SelectedIndex = 0;
             cbType.SelectedIndex = 0;
 
             lblInformation.Text = Localizer.LocalizeString("ConfigurationField.LoadedSuccessfully");
+        }
+
+        // TODO переделать
+        public void SetSettings(long startIndex = -1)
+        {
+            if (startIndex != -1)
+            {
+                // TODO переделать
+                m_StartIndex = startIndex;
+                tbStartIndex.Text = startIndex.ToString();
+            }
         }
 
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)

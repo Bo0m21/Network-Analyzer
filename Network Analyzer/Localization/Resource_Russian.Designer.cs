@@ -232,6 +232,24 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Конфигурация успешно создана.
+        /// </summary>
+        internal static string Editor_ConfigurationCreateSuccessfully {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationCreateSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Конфигурация успешно загружена.
+        /// </summary>
+        internal static string Editor_ConfigurationLoadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationLoadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Название.
         /// </summary>
         internal static string Editor_ConfigurationName {
@@ -372,6 +390,15 @@ namespace Network_Analyzer.Localization {
         internal static string Editor_Error {
             get {
                 return ResourceManager.GetString("Editor.Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не загрузили декриптор.
+        /// </summary>
+        internal static string Editor_ErrorLoadingDecryptor {
+            get {
+                return ResourceManager.GetString("Editor.ErrorLoadingDecryptor", resourceCulture);
             }
         }
         
