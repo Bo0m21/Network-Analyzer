@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Models;
 using Network_Analyzer.Services;
 
 namespace Network_Analyzer

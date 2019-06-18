@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using Network_Analyzer.Extensions;
-using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Models;
 
 namespace Network_Analyzer.Services
 {

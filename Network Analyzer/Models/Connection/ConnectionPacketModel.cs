@@ -1,11 +1,9 @@
-﻿using Network_Analyzer.Models.Enums;
-
-namespace Network_Analyzer.Models
+﻿namespace Network_Analyzer.Models.Connection
 {
 	/// <summary>
-	///     This base class packet
+	///     This base class connection packet
 	/// </summary>
-	public class PacketModel
+	public class ConnectionPacketModel
 	{
 		/// <summary>
 		///     Identity packet
@@ -20,7 +18,7 @@ namespace Network_Analyzer.Models
 		/// <summary>
 		///     Type packet connection
 		/// </summary>
-		public PacketType Type { get; set; }
+		public ConnectionPacketType Type { get; set; }
 
 		/// <summary>
 		///     Flag if this is packet was decrypted

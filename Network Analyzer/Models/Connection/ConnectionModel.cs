@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Network_Analyzer.Models
+namespace Network_Analyzer.Models.Connection
 {
 	/// <summary>
 	///     This class has information and packets for connection
@@ -9,8 +9,8 @@ namespace Network_Analyzer.Models
 	{
 		public ConnectionModel()
 		{
-			ConnectionPackets = new List<PacketModel>();
-			DecryptedPackets = new List<PacketModel>();
+			ConnectionPackets = new List<ConnectionPacketModel>();
+			DecryptedPackets = new List<ConnectionPacketModel>();
 		}
 
 		/// <summary>
@@ -51,11 +51,11 @@ namespace Network_Analyzer.Models
 		/// <summary>
 		///     Gets the packets in the connection.
 		/// </summary>
-		public List<PacketModel> ConnectionPackets { get; set; }
+		public List<ConnectionPacketModel> ConnectionPackets { get; set; }
 
 		/// <summary>
 		///     Gets the decrypted packets in the connection
 		/// </summary>
-		public List<PacketModel> DecryptedPackets { get; set; }
+		public List<ConnectionPacketModel> DecryptedPackets { get; set; }
 	}
 }

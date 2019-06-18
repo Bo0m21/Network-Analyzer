@@ -2,7 +2,7 @@ using System;
 using System.Net.Sockets;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models;
-using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Models.Connection;
 using Network_Analyzer.Network.Data;
 
 namespace Network_Analyzer.Network.Listeners.Clients
@@ -181,11 +181,11 @@ namespace Network_Analyzer.Network.Listeners.Clients
 				{
 					var packetId = Connections.GetNewPacketId(Id);
 
-					var packet = new PacketModel
+					var packet = new ConnectionPacketModel
 					{
 						Id = packetId,
 						Data = Buffer.ResizeByteArray(countReturn),
-						Type = PacketType.ClientToServer
+						Type = ConnectionPacketType.ClientToServer
 					};
 
 					Connections.AddConnectionPacket(Id, packet);
@@ -244,11 +244,11 @@ namespace Network_Analyzer.Network.Listeners.Clients
 				{
 					var packetId = Connections.GetNewPacketId(Id);
 
-					var packet = new PacketModel
+					var packet = new ConnectionPacketModel
 					{
 						Id = packetId,
 						Data = RemoteBuffer.ResizeByteArray(countReturn),
-						Type = PacketType.ServerToClient
+						Type = ConnectionPacketType.ServerToClient
 					};
 
 					Connections.AddConnectionPacket(Id, packet);

@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Models.Enums
+﻿namespace Network_Analyzer.Models
 {
 	/// <summary>
 	///     Listing all available languages

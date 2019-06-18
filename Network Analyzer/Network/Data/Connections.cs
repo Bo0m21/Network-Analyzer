@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Network_Analyzer.Models;
-using Network_Analyzer.Models.Enums;
+using Network_Analyzer.Models.Connection;
 
 namespace Network_Analyzer.Network.Data
 {
@@ -102,26 +102,26 @@ namespace Network_Analyzer.Network.Data
 			}
 		}
 
-		/// <summary>
-		///     Add new packet for connection
-		/// </summary>
-		/// <param name="id">Id connection</param>
-		/// <param name="newPacket">New packet</param>
-		public static void AddConnectionPacket(long id, PacketModel newPacket)
+        /// <summary>
+        ///     Add new connection packet for connection
+        /// </summary>
+        /// <param name="id">Id connection</param>
+        /// <param name="newConnectionPacket">New connection packet</param>
+        public static void AddConnectionPacket(long id, ConnectionPacketModel newConnectionPacket)
 		{
 			var connection = _connections.FirstOrDefault(c => c.Id == id);
 
 			if (connection != null)
 			{
-				connection.ConnectionPackets.Add(newPacket);
+				connection.ConnectionPackets.Add(newConnectionPacket);
 
-				if (newPacket.Type == PacketType.ClientToServer)
+				if (newConnectionPacket.Type == ConnectionPacketType.ClientToServer)
 				{
-					connection.Send += newPacket.Data.Length;
+					connection.Send += newConnectionPacket.Data.Length;
 				}
-				else if (newPacket.Type == PacketType.ServerToClient)
+				else if (newConnectionPacket.Type == ConnectionPacketType.ServerToClient)
 				{
-					connection.Received += newPacket.Data.Length;
+					connection.Received += newConnectionPacket.Data.Length;
 				}
 
 				// TODO: Сделать ивент по приходу новых пакетов

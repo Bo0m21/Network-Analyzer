@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Models.Enums
+﻿namespace Network_Analyzer.Models.SelectedPacket
 {
 	/// <summary>
 	///     Selected encryption type packet connection
