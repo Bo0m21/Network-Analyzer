@@ -27,7 +27,7 @@ namespace Network_Analyzer
             lblInformation.Text = Localizer.LocalizeString("ConfigurationField.LoadedSuccessfully");
         }
 
-        // TODO переделать
+        // TODO переделать и так же переделать выбор из информации
         public void SetSettings(long startIndex = -1)
         {
             if (startIndex != -1)
