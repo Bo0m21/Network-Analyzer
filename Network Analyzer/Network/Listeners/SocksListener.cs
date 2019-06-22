@@ -66,10 +66,10 @@ namespace Network_Analyzer.Network.Listeners
         {
             try
             {
-                var socket = ListenSocket.EndAccept(ar);
+                System.Net.Sockets.Socket socket = ListenSocket.EndAccept(ar);
                 if (socket != null)
                 {
-                    var client = new SocksClient(socket, RemoveClient, AuthList);
+                    SocksClient client = new SocksClient(socket, RemoveClient, AuthList);
                     AddClient(client);
 
                     client.StartHandshake();

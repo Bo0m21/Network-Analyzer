@@ -140,7 +140,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
                 {
                     Id = Connections.GetNewConnectionId();
 
-                    var connection = new ConnectionModel
+                    ConnectionModel connection = new ConnectionModel
                     {
                         Id = Id,
                         SourceAddress = DestinationSocket.LocalEndPoint.ToString(),
@@ -169,7 +169,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
         {
             try
             {
-                var countReturn = ClientSocket.EndReceive(ar);
+                int countReturn = ClientSocket.EndReceive(ar);
                 if (countReturn <= 0)
                 {
                     Dispose();
@@ -178,9 +178,9 @@ namespace Network_Analyzer.Network.Listeners.Clients
 
                 lock (_syncLock)
                 {
-                    var packetId = Connections.GetNewPacketId(Id);
+                    long packetId = Connections.GetNewPacketId(Id);
 
-                    var packet = new ConnectionPacketModel
+                    ConnectionPacketModel packet = new ConnectionPacketModel
                     {
                         Id = packetId,
                         Data = Buffer.ResizeByteArray(countReturn),
@@ -207,7 +207,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
         {
             try
             {
-                var countReturn = DestinationSocket.EndSend(ar);
+                int countReturn = DestinationSocket.EndSend(ar);
                 if (countReturn > 0)
                 {
                     ClientSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, OnClientReceive,
@@ -232,7 +232,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
         {
             try
             {
-                var countReturn = DestinationSocket.EndReceive(ar);
+                int countReturn = DestinationSocket.EndReceive(ar);
                 if (countReturn <= 0)
                 {
                     Dispose();
@@ -241,9 +241,9 @@ namespace Network_Analyzer.Network.Listeners.Clients
 
                 lock (_syncLock)
                 {
-                    var packetId = Connections.GetNewPacketId(Id);
+                    long packetId = Connections.GetNewPacketId(Id);
 
-                    var packet = new ConnectionPacketModel
+                    ConnectionPacketModel packet = new ConnectionPacketModel
                     {
                         Id = packetId,
                         Data = RemoteBuffer.ResizeByteArray(countReturn),
@@ -270,7 +270,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
         {
             try
             {
-                var countReturn = ClientSocket.EndSend(ar);
+                int countReturn = ClientSocket.EndSend(ar);
                 if (countReturn > 0)
                 {
                     DestinationSocket.BeginReceive(RemoteBuffer, 0, RemoteBuffer.Length, SocketFlags.None,

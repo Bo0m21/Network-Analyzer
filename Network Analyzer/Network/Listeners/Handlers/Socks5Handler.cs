@@ -71,7 +71,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
             try
             {
                 byte countReturn = 255;
-                for (var Cnt = 1; Cnt < request.Length; Cnt++)
+                for (int Cnt = 1; Cnt < request.Length; Cnt++)
                     if (request[Cnt] == 0 && AuthList == null)
                     {
                         //0 = No authentication
@@ -144,7 +144,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
         {
             try
             {
-                var Ret = Connection.EndReceive(ar);
+                int Ret = Connection.EndReceive(ar);
                 if (Ret <= 0)
                 {
                     Dispose(false);
@@ -201,7 +201,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                 {
                     case 1: //CONNECT
                         IPAddress RemoteIp = null;
-                        var RemotePort = 0;
+                        int RemotePort = 0;
                         if (query[3] == 1)
                         {
                             RemoteIp = IPAddress.Parse(query[4] + "." + query[5] + "." + query[6] + "." + query[7]);
@@ -219,8 +219,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                             RemoteConnection);
                         break;
                     case 2: //BIND
-                        var Reply = new byte[10];
-                        var LocalIp = Listener.GetLocalExternalIp().Address;
+                        byte[] Reply = new byte[10];
+                        long LocalIp = Listener.GetLocalExternalIp().Address;
                         AcceptSocket = new Socket(IPAddress.Any.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                         AcceptSocket.Bind(new IPEndPoint(IPAddress.Any, 0));
                         AcceptSocket.Listen(50);

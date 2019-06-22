@@ -34,7 +34,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                     if (request[3] == 0 && request[4] == 0 && request[5] == 0 && request[6] != 0)
                     {
                         //Use remote DNS
-                        var countReturn = Array.IndexOf(request, (byte) 0, 7);
+                        int countReturn = Array.IndexOf(request, (byte) 0, 7);
                         if (countReturn > -1)
                             return Array.IndexOf(request, (byte) 0, countReturn + 1) != -1;
                     }
@@ -62,8 +62,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                 {
                     // CONNECT
                     IPAddress RemoteIp;
-                    var RemotePort = request[1] * 256 + request[2];
-                    var countReturn = Array.IndexOf(request, (byte) 0, 7);
+                    int RemotePort = request[1] * 256 + request[2];
+                    int countReturn = Array.IndexOf(request, (byte) 0, 7);
                     Username = Encoding.ASCII.GetString(request, 7, countReturn - 7);
                     if (request[3] == 0 && request[4] == 0 && request[5] == 0 && request[6] != 0)
                     {
@@ -86,8 +86,8 @@ namespace Network_Analyzer.Network.Listeners.Handlers
                 else if (request[0] == 2)
                 {
                     // BIND
-                    var Reply = new byte[8];
-                    var LocalIp = Listener.GetLocalExternalIp().Address;
+                    byte[] Reply = new byte[8];
+                    long LocalIp = Listener.GetLocalExternalIp().Address;
                     AcceptSocket = new Socket(IPAddress.Any.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                     AcceptSocket.Bind(new IPEndPoint(IPAddress.Any, 0));
                     AcceptSocket.Listen(50);

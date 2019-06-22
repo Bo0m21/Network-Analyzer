@@ -44,7 +44,7 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             try
             {
-                var countReturn = Connection.EndReceive(ar);
+                int countReturn = Connection.EndReceive(ar);
                 if (countReturn <= 0)
                 {
                     Callback(false);
@@ -85,8 +85,8 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             try
             {
-                var User = Encoding.ASCII.GetString(query, 2, query[1]);
-                var Pass = Encoding.ASCII.GetString(query, query[1] + 3, query[query[1] + 2]);
+                string User = Encoding.ASCII.GetString(query, 2, query[1]);
+                string Pass = Encoding.ASCII.GetString(query, query[1] + 3, query[query[1] + 2]);
 
                 if (AuthList == null || AuthList.IsItemPresent(User, Pass))
                 {

@@ -21,10 +21,10 @@ namespace Network_Analyzer.Services
         /// <param name="delimeter"></param>
         public static void LoadLocalizer(string languagePrefix, string resourseBase, string delimeter = "_")
         {
-            var fullResourseName = resourseBase;
-            var assembly = Assembly.GetExecutingAssembly();
+            string fullResourseName = resourseBase;
+            Assembly assembly = Assembly.GetExecutingAssembly();
 
-            var resList = assembly.GetManifestResourceNames().ToList();
+            List<string> resList = assembly.GetManifestResourceNames().ToList();
 
             if (resList.Count(x => x.Equals(fullResourseName + delimeter + languagePrefix + ".resources")) == 1)
             {
@@ -73,11 +73,11 @@ namespace Network_Analyzer.Services
         /// <returns></returns>
         public static void LocalizeForm(Form form)
         {
-            var controls = GetAllControls(form.Controls);
+            List<Control> controls = GetAllControls(form.Controls);
 
             form.Text = LocalizeString(form.Text);
 
-            foreach (var control in controls)
+            foreach (Control control in controls)
             {
                 control.Text = LocalizeString(control.Text);
 
@@ -91,7 +91,7 @@ namespace Network_Analyzer.Services
 
                 if (control is MenuStrip)
                 {
-                    var toolStripItems = GetAllMenuItems(((MenuStrip) control).Items);
+                    List<ToolStripMenuItem> toolStripItems = GetAllMenuItems(((MenuStrip) control).Items);
 
                     foreach (ToolStripItem toolStripItem in toolStripItems)
                     {
@@ -101,7 +101,7 @@ namespace Network_Analyzer.Services
 
                 if (control is ComboBox)
                 {
-                    for (var i = 0; i < ((ComboBox) control).Items.Count; i++)
+                    for (int i = 0; i < ((ComboBox) control).Items.Count; i++)
                     {
                         if (((ComboBox) control).Items[i] is string)
                         {
@@ -119,7 +119,7 @@ namespace Network_Analyzer.Services
         /// <returns></returns>
         private static List<Control> GetAllControls(Control.ControlCollection controlCollection)
         {
-            var list = new List<Control>();
+            List<Control> list = new List<Control>();
 
             foreach (Control control in controlCollection)
             {
@@ -137,7 +137,7 @@ namespace Network_Analyzer.Services
         /// <returns></returns>
         private static List<ToolStripMenuItem> GetAllMenuItems(ToolStripItemCollection toolStripItemCollection)
         {
-            var list = new List<ToolStripMenuItem>();
+            List<ToolStripMenuItem> list = new List<ToolStripMenuItem>();
 
             foreach (ToolStripMenuItem toolStripMenuItem in toolStripItemCollection)
             {

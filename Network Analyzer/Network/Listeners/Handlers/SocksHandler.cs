@@ -116,7 +116,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
         {
             try
             {
-                var countReturn = Connection.EndReceive(ar);
+                int countReturn = Connection.EndReceive(ar);
                 if (countReturn <= 0)
                     Dispose(false);
                 AddBytes(Buffer, countReturn);
@@ -180,7 +180,7 @@ namespace Network_Analyzer.Network.Listeners.Handlers
             }
             else
             {
-                var tmp = Bytes;
+                byte[] tmp = Bytes;
                 Bytes = new byte[Bytes.Length + cnt];
                 Array.Copy(tmp, 0, Bytes, 0, tmp.Length);
             }

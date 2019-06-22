@@ -35,8 +35,8 @@
             this.cbSequenceType = new System.Windows.Forms.ComboBox();
             this.cbLength = new System.Windows.Forms.ComboBox();
             this.lblLength = new System.Windows.Forms.Label();
-            this.lblStartIndex = new System.Windows.Forms.Label();
-            this.tbStartIndex = new System.Windows.Forms.TextBox();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.tbPosition = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
             this.lblType = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -56,8 +56,8 @@
             this.gbGeleral.Controls.Add(this.cbSequenceType);
             this.gbGeleral.Controls.Add(this.cbLength);
             this.gbGeleral.Controls.Add(this.lblLength);
-            this.gbGeleral.Controls.Add(this.lblStartIndex);
-            this.gbGeleral.Controls.Add(this.tbStartIndex);
+            this.gbGeleral.Controls.Add(this.lblPosition);
+            this.gbGeleral.Controls.Add(this.tbPosition);
             this.gbGeleral.Controls.Add(this.cbType);
             this.gbGeleral.Controls.Add(this.lblType);
             this.gbGeleral.Controls.Add(this.lblDescription);
@@ -96,8 +96,8 @@
             this.cbSequenceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSequenceType.FormattingEnabled = true;
             this.cbSequenceType.Items.AddRange(new object[] {
-            "Little endian",
-            "Big endian"});
+            "SequenceTypes.LittleEndian",
+            "SequenceTypes.BigEndian"});
             this.cbSequenceType.Location = new System.Drawing.Point(6, 116);
             this.cbSequenceType.Name = "cbSequenceType";
             this.cbSequenceType.Size = new System.Drawing.Size(348, 21);
@@ -124,23 +124,23 @@
             this.lblLength.TabIndex = 30;
             this.lblLength.Text = "ConfigurationField.Length";
             // 
-            // lblStartIndex
+            // lblPosition
             // 
-            this.lblStartIndex.AutoSize = true;
-            this.lblStartIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblStartIndex.Location = new System.Drawing.Point(6, 182);
-            this.lblStartIndex.Name = "lblStartIndex";
-            this.lblStartIndex.Size = new System.Drawing.Size(165, 15);
-            this.lblStartIndex.TabIndex = 29;
-            this.lblStartIndex.Text = "ConfigurationField.StartIndex";
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPosition.Location = new System.Drawing.Point(6, 182);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(165, 15);
+            this.lblPosition.TabIndex = 29;
+            this.lblPosition.Text = "ConfigurationField.Position";
             // 
-            // tbStartIndex
+            // tbPosition
             // 
-            this.tbStartIndex.Location = new System.Drawing.Point(6, 200);
-            this.tbStartIndex.Name = "tbStartIndex";
-            this.tbStartIndex.Size = new System.Drawing.Size(348, 20);
-            this.tbStartIndex.TabIndex = 28;
-            this.tbStartIndex.TextChanged += new System.EventHandler(this.TbStartIndex_TextChanged);
+            this.tbPosition.Location = new System.Drawing.Point(6, 200);
+            this.tbPosition.Name = "tbPosition";
+            this.tbPosition.Size = new System.Drawing.Size(348, 20);
+            this.tbPosition.TabIndex = 28;
+            this.tbPosition.TextChanged += new System.EventHandler(this.TbPosition_TextChanged);
             // 
             // cbType
             // 
@@ -225,6 +225,7 @@
             this.btnSave.TabIndex = 14;
             this.btnSave.Text = "ConfigurationField.Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnCancel
             // 
@@ -234,6 +235,7 @@
             this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "ConfigurationField.Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // ConfigurationField
             // 
@@ -269,8 +271,8 @@
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label lblType;
-        private System.Windows.Forms.Label lblStartIndex;
-        private System.Windows.Forms.TextBox tbStartIndex;
+        private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.TextBox tbPosition;
         private System.Windows.Forms.ComboBox cbLength;
         private System.Windows.Forms.Label lblLength;
         private System.Windows.Forms.Label lblSequenceType;

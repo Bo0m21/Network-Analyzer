@@ -480,7 +480,7 @@
   <data name="Types.Ushort" xml:space="preserve">
     <value>Ushort</value>
   </data>
-  <data name="Editor.AddFieldConfiguration" xml:space="preserve">
+  <data name="Editor.AddConfigurationField" xml:space="preserve">
     <value>Добавить поле</value>
   </data>
   <data name="Editor.Configuration" xml:space="preserve">
@@ -501,7 +501,7 @@
   <data name="Editor.ConfigurationType" xml:space="preserve">
     <value>Тип</value>
   </data>
-  <data name="Editor.DeleteFieldConfiguration" xml:space="preserve">
+  <data name="Editor.DeleteConfigurationField" xml:space="preserve">
     <value>Удалить поле</value>
   </data>
   <data name="ConfigurationField.Cancel" xml:space="preserve">
@@ -528,8 +528,8 @@
   <data name="ConfigurationField.Name" xml:space="preserve">
     <value>Название переменной</value>
   </data>
-  <data name="ConfigurationField.StartIndex" xml:space="preserve">
-    <value>Начальный индекс</value>
+  <data name="ConfigurationField.Position" xml:space="preserve">
+    <value>Позиция в пакете</value>
   </data>
   <data name="ConfigurationField.Type" xml:space="preserve">
     <value>Тип переменной</value>
@@ -572,5 +572,26 @@
   </data>
   <data name="Editor.ErrorLoadingDecryptor" xml:space="preserve">
     <value>Вы не загрузили декриптор</value>
+  </data>
+  <data name="ConfigurationField.ErrorFieldCannotBeEmpty" xml:space="preserve">
+    <value>Ошибка поле не может быть пустым</value>
+  </data>
+  <data name="ConfigurationField.ErrorsPosition" xml:space="preserve">
+    <value>Ошибки в позиции в пакете</value>
+  </data>
+  <data name="SequenceTypes.BigEndian" xml:space="preserve">
+    <value>Big Endian</value>
+  </data>
+  <data name="SequenceTypes.LittleEndian" xml:space="preserve">
+    <value>Little Endian</value>
+  </data>
+  <data name="Editor.ConfigurationFieldAddedSuccessfully" xml:space="preserve">
+    <value>Поле конфигурации успешно добавлено</value>
+  </data>
+  <data name="Editor.ConfigurationFieldDeletedSuccessfully" xml:space="preserve">
+    <value>Поле конфигурации успешно удалено</value>
+  </data>
+  <data name="Editor.ConfigurationValue" xml:space="preserve">
+    <value>Значение</value>
   </data>
 </root>

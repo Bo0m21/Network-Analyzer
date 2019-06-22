@@ -21,8 +21,8 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             get
             {
-                var keys = Listing.Keys;
-                var ret = new string[keys.Count];
+                System.Collections.ICollection keys = Listing.Keys;
+                string[] ret = new string[keys.Count];
                 keys.CopyTo(ret, 0);
 
                 return ret;
@@ -35,8 +35,8 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             get
             {
-                var values = Listing.Values;
-                var ret = new string[values.Count];
+                System.Collections.ICollection values = Listing.Values;
+                string[] ret = new string[values.Count];
                 values.CopyTo(ret, 0);
 
                 return ret;

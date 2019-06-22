@@ -13,7 +13,7 @@ namespace Network_Analyzer.Extensions
         /// </summary>
         public static byte[] ResizeByteArray(this byte[] byteArray, int length)
         {
-            var newArray = new byte[length];
+            byte[] newArray = new byte[length];
             Array.Copy(byteArray, newArray, length);
 
             return newArray;
@@ -32,9 +32,9 @@ namespace Network_Analyzer.Extensions
                 return new int[0];
             }
 
-            var list = new List<int>();
+            List<int> list = new List<int>();
 
-            for (var i = 0; i < self.Length; i++)
+            for (int i = 0; i < self.Length; i++)
             {
                 if (!IsMatch(self, i, candidate))
                 {
@@ -57,7 +57,7 @@ namespace Network_Analyzer.Extensions
                 return false;
             }
 
-            for (var i = 0; i < candidate.Length; i++)
+            for (int i = 0; i < candidate.Length; i++)
             {
                 if (array[position + i] != candidate[i])
                 {

@@ -56,7 +56,7 @@ namespace Network_Analyzer.Network.Listeners.Authentication
             }
             else
             {
-                var tmp = Bytes;
+                byte[] tmp = Bytes;
                 Bytes = new byte[Bytes.Length + cnt];
                 Array.Copy(tmp, 0, Bytes, 0, tmp.Length);
             }

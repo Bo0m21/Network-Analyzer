@@ -68,7 +68,7 @@ namespace Network_Analyzer.Network.Listeners.Clients
         {
             try
             {
-                var countReturn = ClientSocket.EndReceive(ar);
+                int countReturn = ClientSocket.EndReceive(ar);
                 if (countReturn <= 0)
                 {
                     Dispose();

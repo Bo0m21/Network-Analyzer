@@ -201,8 +201,8 @@ namespace Network_Analyzer.Network.Listeners
         {
             try
             {
-                var he = Dns.Resolve(Dns.GetHostName());
-                for (var Cnt = 0; Cnt < he.AddressList.Length; Cnt++)
+                IPHostEntry he = Dns.Resolve(Dns.GetHostName());
+                for (int Cnt = 0; Cnt < he.AddressList.Length; Cnt++)
                     if (IsRemoteIp(he.AddressList[Cnt]))
                         return he.AddressList[Cnt];
                 return he.AddressList[0];
@@ -218,8 +218,8 @@ namespace Network_Analyzer.Network.Listeners
         /// <returns>True if the specified IP address is a remote address, false otherwise.</returns>
         protected static bool IsRemoteIp(IPAddress ip)
         {
-            var First = (byte) (ip.Address % 256);
-            var Second = (byte) (ip.Address % 65536 / 256);
+            byte First = (byte) (ip.Address % 256);
+            byte Second = (byte) (ip.Address % 65536 / 256);
             //Not 10.x.x.x And Not 172.16.x.x <-> 172.31.x.x And Not 192.168.x.x
             //And Not Any And Not Loopback And Not Broadcast
             return First != 10 &&
@@ -235,8 +235,8 @@ namespace Network_Analyzer.Network.Listeners
         /// <returns>True if the specified IP address is a local address, false otherwise.</returns>
         protected static bool IsLocalIp(IPAddress ip)
         {
-            var First = (byte) (ip.Address % 256);
-            var Second = (byte) (ip.Address % 65536 / 256);
+            byte First = (byte) (ip.Address % 256);
+            byte Second = (byte) (ip.Address % 65536 / 256);
             //10.x.x.x Or 172.16.x.x <-> 172.31.x.x Or 192.168.x.x
             return First == 10 ||
                    First == 172 && Second >= 16 && Second <= 31 ||
@@ -253,8 +253,8 @@ namespace Network_Analyzer.Network.Listeners
         {
             try
             {
-                var he = Dns.Resolve(Dns.GetHostName());
-                for (var Cnt = 0; Cnt < he.AddressList.Length; Cnt++)
+                IPHostEntry he = Dns.Resolve(Dns.GetHostName());
+                for (int Cnt = 0; Cnt < he.AddressList.Length; Cnt++)
                     if (IsLocalIp(he.AddressList[Cnt]))
                         return he.AddressList[Cnt];
                 return he.AddressList[0];

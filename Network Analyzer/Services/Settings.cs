@@ -83,7 +83,7 @@ namespace Network_Analyzer.Services
         /// </summary>
         public static void SaveSettings()
         {
-            var configuration = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
 
             if (configuration.AppSettings.Settings.AllKeys.Any(k => k == "Language"))
             {

@@ -16,19 +16,19 @@
         public string Description { get; set; }
 
         /// <summary>
-        ///     Field type sequence
-        /// </summary>
-        public bool SequenceType { get; set; }
-
-        /// <summary>
         ///     Field type
         /// </summary>
         public string Type { get; set; }
 
         /// <summary>
-        ///     Start index at data
+        ///     Position at data
         /// </summary>
-        public string StartIndex { get; set; }
+        public long Position { get; set; }
+
+        /// <summary>
+        ///     Field reverse (type sequence)
+        /// </summary>
+        public bool Reverse { get; set; }
 
         /// <summary>
         ///     Length field(for example - string)

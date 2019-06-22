@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Network_Analyzer.Services;
+using System;
 
 namespace Network_Analyzer.Extensions
 {
@@ -9,7 +10,7 @@ namespace Network_Analyzer.Extensions
     {
         public static sbyte ReadSbyte(this byte[] data, int index)
         {
-            return (sbyte) data[index];
+            return (sbyte)data[index];
         }
 
         public static byte ReadByte(this byte[] data, int index)
@@ -19,7 +20,7 @@ namespace Network_Analyzer.Extensions
 
         public static short ReadShort(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(short)];
+            byte[] bytes = new byte[sizeof(short)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -32,7 +33,7 @@ namespace Network_Analyzer.Extensions
 
         public static ushort ReadUshort(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(ushort)];
+            byte[] bytes = new byte[sizeof(ushort)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -45,7 +46,7 @@ namespace Network_Analyzer.Extensions
 
         public static int ReadInt(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(int)];
+            byte[] bytes = new byte[sizeof(int)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -58,7 +59,7 @@ namespace Network_Analyzer.Extensions
 
         public static uint ReadUint(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(uint)];
+            byte[] bytes = new byte[sizeof(uint)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -71,7 +72,7 @@ namespace Network_Analyzer.Extensions
 
         public static float ReadFloat(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(float)];
+            byte[] bytes = new byte[sizeof(float)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -84,7 +85,7 @@ namespace Network_Analyzer.Extensions
 
         public static long ReadLong(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(long)];
+            byte[] bytes = new byte[sizeof(long)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -97,7 +98,7 @@ namespace Network_Analyzer.Extensions
 
         public static ulong ReadUlong(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(ulong)];
+            byte[] bytes = new byte[sizeof(ulong)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -110,7 +111,7 @@ namespace Network_Analyzer.Extensions
 
         public static double ReadDouble(this byte[] data, int index, bool reverse)
         {
-            var bytes = new byte[sizeof(double)];
+            byte[] bytes = new byte[sizeof(double)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
 
             if (reverse)
@@ -119,6 +120,70 @@ namespace Network_Analyzer.Extensions
             }
 
             return BitConverter.ToDouble(bytes, 0);
+        }
+
+        public static string GetValue(this byte[] data, string type, long index, bool reverse)
+        {
+            if (type == Localizer.LocalizeString("Types.Byte"))
+            {
+                return data.ReadByte((int)index).ToString();
+            }
+
+            if (type == Localizer.LocalizeString("Types.Sbyte"))
+            {
+                return data.ReadSbyte((int)index).ToString();
+            }
+
+            if (index + 1 < data.Length)
+            {
+                if (type == Localizer.LocalizeString("Types.Short"))
+                {
+                    return data.ReadShort((int)index, reverse).ToString();
+                }
+
+                if (type == Localizer.LocalizeString("Types.Ushort"))
+                {
+                    return data.ReadUshort((int)index, reverse).ToString();
+                }
+            }
+
+            if (index + 3 < data.Length)
+            {
+                if (type == Localizer.LocalizeString("Types.Int"))
+                {
+                    return data.ReadInt((int)index, reverse).ToString();
+                }
+
+                if (type == Localizer.LocalizeString("Types.Uint"))
+                {
+                    return data.ReadUint((int)index, reverse).ToString();
+                }
+
+                if (type == Localizer.LocalizeString("Types.Float"))
+                {
+                    return data.ReadFloat((int)index, reverse).ToString();
+                }
+            }
+
+            if (index + 7 < data.Length)
+            {
+                if (type == Localizer.LocalizeString("Types.Long"))
+                {
+                    return data.ReadLong((int)index, reverse).ToString();
+                }
+
+                if (type == Localizer.LocalizeString("Types.Ulong"))
+                {
+                    return data.ReadUlong((int)index, reverse).ToString();
+                }
+
+                if (type == Localizer.LocalizeString("Types.Double"))
+                {
+                    return data.ReadDouble((int)index, reverse).ToString();
+                }
+            }
+
+            return "";
         }
     }
 }

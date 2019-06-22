@@ -39,7 +39,7 @@ namespace Network_Analyzer
             m_TimerAutoSaveConnections = new System.Windows.Forms.Timer();
             m_TimerAutoSaveConnections.Tick += TimerAutoSaveConnections_Tick;
 
-            var connections = Connections.GetConnections();
+            List<ConnectionModel> connections = Connections.GetConnections();
             lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
             lblInformation.Text = Localizer.LocalizeString("Main.LoadedSuccessfully");
@@ -168,8 +168,8 @@ namespace Network_Analyzer
 
         private void BtnLoadConnections_Click(object sender, EventArgs e)
         {
-            var fileName = "";
-            using (var openFileDialog = new OpenFileDialog())
+            string fileName = "";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
 
@@ -184,7 +184,7 @@ namespace Network_Analyzer
                 }
             }
 
-            var connectionsJson = File.ReadAllText(fileName);
+            string connectionsJson = File.ReadAllText(fileName);
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -194,7 +194,7 @@ namespace Network_Analyzer
 
             try
             {
-                var connectionsList = JsonConvert.DeserializeObject<List<ConnectionModel>>(connectionsJson);
+                List<ConnectionModel> connectionsList = JsonConvert.DeserializeObject<List<ConnectionModel>>(connectionsJson);
 
                 if (connectionsList == null || connectionsList.Count == 0)
                 {
@@ -225,7 +225,7 @@ namespace Network_Analyzer
 
             try
             {
-                var connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
+                string connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
 
                 if (string.IsNullOrEmpty(connectionsJson))
                 {
@@ -233,7 +233,7 @@ namespace Network_Analyzer
                     return;
                 }
 
-                using (var saveFileDialog = new SaveFileDialog())
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
                     saveFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
 
@@ -294,7 +294,7 @@ namespace Network_Analyzer
 
             try
             {
-                var connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
+                string connectionsJson = JsonConvert.SerializeObject(Connections.GetConnections());
 
                 if (string.IsNullOrEmpty(connectionsJson))
                 {
@@ -371,10 +371,10 @@ namespace Network_Analyzer
 
             try
             {
-                var connections = Connections.GetConnections();
+                List<ConnectionModel> connections = Connections.GetConnections();
                 lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
-                for (var i = 0; i < connections.Count; i++)
+                for (int i = 0; i < connections.Count; i++)
                 {
                     while (dgvConnections.Rows.Count < i + 1)
                     {
@@ -419,15 +419,15 @@ namespace Network_Analyzer
 
         private void OpenEditorForConnection()
         {
-            var index = dgvConnections?.CurrentRow?.Index;
+            int? index = dgvConnections?.CurrentRow?.Index;
 
             if (index.HasValue)
             {
-                var connection = Connections.GetConnectionAtIndex(index.Value);
+                ConnectionModel connection = Connections.GetConnectionAtIndex(index.Value);
 
                 if (connection != null)
                 {
-                    using (var editor = new Editor(connection.Id))
+                    using (Editor editor = new Editor(connection.Id))
                     {
                         Hide();
                         editor.ShowDialog();
@@ -447,7 +447,7 @@ namespace Network_Analyzer
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var settings = new Settings())
+            using (Settings settings = new Settings())
             {
                 settings.ShowDialog();
             }

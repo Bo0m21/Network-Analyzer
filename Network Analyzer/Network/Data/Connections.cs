@@ -30,7 +30,7 @@ namespace Network_Analyzer.Network.Data
         /// <returns>New packet id for connection</returns>
         public static long GetNewPacketId(long connectionId)
         {
-            var connection = GetConnection(connectionId);
+            ConnectionModel connection = GetConnection(connectionId);
             return connection.ConnectionPackets.Count + 1;
         }
 
@@ -74,7 +74,7 @@ namespace Network_Analyzer.Network.Data
         /// <param name="newConnection">New connection</param>
         public static void AddConnection(ConnectionModel newConnection)
         {
-            var connection = _connections.FirstOrDefault(c => c.Id == newConnection.Id);
+            ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == newConnection.Id);
 
             if (connection == null)
             {
@@ -89,9 +89,9 @@ namespace Network_Analyzer.Network.Data
         /// <param name="newConnections">New connections</param>
         public static void AddConnectionList(List<ConnectionModel> newConnections)
         {
-            foreach (var newConnection in newConnections)
+            foreach (ConnectionModel newConnection in newConnections)
             {
-                var connection = _connections.FirstOrDefault(c => c.Id == newConnection.Id);
+                ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == newConnection.Id);
 
                 if (connection == null)
                 {
@@ -108,7 +108,7 @@ namespace Network_Analyzer.Network.Data
         /// <param name="newConnectionPacket">New connection packet</param>
         public static void AddConnectionPacket(long id, ConnectionPacketModel newConnectionPacket)
         {
-            var connection = _connections.FirstOrDefault(c => c.Id == id);
+            ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == id);
 
             if (connection != null)
             {
@@ -134,7 +134,7 @@ namespace Network_Analyzer.Network.Data
         /// <param name="id">Id connection</param>
         public static void DisconnectedConnection(long id)
         {
-            var connection = _connections.FirstOrDefault(c => c.Id == id);
+            ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == id);
 
             if (connection != null)
             {

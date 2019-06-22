@@ -8,49 +8,49 @@ namespace Network_Analyzer.Decryptor.Decryptors
     {
         public List<DecryptorModel> Parse(byte[] data)
         {
-            var packetData = new byte[data.Length];
+            byte[] packetData = new byte[data.Length];
             Array.Copy(data, 0, packetData, 0, packetData.Length);
 
-            var packets = new List<byte[]>();
-            var decryptPackets = new List<byte[]>();
+            List<byte[]> packets = new List<byte[]>();
+            List<byte[]> decryptPackets = new List<byte[]>();
 
             do
             {
-                var destinationArray = new byte[2];
+                byte[] destinationArray = new byte[2];
                 Array.Copy(packetData, 0, destinationArray, 0, destinationArray.Length);
 
-                var lengthPacket = BitConverter.ToInt16(destinationArray, 0);
+                short lengthPacket = BitConverter.ToInt16(destinationArray, 0);
 
                 if (lengthPacket > packetData.Length)
                 {
                     return null;
                 }
 
-                var arr = new byte[lengthPacket];
+                byte[] arr = new byte[lengthPacket];
                 Array.Copy(packetData, 0, arr, 0, arr.Length);
 
                 packets.Add(arr);
                 packetData = packetData.Skip(lengthPacket).ToArray();
             } while (packetData.Length != 0);
 
-            foreach (var packet in packets)
+            foreach (byte[] packet in packets)
             {
-                var newData = CheckingCrypt(packet) ? Cryptographer(GetDataCrypt(packet)) : GetDataCrypt(packet);
+                byte[] newData = CheckingCrypt(packet) ? Cryptographer(GetDataCrypt(packet)) : GetDataCrypt(packet);
 
-                var destinationArray = new byte[3];
+                byte[] destinationArray = new byte[3];
                 Array.Copy(packet, 0, destinationArray, 0, destinationArray.Length);
 
-                var newArray = new byte[destinationArray.Length + newData.Length];
+                byte[] newArray = new byte[destinationArray.Length + newData.Length];
                 Array.Copy(destinationArray, 0, newArray, 0, destinationArray.Length);
                 Array.Copy(newData, 0, newArray, destinationArray.Length, newData.Length);
 
                 decryptPackets.Add(newArray);
             }
 
-            var result = new List<DecryptorModel>();
-            foreach (var decryptPacket in decryptPackets)
+            List<DecryptorModel> result = new List<DecryptorModel>();
+            foreach (byte[] decryptPacket in decryptPackets)
             {
-                var decryptModel = new DecryptorModel();
+                DecryptorModel decryptModel = new DecryptorModel();
                 decryptModel.Opcode = GetOpcode(decryptPacket);
                 decryptModel.Data = decryptPacket;
 
@@ -67,8 +67,8 @@ namespace Network_Analyzer.Decryptor.Decryptors
 
         private static byte[] GetDataCrypt(byte[] data)
         {
-            var buffer = new byte[data.Length - 3];
-            for (var i = 0; i < buffer.Length; i++)
+            byte[] buffer = new byte[data.Length - 3];
+            for (int i = 0; i < buffer.Length; i++)
             {
                 buffer[i] = data[i + 3];
             }
@@ -99,7 +99,7 @@ namespace Network_Analyzer.Decryptor.Decryptors
                 0x75, 0xAA, 0x00, 0x00
             };
 
-            var resultPacket = new byte[packet.Length];
+            byte[] resultPacket = new byte[packet.Length];
             Array.Copy(packet, resultPacket, packet.Length);
 
             byte[] result; // eax
@@ -113,7 +113,7 @@ namespace Network_Analyzer.Decryptor.Decryptors
             v6 = key[1];
             if (resultPacket.Length > 0)
             {
-                for (var i = 0; i < resultPacket.Length; i++)
+                for (int i = 0; i < resultPacket.Length; i++)
                 {
                     pointerKey = (byte) (pointerKey + 1);
                     v7 = key[pointerKey + 2];
@@ -133,10 +133,10 @@ namespace Network_Analyzer.Decryptor.Decryptors
 
         public string GetOpcode(byte[] dataPackage)
         {
-            var destinationArray = new byte[2];
+            byte[] destinationArray = new byte[2];
             Array.Copy(dataPackage, 4, destinationArray, 0, destinationArray.Length);
 
-            var number = BitConverter.ToInt16(destinationArray, 0);
+            short number = BitConverter.ToInt16(destinationArray, 0);
 
             return number.ToString();
         }

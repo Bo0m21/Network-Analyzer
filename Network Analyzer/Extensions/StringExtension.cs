@@ -41,7 +41,7 @@ namespace Network_Analyzer.Extensions
                 return false;
             }
 
-            return IPAddress.TryParse(address, out var parseAddress);
+            return IPAddress.TryParse(address, out IPAddress parseAddress);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Network_Analyzer.Extensions
         /// <returns></returns>
         public static bool ValidatePort(this string port)
         {
-            if (int.TryParse(port, out var parsePort))
+            if (int.TryParse(port, out int parsePort))
             {
                 if (parsePort >= 1 && parsePort <= 65535)
                 {
@@ -71,7 +71,7 @@ namespace Network_Analyzer.Extensions
         {
             try
             {
-                var existDirectory = Directory.Exists(folder);
+                bool existDirectory = Directory.Exists(folder);
 
                 if (!existDirectory)
                 {

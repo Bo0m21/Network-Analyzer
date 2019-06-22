@@ -13,6 +13,11 @@ namespace Network_Analyzer.Models.Configuration
         }
 
         /// <summary>
+        ///     Configuration opcode
+        /// </summary>
+        public string Opcode { get; set; }
+
+        /// <summary>
         ///     Configuration name
         /// </summary>
         public string Name { get; set; }
