@@ -378,6 +378,8 @@ namespace Network_Analyzer
 
         #region Configuration
 
+        // TODO !!! В конфиги отправлять модель пакета конфигураци для того чтобы производить валидацию имени и позиций
+
         private void BtnAddConfigurationField_Click(object sender, EventArgs e)
         {
             long idPacket = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
