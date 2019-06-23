@@ -70,7 +70,9 @@ namespace Network_Analyzer
             this.hbHexEditor = new HexBoxForm.HexBox();
             this.tpPacketInformation = new System.Windows.Forms.TabPage();
             this.gbDataTypes = new System.Windows.Forms.GroupBox();
+            this.lblSequenceType = new System.Windows.Forms.Label();
             this.btnStructureDouble = new System.Windows.Forms.Button();
+            this.cbSequenceType = new System.Windows.Forms.ComboBox();
             this.btnFieldDouble = new System.Windows.Forms.Button();
             this.tbDouble = new System.Windows.Forms.TextBox();
             this.btnStructureUlong = new System.Windows.Forms.Button();
@@ -110,7 +112,6 @@ namespace Network_Analyzer
             this.lblShortType = new System.Windows.Forms.Label();
             this.lblSbyteType = new System.Windows.Forms.Label();
             this.lblByteType = new System.Windows.Forms.Label();
-            this.cbSequenceType = new System.Windows.Forms.ComboBox();
             this.gbGeneralInformation = new System.Windows.Forms.GroupBox();
             this.lblAllPackets = new System.Windows.Forms.Label();
             this.lblSelectedLength = new System.Windows.Forms.Label();
@@ -121,14 +122,14 @@ namespace Network_Analyzer
             this.btnDeleteConfigurationField = new System.Windows.Forms.Button();
             this.btnAddConfigurationField = new System.Windows.Forms.Button();
             this.dgvConfigurationFields = new System.Windows.Forms.DataGridView();
-            this.tbConfigurationPacketDescription = new System.Windows.Forms.TextBox();
-            this.lblConfigurationPacketDescription = new System.Windows.Forms.Label();
-            this.lblConfigurationName = new System.Windows.Forms.Label();
-            this.tbConfigurationPacketName = new System.Windows.Forms.TextBox();
             this.ConfigurationPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfigurationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfigurationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConfigurationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbConfigurationPacketDescription = new System.Windows.Forms.TextBox();
+            this.lblConfigurationPacketDescription = new System.Windows.Forms.Label();
+            this.lblConfigurationName = new System.Windows.Forms.Label();
+            this.tbConfigurationPacketName = new System.Windows.Forms.TextBox();
             this.msMenu.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpPackets.SuspendLayout();
@@ -496,7 +497,6 @@ namespace Network_Analyzer
             // 
             this.tpPacketInformation.BackColor = System.Drawing.SystemColors.Control;
             this.tpPacketInformation.Controls.Add(this.gbDataTypes);
-            this.tpPacketInformation.Controls.Add(this.cbSequenceType);
             this.tpPacketInformation.Controls.Add(this.gbGeneralInformation);
             this.tpPacketInformation.Location = new System.Drawing.Point(4, 22);
             this.tpPacketInformation.Name = "tpPacketInformation";
@@ -507,7 +507,9 @@ namespace Network_Analyzer
             // 
             // gbDataTypes
             // 
+            this.gbDataTypes.Controls.Add(this.lblSequenceType);
             this.gbDataTypes.Controls.Add(this.btnStructureDouble);
+            this.gbDataTypes.Controls.Add(this.cbSequenceType);
             this.gbDataTypes.Controls.Add(this.btnFieldDouble);
             this.gbDataTypes.Controls.Add(this.tbDouble);
             this.gbDataTypes.Controls.Add(this.btnStructureUlong);
@@ -547,25 +549,48 @@ namespace Network_Analyzer
             this.gbDataTypes.Controls.Add(this.lblShortType);
             this.gbDataTypes.Controls.Add(this.lblSbyteType);
             this.gbDataTypes.Controls.Add(this.lblByteType);
-            this.gbDataTypes.Location = new System.Drawing.Point(6, 88);
+            this.gbDataTypes.Location = new System.Drawing.Point(6, 61);
             this.gbDataTypes.Name = "gbDataTypes";
-            this.gbDataTypes.Size = new System.Drawing.Size(330, 280);
+            this.gbDataTypes.Size = new System.Drawing.Size(330, 335);
             this.gbDataTypes.TabIndex = 39;
             this.gbDataTypes.TabStop = false;
             this.gbDataTypes.Text = "Editor.DataTypes";
             // 
+            // lblSequenceType
+            // 
+            this.lblSequenceType.AutoSize = true;
+            this.lblSequenceType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSequenceType.Location = new System.Drawing.Point(6, 20);
+            this.lblSequenceType.Name = "lblSequenceType";
+            this.lblSequenceType.Size = new System.Drawing.Size(124, 15);
+            this.lblSequenceType.TabIndex = 54;
+            this.lblSequenceType.Text = "Editor.SequenceType";
+            // 
             // btnStructureDouble
             // 
-            this.btnStructureDouble.Location = new System.Drawing.Point(288, 251);
+            this.btnStructureDouble.Location = new System.Drawing.Point(288, 307);
             this.btnStructureDouble.Name = "btnStructureDouble";
             this.btnStructureDouble.Size = new System.Drawing.Size(36, 23);
             this.btnStructureDouble.TabIndex = 53;
             this.btnStructureDouble.Text = "Two";
             this.btnStructureDouble.UseVisualStyleBackColor = true;
             // 
+            // cbSequenceType
+            // 
+            this.cbSequenceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSequenceType.FormattingEnabled = true;
+            this.cbSequenceType.Items.AddRange(new object[] {
+            "SequenceTypes.LittleEndian",
+            "SequenceTypes.BigEndian"});
+            this.cbSequenceType.Location = new System.Drawing.Point(136, 19);
+            this.cbSequenceType.Name = "cbSequenceType";
+            this.cbSequenceType.Size = new System.Drawing.Size(188, 21);
+            this.cbSequenceType.TabIndex = 39;
+            this.cbSequenceType.SelectedIndexChanged += new System.EventHandler(this.CbSequenceType_SelectedIndexChanged);
+            // 
             // btnFieldDouble
             // 
-            this.btnFieldDouble.Location = new System.Drawing.Point(247, 251);
+            this.btnFieldDouble.Location = new System.Drawing.Point(247, 307);
             this.btnFieldDouble.Name = "btnFieldDouble";
             this.btnFieldDouble.Size = new System.Drawing.Size(35, 23);
             this.btnFieldDouble.TabIndex = 52;
@@ -574,7 +599,7 @@ namespace Network_Analyzer
             // 
             // tbDouble
             // 
-            this.tbDouble.Location = new System.Drawing.Point(59, 253);
+            this.tbDouble.Location = new System.Drawing.Point(59, 309);
             this.tbDouble.Name = "tbDouble";
             this.tbDouble.ReadOnly = true;
             this.tbDouble.Size = new System.Drawing.Size(182, 20);
@@ -582,7 +607,7 @@ namespace Network_Analyzer
             // 
             // btnStructureUlong
             // 
-            this.btnStructureUlong.Location = new System.Drawing.Point(288, 225);
+            this.btnStructureUlong.Location = new System.Drawing.Point(288, 278);
             this.btnStructureUlong.Name = "btnStructureUlong";
             this.btnStructureUlong.Size = new System.Drawing.Size(36, 23);
             this.btnStructureUlong.TabIndex = 50;
@@ -591,7 +616,7 @@ namespace Network_Analyzer
             // 
             // btnFieldUlong
             // 
-            this.btnFieldUlong.Location = new System.Drawing.Point(247, 225);
+            this.btnFieldUlong.Location = new System.Drawing.Point(247, 278);
             this.btnFieldUlong.Name = "btnFieldUlong";
             this.btnFieldUlong.Size = new System.Drawing.Size(35, 23);
             this.btnFieldUlong.TabIndex = 49;
@@ -600,7 +625,7 @@ namespace Network_Analyzer
             // 
             // tbUlong
             // 
-            this.tbUlong.Location = new System.Drawing.Point(59, 227);
+            this.tbUlong.Location = new System.Drawing.Point(59, 280);
             this.tbUlong.Name = "tbUlong";
             this.tbUlong.ReadOnly = true;
             this.tbUlong.Size = new System.Drawing.Size(182, 20);
@@ -608,7 +633,7 @@ namespace Network_Analyzer
             // 
             // btnStructureUint
             // 
-            this.btnStructureUint.Location = new System.Drawing.Point(288, 199);
+            this.btnStructureUint.Location = new System.Drawing.Point(288, 249);
             this.btnStructureUint.Name = "btnStructureUint";
             this.btnStructureUint.Size = new System.Drawing.Size(36, 23);
             this.btnStructureUint.TabIndex = 47;
@@ -617,7 +642,7 @@ namespace Network_Analyzer
             // 
             // btnFieldUint
             // 
-            this.btnFieldUint.Location = new System.Drawing.Point(247, 199);
+            this.btnFieldUint.Location = new System.Drawing.Point(247, 249);
             this.btnFieldUint.Name = "btnFieldUint";
             this.btnFieldUint.Size = new System.Drawing.Size(35, 23);
             this.btnFieldUint.TabIndex = 46;
@@ -626,7 +651,7 @@ namespace Network_Analyzer
             // 
             // tbUint
             // 
-            this.tbUint.Location = new System.Drawing.Point(59, 201);
+            this.tbUint.Location = new System.Drawing.Point(59, 251);
             this.tbUint.Name = "tbUint";
             this.tbUint.ReadOnly = true;
             this.tbUint.Size = new System.Drawing.Size(182, 20);
@@ -634,7 +659,7 @@ namespace Network_Analyzer
             // 
             // btnStructureUshort
             // 
-            this.btnStructureUshort.Location = new System.Drawing.Point(288, 173);
+            this.btnStructureUshort.Location = new System.Drawing.Point(288, 220);
             this.btnStructureUshort.Name = "btnStructureUshort";
             this.btnStructureUshort.Size = new System.Drawing.Size(36, 23);
             this.btnStructureUshort.TabIndex = 44;
@@ -643,7 +668,7 @@ namespace Network_Analyzer
             // 
             // btnFieldUshort
             // 
-            this.btnFieldUshort.Location = new System.Drawing.Point(247, 173);
+            this.btnFieldUshort.Location = new System.Drawing.Point(247, 220);
             this.btnFieldUshort.Name = "btnFieldUshort";
             this.btnFieldUshort.Size = new System.Drawing.Size(35, 23);
             this.btnFieldUshort.TabIndex = 43;
@@ -652,7 +677,7 @@ namespace Network_Analyzer
             // 
             // tbUshort
             // 
-            this.tbUshort.Location = new System.Drawing.Point(59, 175);
+            this.tbUshort.Location = new System.Drawing.Point(59, 222);
             this.tbUshort.Name = "tbUshort";
             this.tbUshort.ReadOnly = true;
             this.tbUshort.Size = new System.Drawing.Size(182, 20);
@@ -660,7 +685,7 @@ namespace Network_Analyzer
             // 
             // btnStructureSbyte
             // 
-            this.btnStructureSbyte.Location = new System.Drawing.Point(288, 147);
+            this.btnStructureSbyte.Location = new System.Drawing.Point(288, 191);
             this.btnStructureSbyte.Name = "btnStructureSbyte";
             this.btnStructureSbyte.Size = new System.Drawing.Size(36, 23);
             this.btnStructureSbyte.TabIndex = 41;
@@ -669,7 +694,7 @@ namespace Network_Analyzer
             // 
             // btnFieldSbyte
             // 
-            this.btnFieldSbyte.Location = new System.Drawing.Point(247, 147);
+            this.btnFieldSbyte.Location = new System.Drawing.Point(247, 191);
             this.btnFieldSbyte.Name = "btnFieldSbyte";
             this.btnFieldSbyte.Size = new System.Drawing.Size(35, 23);
             this.btnFieldSbyte.TabIndex = 40;
@@ -678,7 +703,7 @@ namespace Network_Analyzer
             // 
             // tbSbyte
             // 
-            this.tbSbyte.Location = new System.Drawing.Point(59, 149);
+            this.tbSbyte.Location = new System.Drawing.Point(59, 193);
             this.tbSbyte.Name = "tbSbyte";
             this.tbSbyte.ReadOnly = true;
             this.tbSbyte.Size = new System.Drawing.Size(182, 20);
@@ -686,7 +711,7 @@ namespace Network_Analyzer
             // 
             // btnStructureFloat
             // 
-            this.btnStructureFloat.Location = new System.Drawing.Point(288, 121);
+            this.btnStructureFloat.Location = new System.Drawing.Point(288, 162);
             this.btnStructureFloat.Name = "btnStructureFloat";
             this.btnStructureFloat.Size = new System.Drawing.Size(36, 23);
             this.btnStructureFloat.TabIndex = 38;
@@ -695,7 +720,7 @@ namespace Network_Analyzer
             // 
             // btnFieldFloat
             // 
-            this.btnFieldFloat.Location = new System.Drawing.Point(247, 121);
+            this.btnFieldFloat.Location = new System.Drawing.Point(247, 162);
             this.btnFieldFloat.Name = "btnFieldFloat";
             this.btnFieldFloat.Size = new System.Drawing.Size(35, 23);
             this.btnFieldFloat.TabIndex = 37;
@@ -704,7 +729,7 @@ namespace Network_Analyzer
             // 
             // tbFloat
             // 
-            this.tbFloat.Location = new System.Drawing.Point(59, 123);
+            this.tbFloat.Location = new System.Drawing.Point(59, 164);
             this.tbFloat.Name = "tbFloat";
             this.tbFloat.ReadOnly = true;
             this.tbFloat.Size = new System.Drawing.Size(182, 20);
@@ -712,7 +737,7 @@ namespace Network_Analyzer
             // 
             // btnStructureLong
             // 
-            this.btnStructureLong.Location = new System.Drawing.Point(288, 95);
+            this.btnStructureLong.Location = new System.Drawing.Point(288, 133);
             this.btnStructureLong.Name = "btnStructureLong";
             this.btnStructureLong.Size = new System.Drawing.Size(36, 23);
             this.btnStructureLong.TabIndex = 35;
@@ -721,7 +746,7 @@ namespace Network_Analyzer
             // 
             // btnFieldLong
             // 
-            this.btnFieldLong.Location = new System.Drawing.Point(247, 95);
+            this.btnFieldLong.Location = new System.Drawing.Point(247, 133);
             this.btnFieldLong.Name = "btnFieldLong";
             this.btnFieldLong.Size = new System.Drawing.Size(35, 23);
             this.btnFieldLong.TabIndex = 34;
@@ -730,7 +755,7 @@ namespace Network_Analyzer
             // 
             // tbLong
             // 
-            this.tbLong.Location = new System.Drawing.Point(59, 97);
+            this.tbLong.Location = new System.Drawing.Point(59, 135);
             this.tbLong.Name = "tbLong";
             this.tbLong.ReadOnly = true;
             this.tbLong.Size = new System.Drawing.Size(182, 20);
@@ -738,7 +763,7 @@ namespace Network_Analyzer
             // 
             // btnStructureInt
             // 
-            this.btnStructureInt.Location = new System.Drawing.Point(288, 69);
+            this.btnStructureInt.Location = new System.Drawing.Point(288, 104);
             this.btnStructureInt.Name = "btnStructureInt";
             this.btnStructureInt.Size = new System.Drawing.Size(36, 23);
             this.btnStructureInt.TabIndex = 32;
@@ -747,7 +772,7 @@ namespace Network_Analyzer
             // 
             // btnFieldInt
             // 
-            this.btnFieldInt.Location = new System.Drawing.Point(247, 69);
+            this.btnFieldInt.Location = new System.Drawing.Point(247, 104);
             this.btnFieldInt.Name = "btnFieldInt";
             this.btnFieldInt.Size = new System.Drawing.Size(35, 23);
             this.btnFieldInt.TabIndex = 31;
@@ -756,7 +781,7 @@ namespace Network_Analyzer
             // 
             // tbInt
             // 
-            this.tbInt.Location = new System.Drawing.Point(59, 71);
+            this.tbInt.Location = new System.Drawing.Point(59, 106);
             this.tbInt.Name = "tbInt";
             this.tbInt.ReadOnly = true;
             this.tbInt.Size = new System.Drawing.Size(182, 20);
@@ -764,7 +789,7 @@ namespace Network_Analyzer
             // 
             // btnStructureShort
             // 
-            this.btnStructureShort.Location = new System.Drawing.Point(288, 43);
+            this.btnStructureShort.Location = new System.Drawing.Point(288, 75);
             this.btnStructureShort.Name = "btnStructureShort";
             this.btnStructureShort.Size = new System.Drawing.Size(36, 23);
             this.btnStructureShort.TabIndex = 29;
@@ -773,7 +798,7 @@ namespace Network_Analyzer
             // 
             // btnFieldShort
             // 
-            this.btnFieldShort.Location = new System.Drawing.Point(247, 43);
+            this.btnFieldShort.Location = new System.Drawing.Point(247, 75);
             this.btnFieldShort.Name = "btnFieldShort";
             this.btnFieldShort.Size = new System.Drawing.Size(35, 23);
             this.btnFieldShort.TabIndex = 28;
@@ -782,7 +807,7 @@ namespace Network_Analyzer
             // 
             // tbShort
             // 
-            this.tbShort.Location = new System.Drawing.Point(59, 45);
+            this.tbShort.Location = new System.Drawing.Point(59, 77);
             this.tbShort.Name = "tbShort";
             this.tbShort.ReadOnly = true;
             this.tbShort.Size = new System.Drawing.Size(182, 20);
@@ -790,7 +815,7 @@ namespace Network_Analyzer
             // 
             // btnStructureByte
             // 
-            this.btnStructureByte.Location = new System.Drawing.Point(288, 17);
+            this.btnStructureByte.Location = new System.Drawing.Point(288, 46);
             this.btnStructureByte.Name = "btnStructureByte";
             this.btnStructureByte.Size = new System.Drawing.Size(36, 23);
             this.btnStructureByte.TabIndex = 26;
@@ -799,7 +824,7 @@ namespace Network_Analyzer
             // 
             // btnFieldByte
             // 
-            this.btnFieldByte.Location = new System.Drawing.Point(247, 17);
+            this.btnFieldByte.Location = new System.Drawing.Point(247, 46);
             this.btnFieldByte.Name = "btnFieldByte";
             this.btnFieldByte.Size = new System.Drawing.Size(35, 23);
             this.btnFieldByte.TabIndex = 25;
@@ -808,7 +833,7 @@ namespace Network_Analyzer
             // 
             // tbByte
             // 
-            this.tbByte.Location = new System.Drawing.Point(59, 19);
+            this.tbByte.Location = new System.Drawing.Point(59, 48);
             this.tbByte.Name = "tbByte";
             this.tbByte.ReadOnly = true;
             this.tbByte.Size = new System.Drawing.Size(182, 20);
@@ -818,7 +843,7 @@ namespace Network_Analyzer
             // 
             this.lblDoubleType.AutoSize = true;
             this.lblDoubleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblDoubleType.Location = new System.Drawing.Point(6, 254);
+            this.lblDoubleType.Location = new System.Drawing.Point(6, 310);
             this.lblDoubleType.Name = "lblDoubleType";
             this.lblDoubleType.Size = new System.Drawing.Size(82, 15);
             this.lblDoubleType.TabIndex = 23;
@@ -828,7 +853,7 @@ namespace Network_Analyzer
             // 
             this.lblFloatType.AutoSize = true;
             this.lblFloatType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblFloatType.Location = new System.Drawing.Point(6, 124);
+            this.lblFloatType.Location = new System.Drawing.Point(6, 165);
             this.lblFloatType.Name = "lblFloatType";
             this.lblFloatType.Size = new System.Drawing.Size(69, 15);
             this.lblFloatType.TabIndex = 22;
@@ -838,7 +863,7 @@ namespace Network_Analyzer
             // 
             this.lblUlongType.AutoSize = true;
             this.lblUlongType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblUlongType.Location = new System.Drawing.Point(6, 228);
+            this.lblUlongType.Location = new System.Drawing.Point(6, 281);
             this.lblUlongType.Name = "lblUlongType";
             this.lblUlongType.Size = new System.Drawing.Size(75, 15);
             this.lblUlongType.TabIndex = 21;
@@ -848,7 +873,7 @@ namespace Network_Analyzer
             // 
             this.lblLongType.AutoSize = true;
             this.lblLongType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblLongType.Location = new System.Drawing.Point(6, 98);
+            this.lblLongType.Location = new System.Drawing.Point(6, 136);
             this.lblLongType.Name = "lblLongType";
             this.lblLongType.Size = new System.Drawing.Size(70, 15);
             this.lblLongType.TabIndex = 20;
@@ -858,7 +883,7 @@ namespace Network_Analyzer
             // 
             this.lblUintType.AutoSize = true;
             this.lblUintType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblUintType.Location = new System.Drawing.Point(6, 202);
+            this.lblUintType.Location = new System.Drawing.Point(6, 252);
             this.lblUintType.Name = "lblUintType";
             this.lblUintType.Size = new System.Drawing.Size(64, 15);
             this.lblUintType.TabIndex = 19;
@@ -868,7 +893,7 @@ namespace Network_Analyzer
             // 
             this.lblIntType.AutoSize = true;
             this.lblIntType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblIntType.Location = new System.Drawing.Point(6, 72);
+            this.lblIntType.Location = new System.Drawing.Point(6, 107);
             this.lblIntType.Name = "lblIntType";
             this.lblIntType.Size = new System.Drawing.Size(55, 15);
             this.lblIntType.TabIndex = 18;
@@ -878,7 +903,7 @@ namespace Network_Analyzer
             // 
             this.lblUshortType.AutoSize = true;
             this.lblUshortType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblUshortType.Location = new System.Drawing.Point(6, 176);
+            this.lblUshortType.Location = new System.Drawing.Point(6, 223);
             this.lblUshortType.Name = "lblUshortType";
             this.lblUshortType.Size = new System.Drawing.Size(78, 15);
             this.lblUshortType.TabIndex = 17;
@@ -888,7 +913,7 @@ namespace Network_Analyzer
             // 
             this.lblShortType.AutoSize = true;
             this.lblShortType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblShortType.Location = new System.Drawing.Point(6, 46);
+            this.lblShortType.Location = new System.Drawing.Point(6, 78);
             this.lblShortType.Name = "lblShortType";
             this.lblShortType.Size = new System.Drawing.Size(71, 15);
             this.lblShortType.TabIndex = 16;
@@ -898,7 +923,7 @@ namespace Network_Analyzer
             // 
             this.lblSbyteType.AutoSize = true;
             this.lblSbyteType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSbyteType.Location = new System.Drawing.Point(6, 150);
+            this.lblSbyteType.Location = new System.Drawing.Point(6, 194);
             this.lblSbyteType.Name = "lblSbyteType";
             this.lblSbyteType.Size = new System.Drawing.Size(72, 15);
             this.lblSbyteType.TabIndex = 15;
@@ -908,24 +933,11 @@ namespace Network_Analyzer
             // 
             this.lblByteType.AutoSize = true;
             this.lblByteType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblByteType.Location = new System.Drawing.Point(6, 20);
+            this.lblByteType.Location = new System.Drawing.Point(6, 49);
             this.lblByteType.Name = "lblByteType";
             this.lblByteType.Size = new System.Drawing.Size(65, 15);
             this.lblByteType.TabIndex = 14;
             this.lblByteType.Text = "Types.Byte";
-            // 
-            // cbSequenceType
-            // 
-            this.cbSequenceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSequenceType.FormattingEnabled = true;
-            this.cbSequenceType.Items.AddRange(new object[] {
-            "SequenceTypes.LittleEndian",
-            "SequenceTypes.BigEndian"});
-            this.cbSequenceType.Location = new System.Drawing.Point(6, 61);
-            this.cbSequenceType.Name = "cbSequenceType";
-            this.cbSequenceType.Size = new System.Drawing.Size(330, 21);
-            this.cbSequenceType.TabIndex = 39;
-            this.cbSequenceType.SelectedIndexChanged += new System.EventHandler(this.CbSequenceType_SelectedIndexChanged);
             // 
             // gbGeneralInformation
             // 
@@ -1060,6 +1072,37 @@ namespace Network_Analyzer
             this.dgvConfigurationFields.Size = new System.Drawing.Size(330, 295);
             this.dgvConfigurationFields.TabIndex = 22;
             // 
+            // ConfigurationPosition
+            // 
+            this.ConfigurationPosition.HeaderText = "Editor.ConfigurationPosition";
+            this.ConfigurationPosition.Name = "ConfigurationPosition";
+            this.ConfigurationPosition.ReadOnly = true;
+            this.ConfigurationPosition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ConfigurationPosition.Width = 75;
+            // 
+            // ConfigurationType
+            // 
+            this.ConfigurationType.HeaderText = "Editor.ConfigurationType";
+            this.ConfigurationType.Name = "ConfigurationType";
+            this.ConfigurationType.ReadOnly = true;
+            this.ConfigurationType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ConfigurationType.Width = 75;
+            // 
+            // ConfigurationName
+            // 
+            this.ConfigurationName.HeaderText = "Editor.ConfigurationName";
+            this.ConfigurationName.Name = "ConfigurationName";
+            this.ConfigurationName.ReadOnly = true;
+            this.ConfigurationName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ConfigurationName.Width = 150;
+            // 
+            // ConfigurationValue
+            // 
+            this.ConfigurationValue.HeaderText = "Editor.ConfigurationValue";
+            this.ConfigurationValue.Name = "ConfigurationValue";
+            this.ConfigurationValue.ReadOnly = true;
+            this.ConfigurationValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // tbConfigurationPacketDescription
             // 
             this.tbConfigurationPacketDescription.Location = new System.Drawing.Point(6, 66);
@@ -1094,37 +1137,6 @@ namespace Network_Analyzer
             this.tbConfigurationPacketName.Name = "tbConfigurationPacketName";
             this.tbConfigurationPacketName.Size = new System.Drawing.Size(330, 20);
             this.tbConfigurationPacketName.TabIndex = 19;
-            // 
-            // ConfigurationPosition
-            // 
-            this.ConfigurationPosition.HeaderText = "Editor.ConfigurationPosition";
-            this.ConfigurationPosition.Name = "ConfigurationPosition";
-            this.ConfigurationPosition.ReadOnly = true;
-            this.ConfigurationPosition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ConfigurationPosition.Width = 75;
-            // 
-            // ConfigurationType
-            // 
-            this.ConfigurationType.HeaderText = "Editor.ConfigurationType";
-            this.ConfigurationType.Name = "ConfigurationType";
-            this.ConfigurationType.ReadOnly = true;
-            this.ConfigurationType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ConfigurationType.Width = 75;
-            // 
-            // ConfigurationName
-            // 
-            this.ConfigurationName.HeaderText = "Editor.ConfigurationName";
-            this.ConfigurationName.Name = "ConfigurationName";
-            this.ConfigurationName.ReadOnly = true;
-            this.ConfigurationName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ConfigurationName.Width = 150;
-            // 
-            // ConfigurationValue
-            // 
-            this.ConfigurationValue.HeaderText = "Editor.ConfigurationValue";
-            this.ConfigurationValue.Name = "ConfigurationValue";
-            this.ConfigurationValue.ReadOnly = true;
-            this.ConfigurationValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Editor
             // 
@@ -1262,5 +1274,6 @@ namespace Network_Analyzer
         private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationValue;
+        private System.Windows.Forms.Label lblSequenceType;
     }
 }

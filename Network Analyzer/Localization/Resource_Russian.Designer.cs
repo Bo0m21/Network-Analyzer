@@ -772,6 +772,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Порядок байтов.
+        /// </summary>
+        internal static string Editor_SequenceType {
+            get {
+                return ResourceManager.GetString("Editor.SequenceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Network Analyzer - Редактор | 2019 © Bo0m21.
         /// </summary>
         internal static string Editor_Text {

@@ -594,4 +594,7 @@
   <data name="Editor.ConfigurationValue" xml:space="preserve">
     <value>Значение</value>
   </data>
+  <data name="Editor.SequenceType" xml:space="preserve">
+    <value>Порядок байтов</value>
+  </data>
 </root>
