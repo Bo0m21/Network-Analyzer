@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             get
             {
-                System.Collections.ICollection keys = Listing.Keys;
+                ICollection keys = Listing.Keys;
                 string[] ret = new string[keys.Count];
                 keys.CopyTo(ret, 0);
 
@@ -35,7 +36,7 @@ namespace Network_Analyzer.Network.Listeners.Authentication
         {
             get
             {
-                System.Collections.ICollection values = Listing.Values;
+                ICollection values = Listing.Values;
                 string[] ret = new string[values.Count];
                 values.CopyTo(ret, 0);
 

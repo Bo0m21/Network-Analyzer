@@ -9,10 +9,9 @@ namespace Network_Analyzer
 {
     public partial class ConfigurationField : Form
     {
-        private ConnectionPacketModel m_PacketModel;
-        private long m_Position;
-
         private ConfigurationFieldModel m_ConfigurationFieldModel;
+        private readonly ConnectionPacketModel m_PacketModel;
+        private readonly long m_Position;
 
         public ConfigurationField(ConnectionPacketModel packet)
         {
@@ -38,7 +37,7 @@ namespace Network_Analyzer
 
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
+            if ((string) cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
             {
                 cbLength.Enabled = true;
             }
@@ -111,7 +110,7 @@ namespace Network_Analyzer
 
             bool reverse = cbSequenceType.Text == Localizer.LocalizeString("SequenceTypes.LittleEndian") ? false : true;
 
-            m_ConfigurationFieldModel = new ConfigurationFieldModel()
+            m_ConfigurationFieldModel = new ConfigurationFieldModel
             {
                 Name = tbName.Text,
                 Description = tbDescription.Text,

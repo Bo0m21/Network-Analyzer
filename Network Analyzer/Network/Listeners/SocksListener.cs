@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Sockets;
 using Network_Analyzer.Network.Listeners.Authentication;
 using Network_Analyzer.Network.Listeners.Clients;
 
@@ -66,7 +67,7 @@ namespace Network_Analyzer.Network.Listeners
         {
             try
             {
-                System.Net.Sockets.Socket socket = ListenSocket.EndAccept(ar);
+                Socket socket = ListenSocket.EndAccept(ar);
                 if (socket != null)
                 {
                     SocksClient client = new SocksClient(socket, RemoveClient, AuthList);

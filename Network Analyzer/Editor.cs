@@ -63,7 +63,7 @@ namespace Network_Analyzer
             m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
             m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
 
-            ((Control)tpConfiguration).Enabled = false;
+            ((Control) tpConfiguration).Enabled = false;
 
             lblInformation.Text = Localizer.LocalizeString("Editor.LoadedSuccessfully");
         }
@@ -78,7 +78,7 @@ namespace Network_Analyzer
 
         private void EncodingInstall_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            ToolStripMenuItem item = (ToolStripMenuItem) sender;
 
             if (item.Text == Localizer.LocalizeString("Editor.EncodingAscii"))
             {
@@ -136,7 +136,7 @@ namespace Network_Analyzer
             }
 
             m_ConfigurationModel = new ConfigurationModel();
-            ((Control)tpConfiguration).Enabled = true;
+            ((Control) tpConfiguration).Enabled = true;
 
             // TODO
 
@@ -157,7 +157,7 @@ namespace Network_Analyzer
             }
 
             m_ConfigurationModel = new ConfigurationModel();
-            ((Control)tpConfiguration).Enabled = true;
+            ((Control) tpConfiguration).Enabled = true;
 
             lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationCreateSuccessfully");
         }
@@ -437,7 +437,7 @@ namespace Network_Analyzer
         #region Methods
 
         /// <summary>
-        /// Get all packets by search settings
+        ///     Get all packets by search settings
         /// </summary>
         /// <returns></returns>
         private List<ConnectionPacketModel> GetPacketsBySearchSettings()
@@ -482,7 +482,7 @@ namespace Network_Analyzer
         }
 
         /// <summary>
-        /// Set current connection packet model
+        ///     Set current connection packet model
         /// </summary>
         private void SetCurrentConnectionPacketModel()
         {
@@ -498,12 +498,12 @@ namespace Network_Analyzer
                 return;
             }
 
-            long packetId = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+            long packetId = (long) dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
             m_CurrentConnectionPacketModel = GetPacketsBySearchSettings().FirstOrDefault(p => p.Id == packetId);
         }
 
         /// <summary>
-        /// Method for update data grid
+        ///     Method for update data grid
         /// </summary>
         private void DataGridViewUpdate()
         {
@@ -575,7 +575,7 @@ namespace Network_Analyzer
         }
 
         /// <summary>
-        /// Method for update hexbox
+        ///     Method for update hexbox
         /// </summary>
         private void HexBoxViewUpdate()
         {
@@ -599,7 +599,7 @@ namespace Network_Analyzer
         }
 
         /// <summary>
-        /// Method for update information
+        ///     Method for update information
         /// </summary>
         private void InformationViewUpdate()
         {
@@ -650,7 +650,7 @@ namespace Network_Analyzer
         }
 
         /// <summary>
-        /// Method for updare configuration
+        ///     Method for updare configuration
         /// </summary>
         private void ConfigurationViewUpdate()
         {

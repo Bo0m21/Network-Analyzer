@@ -1,5 +1,5 @@
-﻿using Network_Analyzer.Services;
-using System;
+﻿using System;
+using Network_Analyzer.Services;
 
 namespace Network_Analyzer.Extensions
 {
@@ -10,7 +10,7 @@ namespace Network_Analyzer.Extensions
     {
         public static sbyte ReadSbyte(this byte[] data, int index)
         {
-            return (sbyte)data[index];
+            return (sbyte) data[index];
         }
 
         public static byte ReadByte(this byte[] data, int index)
@@ -126,24 +126,24 @@ namespace Network_Analyzer.Extensions
         {
             if (type == Localizer.LocalizeString("Types.Byte"))
             {
-                return data.ReadByte((int)index).ToString();
+                return data.ReadByte((int) index).ToString();
             }
 
             if (type == Localizer.LocalizeString("Types.Sbyte"))
             {
-                return data.ReadSbyte((int)index).ToString();
+                return data.ReadSbyte((int) index).ToString();
             }
 
             if (index + 1 < data.Length)
             {
                 if (type == Localizer.LocalizeString("Types.Short"))
                 {
-                    return data.ReadShort((int)index, reverse).ToString();
+                    return data.ReadShort((int) index, reverse).ToString();
                 }
 
                 if (type == Localizer.LocalizeString("Types.Ushort"))
                 {
-                    return data.ReadUshort((int)index, reverse).ToString();
+                    return data.ReadUshort((int) index, reverse).ToString();
                 }
             }
 
@@ -151,17 +151,17 @@ namespace Network_Analyzer.Extensions
             {
                 if (type == Localizer.LocalizeString("Types.Int"))
                 {
-                    return data.ReadInt((int)index, reverse).ToString();
+                    return data.ReadInt((int) index, reverse).ToString();
                 }
 
                 if (type == Localizer.LocalizeString("Types.Uint"))
                 {
-                    return data.ReadUint((int)index, reverse).ToString();
+                    return data.ReadUint((int) index, reverse).ToString();
                 }
 
                 if (type == Localizer.LocalizeString("Types.Float"))
                 {
-                    return data.ReadFloat((int)index, reverse).ToString();
+                    return data.ReadFloat((int) index, reverse).ToString();
                 }
             }
 
@@ -169,17 +169,17 @@ namespace Network_Analyzer.Extensions
             {
                 if (type == Localizer.LocalizeString("Types.Long"))
                 {
-                    return data.ReadLong((int)index, reverse).ToString();
+                    return data.ReadLong((int) index, reverse).ToString();
                 }
 
                 if (type == Localizer.LocalizeString("Types.Ulong"))
                 {
-                    return data.ReadUlong((int)index, reverse).ToString();
+                    return data.ReadUlong((int) index, reverse).ToString();
                 }
 
                 if (type == Localizer.LocalizeString("Types.Double"))
                 {
-                    return data.ReadDouble((int)index, reverse).ToString();
+                    return data.ReadDouble((int) index, reverse).ToString();
                 }
             }
 
