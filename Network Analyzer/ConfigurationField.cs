@@ -116,8 +116,8 @@ namespace Network_Analyzer
                 Name = tbName.Text,
                 Description = tbDescription.Text,
                 Type = cbType.Text,
-                Position = position,
                 Reverse = reverse,
+                Position = position,
                 Length = cbLength.Text
             };
 

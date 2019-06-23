@@ -183,7 +183,7 @@ namespace Network_Analyzer.Extensions
                 }
             }
 
-            return "";
+            return "0";
         }
     }
 }

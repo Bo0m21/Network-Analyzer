@@ -69,6 +69,7 @@
     <Compile Include="Extensions\ConverterExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Models\Configuration\ConfigurationFieldModel.cs" />
+    <Compile Include="Models\Configuration\ConfigurationPacketModel.cs" />
     <Compile Include="Models\Configuration\ConfigurationModel.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />

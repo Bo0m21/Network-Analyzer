@@ -21,14 +21,14 @@
         public string Type { get; set; }
 
         /// <summary>
-        ///     Position at data
-        /// </summary>
-        public long Position { get; set; }
-
-        /// <summary>
         ///     Field reverse (type sequence)
         /// </summary>
         public bool Reverse { get; set; }
+
+        /// <summary>
+        ///     Position at data
+        /// </summary>
+        public long Position { get; set; }
 
         /// <summary>
         ///     Length field(for example - string)
