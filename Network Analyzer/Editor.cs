@@ -32,6 +32,7 @@ namespace Network_Analyzer
         private ConfigurationModel m_ConfigurationModel;
 
         private ConnectionPacketModel m_CurrentConnectionPacketModel;
+        private ConfigurationPacketModel m_CurrentConfigurationPacketModel;
 
         private IDecryptor m_Decryptor;
         private SearchModel m_SearchModel;
@@ -63,8 +64,6 @@ namespace Network_Analyzer
             m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
             m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
 
-            ((Control) tpConfiguration).Enabled = false;
-
             lblInformation.Text = Localizer.LocalizeString("Editor.LoadedSuccessfully");
         }
 
@@ -78,7 +77,7 @@ namespace Network_Analyzer
 
         private void EncodingInstall_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem) sender;
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
             if (item.Text == Localizer.LocalizeString("Editor.EncodingAscii"))
             {
@@ -121,6 +120,12 @@ namespace Network_Analyzer
         {
             m_TimerDecryptPacketsUpdate.Stop();
 
+            m_ConnectionModel.DecryptedPackets.Clear();
+            foreach (ConnectionPacketModel packet in m_ConnectionModel.ConnectionPackets)
+            {
+                packet.IsDecrypted = false;
+            }
+
             m_Decryptor = null;
             cbTypeEncryptionPackets.SelectedIndex = 0;
 
@@ -136,11 +141,18 @@ namespace Network_Analyzer
             }
 
             m_ConfigurationModel = new ConfigurationModel();
-            ((Control) tpConfiguration).Enabled = true;
 
-            // TODO
+			// TODO
 
-            lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationLoadedSuccessfully");
+			DataGridViewUpdate();
+			SetCurrentConnectionPacketModel();
+			SetCurrentConfigurationPacketModel();
+
+			HexBoxViewUpdate();
+			InformationViewUpdate();
+			ConfigurationViewUpdate();
+
+			lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationLoadedSuccessfully");
         }
 
         private void SaveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,9 +169,18 @@ namespace Network_Analyzer
             }
 
             m_ConfigurationModel = new ConfigurationModel();
-            ((Control) tpConfiguration).Enabled = true;
 
-            lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationCreateSuccessfully");
+			// TODO
+
+			DataGridViewUpdate();
+			SetCurrentConnectionPacketModel();
+			SetCurrentConfigurationPacketModel();
+
+			HexBoxViewUpdate();
+			InformationViewUpdate();
+			ConfigurationViewUpdate();
+
+			lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationCreateSuccessfully");
         }
 
         #endregion
@@ -187,9 +208,11 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         private void CbTypePackets_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,9 +232,11 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         private void DgvPackets_SelectionChanged(object sender, EventArgs e)
@@ -222,9 +247,11 @@ namespace Network_Analyzer
             }
 
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         private void CbAutoUpdateDataGridView_CheckedChanged(object sender, EventArgs e)
@@ -249,9 +276,11 @@ namespace Network_Analyzer
         {
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         private void BtnClearPackets_Click(object sender, EventArgs e)
@@ -264,9 +293,11 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         #endregion
@@ -329,9 +360,11 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
         private void BtnSearchClear_Click(object sender, EventArgs e)
@@ -341,16 +374,26 @@ namespace Network_Analyzer
 
             DataGridViewUpdate();
             SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
             HexBoxViewUpdate();
             InformationViewUpdate();
+            ConfigurationViewUpdate();
         }
 
-        // TODO Доделать
         private void HbHexEditor_Paint(object sender, PaintEventArgs e)
         {
-            hbHexEditor.FillPaint(e.Graphics, 0, 2, new SolidBrush(Color.FromArgb(89, 202, 250)));
-            hbHexEditor.FillPaint(e.Graphics, 2, 2, new SolidBrush(Color.FromArgb(146, 250, 91)));
+	        if (m_CurrentConfigurationPacketModel != null)
+	        {
+		        foreach (var configurationPacketField in m_CurrentConfigurationPacketModel.ConfigurationPacketFields)
+		        {
+			        hbHexEditor.FillPaint(e.Graphics, configurationPacketField.Position, configurationPacketField.GetLengthByType(), new SolidBrush(Color.FromArgb(146, 250, 91)));
+		        }
+
+				// TODO Доделать выбор и изменение цвета
+		        //new SolidBrush(Color.FromArgb(89, 202, 250)
+				//new SolidBrush(Color.FromArgb(146, 250, 91)
+	        }
         }
 
         #endregion
@@ -374,55 +417,135 @@ namespace Network_Analyzer
 
         #endregion
 
-        #region Configuration // toto доделать
+        #region Configuration
 
-        // TODO !!! В конфиги отправлять модель пакета конфигураци для того чтобы производить валидацию имени и позиций
-        // TODO refacrot
+        private void TbConfigurationPacketName_TextChanged(object sender, EventArgs e)
+        {
+            if (m_CurrentConfigurationPacketModel == null)
+            {
+                return;
+            }
+
+            m_CurrentConfigurationPacketModel.Name = tbConfigurationPacketName.Text;
+
+			DataGridViewUpdate();
+		}
+
+        private void TbConfigurationPacketDescription_TextChanged(object sender, EventArgs e)
+        {
+            if (m_CurrentConfigurationPacketModel == null)
+            {
+                return;
+            }
+
+            m_CurrentConfigurationPacketModel.Descreption = tbConfigurationPacketDescription.Text;
+
+			DataGridViewUpdate();
+		}
+
         private void BtnAddConfigurationField_Click(object sender, EventArgs e)
         {
-            if (m_SelectedPacketEncryptionType != SelectedPacketEncryptionType.Decrypted)
+	        using (ConfigurationPacketField configurationPacketField = new ConfigurationPacketField(m_CurrentConnectionPacketModel, m_CurrentConfigurationPacketModel))
             {
-                lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsSelectDecryptedPackages");
-                return;
+				configurationPacketField.SetPosition(hbHexEditor.SelectionStart);
+				configurationPacketField.SetSequenceType(cbSequenceType.Text);
+
+				configurationPacketField.ShowDialog();
             }
 
-            if (hbHexEditor.SelectionStart == m_CurrentConnectionPacketModel.Data.Length || hbHexEditor.SelectionStart == -1)
-            {
-                return;
-            }
+			DataGridViewUpdate();
+	        SetCurrentConnectionPacketModel();
+	        SetCurrentConfigurationPacketModel();
 
-            using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, hbHexEditor.SelectionStart))
-            {
-                DialogResult result = configurationField.ShowDialog();
+	        HexBoxViewUpdate();
+	        InformationViewUpdate();
+	        ConfigurationViewUpdate();
+		}
 
-                if (result == DialogResult.OK)
-                {
-                    ConfigurationFieldModel resultModel = configurationField.GetConfigurationFieldModel();
-                    //m_ConfigurationModel.ConfigurationFields.Add(resultModel);
+		private void BtnEditConfigurationField_Click(object sender, EventArgs e)
+		{
+			if (dgvConfigurationFields.Rows.Count == 0)
+			{
+				return;
+			}
 
-                    ConfigurationViewUpdate();
-                    lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationFieldAddedSuccessfully");
-                }
-            }
-        }
+			if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationPosition"].Value == null)
+			{
+				return;
+			}
 
-        // TODO refacrot
-        private void BtnDeleteConfigurationField_Click(object sender, EventArgs e)
+			long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationPosition"].Value;
+			ConfigurationPacketFieldModel configurationPacketFieldModel = m_CurrentConfigurationPacketModel.ConfigurationPacketFields.FirstOrDefault(c => c.Position == position);
+
+			using (ConfigurationPacketField configurationPacketField = new ConfigurationPacketField(m_CurrentConnectionPacketModel, m_CurrentConfigurationPacketModel))
+			{
+				configurationPacketField.SetPosition(hbHexEditor.SelectionStart);
+				configurationPacketField.SetSequenceType(cbSequenceType.Text);
+
+				configurationPacketField.ShowDialog();
+			}
+
+			DataGridViewUpdate();
+			SetCurrentConnectionPacketModel();
+			SetCurrentConfigurationPacketModel();
+
+			HexBoxViewUpdate();
+			InformationViewUpdate();
+			ConfigurationViewUpdate();
+		}
+
+		private void BtnDeleteConfigurationField_Click(object sender, EventArgs e)
         {
+            if (dgvConfigurationFields.Rows.Count == 0)
+            {
+                return;
+            }
+
+            if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationPosition"].Value == null)
+            {
+                return;
+            }
+
             long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationPosition"].Value;
+            ConfigurationPacketFieldModel configurationPacketField = m_CurrentConfigurationPacketModel.ConfigurationPacketFields.FirstOrDefault(c => c.Position == position);
+            m_CurrentConfigurationPacketModel.ConfigurationPacketFields.Remove(configurationPacketField);
 
-            //ConfigurationFieldModel configurationField = m_ConfigurationModel.ConfigurationFields.FirstOrDefault(c => c.Position == position);
-            //m_ConfigurationModel.ConfigurationFields.Remove(configurationField);
+            DataGridViewUpdate();
+            SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationPacketModel();
 
+            HexBoxViewUpdate();
+            InformationViewUpdate();
             ConfigurationViewUpdate();
-            lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationFieldDeletedSuccessfully");
-        }
+		}
 
-        #endregion
+		private void BtnAddFieldToConfiguration_Click(object sender, EventArgs e)
+		{
+			var type = ((Button) sender).Name.Replace("btnField", "");
 
-        #region Timers
+			using (ConfigurationPacketField configurationPacketField = new ConfigurationPacketField(m_CurrentConnectionPacketModel, m_CurrentConfigurationPacketModel))
+			{
+				configurationPacketField.SetPosition(hbHexEditor.SelectionStart);
+				configurationPacketField.SetSequenceType(cbSequenceType.Text);
+				configurationPacketField.SetType(type);
 
-        private void TimerDecryptPacketsUpdate_Tick(object sender, EventArgs e)
+				configurationPacketField.ShowDialog();
+			}
+
+			DataGridViewUpdate();
+			SetCurrentConnectionPacketModel();
+			SetCurrentConfigurationPacketModel();
+
+			HexBoxViewUpdate();
+			InformationViewUpdate();
+			ConfigurationViewUpdate();
+		}
+
+		#endregion
+
+		#region Timers
+
+		private void TimerDecryptPacketsUpdate_Tick(object sender, EventArgs e)
         {
             Invoke(new Action(DecryptPacketsUpdate));
         }
@@ -498,8 +621,49 @@ namespace Network_Analyzer
                 return;
             }
 
-            long packetId = (long) dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
+            long packetId = (long)dgvPackets.Rows[dgvPackets.CurrentCell.RowIndex].Cells["Id"].Value;
             m_CurrentConnectionPacketModel = GetPacketsBySearchSettings().FirstOrDefault(p => p.Id == packetId);
+        }
+
+        /// <summary>
+        ///     Set current configuration packet model
+        /// </summary>
+        private void SetCurrentConfigurationPacketModel()
+        {
+            if (m_CurrentConnectionPacketModel == null)
+            {
+                m_CurrentConfigurationPacketModel = null;
+                return;
+            }
+
+            if (m_ConfigurationModel == null)
+            {
+                m_CurrentConfigurationPacketModel = null;
+                return;
+            }
+
+            if (m_SelectedPacketEncryptionType != SelectedPacketEncryptionType.Decrypted)
+            {
+                m_CurrentConfigurationPacketModel = null;
+                return;
+            }
+
+            ConfigurationPacketModel configurationPacket = m_ConfigurationModel.ConfigurationPackets.FirstOrDefault(c => c.Opcode == m_CurrentConnectionPacketModel.Opcode);
+
+            if (configurationPacket != null)
+            {
+                m_CurrentConfigurationPacketModel = configurationPacket;
+            }
+            else
+            {
+                var newConfigurationPacket = new ConfigurationPacketModel()
+                {
+                    Opcode = m_CurrentConnectionPacketModel.Opcode
+                };
+
+                m_ConfigurationModel.ConfigurationPackets.Add(newConfigurationPacket);
+                m_CurrentConfigurationPacketModel = newConfigurationPacket;
+            }
         }
 
         /// <summary>
@@ -550,12 +714,31 @@ namespace Network_Analyzer
 
                     if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
                     {
+						dgvPackets.Rows[i].Cells["PacketOpcode"].Value = "-";
                         dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotDecrypted");
-                    }
+					}
                     else if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
                     {
-                        dgvPackets.Rows[i].Cells["PacketName"].Value = packets[i].Opcode;
-                    }
+                        dgvPackets.Rows[i].Cells["PacketOpcode"].Value = packets[i].Opcode;
+
+						if (m_ConfigurationModel != null)
+						{
+							var configurationPacketModel = m_ConfigurationModel.ConfigurationPackets.FirstOrDefault(p => p.Opcode == packets[i].Opcode);
+						
+							if (configurationPacketModel != null)
+							{
+								dgvPackets.Rows[i].Cells["PacketName"].Value = configurationPacketModel.Name;
+							}
+							else
+							{
+								dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotInstalled");
+							}
+						}
+						else
+						{
+							dgvPackets.Rows[i].Cells["PacketName"].Value = Localizer.LocalizeString("Editor.NotInstalled");
+						}
+					}
                 }
 
                 if (cbAutoScroll.Checked)
@@ -632,6 +815,11 @@ namespace Network_Analyzer
             lblSelectedIndex.Text = Localizer.LocalizeString("Editor.SelectedIndex") + " " + hbHexEditor.SelectionStart;
             lblSelectedLength.Text = Localizer.LocalizeString("Editor.SelectedLength") + " " + hbHexEditor.SelectionLength;
 
+            if (hbHexEditor.SelectionStart == m_CurrentConnectionPacketModel.Data.Length || hbHexEditor.SelectionStart == -1)
+            {
+                return;
+            }
+
             bool reverse = cbSequenceType.Text == Localizer.LocalizeString("SequenceTypes.LittleEndian") ? false : true;
 
             tbByte.Text = m_CurrentConnectionPacketModel.Data.GetValue(Localizer.LocalizeString("Types.Byte"), hbHexEditor.SelectionStart, reverse);
@@ -654,28 +842,56 @@ namespace Network_Analyzer
         /// </summary>
         private void ConfigurationViewUpdate()
         {
-            // TODO
-            //if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Decrypted)
-            //{
-            //    packet = m_ConnectionModel.DecryptedPackets.FirstOrDefault(p => p.Id == idPacket);
-            //}
-            //else
-            //{
-            //    lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsSelectDecryptedPackages");
-            //    return;
-            //}
+            if (m_CurrentConfigurationPacketModel == null)
+            {
+	            btnFieldByte.Enabled = false;
+	            btnFieldShort.Enabled = false;
+	            btnFieldInt.Enabled = false;
+	            btnFieldLong.Enabled = false;
+	            btnFieldFloat.Enabled = false;
+	            btnFieldSbyte.Enabled = false;
+	            btnFieldUshort.Enabled = false;
+	            btnFieldUint.Enabled = false;
+	            btnFieldUlong.Enabled = false;
+	            btnFieldDouble.Enabled = false;
 
-            //dgvConfigurationFields.Rows.Clear();
+				((Control)tpConfiguration).Enabled = false;
 
-            //m_ConfigurationModel.ConfigurationFields = m_ConfigurationModel.ConfigurationFields.OrderBy(c => c.Position).ToList();
+                tbConfigurationPacketName.Clear();
+                tbConfigurationPacketDescription.Clear();
+                dgvConfigurationFields.Rows.Clear();
 
-            //for (int i = 0; i < m_ConfigurationModel.ConfigurationFields.Count; i++)
-            //{
-            //    ConfigurationFieldModel configurationField = m_ConfigurationModel.ConfigurationFields[i];
+                return;
+            }
 
-            //    string fieldValue = packet.Data.GetValue(configurationField.Type, configurationField.Position, configurationField.Reverse);
-            //    dgvConfigurationFields.Rows.Add(configurationField.Position, configurationField.Type, configurationField.Name, fieldValue);
-            //}
+            btnFieldByte.Enabled = true;
+            btnFieldShort.Enabled = true;
+            btnFieldInt.Enabled = true;
+            btnFieldLong.Enabled = true;
+            btnFieldFloat.Enabled = true;
+            btnFieldSbyte.Enabled = true;
+            btnFieldUshort.Enabled = true;
+            btnFieldUint.Enabled = true;
+            btnFieldUlong.Enabled = true;
+            btnFieldDouble.Enabled = true;
+
+			((Control)tpConfiguration).Enabled = true;
+
+            tbConfigurationPacketName.Text = m_CurrentConfigurationPacketModel.Name;
+            tbConfigurationPacketDescription.Text = m_CurrentConfigurationPacketModel.Descreption;
+
+            dgvConfigurationFields.Rows.Clear();
+
+            m_CurrentConfigurationPacketModel.ConfigurationPacketFields = m_CurrentConfigurationPacketModel
+	            .ConfigurationPacketFields.OrderBy(c => c.Position).ToList();
+
+			for (int i = 0; i < m_CurrentConfigurationPacketModel.ConfigurationPacketFields.Count; i++)
+            {
+                ConfigurationPacketFieldModel configurationPacketFieldModel = m_CurrentConfigurationPacketModel.ConfigurationPacketFields[i];
+
+                string configurationPacketFieldValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationPacketFieldModel.Type, configurationPacketFieldModel.Position, configurationPacketFieldModel.Reverse);
+                dgvConfigurationFields.Rows.Add(configurationPacketFieldModel.Position, configurationPacketFieldModel.Type, configurationPacketFieldModel.Name, configurationPacketFieldValue);
+            }
         }
 
         #endregion
@@ -766,6 +982,6 @@ namespace Network_Analyzer
             }
         }
 
-        #endregion
-    }
+		#endregion
+	}
 }

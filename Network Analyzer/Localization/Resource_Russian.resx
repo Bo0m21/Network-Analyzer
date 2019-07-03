@@ -481,7 +481,7 @@
     <value>Ushort</value>
   </data>
   <data name="Editor.AddConfigurationField" xml:space="preserve">
-    <value>Добавить поле</value>
+    <value>Добавить</value>
   </data>
   <data name="Editor.Configuration" xml:space="preserve">
     <value>Конфигурация</value>
@@ -502,7 +502,7 @@
     <value>Тип</value>
   </data>
   <data name="Editor.DeleteConfigurationField" xml:space="preserve">
-    <value>Удалить поле</value>
+    <value>Удалить</value>
   </data>
   <data name="ConfigurationField.Cancel" xml:space="preserve">
     <value>Отмена</value>
@@ -573,9 +573,6 @@
   <data name="Editor.ErrorLoadingDecryptor" xml:space="preserve">
     <value>Вы не загрузили декриптор</value>
   </data>
-  <data name="ConfigurationField.ErrorFieldCannotBeEmpty" xml:space="preserve">
-    <value>Ошибка поле не может быть пустым</value>
-  </data>
   <data name="ConfigurationField.ErrorsPosition" xml:space="preserve">
     <value>Ошибки в позиции в пакете</value>
   </data>
@@ -596,5 +593,32 @@
   </data>
   <data name="Editor.SequenceType" xml:space="preserve">
     <value>Порядок байтов</value>
+  </data>
+  <data name="ConfigurationField.ErrorFieldDescriptionCannotBeEmpty" xml:space="preserve">
+    <value>Ошибка поле Описание не может быть пустым</value>
+  </data>
+  <data name="ConfigurationField.ErrorFieldNameCannotBeEmpty" xml:space="preserve">
+    <value>Ошибка поле Название не может быть пустым</value>
+  </data>
+  <data name="ConfigurationField.ErrorNameAlreadyExists" xml:space="preserve">
+    <value>Название уже существует в текущем пакете</value>
+  </data>
+  <data name="ConfigurationField.ErrorNameBeginCapitalLetter" xml:space="preserve">
+    <value>Название должно начинаться с заглавной буквы</value>
+  </data>
+  <data name="ConfigurationField.ErrorOnlyEnglishLettersNumbers" xml:space="preserve">
+    <value>Название должно содержать английские буквы и цифры</value>
+  </data>
+  <data name="ConfigurationField.ErrorsLengthCanNotParted" xml:space="preserve">
+    <value>Ошибка длина не может быть распаршена</value>
+  </data>
+  <data name="ConfigurationField.ErrorsLengthEmpty" xml:space="preserve">
+    <value>Ошибка длина не может быть пустой</value>
+  </data>
+  <data name="Editor.EditConfigurationField" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Editor.NotInstalled" xml:space="preserve">
+    <value>Не установлено</value>
   </data>
 </root>

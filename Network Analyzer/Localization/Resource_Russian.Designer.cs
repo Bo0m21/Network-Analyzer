@@ -79,11 +79,65 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ошибка поле не может быть пустым.
+        ///   Ищет локализованную строку, похожую на Ошибка поле Описание не может быть пустым.
         /// </summary>
-        internal static string ConfigurationField_ErrorFieldCannotBeEmpty {
+        internal static string ConfigurationField_ErrorFieldDescriptionCannotBeEmpty {
             get {
-                return ResourceManager.GetString("ConfigurationField.ErrorFieldCannotBeEmpty", resourceCulture);
+                return ResourceManager.GetString("ConfigurationField.ErrorFieldDescriptionCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка поле Название не может быть пустым.
+        /// </summary>
+        internal static string ConfigurationField_ErrorFieldNameCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorFieldNameCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название уже существует в текущем пакете.
+        /// </summary>
+        internal static string ConfigurationField_ErrorNameAlreadyExists {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorNameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название должно начинаться с заглавной буквы.
+        /// </summary>
+        internal static string ConfigurationField_ErrorNameBeginCapitalLetter {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorNameBeginCapitalLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Название должно содержать английские буквы и цифры.
+        /// </summary>
+        internal static string ConfigurationField_ErrorOnlyEnglishLettersNumbers {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorOnlyEnglishLettersNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка длина не может быть распаршена.
+        /// </summary>
+        internal static string ConfigurationField_ErrorsLengthCanNotParted {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorsLengthCanNotParted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка длина не может быть пустой.
+        /// </summary>
+        internal static string ConfigurationField_ErrorsLengthEmpty {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorsLengthEmpty", resourceCulture);
             }
         }
         
@@ -196,7 +250,7 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Добавить поле.
+        ///   Ищет локализованную строку, похожую на Добавить.
         /// </summary>
         internal static string Editor_AddConfigurationField {
             get {
@@ -385,11 +439,20 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Удалить поле.
+        ///   Ищет локализованную строку, похожую на Удалить.
         /// </summary>
         internal static string Editor_DeleteConfigurationField {
             get {
                 return ResourceManager.GetString("Editor.DeleteConfigurationField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменить.
+        /// </summary>
+        internal static string Editor_EditConfigurationField {
+            get {
+                return ResourceManager.GetString("Editor.EditConfigurationField", resourceCulture);
             }
         }
         
@@ -597,6 +660,15 @@ namespace Network_Analyzer.Localization {
         internal static string Editor_NotDecrypted {
             get {
                 return ResourceManager.GetString("Editor.NotDecrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не установлено.
+        /// </summary>
+        internal static string Editor_NotInstalled {
+            get {
+                return ResourceManager.GetString("Editor.NotInstalled", resourceCulture);
             }
         }
         

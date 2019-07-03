@@ -51,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationField.cs">
+    <Compile Include="ConfigurationPacketField.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigurationField.Designer.cs">
-      <DependentUpon>ConfigurationField.cs</DependentUpon>
+    <Compile Include="ConfigurationPacketField.Designer.cs">
+      <DependentUpon>ConfigurationPacketField.cs</DependentUpon>
     </Compile>
     <Compile Include="Decryptor\DecryptorModel.cs" />
     <Compile Include="Decryptor\Decryptors\R2Decryptor.cs" />
@@ -67,8 +67,9 @@
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ConverterExtension.cs" />
+    <Compile Include="Extensions\ConfigurationExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="Models\Configuration\ConfigurationFieldModel.cs" />
+    <Compile Include="Models\Configuration\ConfigurationPacketFieldModel.cs" />
     <Compile Include="Models\Configuration\ConfigurationPacketModel.cs" />
     <Compile Include="Models\Configuration\ConfigurationModel.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
@@ -113,8 +114,8 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ConfigurationField.resx">
-      <DependentUpon>ConfigurationField.cs</DependentUpon>
+    <EmbeddedResource Include="ConfigurationPacketField.resx">
+      <DependentUpon>ConfigurationPacketField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
