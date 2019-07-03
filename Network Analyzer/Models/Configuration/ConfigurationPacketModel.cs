@@ -9,7 +9,7 @@ namespace Network_Analyzer.Models.Configuration
     {
         public ConfigurationPacketModel()
         {
-            ConfigurationFields = new List<ConfigurationFieldModel>();
+            ConfigurationPacketFields = new List<ConfigurationPacketFieldModel>();
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace Network_Analyzer.Models.Configuration
         public string Descreption { get; set; }
 
         /// <summary>
-        ///     Configuration fields
+        ///     Configuration packet fields
         /// </summary>
-        public List<ConfigurationFieldModel> ConfigurationFields { get; set; }
+        public List<ConfigurationPacketFieldModel> ConfigurationPacketFields { get; set; }
     }
 }

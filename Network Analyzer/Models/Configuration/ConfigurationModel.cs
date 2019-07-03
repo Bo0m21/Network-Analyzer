@@ -3,7 +3,7 @@
 namespace Network_Analyzer.Models.Configuration
 {
     /// <summary>
-    ///     This class has information for configuration
+    ///     This class has packets for configuration
     /// </summary>
     public class ConfigurationModel
     {
@@ -12,7 +12,7 @@ namespace Network_Analyzer.Models.Configuration
             ConfigurationPackets = new List<ConfigurationPacketModel>();
         }
 
-        // TODO Добавить структуры и глабальные поля
+        // TODO Добавить структуры и глабальные поля и возможно названеие конфига
 
         /// <summary>
         ///     Configuration packets

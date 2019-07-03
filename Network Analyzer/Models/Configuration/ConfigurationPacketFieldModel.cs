@@ -3,7 +3,7 @@
     /// <summary>
     ///     This base class configuration field
     /// </summary>
-    public class ConfigurationFieldModel
+    public class ConfigurationPacketFieldModel
     {
         /// <summary>
         ///     Field name
