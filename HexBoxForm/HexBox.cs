@@ -2378,24 +2378,34 @@ namespace HexBoxForm
 				PaintColumnSeparator(e.Graphics);
         }
 
-        public void FillPaint(Graphics g, long start, long length, Brush brush)
+		/// <summary>
+		/// Paint fill in the hexbox
+		/// </summary>
+		/// <param name="g">Current graphics</param>
+		/// <param name="start">Start draw</param>
+		/// <param name="length">Length draw</param>
+		/// <param name="brush">Current color for draw</param>
+		public void FillPaint(Graphics g, long start, long length, Brush brush)
         {
             if (_byteProvider == null)
                 return;
 
-            for (long i = 0; i < length; i++)
-            {
-                if (_byteProvider.Length <= start + i)
-                    return;
+			if(start + length < _startByte || start > _endByte)
+				return;
 
-                Point gridPoint = GetGridBytePoint(start + i);
-                PointF bytePointF = GetBytePointF(gridPoint);
+			for (long viewByte = _startByte, indexView = 0; viewByte < _endByte; viewByte++, indexView++)
+			{
+				if (viewByte >= start && viewByte <= start + length - 1)
+				{
+					Point gridPoint = GetGridBytePoint(indexView);
+					PointF bytePointF = GetBytePointF(gridPoint);
 
-                bool isLastChar = length == i + 1 || _byteProvider.Length <= start + i + 1;
-                float bcWidth = (isLastChar) ? _charSize.Width * 2 : _charSize.Width * 3;
+					bool isLastChar = viewByte + 1 >= start + length;
+					float bcWidth = (isLastChar) ? _charSize.Width * 2 : _charSize.Width * 3;
 
-                g.FillRectangle(brush, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
-            }
+					g.FillRectangle(brush, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
+				}
+			}
         }
 
         void PaintLineInfo(Graphics g, long startByte, long endByte)

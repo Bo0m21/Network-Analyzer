@@ -1211,6 +1211,15 @@
             </summary>
             <param name="e">A PaintEventArgs that contains the event data.</param>
         </member>
+        <member name="M:HexBoxForm.HexBox.FillPaint(System.Drawing.Graphics,System.Int64,System.Int64,System.Drawing.Brush)">
+            <summary>
+            Paint fill in the hexbox
+            </summary>
+            <param name="g">Current graphics</param>
+            <param name="start">Start draw</param>
+            <param name="length">Length draw</param>
+            <param name="brush">Current color for draw</param>
+        </member>
         <member name="P:HexBoxForm.HexBox.BackColor">
             <summary>
             Gets or sets the background color for the control.
