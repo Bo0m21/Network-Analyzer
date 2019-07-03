@@ -124,15 +124,18 @@ namespace Network_Analyzer.Extensions
 
         public static string GetValue(this byte[] data, string type, long index, bool reverse)
         {
-            if (type == Localizer.LocalizeString("Types.Byte"))
-            {
-                return data.ReadByte((int) index).ToString();
-            }
+	        if (index < data.Length)
+	        {
+		        if (type == Localizer.LocalizeString("Types.Byte"))
+	            {
+	                return data.ReadByte((int) index).ToString();
+	            }
 
-            if (type == Localizer.LocalizeString("Types.Sbyte"))
-            {
-                return data.ReadSbyte((int) index).ToString();
-            }
+	            if (type == Localizer.LocalizeString("Types.Sbyte"))
+	            {
+	                return data.ReadSbyte((int) index).ToString();
+	            }
+	        }
 
             if (index + 1 < data.Length)
             {
