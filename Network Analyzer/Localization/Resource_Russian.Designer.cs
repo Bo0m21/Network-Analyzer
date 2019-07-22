@@ -106,7 +106,16 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ошибка опкод не модет быть пустым.
+        ///   Ищет локализованную строку, похожую на Ошибка опкод уже существует.
+        /// </summary>
+        internal static string ConfigurationClass_ErrorOpcodeAlreadyExists {
+            get {
+                return ResourceManager.GetString("ConfigurationClass.ErrorOpcodeAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка опкод не может быть пустым.
         /// </summary>
         internal static string ConfigurationClass_ErrorOpcodeCannotBeEmpty {
             get {

@@ -80,26 +80,32 @@ namespace Network_Analyzer
 				return;
 			}
 
-			string opcodePacket = "";
+			string opcode = "";
 			if (m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.Packets)
 			{
-				opcodePacket = m_ConnectionPacketModel.Opcode;
+				opcode = m_ConnectionPacketModel.Opcode;
 			}
 			else if (m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.ConfigurationPackets)
 			{
-				if (string.IsNullOrEmpty(tbOpcode.Text))
+				opcode = tbOpcode.Text;
+
+				if (string.IsNullOrEmpty(opcode))
 				{
 					lblInformation.Text = Localizer.LocalizeString("ConfigurationClass.ErrorOpcodeCannotBeEmpty");
 					return;
 				}
 
-				opcodePacket = tbOpcode.Text;
+				if (m_ConfigurationClasses.Any(c => c.Opcode == opcode))
+				{
+					lblInformation.Text = Localizer.LocalizeString("ConfigurationClass.ErrorOpcodeAlreadyExists");
+					return;
+				}
 			}
 
 			m_ConfigurationClasses.Add(new ConfigurationClassModel
 			{
 				Name = tbName.Text,
-				Opcode = opcodePacket
+				Opcode = opcode
 			});
 
 			Close();

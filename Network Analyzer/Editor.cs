@@ -961,7 +961,6 @@ namespace Network_Analyzer
 		/// </summary>
 		private void SetCurrentConfigurationClassModel()
 		{
-			// TODO Refactor method
 			if (m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.Packets)
 			{
 				if (m_ConfigurationModel == null)

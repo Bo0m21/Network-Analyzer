@@ -723,8 +723,11 @@
   <data name="Editor.ConfigurationPackets" xml:space="preserve">
     <value>Конфигурации пакетов</value>
   </data>
+  <data name="ConfigurationClass.ErrorOpcodeAlreadyExists" xml:space="preserve">
+    <value>Ошибка опкод уже существует</value>
+  </data>
   <data name="ConfigurationClass.ErrorOpcodeCannotBeEmpty" xml:space="preserve">
-    <value>Ошибка опкод не модет быть пустым</value>
+    <value>Ошибка опкод не может быть пустым</value>
   </data>
   <data name="ConfigurationClass.Opcode" xml:space="preserve">
     <value>Опкод</value>
