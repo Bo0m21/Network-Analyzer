@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Network_Analyzer.Decryptor.Decryptors
 {
+	// TODO Переписать
     public class R2Decryptor : IDecryptor
     {
         public List<DecryptorModel> Parse(byte[] data)

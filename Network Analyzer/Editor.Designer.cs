@@ -34,6 +34,18 @@ namespace Network_Analyzer
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
 			this.msMenu = new System.Windows.Forms.MenuStrip();
 			this.hexEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +61,7 @@ namespace Network_Analyzer
 			this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.createConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tcGeneral = new System.Windows.Forms.TabControl();
 			this.tpPackets = new System.Windows.Forms.TabPage();
 			this.cbAutoScroll = new System.Windows.Forms.CheckBox();
 			this.btnUpdatePackets = new System.Windows.Forms.Button();
@@ -58,6 +70,15 @@ namespace Network_Analyzer
 			this.cbTypeEncryptionPackets = new System.Windows.Forms.ComboBox();
 			this.cbTypePackets = new System.Windows.Forms.ComboBox();
 			this.dgvPackets = new System.Windows.Forms.DataGridView();
+			this.PacketNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PacketId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tpConfigurationPackets = new System.Windows.Forms.TabPage();
+			this.tpStructures = new System.Windows.Forms.TabPage();
+			this.dgvStructures = new System.Windows.Forms.DataGridView();
+			this.StructureNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.StructureName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.lblInformation = new System.Windows.Forms.Label();
 			this.gbHexEditor = new System.Windows.Forms.GroupBox();
 			this.btnSearchClear = new System.Windows.Forms.Button();
@@ -68,35 +89,25 @@ namespace Network_Analyzer
 			this.tpPacketInformation = new System.Windows.Forms.TabPage();
 			this.gbDataTypes = new System.Windows.Forms.GroupBox();
 			this.lblSequenceType = new System.Windows.Forms.Label();
-			this.btnStructureDouble = new System.Windows.Forms.Button();
 			this.cbSequenceType = new System.Windows.Forms.ComboBox();
 			this.btnFieldDouble = new System.Windows.Forms.Button();
 			this.tbDouble = new System.Windows.Forms.TextBox();
-			this.btnStructureUlong = new System.Windows.Forms.Button();
 			this.btnFieldUlong = new System.Windows.Forms.Button();
 			this.tbUlong = new System.Windows.Forms.TextBox();
-			this.btnStructureUint = new System.Windows.Forms.Button();
 			this.btnFieldUint = new System.Windows.Forms.Button();
 			this.tbUint = new System.Windows.Forms.TextBox();
-			this.btnStructureUshort = new System.Windows.Forms.Button();
 			this.btnFieldUshort = new System.Windows.Forms.Button();
 			this.tbUshort = new System.Windows.Forms.TextBox();
-			this.btnStructureSbyte = new System.Windows.Forms.Button();
 			this.btnFieldSbyte = new System.Windows.Forms.Button();
 			this.tbSbyte = new System.Windows.Forms.TextBox();
-			this.btnStructureFloat = new System.Windows.Forms.Button();
 			this.btnFieldFloat = new System.Windows.Forms.Button();
 			this.tbFloat = new System.Windows.Forms.TextBox();
-			this.btnStructureLong = new System.Windows.Forms.Button();
 			this.btnFieldLong = new System.Windows.Forms.Button();
 			this.tbLong = new System.Windows.Forms.TextBox();
-			this.btnStructureInt = new System.Windows.Forms.Button();
 			this.btnFieldInt = new System.Windows.Forms.Button();
 			this.tbInt = new System.Windows.Forms.TextBox();
-			this.btnStructureShort = new System.Windows.Forms.Button();
 			this.btnFieldShort = new System.Windows.Forms.Button();
 			this.tbShort = new System.Windows.Forms.TextBox();
-			this.btnStructureByte = new System.Windows.Forms.Button();
 			this.btnFieldByte = new System.Windows.Forms.Button();
 			this.tbByte = new System.Windows.Forms.TextBox();
 			this.lblDoubleType = new System.Windows.Forms.Label();
@@ -110,39 +121,46 @@ namespace Network_Analyzer
 			this.lblSbyteType = new System.Windows.Forms.Label();
 			this.lblByteType = new System.Windows.Forms.Label();
 			this.gbGeneralInformation = new System.Windows.Forms.GroupBox();
-			this.lblAllPackets = new System.Windows.Forms.Label();
+			this.lblClassCount = new System.Windows.Forms.Label();
 			this.lblSelectedLength = new System.Windows.Forms.Label();
-			this.lblLengthPacket = new System.Windows.Forms.Label();
+			this.lblDataLength = new System.Windows.Forms.Label();
 			this.lblSelectedIndex = new System.Windows.Forms.Label();
-			this.tabControl2 = new System.Windows.Forms.TabControl();
+			this.tcConfiguration = new System.Windows.Forms.TabControl();
 			this.tpConfiguration = new System.Windows.Forms.TabPage();
-			this.btnEditConfigurationField = new System.Windows.Forms.Button();
-			this.btnDeleteConfigurationField = new System.Windows.Forms.Button();
+			this.btnConfigurationAdd = new System.Windows.Forms.Button();
+			this.btnConfigurationDelete = new System.Windows.Forms.Button();
+			this.btnConfigurationFieldEdit = new System.Windows.Forms.Button();
+			this.btnConfigurationFieldDelete = new System.Windows.Forms.Button();
 			this.btnConfigurationFieldAdd = new System.Windows.Forms.Button();
 			this.dgvConfigurationFields = new System.Windows.Forms.DataGridView();
-			this.ConfigurationPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ConfigurationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ConfigurationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ConfigurationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.tbConfigurationPacketDescription = new System.Windows.Forms.TextBox();
-			this.lblConfigurationPacketDescription = new System.Windows.Forms.Label();
+			this.ConfigurationFieldPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationFieldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationFieldValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tbConfigurationDescription = new System.Windows.Forms.TextBox();
+			this.lblConfigurationDescription = new System.Windows.Forms.Label();
 			this.lblConfigurationName = new System.Windows.Forms.Label();
-			this.tbConfigurationPacketName = new System.Windows.Forms.TextBox();
-			this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tbConfigurationName = new System.Windows.Forms.TextBox();
+			this.tpBindings = new System.Windows.Forms.TabPage();
+			this.dgvConfigurationPackets = new System.Windows.Forms.DataGridView();
+			this.ConfigurationPacketNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationPacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationPacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.msMenu.SuspendLayout();
-			this.tabControl1.SuspendLayout();
+			this.tcGeneral.SuspendLayout();
 			this.tpPackets.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).BeginInit();
+			this.tpConfigurationPackets.SuspendLayout();
+			this.tpStructures.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvStructures)).BeginInit();
 			this.gbHexEditor.SuspendLayout();
 			this.tpPacketInformation.SuspendLayout();
 			this.gbDataTypes.SuspendLayout();
 			this.gbGeneralInformation.SuspendLayout();
-			this.tabControl2.SuspendLayout();
+			this.tcConfiguration.SuspendLayout();
 			this.tpConfiguration.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationFields)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// msMenu
@@ -259,14 +277,17 @@ namespace Network_Analyzer
 			this.createConfigurationToolStripMenuItem.Text = "Editor.CreateConfiguration";
 			this.createConfigurationToolStripMenuItem.Click += new System.EventHandler(this.CreateConfigurationToolStripMenuItem_Click);
 			// 
-			// tabControl1
+			// tcGeneral
 			// 
-			this.tabControl1.Controls.Add(this.tpPackets);
-			this.tabControl1.Location = new System.Drawing.Point(12, 27);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(330, 603);
-			this.tabControl1.TabIndex = 1;
+			this.tcGeneral.Controls.Add(this.tpPackets);
+			this.tcGeneral.Controls.Add(this.tpConfigurationPackets);
+			this.tcGeneral.Controls.Add(this.tpStructures);
+			this.tcGeneral.Location = new System.Drawing.Point(12, 27);
+			this.tcGeneral.Name = "tcGeneral";
+			this.tcGeneral.SelectedIndex = 0;
+			this.tcGeneral.Size = new System.Drawing.Size(330, 603);
+			this.tcGeneral.TabIndex = 1;
+			this.tcGeneral.SelectedIndexChanged += new System.EventHandler(this.TcGeneral_SelectedIndexChanged);
 			// 
 			// tpPackets
 			// 
@@ -372,20 +393,154 @@ namespace Network_Analyzer
 			this.dgvPackets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvPackets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvPackets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Number,
-            this.Id,
+            this.PacketNumber,
+            this.PacketId,
             this.PacketOpcode,
             this.PacketName});
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvPackets.DefaultCellStyle = dataGridViewCellStyle2;
 			this.dgvPackets.Location = new System.Drawing.Point(6, 33);
 			this.dgvPackets.Name = "dgvPackets";
 			this.dgvPackets.ReadOnly = true;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvPackets.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.dgvPackets.RowHeadersVisible = false;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.dgvPackets.RowsDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dgvPackets.RowsDefaultCellStyle = dataGridViewCellStyle4;
 			this.dgvPackets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvPackets.Size = new System.Drawing.Size(310, 463);
 			this.dgvPackets.TabIndex = 3;
 			this.dgvPackets.SelectionChanged += new System.EventHandler(this.DgvPackets_SelectionChanged);
+			// 
+			// PacketNumber
+			// 
+			this.PacketNumber.HeaderText = "№";
+			this.PacketNumber.Name = "PacketNumber";
+			this.PacketNumber.ReadOnly = true;
+			this.PacketNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.PacketNumber.Width = 50;
+			// 
+			// PacketId
+			// 
+			this.PacketId.HeaderText = "Id";
+			this.PacketId.Name = "PacketId";
+			this.PacketId.ReadOnly = true;
+			this.PacketId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.PacketId.Visible = false;
+			// 
+			// PacketOpcode
+			// 
+			this.PacketOpcode.HeaderText = "Editor.PacketOpcode";
+			this.PacketOpcode.Name = "PacketOpcode";
+			this.PacketOpcode.ReadOnly = true;
+			this.PacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.PacketOpcode.Width = 70;
+			// 
+			// PacketName
+			// 
+			this.PacketName.HeaderText = "Editor.PacketName";
+			this.PacketName.Name = "PacketName";
+			this.PacketName.ReadOnly = true;
+			this.PacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.PacketName.Width = 170;
+			// 
+			// tpConfigurationPackets
+			// 
+			this.tpConfigurationPackets.BackColor = System.Drawing.SystemColors.Control;
+			this.tpConfigurationPackets.Controls.Add(this.dgvConfigurationPackets);
+			this.tpConfigurationPackets.Location = new System.Drawing.Point(4, 22);
+			this.tpConfigurationPackets.Name = "tpConfigurationPackets";
+			this.tpConfigurationPackets.Padding = new System.Windows.Forms.Padding(3);
+			this.tpConfigurationPackets.Size = new System.Drawing.Size(322, 577);
+			this.tpConfigurationPackets.TabIndex = 3;
+			this.tpConfigurationPackets.Text = "Editor.ConfigurationPackets";
+			// 
+			// tpStructures
+			// 
+			this.tpStructures.BackColor = System.Drawing.SystemColors.Control;
+			this.tpStructures.Controls.Add(this.dgvStructures);
+			this.tpStructures.Location = new System.Drawing.Point(4, 22);
+			this.tpStructures.Name = "tpStructures";
+			this.tpStructures.Padding = new System.Windows.Forms.Padding(3);
+			this.tpStructures.Size = new System.Drawing.Size(322, 577);
+			this.tpStructures.TabIndex = 2;
+			this.tpStructures.Text = "Editor.Structures";
+			// 
+			// dgvStructures
+			// 
+			this.dgvStructures.AllowDrop = true;
+			this.dgvStructures.AllowUserToAddRows = false;
+			this.dgvStructures.AllowUserToDeleteRows = false;
+			this.dgvStructures.AllowUserToOrderColumns = true;
+			this.dgvStructures.AllowUserToResizeColumns = false;
+			this.dgvStructures.AllowUserToResizeRows = false;
+			this.dgvStructures.BackgroundColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvStructures.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			this.dgvStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvStructures.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.StructureNumber,
+            this.StructureName});
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvStructures.DefaultCellStyle = dataGridViewCellStyle10;
+			this.dgvStructures.Location = new System.Drawing.Point(6, 6);
+			this.dgvStructures.Name = "dgvStructures";
+			this.dgvStructures.ReadOnly = true;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvStructures.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+			this.dgvStructures.RowHeadersVisible = false;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dgvStructures.RowsDefaultCellStyle = dataGridViewCellStyle12;
+			this.dgvStructures.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvStructures.Size = new System.Drawing.Size(310, 565);
+			this.dgvStructures.TabIndex = 4;
+			this.dgvStructures.SelectionChanged += new System.EventHandler(this.DgvStructures_SelectionChanged);
+			// 
+			// StructureNumber
+			// 
+			this.StructureNumber.HeaderText = "№";
+			this.StructureNumber.Name = "StructureNumber";
+			this.StructureNumber.ReadOnly = true;
+			this.StructureNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.StructureNumber.Width = 50;
+			// 
+			// StructureName
+			// 
+			this.StructureName.HeaderText = "Editor.StructureName";
+			this.StructureName.Name = "StructureName";
+			this.StructureName.ReadOnly = true;
+			this.StructureName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.StructureName.Width = 240;
 			// 
 			// lblInformation
 			// 
@@ -435,6 +590,7 @@ namespace Network_Analyzer
 			this.cbSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbSearchType.FormattingEnabled = true;
 			this.cbSearchType.Items.AddRange(new object[] {
+            "Editor.SearchName",
             "Editor.SearchOpcode",
             "Editor.SearchBytes"});
 			this.cbSearchType.Location = new System.Drawing.Point(6, 576);
@@ -487,35 +643,25 @@ namespace Network_Analyzer
 			// gbDataTypes
 			// 
 			this.gbDataTypes.Controls.Add(this.lblSequenceType);
-			this.gbDataTypes.Controls.Add(this.btnStructureDouble);
 			this.gbDataTypes.Controls.Add(this.cbSequenceType);
 			this.gbDataTypes.Controls.Add(this.btnFieldDouble);
 			this.gbDataTypes.Controls.Add(this.tbDouble);
-			this.gbDataTypes.Controls.Add(this.btnStructureUlong);
 			this.gbDataTypes.Controls.Add(this.btnFieldUlong);
 			this.gbDataTypes.Controls.Add(this.tbUlong);
-			this.gbDataTypes.Controls.Add(this.btnStructureUint);
 			this.gbDataTypes.Controls.Add(this.btnFieldUint);
 			this.gbDataTypes.Controls.Add(this.tbUint);
-			this.gbDataTypes.Controls.Add(this.btnStructureUshort);
 			this.gbDataTypes.Controls.Add(this.btnFieldUshort);
 			this.gbDataTypes.Controls.Add(this.tbUshort);
-			this.gbDataTypes.Controls.Add(this.btnStructureSbyte);
 			this.gbDataTypes.Controls.Add(this.btnFieldSbyte);
 			this.gbDataTypes.Controls.Add(this.tbSbyte);
-			this.gbDataTypes.Controls.Add(this.btnStructureFloat);
 			this.gbDataTypes.Controls.Add(this.btnFieldFloat);
 			this.gbDataTypes.Controls.Add(this.tbFloat);
-			this.gbDataTypes.Controls.Add(this.btnStructureLong);
 			this.gbDataTypes.Controls.Add(this.btnFieldLong);
 			this.gbDataTypes.Controls.Add(this.tbLong);
-			this.gbDataTypes.Controls.Add(this.btnStructureInt);
 			this.gbDataTypes.Controls.Add(this.btnFieldInt);
 			this.gbDataTypes.Controls.Add(this.tbInt);
-			this.gbDataTypes.Controls.Add(this.btnStructureShort);
 			this.gbDataTypes.Controls.Add(this.btnFieldShort);
 			this.gbDataTypes.Controls.Add(this.tbShort);
-			this.gbDataTypes.Controls.Add(this.btnStructureByte);
 			this.gbDataTypes.Controls.Add(this.btnFieldByte);
 			this.gbDataTypes.Controls.Add(this.tbByte);
 			this.gbDataTypes.Controls.Add(this.lblDoubleType);
@@ -545,15 +691,6 @@ namespace Network_Analyzer
 			this.lblSequenceType.TabIndex = 54;
 			this.lblSequenceType.Text = "Editor.SequenceType";
 			// 
-			// btnStructureDouble
-			// 
-			this.btnStructureDouble.Location = new System.Drawing.Point(288, 307);
-			this.btnStructureDouble.Name = "btnStructureDouble";
-			this.btnStructureDouble.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureDouble.TabIndex = 53;
-			this.btnStructureDouble.Text = "Two";
-			this.btnStructureDouble.UseVisualStyleBackColor = true;
-			// 
 			// cbSequenceType
 			// 
 			this.cbSequenceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -571,11 +708,11 @@ namespace Network_Analyzer
 			// 
 			this.btnFieldDouble.Location = new System.Drawing.Point(247, 307);
 			this.btnFieldDouble.Name = "btnFieldDouble";
-			this.btnFieldDouble.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldDouble.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldDouble.TabIndex = 52;
 			this.btnFieldDouble.Text = "One";
 			this.btnFieldDouble.UseVisualStyleBackColor = true;
-			this.btnFieldDouble.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldDouble.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbDouble
 			// 
@@ -585,24 +722,15 @@ namespace Network_Analyzer
 			this.tbDouble.Size = new System.Drawing.Size(182, 20);
 			this.tbDouble.TabIndex = 51;
 			// 
-			// btnStructureUlong
-			// 
-			this.btnStructureUlong.Location = new System.Drawing.Point(288, 278);
-			this.btnStructureUlong.Name = "btnStructureUlong";
-			this.btnStructureUlong.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureUlong.TabIndex = 50;
-			this.btnStructureUlong.Text = "Two";
-			this.btnStructureUlong.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldUlong
 			// 
 			this.btnFieldUlong.Location = new System.Drawing.Point(247, 278);
 			this.btnFieldUlong.Name = "btnFieldUlong";
-			this.btnFieldUlong.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldUlong.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldUlong.TabIndex = 49;
 			this.btnFieldUlong.Text = "One";
 			this.btnFieldUlong.UseVisualStyleBackColor = true;
-			this.btnFieldUlong.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldUlong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUlong
 			// 
@@ -612,24 +740,15 @@ namespace Network_Analyzer
 			this.tbUlong.Size = new System.Drawing.Size(182, 20);
 			this.tbUlong.TabIndex = 48;
 			// 
-			// btnStructureUint
-			// 
-			this.btnStructureUint.Location = new System.Drawing.Point(288, 249);
-			this.btnStructureUint.Name = "btnStructureUint";
-			this.btnStructureUint.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureUint.TabIndex = 47;
-			this.btnStructureUint.Text = "Two";
-			this.btnStructureUint.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldUint
 			// 
 			this.btnFieldUint.Location = new System.Drawing.Point(247, 249);
 			this.btnFieldUint.Name = "btnFieldUint";
-			this.btnFieldUint.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldUint.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldUint.TabIndex = 46;
 			this.btnFieldUint.Text = "One";
 			this.btnFieldUint.UseVisualStyleBackColor = true;
-			this.btnFieldUint.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldUint.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUint
 			// 
@@ -639,24 +758,15 @@ namespace Network_Analyzer
 			this.tbUint.Size = new System.Drawing.Size(182, 20);
 			this.tbUint.TabIndex = 45;
 			// 
-			// btnStructureUshort
-			// 
-			this.btnStructureUshort.Location = new System.Drawing.Point(288, 220);
-			this.btnStructureUshort.Name = "btnStructureUshort";
-			this.btnStructureUshort.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureUshort.TabIndex = 44;
-			this.btnStructureUshort.Text = "Two";
-			this.btnStructureUshort.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldUshort
 			// 
 			this.btnFieldUshort.Location = new System.Drawing.Point(247, 220);
 			this.btnFieldUshort.Name = "btnFieldUshort";
-			this.btnFieldUshort.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldUshort.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldUshort.TabIndex = 43;
 			this.btnFieldUshort.Text = "One";
 			this.btnFieldUshort.UseVisualStyleBackColor = true;
-			this.btnFieldUshort.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldUshort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUshort
 			// 
@@ -666,24 +776,15 @@ namespace Network_Analyzer
 			this.tbUshort.Size = new System.Drawing.Size(182, 20);
 			this.tbUshort.TabIndex = 42;
 			// 
-			// btnStructureSbyte
-			// 
-			this.btnStructureSbyte.Location = new System.Drawing.Point(288, 191);
-			this.btnStructureSbyte.Name = "btnStructureSbyte";
-			this.btnStructureSbyte.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureSbyte.TabIndex = 41;
-			this.btnStructureSbyte.Text = "Two";
-			this.btnStructureSbyte.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldSbyte
 			// 
 			this.btnFieldSbyte.Location = new System.Drawing.Point(247, 191);
 			this.btnFieldSbyte.Name = "btnFieldSbyte";
-			this.btnFieldSbyte.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldSbyte.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldSbyte.TabIndex = 40;
 			this.btnFieldSbyte.Text = "One";
 			this.btnFieldSbyte.UseVisualStyleBackColor = true;
-			this.btnFieldSbyte.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldSbyte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbSbyte
 			// 
@@ -693,24 +794,15 @@ namespace Network_Analyzer
 			this.tbSbyte.Size = new System.Drawing.Size(182, 20);
 			this.tbSbyte.TabIndex = 39;
 			// 
-			// btnStructureFloat
-			// 
-			this.btnStructureFloat.Location = new System.Drawing.Point(288, 162);
-			this.btnStructureFloat.Name = "btnStructureFloat";
-			this.btnStructureFloat.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureFloat.TabIndex = 38;
-			this.btnStructureFloat.Text = "Two";
-			this.btnStructureFloat.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldFloat
 			// 
 			this.btnFieldFloat.Location = new System.Drawing.Point(247, 162);
 			this.btnFieldFloat.Name = "btnFieldFloat";
-			this.btnFieldFloat.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldFloat.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldFloat.TabIndex = 37;
 			this.btnFieldFloat.Text = "One";
 			this.btnFieldFloat.UseVisualStyleBackColor = true;
-			this.btnFieldFloat.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldFloat.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbFloat
 			// 
@@ -720,24 +812,15 @@ namespace Network_Analyzer
 			this.tbFloat.Size = new System.Drawing.Size(182, 20);
 			this.tbFloat.TabIndex = 36;
 			// 
-			// btnStructureLong
-			// 
-			this.btnStructureLong.Location = new System.Drawing.Point(288, 133);
-			this.btnStructureLong.Name = "btnStructureLong";
-			this.btnStructureLong.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureLong.TabIndex = 35;
-			this.btnStructureLong.Text = "Two";
-			this.btnStructureLong.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldLong
 			// 
 			this.btnFieldLong.Location = new System.Drawing.Point(247, 133);
 			this.btnFieldLong.Name = "btnFieldLong";
-			this.btnFieldLong.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldLong.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldLong.TabIndex = 34;
 			this.btnFieldLong.Text = "One";
 			this.btnFieldLong.UseVisualStyleBackColor = true;
-			this.btnFieldLong.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldLong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbLong
 			// 
@@ -747,24 +830,15 @@ namespace Network_Analyzer
 			this.tbLong.Size = new System.Drawing.Size(182, 20);
 			this.tbLong.TabIndex = 33;
 			// 
-			// btnStructureInt
-			// 
-			this.btnStructureInt.Location = new System.Drawing.Point(288, 104);
-			this.btnStructureInt.Name = "btnStructureInt";
-			this.btnStructureInt.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureInt.TabIndex = 32;
-			this.btnStructureInt.Text = "Two";
-			this.btnStructureInt.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldInt
 			// 
 			this.btnFieldInt.Location = new System.Drawing.Point(247, 104);
 			this.btnFieldInt.Name = "btnFieldInt";
-			this.btnFieldInt.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldInt.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldInt.TabIndex = 31;
 			this.btnFieldInt.Text = "One";
 			this.btnFieldInt.UseVisualStyleBackColor = true;
-			this.btnFieldInt.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldInt.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbInt
 			// 
@@ -774,24 +848,15 @@ namespace Network_Analyzer
 			this.tbInt.Size = new System.Drawing.Size(182, 20);
 			this.tbInt.TabIndex = 30;
 			// 
-			// btnStructureShort
-			// 
-			this.btnStructureShort.Location = new System.Drawing.Point(288, 75);
-			this.btnStructureShort.Name = "btnStructureShort";
-			this.btnStructureShort.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureShort.TabIndex = 29;
-			this.btnStructureShort.Text = "Two";
-			this.btnStructureShort.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldShort
 			// 
 			this.btnFieldShort.Location = new System.Drawing.Point(247, 75);
 			this.btnFieldShort.Name = "btnFieldShort";
-			this.btnFieldShort.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldShort.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldShort.TabIndex = 28;
 			this.btnFieldShort.Text = "One";
 			this.btnFieldShort.UseVisualStyleBackColor = true;
-			this.btnFieldShort.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldShort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbShort
 			// 
@@ -801,24 +866,15 @@ namespace Network_Analyzer
 			this.tbShort.Size = new System.Drawing.Size(182, 20);
 			this.tbShort.TabIndex = 27;
 			// 
-			// btnStructureByte
-			// 
-			this.btnStructureByte.Location = new System.Drawing.Point(288, 46);
-			this.btnStructureByte.Name = "btnStructureByte";
-			this.btnStructureByte.Size = new System.Drawing.Size(36, 23);
-			this.btnStructureByte.TabIndex = 26;
-			this.btnStructureByte.Text = "Two";
-			this.btnStructureByte.UseVisualStyleBackColor = true;
-			// 
 			// btnFieldByte
 			// 
 			this.btnFieldByte.Location = new System.Drawing.Point(247, 46);
 			this.btnFieldByte.Name = "btnFieldByte";
-			this.btnFieldByte.Size = new System.Drawing.Size(35, 23);
+			this.btnFieldByte.Size = new System.Drawing.Size(77, 23);
 			this.btnFieldByte.TabIndex = 25;
 			this.btnFieldByte.Text = "One";
 			this.btnFieldByte.UseVisualStyleBackColor = true;
-			this.btnFieldByte.Click += new System.EventHandler(this.BtnAddFieldToConfiguration_Click);
+			this.btnFieldByte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbByte
 			// 
@@ -930,9 +986,9 @@ namespace Network_Analyzer
 			// 
 			// gbGeneralInformation
 			// 
-			this.gbGeneralInformation.Controls.Add(this.lblAllPackets);
+			this.gbGeneralInformation.Controls.Add(this.lblClassCount);
 			this.gbGeneralInformation.Controls.Add(this.lblSelectedLength);
-			this.gbGeneralInformation.Controls.Add(this.lblLengthPacket);
+			this.gbGeneralInformation.Controls.Add(this.lblDataLength);
 			this.gbGeneralInformation.Controls.Add(this.lblSelectedIndex);
 			this.gbGeneralInformation.Location = new System.Drawing.Point(6, 6);
 			this.gbGeneralInformation.Name = "gbGeneralInformation";
@@ -941,15 +997,15 @@ namespace Network_Analyzer
 			this.gbGeneralInformation.TabStop = false;
 			this.gbGeneralInformation.Text = "Editor.GeneralInformation";
 			// 
-			// lblAllPackets
+			// lblClassCount
 			// 
-			this.lblAllPackets.AutoSize = true;
-			this.lblAllPackets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblAllPackets.Location = new System.Drawing.Point(6, 16);
-			this.lblAllPackets.Name = "lblAllPackets";
-			this.lblAllPackets.Size = new System.Drawing.Size(98, 15);
-			this.lblAllPackets.TabIndex = 14;
-			this.lblAllPackets.Text = "Editor.AllPackets";
+			this.lblClassCount.AutoSize = true;
+			this.lblClassCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblClassCount.Location = new System.Drawing.Point(6, 16);
+			this.lblClassCount.Name = "lblClassCount";
+			this.lblClassCount.Size = new System.Drawing.Size(104, 15);
+			this.lblClassCount.TabIndex = 14;
+			this.lblClassCount.Text = "Editor.ClassCount";
 			// 
 			// lblSelectedLength
 			// 
@@ -961,15 +1017,15 @@ namespace Network_Analyzer
 			this.lblSelectedLength.TabIndex = 37;
 			this.lblSelectedLength.Text = "Editor.SelectedLength";
 			// 
-			// lblLengthPacket
+			// lblDataLength
 			// 
-			this.lblLengthPacket.AutoSize = true;
-			this.lblLengthPacket.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblLengthPacket.Location = new System.Drawing.Point(6, 31);
-			this.lblLengthPacket.Name = "lblLengthPacket";
-			this.lblLengthPacket.Size = new System.Drawing.Size(117, 15);
-			this.lblLengthPacket.TabIndex = 15;
-			this.lblLengthPacket.Text = "Editor.LengthPacket";
+			this.lblDataLength.AutoSize = true;
+			this.lblDataLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblDataLength.Location = new System.Drawing.Point(6, 31);
+			this.lblDataLength.Name = "lblDataLength";
+			this.lblDataLength.Size = new System.Drawing.Size(106, 15);
+			this.lblDataLength.TabIndex = 15;
+			this.lblDataLength.Text = "Editor.DataLength";
 			// 
 			// lblSelectedIndex
 			// 
@@ -981,27 +1037,31 @@ namespace Network_Analyzer
 			this.lblSelectedIndex.TabIndex = 35;
 			this.lblSelectedIndex.Text = "Editor.SelectedIndex";
 			// 
-			// tabControl2
+			// tcConfiguration
 			// 
-			this.tabControl2.Controls.Add(this.tpPacketInformation);
-			this.tabControl2.Controls.Add(this.tpConfiguration);
-			this.tabControl2.Location = new System.Drawing.Point(928, 27);
-			this.tabControl2.Name = "tabControl2";
-			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(350, 603);
-			this.tabControl2.TabIndex = 16;
+			this.tcConfiguration.Controls.Add(this.tpPacketInformation);
+			this.tcConfiguration.Controls.Add(this.tpConfiguration);
+			this.tcConfiguration.Controls.Add(this.tpBindings);
+			this.tcConfiguration.Location = new System.Drawing.Point(928, 27);
+			this.tcConfiguration.Name = "tcConfiguration";
+			this.tcConfiguration.SelectedIndex = 0;
+			this.tcConfiguration.Size = new System.Drawing.Size(350, 603);
+			this.tcConfiguration.TabIndex = 16;
+			this.tcConfiguration.SelectedIndexChanged += new System.EventHandler(this.TcConfiguration_SelectedIndexChanged);
 			// 
 			// tpConfiguration
 			// 
 			this.tpConfiguration.BackColor = System.Drawing.SystemColors.Control;
-			this.tpConfiguration.Controls.Add(this.btnEditConfigurationField);
-			this.tpConfiguration.Controls.Add(this.btnDeleteConfigurationField);
+			this.tpConfiguration.Controls.Add(this.btnConfigurationAdd);
+			this.tpConfiguration.Controls.Add(this.btnConfigurationDelete);
+			this.tpConfiguration.Controls.Add(this.btnConfigurationFieldEdit);
+			this.tpConfiguration.Controls.Add(this.btnConfigurationFieldDelete);
 			this.tpConfiguration.Controls.Add(this.btnConfigurationFieldAdd);
 			this.tpConfiguration.Controls.Add(this.dgvConfigurationFields);
-			this.tpConfiguration.Controls.Add(this.tbConfigurationPacketDescription);
-			this.tpConfiguration.Controls.Add(this.lblConfigurationPacketDescription);
+			this.tpConfiguration.Controls.Add(this.tbConfigurationDescription);
+			this.tpConfiguration.Controls.Add(this.lblConfigurationDescription);
 			this.tpConfiguration.Controls.Add(this.lblConfigurationName);
-			this.tpConfiguration.Controls.Add(this.tbConfigurationPacketName);
+			this.tpConfiguration.Controls.Add(this.tbConfigurationName);
 			this.tpConfiguration.Location = new System.Drawing.Point(4, 22);
 			this.tpConfiguration.Name = "tpConfiguration";
 			this.tpConfiguration.Padding = new System.Windows.Forms.Padding(3);
@@ -1009,35 +1069,55 @@ namespace Network_Analyzer
 			this.tpConfiguration.TabIndex = 1;
 			this.tpConfiguration.Text = "Editor.Configuration";
 			// 
-			// btnEditConfigurationField
+			// btnConfigurationAdd
 			// 
-			this.btnEditConfigurationField.Location = new System.Drawing.Point(118, 548);
-			this.btnEditConfigurationField.Name = "btnEditConfigurationField";
-			this.btnEditConfigurationField.Size = new System.Drawing.Size(106, 23);
-			this.btnEditConfigurationField.TabIndex = 24;
-			this.btnEditConfigurationField.Text = "Editor.EditConfigurationField";
-			this.btnEditConfigurationField.UseVisualStyleBackColor = true;
-			this.btnEditConfigurationField.Click += new System.EventHandler(this.BtnEditConfigurationField_Click);
+			this.btnConfigurationAdd.Location = new System.Drawing.Point(6, 548);
+			this.btnConfigurationAdd.Name = "btnConfigurationAdd";
+			this.btnConfigurationAdd.Size = new System.Drawing.Size(162, 23);
+			this.btnConfigurationAdd.TabIndex = 26;
+			this.btnConfigurationAdd.Text = "Editor.ConfigurationAdd";
+			this.btnConfigurationAdd.UseVisualStyleBackColor = true;
+			this.btnConfigurationAdd.Click += new System.EventHandler(this.BtnConfigurationAdd_Click);
 			// 
-			// btnDeleteConfigurationField
+			// btnConfigurationDelete
 			// 
-			this.btnDeleteConfigurationField.Location = new System.Drawing.Point(230, 548);
-			this.btnDeleteConfigurationField.Name = "btnDeleteConfigurationField";
-			this.btnDeleteConfigurationField.Size = new System.Drawing.Size(106, 23);
-			this.btnDeleteConfigurationField.TabIndex = 23;
-			this.btnDeleteConfigurationField.Text = "Editor.DeleteConfigurationField";
-			this.btnDeleteConfigurationField.UseVisualStyleBackColor = true;
-			this.btnDeleteConfigurationField.Click += new System.EventHandler(this.BtnDeleteConfigurationField_Click);
+			this.btnConfigurationDelete.Location = new System.Drawing.Point(174, 548);
+			this.btnConfigurationDelete.Name = "btnConfigurationDelete";
+			this.btnConfigurationDelete.Size = new System.Drawing.Size(162, 23);
+			this.btnConfigurationDelete.TabIndex = 25;
+			this.btnConfigurationDelete.Text = "Editor.ConfigurationDelete";
+			this.btnConfigurationDelete.UseVisualStyleBackColor = true;
+			this.btnConfigurationDelete.Click += new System.EventHandler(this.BtnConfigurationDelete_Click);
+			// 
+			// btnConfigurationFieldEdit
+			// 
+			this.btnConfigurationFieldEdit.Location = new System.Drawing.Point(118, 519);
+			this.btnConfigurationFieldEdit.Name = "btnConfigurationFieldEdit";
+			this.btnConfigurationFieldEdit.Size = new System.Drawing.Size(106, 23);
+			this.btnConfigurationFieldEdit.TabIndex = 24;
+			this.btnConfigurationFieldEdit.Text = "Editor.ConfigurationFieldEdit";
+			this.btnConfigurationFieldEdit.UseVisualStyleBackColor = true;
+			this.btnConfigurationFieldEdit.Click += new System.EventHandler(this.BtnConfigurationFieldEdit_Click);
+			// 
+			// btnConfigurationFieldDelete
+			// 
+			this.btnConfigurationFieldDelete.Location = new System.Drawing.Point(230, 519);
+			this.btnConfigurationFieldDelete.Name = "btnConfigurationFieldDelete";
+			this.btnConfigurationFieldDelete.Size = new System.Drawing.Size(106, 23);
+			this.btnConfigurationFieldDelete.TabIndex = 23;
+			this.btnConfigurationFieldDelete.Text = "Editor.ConfigurationFieldDelete";
+			this.btnConfigurationFieldDelete.UseVisualStyleBackColor = true;
+			this.btnConfigurationFieldDelete.Click += new System.EventHandler(this.BtnConfigurationFieldDelete_Click);
 			// 
 			// btnConfigurationFieldAdd
 			// 
-			this.btnConfigurationFieldAdd.Location = new System.Drawing.Point(6, 548);
+			this.btnConfigurationFieldAdd.Location = new System.Drawing.Point(6, 519);
 			this.btnConfigurationFieldAdd.Name = "btnConfigurationFieldAdd";
 			this.btnConfigurationFieldAdd.Size = new System.Drawing.Size(106, 23);
 			this.btnConfigurationFieldAdd.TabIndex = 22;
-			this.btnConfigurationFieldAdd.Text = "Editor.AddConfigurationField";
+			this.btnConfigurationFieldAdd.Text = "Editor.ConfigurationFieldAdd";
 			this.btnConfigurationFieldAdd.UseVisualStyleBackColor = true;
-			this.btnConfigurationFieldAdd.Click += new System.EventHandler(this.BtnAddConfigurationField_Click);
+			this.btnConfigurationFieldAdd.Click += new System.EventHandler(this.BtnConfigurationFieldAdd_Click);
 			// 
 			// dgvConfigurationFields
 			// 
@@ -1048,79 +1128,95 @@ namespace Network_Analyzer
 			this.dgvConfigurationFields.AllowUserToResizeColumns = false;
 			this.dgvConfigurationFields.AllowUserToResizeRows = false;
 			this.dgvConfigurationFields.BackgroundColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvConfigurationFields.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationFields.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
 			this.dgvConfigurationFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvConfigurationFields.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ConfigurationPosition,
-            this.ConfigurationType,
-            this.ConfigurationName,
-            this.ConfigurationValue});
+            this.ConfigurationFieldPosition,
+            this.ConfigurationFieldType,
+            this.ConfigurationFieldName,
+            this.ConfigurationFieldValue});
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvConfigurationFields.DefaultCellStyle = dataGridViewCellStyle14;
 			this.dgvConfigurationFields.Location = new System.Drawing.Point(6, 117);
 			this.dgvConfigurationFields.Name = "dgvConfigurationFields";
 			this.dgvConfigurationFields.ReadOnly = true;
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationFields.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
 			this.dgvConfigurationFields.RowHeadersVisible = false;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.dgvConfigurationFields.RowsDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dgvConfigurationFields.RowsDefaultCellStyle = dataGridViewCellStyle16;
 			this.dgvConfigurationFields.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvConfigurationFields.Size = new System.Drawing.Size(330, 425);
+			this.dgvConfigurationFields.Size = new System.Drawing.Size(330, 396);
 			this.dgvConfigurationFields.TabIndex = 22;
 			// 
-			// ConfigurationPosition
+			// ConfigurationFieldPosition
 			// 
-			this.ConfigurationPosition.HeaderText = "Editor.ConfigurationPosition";
-			this.ConfigurationPosition.Name = "ConfigurationPosition";
-			this.ConfigurationPosition.ReadOnly = true;
-			this.ConfigurationPosition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationPosition.Width = 75;
+			this.ConfigurationFieldPosition.HeaderText = "Editor.ConfigurationFieldPosition";
+			this.ConfigurationFieldPosition.Name = "ConfigurationFieldPosition";
+			this.ConfigurationFieldPosition.ReadOnly = true;
+			this.ConfigurationFieldPosition.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationFieldPosition.Width = 75;
 			// 
-			// ConfigurationType
+			// ConfigurationFieldType
 			// 
-			this.ConfigurationType.HeaderText = "Editor.ConfigurationType";
-			this.ConfigurationType.Name = "ConfigurationType";
-			this.ConfigurationType.ReadOnly = true;
-			this.ConfigurationType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationType.Width = 75;
+			this.ConfigurationFieldType.HeaderText = "Editor.ConfigurationFieldType";
+			this.ConfigurationFieldType.Name = "ConfigurationFieldType";
+			this.ConfigurationFieldType.ReadOnly = true;
+			this.ConfigurationFieldType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationFieldType.Width = 75;
 			// 
-			// ConfigurationName
+			// ConfigurationFieldName
 			// 
-			this.ConfigurationName.HeaderText = "Editor.ConfigurationName";
-			this.ConfigurationName.Name = "ConfigurationName";
-			this.ConfigurationName.ReadOnly = true;
-			this.ConfigurationName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationName.Width = 150;
+			this.ConfigurationFieldName.HeaderText = "Editor.ConfigurationFieldName";
+			this.ConfigurationFieldName.Name = "ConfigurationFieldName";
+			this.ConfigurationFieldName.ReadOnly = true;
+			this.ConfigurationFieldName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationFieldName.Width = 150;
 			// 
-			// ConfigurationValue
+			// ConfigurationFieldValue
 			// 
-			this.ConfigurationValue.HeaderText = "Editor.ConfigurationValue";
-			this.ConfigurationValue.Name = "ConfigurationValue";
-			this.ConfigurationValue.ReadOnly = true;
-			this.ConfigurationValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationFieldValue.HeaderText = "Editor.ConfigurationFieldValue";
+			this.ConfigurationFieldValue.Name = "ConfigurationFieldValue";
+			this.ConfigurationFieldValue.ReadOnly = true;
+			this.ConfigurationFieldValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// tbConfigurationPacketDescription
+			// tbConfigurationDescription
 			// 
-			this.tbConfigurationPacketDescription.Location = new System.Drawing.Point(6, 66);
-			this.tbConfigurationPacketDescription.Multiline = true;
-			this.tbConfigurationPacketDescription.Name = "tbConfigurationPacketDescription";
-			this.tbConfigurationPacketDescription.Size = new System.Drawing.Size(330, 45);
-			this.tbConfigurationPacketDescription.TabIndex = 22;
-			this.tbConfigurationPacketDescription.TextChanged += new System.EventHandler(this.TbConfigurationPacketDescription_TextChanged);
+			this.tbConfigurationDescription.Location = new System.Drawing.Point(6, 66);
+			this.tbConfigurationDescription.Multiline = true;
+			this.tbConfigurationDescription.Name = "tbConfigurationDescription";
+			this.tbConfigurationDescription.Size = new System.Drawing.Size(330, 45);
+			this.tbConfigurationDescription.TabIndex = 22;
+			this.tbConfigurationDescription.Leave += new System.EventHandler(this.TbConfigurationDescription_Leave);
 			// 
-			// lblConfigurationPacketDescription
+			// lblConfigurationDescription
 			// 
-			this.lblConfigurationPacketDescription.AutoSize = true;
-			this.lblConfigurationPacketDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblConfigurationPacketDescription.Location = new System.Drawing.Point(6, 48);
-			this.lblConfigurationPacketDescription.Name = "lblConfigurationPacketDescription";
-			this.lblConfigurationPacketDescription.Size = new System.Drawing.Size(214, 15);
-			this.lblConfigurationPacketDescription.TabIndex = 21;
-			this.lblConfigurationPacketDescription.Text = "Editor.ConfigurationPacketDescription";
+			this.lblConfigurationDescription.AutoSize = true;
+			this.lblConfigurationDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblConfigurationDescription.Location = new System.Drawing.Point(6, 48);
+			this.lblConfigurationDescription.Name = "lblConfigurationDescription";
+			this.lblConfigurationDescription.Size = new System.Drawing.Size(177, 15);
+			this.lblConfigurationDescription.TabIndex = 21;
+			this.lblConfigurationDescription.Text = "Editor.ConfigurationDescription";
 			// 
 			// lblConfigurationName
 			// 
@@ -1128,59 +1224,110 @@ namespace Network_Analyzer
 			this.lblConfigurationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.lblConfigurationName.Location = new System.Drawing.Point(6, 7);
 			this.lblConfigurationName.Name = "lblConfigurationName";
-			this.lblConfigurationName.Size = new System.Drawing.Size(186, 15);
+			this.lblConfigurationName.Size = new System.Drawing.Size(149, 15);
 			this.lblConfigurationName.TabIndex = 20;
-			this.lblConfigurationName.Text = "Editor.ConfigurationPacketName";
+			this.lblConfigurationName.Text = "Editor.ConfigurationName";
 			// 
-			// tbConfigurationPacketName
+			// tbConfigurationName
 			// 
-			this.tbConfigurationPacketName.Location = new System.Drawing.Point(6, 25);
-			this.tbConfigurationPacketName.Name = "tbConfigurationPacketName";
-			this.tbConfigurationPacketName.Size = new System.Drawing.Size(330, 20);
-			this.tbConfigurationPacketName.TabIndex = 19;
-			this.tbConfigurationPacketName.TextChanged += new System.EventHandler(this.TbConfigurationPacketName_TextChanged);
+			this.tbConfigurationName.Location = new System.Drawing.Point(6, 25);
+			this.tbConfigurationName.Name = "tbConfigurationName";
+			this.tbConfigurationName.Size = new System.Drawing.Size(330, 20);
+			this.tbConfigurationName.TabIndex = 19;
+			this.tbConfigurationName.Leave += new System.EventHandler(this.TbConfigurationName_Leave);
 			// 
-			// Number
+			// tpBindings
 			// 
-			this.Number.HeaderText = "№";
-			this.Number.Name = "Number";
-			this.Number.ReadOnly = true;
-			this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Number.Width = 50;
+			this.tpBindings.BackColor = System.Drawing.SystemColors.Control;
+			this.tpBindings.Location = new System.Drawing.Point(4, 22);
+			this.tpBindings.Name = "tpBindings";
+			this.tpBindings.Padding = new System.Windows.Forms.Padding(3);
+			this.tpBindings.Size = new System.Drawing.Size(342, 577);
+			this.tpBindings.TabIndex = 2;
+			this.tpBindings.Text = "Editor.Bindings";
 			// 
-			// Id
+			// dgvConfigurationPackets
 			// 
-			this.Id.HeaderText = "Id";
-			this.Id.Name = "Id";
-			this.Id.ReadOnly = true;
-			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Id.Visible = false;
+			this.dgvConfigurationPackets.AllowDrop = true;
+			this.dgvConfigurationPackets.AllowUserToAddRows = false;
+			this.dgvConfigurationPackets.AllowUserToDeleteRows = false;
+			this.dgvConfigurationPackets.AllowUserToOrderColumns = true;
+			this.dgvConfigurationPackets.AllowUserToResizeColumns = false;
+			this.dgvConfigurationPackets.AllowUserToResizeRows = false;
+			this.dgvConfigurationPackets.BackgroundColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationPackets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			this.dgvConfigurationPackets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvConfigurationPackets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ConfigurationPacketNumber,
+            this.ConfigurationPacketOpcode,
+            this.ConfigurationPacketName});
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvConfigurationPackets.DefaultCellStyle = dataGridViewCellStyle6;
+			this.dgvConfigurationPackets.Location = new System.Drawing.Point(6, 6);
+			this.dgvConfigurationPackets.Name = "dgvConfigurationPackets";
+			this.dgvConfigurationPackets.ReadOnly = true;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationPackets.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			this.dgvConfigurationPackets.RowHeadersVisible = false;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dgvConfigurationPackets.RowsDefaultCellStyle = dataGridViewCellStyle8;
+			this.dgvConfigurationPackets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvConfigurationPackets.Size = new System.Drawing.Size(310, 565);
+			this.dgvConfigurationPackets.TabIndex = 4;
+			this.dgvConfigurationPackets.SelectionChanged += new System.EventHandler(this.DgvConfigurationPackets_SelectionChanged);
 			// 
-			// PacketOpcode
+			// ConfigurationPacketNumber
 			// 
-			this.PacketOpcode.HeaderText = "Editor.PacketOpcode";
-			this.PacketOpcode.Name = "PacketOpcode";
-			this.PacketOpcode.ReadOnly = true;
-			this.PacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.PacketOpcode.Width = 70;
+			this.ConfigurationPacketNumber.HeaderText = "№";
+			this.ConfigurationPacketNumber.Name = "ConfigurationPacketNumber";
+			this.ConfigurationPacketNumber.ReadOnly = true;
+			this.ConfigurationPacketNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketNumber.Width = 50;
 			// 
-			// PacketName
+			// ConfigurationPacketOpcode
 			// 
-			this.PacketName.HeaderText = "Editor.PacketName";
-			this.PacketName.Name = "PacketName";
-			this.PacketName.ReadOnly = true;
-			this.PacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.PacketName.Width = 170;
+			this.ConfigurationPacketOpcode.HeaderText = "Editor.PacketOpcode";
+			this.ConfigurationPacketOpcode.Name = "ConfigurationPacketOpcode";
+			this.ConfigurationPacketOpcode.ReadOnly = true;
+			this.ConfigurationPacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketOpcode.Width = 70;
+			// 
+			// ConfigurationPacketName
+			// 
+			this.ConfigurationPacketName.HeaderText = "Editor.PacketName";
+			this.ConfigurationPacketName.Name = "ConfigurationPacketName";
+			this.ConfigurationPacketName.ReadOnly = true;
+			this.ConfigurationPacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketName.Width = 170;
 			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1290, 655);
-			this.Controls.Add(this.tabControl2);
+			this.Controls.Add(this.tcConfiguration);
 			this.Controls.Add(this.gbHexEditor);
 			this.Controls.Add(this.lblInformation);
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.tcGeneral);
 			this.Controls.Add(this.msMenu);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1192,10 +1339,13 @@ namespace Network_Analyzer
 			this.Load += new System.EventHandler(this.Editor_Load);
 			this.msMenu.ResumeLayout(false);
 			this.msMenu.PerformLayout();
-			this.tabControl1.ResumeLayout(false);
+			this.tcGeneral.ResumeLayout(false);
 			this.tpPackets.ResumeLayout(false);
 			this.tpPackets.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).EndInit();
+			this.tpConfigurationPackets.ResumeLayout(false);
+			this.tpStructures.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvStructures)).EndInit();
 			this.gbHexEditor.ResumeLayout(false);
 			this.gbHexEditor.PerformLayout();
 			this.tpPacketInformation.ResumeLayout(false);
@@ -1203,10 +1353,11 @@ namespace Network_Analyzer
 			this.gbDataTypes.PerformLayout();
 			this.gbGeneralInformation.ResumeLayout(false);
 			this.gbGeneralInformation.PerformLayout();
-			this.tabControl2.ResumeLayout(false);
+			this.tcConfiguration.ResumeLayout(false);
 			this.tpConfiguration.ResumeLayout(false);
 			this.tpConfiguration.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationFields)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1215,7 +1366,7 @@ namespace Network_Analyzer
         #endregion
 
         private System.Windows.Forms.MenuStrip msMenu;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tcGeneral;
         private System.Windows.Forms.TabPage tpPackets;
         private System.Windows.Forms.DataGridView dgvPackets;
         private System.Windows.Forms.CheckBox cbAutoScroll;
@@ -1242,11 +1393,11 @@ namespace Network_Analyzer
 		private System.Windows.Forms.ToolStripMenuItem unloadDecryptorToolStripMenuItem;
 		private System.Windows.Forms.TabPage tpPacketInformation;
 		private System.Windows.Forms.GroupBox gbGeneralInformation;
-		private System.Windows.Forms.Label lblAllPackets;
+		private System.Windows.Forms.Label lblClassCount;
 		private System.Windows.Forms.Label lblSelectedLength;
-		private System.Windows.Forms.Label lblLengthPacket;
+		private System.Windows.Forms.Label lblDataLength;
 		private System.Windows.Forms.Label lblSelectedIndex;
-		private System.Windows.Forms.TabControl tabControl2;
+		private System.Windows.Forms.TabControl tcConfiguration;
 		private System.Windows.Forms.ComboBox cbSequenceType;
 		private System.Windows.Forms.GroupBox gbDataTypes;
 		private System.Windows.Forms.Label lblByteType;
@@ -1261,55 +1412,57 @@ namespace Network_Analyzer
 		private System.Windows.Forms.Label lblFloatType;
 		private System.Windows.Forms.TabPage tpConfiguration;
 		private System.Windows.Forms.Label lblConfigurationName;
-		private System.Windows.Forms.TextBox tbConfigurationPacketName;
-		private System.Windows.Forms.TextBox tbConfigurationPacketDescription;
-		private System.Windows.Forms.Label lblConfigurationPacketDescription;
+		private System.Windows.Forms.TextBox tbConfigurationName;
+		private System.Windows.Forms.TextBox tbConfigurationDescription;
+		private System.Windows.Forms.Label lblConfigurationDescription;
 		private System.Windows.Forms.DataGridView dgvConfigurationFields;
-		private System.Windows.Forms.Button btnDeleteConfigurationField;
+		private System.Windows.Forms.Button btnConfigurationFieldDelete;
 		private System.Windows.Forms.Button btnConfigurationFieldAdd;
         private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createConfigurationToolStripMenuItem;
         private System.Windows.Forms.TextBox tbByte;
-        private System.Windows.Forms.Button btnStructureByte;
         private System.Windows.Forms.Button btnFieldByte;
-        private System.Windows.Forms.Button btnStructureDouble;
         private System.Windows.Forms.Button btnFieldDouble;
         private System.Windows.Forms.TextBox tbDouble;
-        private System.Windows.Forms.Button btnStructureUlong;
         private System.Windows.Forms.Button btnFieldUlong;
         private System.Windows.Forms.TextBox tbUlong;
-        private System.Windows.Forms.Button btnStructureUint;
         private System.Windows.Forms.Button btnFieldUint;
         private System.Windows.Forms.TextBox tbUint;
-        private System.Windows.Forms.Button btnStructureUshort;
         private System.Windows.Forms.Button btnFieldUshort;
         private System.Windows.Forms.TextBox tbUshort;
-        private System.Windows.Forms.Button btnStructureSbyte;
         private System.Windows.Forms.Button btnFieldSbyte;
         private System.Windows.Forms.TextBox tbSbyte;
-        private System.Windows.Forms.Button btnStructureFloat;
         private System.Windows.Forms.Button btnFieldFloat;
         private System.Windows.Forms.TextBox tbFloat;
-        private System.Windows.Forms.Button btnStructureLong;
         private System.Windows.Forms.Button btnFieldLong;
         private System.Windows.Forms.TextBox tbLong;
-        private System.Windows.Forms.Button btnStructureInt;
         private System.Windows.Forms.Button btnFieldInt;
         private System.Windows.Forms.TextBox tbInt;
-        private System.Windows.Forms.Button btnStructureShort;
         private System.Windows.Forms.Button btnFieldShort;
         private System.Windows.Forms.TextBox tbShort;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPosition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationValue;
         private System.Windows.Forms.Label lblSequenceType;
-		private System.Windows.Forms.Button btnEditConfigurationField;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.Button btnConfigurationFieldEdit;
+		private System.Windows.Forms.TabPage tpBindings;
+		private System.Windows.Forms.TabPage tpStructures;
+		private System.Windows.Forms.DataGridView dgvStructures;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationFieldPosition;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationFieldType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationFieldName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationFieldValue;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PacketNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PacketId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn PacketOpcode;
 		private System.Windows.Forms.DataGridViewTextBoxColumn PacketName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn StructureNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn StructureName;
+		private System.Windows.Forms.Button btnConfigurationAdd;
+		private System.Windows.Forms.Button btnConfigurationDelete;
+		private System.Windows.Forms.TabPage tpConfigurationPackets;
+		private System.Windows.Forms.DataGridView dgvConfigurationPackets;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketOpcode;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketName;
 	}
 }

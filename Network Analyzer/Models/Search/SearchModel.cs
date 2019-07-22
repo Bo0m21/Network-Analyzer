@@ -7,7 +7,8 @@
     {
         public SelectedSearchType Type { get; set; }
 
-        public string Opcode { get; set; }
+		public string Name { get; set; }
+		public string Opcode { get; set; }
         public byte[] Bytes { get; set; }
     }
 }

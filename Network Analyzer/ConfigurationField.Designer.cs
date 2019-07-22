@@ -1,6 +1,6 @@
 ﻿namespace Network_Analyzer
 {
-    partial class ConfigurationPacketField
+    partial class ConfigurationField
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationPacketField));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationField));
 			this.gbGeleral = new System.Windows.Forms.GroupBox();
+			this.lblArrayLength = new System.Windows.Forms.Label();
+			this.tbArrayLength = new System.Windows.Forms.TextBox();
+			this.cbArray = new System.Windows.Forms.CheckBox();
+			this.tbValue = new System.Windows.Forms.TextBox();
 			this.lblValue = new System.Windows.Forms.Label();
 			this.lblSequenceType = new System.Windows.Forms.Label();
 			this.cbSequenceType = new System.Windows.Forms.ComboBox();
-			this.cbLength = new System.Windows.Forms.ComboBox();
-			this.lblLength = new System.Windows.Forms.Label();
+			this.cbCommon = new System.Windows.Forms.ComboBox();
+			this.lblCommon = new System.Windows.Forms.Label();
 			this.lblPosition = new System.Windows.Forms.Label();
 			this.tbPosition = new System.Windows.Forms.TextBox();
 			this.cbType = new System.Windows.Forms.ComboBox();
@@ -46,18 +50,20 @@
 			this.lblInformation = new System.Windows.Forms.Label();
 			this.btnSave = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
-			this.tbValue = new System.Windows.Forms.TextBox();
 			this.gbGeleral.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// gbGeleral
 			// 
+			this.gbGeleral.Controls.Add(this.lblArrayLength);
+			this.gbGeleral.Controls.Add(this.tbArrayLength);
+			this.gbGeleral.Controls.Add(this.cbArray);
 			this.gbGeleral.Controls.Add(this.tbValue);
 			this.gbGeleral.Controls.Add(this.lblValue);
 			this.gbGeleral.Controls.Add(this.lblSequenceType);
 			this.gbGeleral.Controls.Add(this.cbSequenceType);
-			this.gbGeleral.Controls.Add(this.cbLength);
-			this.gbGeleral.Controls.Add(this.lblLength);
+			this.gbGeleral.Controls.Add(this.cbCommon);
+			this.gbGeleral.Controls.Add(this.lblCommon);
 			this.gbGeleral.Controls.Add(this.lblPosition);
 			this.gbGeleral.Controls.Add(this.tbPosition);
 			this.gbGeleral.Controls.Add(this.cbType);
@@ -68,16 +74,54 @@
 			this.gbGeleral.Controls.Add(this.tbName);
 			this.gbGeleral.Location = new System.Drawing.Point(12, 12);
 			this.gbGeleral.Name = "gbGeleral";
-			this.gbGeleral.Size = new System.Drawing.Size(360, 294);
+			this.gbGeleral.Size = new System.Drawing.Size(360, 365);
 			this.gbGeleral.TabIndex = 0;
 			this.gbGeleral.TabStop = false;
 			this.gbGeleral.Text = "ConfigurationField.Geleral";
+			// 
+			// lblArrayLength
+			// 
+			this.lblArrayLength.AutoSize = true;
+			this.lblArrayLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblArrayLength.Location = new System.Drawing.Point(6, 121);
+			this.lblArrayLength.Name = "lblArrayLength";
+			this.lblArrayLength.Size = new System.Drawing.Size(175, 15);
+			this.lblArrayLength.TabIndex = 56;
+			this.lblArrayLength.Text = "ConfigurationField.ArrayLength";
+			// 
+			// tbArrayLength
+			// 
+			this.tbArrayLength.Enabled = false;
+			this.tbArrayLength.Location = new System.Drawing.Point(6, 139);
+			this.tbArrayLength.Name = "tbArrayLength";
+			this.tbArrayLength.Size = new System.Drawing.Size(348, 20);
+			this.tbArrayLength.TabIndex = 55;
+			this.tbArrayLength.Text = "0";
+			// 
+			// cbArray
+			// 
+			this.cbArray.AutoSize = true;
+			this.cbArray.Location = new System.Drawing.Point(6, 101);
+			this.cbArray.Name = "cbArray";
+			this.cbArray.Size = new System.Drawing.Size(137, 17);
+			this.cbArray.TabIndex = 54;
+			this.cbArray.Text = "ConfigurationField.Array";
+			this.cbArray.UseVisualStyleBackColor = true;
+			this.cbArray.CheckedChanged += new System.EventHandler(this.CbArray_CheckedChanged);
+			// 
+			// tbValue
+			// 
+			this.tbValue.Location = new System.Drawing.Point(75, 335);
+			this.tbValue.Name = "tbValue";
+			this.tbValue.ReadOnly = true;
+			this.tbValue.Size = new System.Drawing.Size(279, 20);
+			this.tbValue.TabIndex = 53;
 			// 
 			// lblValue
 			// 
 			this.lblValue.AutoSize = true;
 			this.lblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblValue.Location = new System.Drawing.Point(6, 269);
+			this.lblValue.Location = new System.Drawing.Point(6, 336);
 			this.lblValue.Name = "lblValue";
 			this.lblValue.Size = new System.Drawing.Size(141, 15);
 			this.lblValue.TabIndex = 42;
@@ -87,7 +131,7 @@
 			// 
 			this.lblSequenceType.AutoSize = true;
 			this.lblSequenceType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblSequenceType.Location = new System.Drawing.Point(6, 98);
+			this.lblSequenceType.Location = new System.Drawing.Point(6, 162);
 			this.lblSequenceType.Name = "lblSequenceType";
 			this.lblSequenceType.Size = new System.Drawing.Size(192, 15);
 			this.lblSequenceType.TabIndex = 41;
@@ -100,37 +144,37 @@
 			this.cbSequenceType.Items.AddRange(new object[] {
             "SequenceTypes.LittleEndian",
             "SequenceTypes.BigEndian"});
-			this.cbSequenceType.Location = new System.Drawing.Point(6, 116);
+			this.cbSequenceType.Location = new System.Drawing.Point(6, 180);
 			this.cbSequenceType.Name = "cbSequenceType";
 			this.cbSequenceType.Size = new System.Drawing.Size(348, 21);
 			this.cbSequenceType.TabIndex = 40;
 			this.cbSequenceType.SelectedIndexChanged += new System.EventHandler(this.CbSequenceType_SelectedIndexChanged);
 			// 
-			// cbLength
+			// cbCommon
 			// 
-			this.cbLength.Enabled = false;
-			this.cbLength.FormattingEnabled = true;
-			this.cbLength.Location = new System.Drawing.Point(6, 241);
-			this.cbLength.Name = "cbLength";
-			this.cbLength.Size = new System.Drawing.Size(348, 21);
-			this.cbLength.TabIndex = 31;
-			this.cbLength.TextChanged += new System.EventHandler(this.CbLength_TextChanged);
+			this.cbCommon.Enabled = false;
+			this.cbCommon.FormattingEnabled = true;
+			this.cbCommon.Location = new System.Drawing.Point(6, 264);
+			this.cbCommon.Name = "cbCommon";
+			this.cbCommon.Size = new System.Drawing.Size(348, 21);
+			this.cbCommon.TabIndex = 31;
+			this.cbCommon.TextChanged += new System.EventHandler(this.CbCommon_TextChanged);
 			// 
-			// lblLength
+			// lblCommon
 			// 
-			this.lblLength.AutoSize = true;
-			this.lblLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblLength.Location = new System.Drawing.Point(6, 223);
-			this.lblLength.Name = "lblLength";
-			this.lblLength.Size = new System.Drawing.Size(148, 15);
-			this.lblLength.TabIndex = 30;
-			this.lblLength.Text = "ConfigurationField.Length";
+			this.lblCommon.AutoSize = true;
+			this.lblCommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblCommon.Location = new System.Drawing.Point(6, 246);
+			this.lblCommon.Name = "lblCommon";
+			this.lblCommon.Size = new System.Drawing.Size(193, 15);
+			this.lblCommon.TabIndex = 30;
+			this.lblCommon.Text = "ConfigurationField.CommonString";
 			// 
 			// lblPosition
 			// 
 			this.lblPosition.AutoSize = true;
 			this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblPosition.Location = new System.Drawing.Point(6, 182);
+			this.lblPosition.Location = new System.Drawing.Point(6, 291);
 			this.lblPosition.Name = "lblPosition";
 			this.lblPosition.Size = new System.Drawing.Size(154, 15);
 			this.lblPosition.TabIndex = 29;
@@ -138,10 +182,11 @@
 			// 
 			// tbPosition
 			// 
-			this.tbPosition.Location = new System.Drawing.Point(6, 200);
+			this.tbPosition.Location = new System.Drawing.Point(6, 309);
 			this.tbPosition.Name = "tbPosition";
 			this.tbPosition.Size = new System.Drawing.Size(348, 20);
 			this.tbPosition.TabIndex = 28;
+			this.tbPosition.Text = "0";
 			this.tbPosition.TextChanged += new System.EventHandler(this.TbPosition_TextChanged);
 			// 
 			// cbType
@@ -159,8 +204,9 @@
             "Types.Ulong",
             "Types.Float",
             "Types.Double",
-            "Types.String"});
-			this.cbType.Location = new System.Drawing.Point(6, 158);
+            "Types.String",
+            "Types.Structure"});
+			this.cbType.Location = new System.Drawing.Point(6, 222);
 			this.cbType.Name = "cbType";
 			this.cbType.Size = new System.Drawing.Size(348, 21);
 			this.cbType.TabIndex = 27;
@@ -170,7 +216,7 @@
 			// 
 			this.lblType.AutoSize = true;
 			this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblType.Location = new System.Drawing.Point(6, 140);
+			this.lblType.Location = new System.Drawing.Point(6, 204);
 			this.lblType.Name = "lblType";
 			this.lblType.Size = new System.Drawing.Size(136, 15);
 			this.lblType.TabIndex = 26;
@@ -213,7 +259,7 @@
 			// lblInformation
 			// 
 			this.lblInformation.AutoSize = true;
-			this.lblInformation.Location = new System.Drawing.Point(12, 338);
+			this.lblInformation.Location = new System.Drawing.Point(12, 409);
 			this.lblInformation.Name = "lblInformation";
 			this.lblInformation.Size = new System.Drawing.Size(146, 13);
 			this.lblInformation.TabIndex = 15;
@@ -221,7 +267,7 @@
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(247, 312);
+			this.btnSave.Location = new System.Drawing.Point(247, 383);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(125, 23);
 			this.btnSave.TabIndex = 14;
@@ -231,7 +277,7 @@
 			// 
 			// btnCancel
 			// 
-			this.btnCancel.Location = new System.Drawing.Point(12, 312);
+			this.btnCancel.Location = new System.Drawing.Point(12, 383);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(125, 23);
 			this.btnCancel.TabIndex = 13;
@@ -239,19 +285,11 @@
 			this.btnCancel.UseVisualStyleBackColor = true;
 			this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
 			// 
-			// tbValue
-			// 
-			this.tbValue.Location = new System.Drawing.Point(75, 268);
-			this.tbValue.Name = "tbValue";
-			this.tbValue.ReadOnly = true;
-			this.tbValue.Size = new System.Drawing.Size(279, 20);
-			this.tbValue.TabIndex = 53;
-			// 
-			// ConfigurationPacketField
+			// ConfigurationField
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(384, 360);
+			this.ClientSize = new System.Drawing.Size(384, 431);
 			this.Controls.Add(this.lblInformation);
 			this.Controls.Add(this.btnSave);
 			this.Controls.Add(this.btnCancel);
@@ -259,7 +297,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
-			this.Name = "ConfigurationPacketField";
+			this.Name = "ConfigurationField";
 			this.Text = "ConfigurationField.Text";
 			this.Load += new System.EventHandler(this.ConfigurationField_Load);
 			this.gbGeleral.ResumeLayout(false);
@@ -283,11 +321,14 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.TextBox tbPosition;
-        private System.Windows.Forms.ComboBox cbLength;
-        private System.Windows.Forms.Label lblLength;
+        private System.Windows.Forms.ComboBox cbCommon;
+        private System.Windows.Forms.Label lblCommon;
         private System.Windows.Forms.Label lblSequenceType;
         private System.Windows.Forms.ComboBox cbSequenceType;
         private System.Windows.Forms.Label lblValue;
 		private System.Windows.Forms.TextBox tbValue;
+		private System.Windows.Forms.CheckBox cbArray;
+		private System.Windows.Forms.Label lblArrayLength;
+		private System.Windows.Forms.TextBox tbArrayLength;
 	}
 }

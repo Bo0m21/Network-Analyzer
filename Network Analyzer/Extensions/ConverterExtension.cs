@@ -8,17 +8,36 @@ namespace Network_Analyzer.Extensions
     /// </summary>
     public static class ConverterExtension
     {
+		/// <summary>
+		///		Read sbyte from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <returns></returns>
         public static sbyte ReadSbyte(this byte[] data, int index)
         {
             return (sbyte) data[index];
         }
 
-        public static byte ReadByte(this byte[] data, int index)
+		/// <summary>
+		///		Read byte from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		public static byte ReadByte(this byte[] data, int index)
         {
             return data[index];
         }
 
-        public static short ReadShort(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read short from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static short ReadShort(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(short)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -31,7 +50,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToInt16(bytes, 0);
         }
 
-        public static ushort ReadUshort(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read ushort from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static ushort ReadUshort(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(ushort)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -44,7 +70,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToUInt16(bytes, 0);
         }
 
-        public static int ReadInt(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read int from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static int ReadInt(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(int)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -57,7 +90,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToInt32(bytes, 0);
         }
 
-        public static uint ReadUint(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read uint from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static uint ReadUint(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(uint)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -70,7 +110,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToUInt32(bytes, 0);
         }
 
-        public static float ReadFloat(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read float from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static float ReadFloat(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(float)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -83,7 +130,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToSingle(bytes, 0);
         }
 
-        public static long ReadLong(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read long from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static long ReadLong(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(long)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -96,7 +150,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToInt64(bytes, 0);
         }
 
-        public static ulong ReadUlong(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read ulong from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static ulong ReadUlong(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(ulong)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -109,7 +170,14 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToUInt64(bytes, 0);
         }
 
-        public static double ReadDouble(this byte[] data, int index, bool reverse)
+		/// <summary>
+		///		Read double from array
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static double ReadDouble(this byte[] data, int index, bool reverse)
         {
             byte[] bytes = new byte[sizeof(double)];
             Array.Copy(data, index, bytes, 0, bytes.Length);
@@ -122,7 +190,15 @@ namespace Network_Analyzer.Extensions
             return BitConverter.ToDouble(bytes, 0);
         }
 
-        public static string GetValue(this byte[] data, string type, long index, bool reverse)
+		/// <summary>
+		///		Get value from array by type
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="type"></param>
+		/// <param name="index"></param>
+		/// <param name="reverse"></param>
+		/// <returns></returns>
+		public static string GetValue(this byte[] data, string type, long index, bool reverse)
         {
 	        if (index < data.Length)
 	        {

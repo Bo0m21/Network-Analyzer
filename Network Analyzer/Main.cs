@@ -186,7 +186,7 @@ namespace Network_Analyzer
 
             string connectionsJson = File.ReadAllText(fileName);
 
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(connectionsJson))
             {
                 lblInformation.Text = Localizer.LocalizeString("Main.DeserializationResultEmpty");
                 return;

@@ -5,7 +5,8 @@
     /// </summary>
     public enum SelectedSearchType
     {
-        Opcode = 0,
-        Bytes = 1
+		Name = 0,
+		Opcode = 1,
+        Bytes = 2
     }
 }

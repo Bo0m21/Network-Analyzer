@@ -9,14 +9,18 @@ namespace Network_Analyzer.Models.Configuration
     {
         public ConfigurationModel()
         {
-            ConfigurationPackets = new List<ConfigurationPacketModel>();
+			ConfigurationStructures = new List<ConfigurationClassModel>();
+			ConfigurationPackets = new List<ConfigurationClassModel>();
         }
 
-        // TODO Добавить структуры и глабальные поля и возможно названеие конфига
+		/// <summary>
+		///     Configuration structures
+		/// </summary>
+		public List<ConfigurationClassModel> ConfigurationStructures { get; set; }
 
-        /// <summary>
-        ///     Configuration packets
-        /// </summary>
-        public List<ConfigurationPacketModel> ConfigurationPackets { get; set; }
+		/// <summary>
+		///     Configuration packets
+		/// </summary>
+		public List<ConfigurationClassModel> ConfigurationPackets { get; set; }
     }
 }

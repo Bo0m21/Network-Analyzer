@@ -3,7 +3,7 @@
     /// <summary>
     ///     This base class configuration field
     /// </summary>
-    public class ConfigurationPacketFieldModel
+    public class ConfigurationFieldModel
     {
         /// <summary>
         ///     Field name
@@ -20,19 +20,29 @@
         /// </summary>
         public string Type { get; set; }
 
-        /// <summary>
-        ///     Field reverse (type sequence)
-        /// </summary>
-        public bool Reverse { get; set; }
+		/// <summary>
+		///     Field sequence type
+		/// </summary>
+		public string SequenceType { get; set; }
 
         /// <summary>
         ///     Position at data
         /// </summary>
         public long Position { get; set; }
 
-        /// <summary>
-        ///     Length field(for example - string)
-        /// </summary>
-        public string Length { get; set; }
+		/// <summary>
+		///		If field array
+		/// </summary>
+		public bool IsArray { get; set; }
+
+		/// <summary>
+		///		Array length
+		/// </summary>
+		public long ArrayLength { get; set; }
+
+		/// <summary>
+		///     Common field(Name structure/field or length)
+		/// </summary>
+		public string Common { get; set; }
     }
 }

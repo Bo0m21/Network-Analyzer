@@ -357,8 +357,8 @@
   <data name="Editor.HexEditor" xml:space="preserve">
     <value>Hex редактор</value>
   </data>
-  <data name="Editor.AllPackets" xml:space="preserve">
-    <value>Всего пакетов</value>
+  <data name="Editor.ClassCount" xml:space="preserve">
+    <value>Количество</value>
   </data>
   <data name="Editor.Error" xml:space="preserve">
     <value>Ошибка</value>
@@ -426,8 +426,8 @@
   <data name="Types.Int" xml:space="preserve">
     <value>Int</value>
   </data>
-  <data name="Editor.LengthPacket" xml:space="preserve">
-    <value>Длина пакета </value>
+  <data name="Editor.DataLength" xml:space="preserve">
+    <value>Длина</value>
   </data>
   <data name="Editor.LoadDecryptor" xml:space="preserve">
     <value>Загрузить декриптор</value>
@@ -480,28 +480,28 @@
   <data name="Types.Ushort" xml:space="preserve">
     <value>Ushort</value>
   </data>
-  <data name="Editor.AddConfigurationField" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldAdd" xml:space="preserve">
     <value>Добавить</value>
   </data>
   <data name="Editor.Configuration" xml:space="preserve">
     <value>Конфигурация</value>
   </data>
-  <data name="Editor.ConfigurationName" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldName" xml:space="preserve">
     <value>Название</value>
   </data>
-  <data name="Editor.ConfigurationPacketDescription" xml:space="preserve">
+  <data name="Editor.ConfigurationDescription" xml:space="preserve">
     <value>Описание конфигурации пакета</value>
   </data>
-  <data name="Editor.ConfigurationPacketName" xml:space="preserve">
+  <data name="Editor.ConfigurationName" xml:space="preserve">
     <value>Название конфигурации пакета</value>
   </data>
-  <data name="Editor.ConfigurationPosition" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldPosition" xml:space="preserve">
     <value>Позиция</value>
   </data>
-  <data name="Editor.ConfigurationType" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldType" xml:space="preserve">
     <value>Тип</value>
   </data>
-  <data name="Editor.DeleteConfigurationField" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldDelete" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="ConfigurationField.Cancel" xml:space="preserve">
@@ -522,14 +522,11 @@
   <data name="ConfigurationField.Description" xml:space="preserve">
     <value>Описание переменной</value>
   </data>
-  <data name="ConfigurationField.Length" xml:space="preserve">
-    <value>Длина</value>
-  </data>
   <data name="ConfigurationField.Name" xml:space="preserve">
     <value>Название переменной</value>
   </data>
   <data name="ConfigurationField.Position" xml:space="preserve">
-    <value>Позиция в пакете</value>
+    <value>Позиция</value>
   </data>
   <data name="ConfigurationField.Type" xml:space="preserve">
     <value>Тип переменной</value>
@@ -574,7 +571,7 @@
     <value>Вы не загрузили декриптор</value>
   </data>
   <data name="ConfigurationField.ErrorsPosition" xml:space="preserve">
-    <value>Ошибки в позиции в пакете</value>
+    <value>Ошибки в позиции</value>
   </data>
   <data name="SequenceTypes.BigEndian" xml:space="preserve">
     <value>Big Endian</value>
@@ -588,20 +585,17 @@
   <data name="Editor.ConfigurationFieldDeletedSuccessfully" xml:space="preserve">
     <value>Поле конфигурации успешно удалено</value>
   </data>
-  <data name="Editor.ConfigurationValue" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldValue" xml:space="preserve">
     <value>Значение</value>
   </data>
   <data name="Editor.SequenceType" xml:space="preserve">
     <value>Порядок байтов</value>
   </data>
-  <data name="ConfigurationField.ErrorFieldDescriptionCannotBeEmpty" xml:space="preserve">
-    <value>Ошибка поле Описание не может быть пустым</value>
-  </data>
   <data name="ConfigurationField.ErrorFieldNameCannotBeEmpty" xml:space="preserve">
     <value>Ошибка поле Название не может быть пустым</value>
   </data>
   <data name="ConfigurationField.ErrorNameAlreadyExists" xml:space="preserve">
-    <value>Название уже существует в текущем пакете</value>
+    <value>Название уже существует</value>
   </data>
   <data name="ConfigurationField.ErrorNameBeginCapitalLetter" xml:space="preserve">
     <value>Название должно начинаться с заглавной буквы</value>
@@ -609,16 +603,130 @@
   <data name="ConfigurationField.ErrorOnlyEnglishLettersNumbers" xml:space="preserve">
     <value>Название должно содержать английские буквы и цифры</value>
   </data>
-  <data name="ConfigurationField.ErrorsLengthCanNotParted" xml:space="preserve">
-    <value>Ошибка длина не может быть распаршена</value>
+  <data name="ConfigurationField.ErrorsEnteredLengthInvalid" xml:space="preserve">
+    <value>Ошибка введена не верная длина</value>
   </data>
   <data name="ConfigurationField.ErrorsLengthEmpty" xml:space="preserve">
     <value>Ошибка длина не может быть пустой</value>
   </data>
-  <data name="Editor.EditConfigurationField" xml:space="preserve">
+  <data name="Editor.ConfigurationFieldEdit" xml:space="preserve">
     <value>Изменить</value>
   </data>
   <data name="Editor.NotInstalled" xml:space="preserve">
     <value>Не установлено</value>
+  </data>
+  <data name="Editor.Structures" xml:space="preserve">
+    <value>Структуры</value>
+  </data>
+  <data name="Editor.Bindings" xml:space="preserve">
+    <value>Связи</value>
+  </data>
+  <data name="ConfigurationClass.Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ConfigurationClass.ErrorNameAlreadyExists" xml:space="preserve">
+    <value>Данное название уже существует</value>
+  </data>
+  <data name="ConfigurationClass.ErrorNameBeginCapitalLetter" xml:space="preserve">
+    <value>Название должно начинаться с заглавной буквы</value>
+  </data>
+  <data name="ConfigurationClass.ErrorOnlyEnglishLettersNumbers" xml:space="preserve">
+    <value>Название должно содержать английские буквы и цифры</value>
+  </data>
+  <data name="ConfigurationClass.ErrorConfigurationNameCannotBeEmpty" xml:space="preserve">
+    <value>Ошибка поле Название не может быть пустым</value>
+  </data>
+  <data name="ConfigurationClass.Geleral" xml:space="preserve">
+    <value>Описание конфигурации</value>
+  </data>
+  <data name="ConfigurationClass.Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="ConfigurationClass.LoadedSuccessfully" xml:space="preserve">
+    <value>Редактирование конфигурации успешно загружено</value>
+  </data>
+  <data name="ConfigurationClass.Name" xml:space="preserve">
+    <value>Название конфигурации</value>
+  </data>
+  <data name="ConfigurationClass.Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="ConfigurationClass.Text" xml:space="preserve">
+    <value>Объект конфигурации</value>
+  </data>
+  <data name="Editor.SearchName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Editor.StructureEdit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Editor.StructureName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="ConfigurationField.CommonString" xml:space="preserve">
+    <value>Название или длина</value>
+  </data>
+  <data name="ConfigurationField.CommonStructure" xml:space="preserve">
+    <value>Название структуры</value>
+  </data>
+  <data name="ConfigurationField.ErrorsEnteredStructureInvalid" xml:space="preserve">
+    <value>Ошибка введена не верная структура</value>
+  </data>
+  <data name="ConfigurationField.ErrorsPositionAlreadyUse" xml:space="preserve">
+    <value>Ошибка позиция уже используется</value>
+  </data>
+  <data name="ConfigurationField.ErrorsStructureEmpty" xml:space="preserve">
+    <value>Ошибка структура не может быть пустой</value>
+  </data>
+  <data name="Types.Structure" xml:space="preserve">
+    <value>Structure</value>
+  </data>
+  <data name="ConfigurationField.Array" xml:space="preserve">
+    <value>Поле является массивом</value>
+  </data>
+  <data name="ConfigurationField.ArrayLength" xml:space="preserve">
+    <value>Длина массива</value>
+  </data>
+  <data name="ConfigurationField.ErrorsArrayLength" xml:space="preserve">
+    <value>Ошибки в длине массива</value>
+  </data>
+  <data name="Editor.ConfigurationAdd" xml:space="preserve">
+    <value>Добавить конфигурацию</value>
+  </data>
+  <data name="Editor.ConfigurationDelete" xml:space="preserve">
+    <value>Удалить конфигурацию</value>
+  </data>
+  <data name="Editor.ErrorsConfigurationNameAlreadyUse" xml:space="preserve">
+    <value>Ошибка данное название конфигурации уже используется</value>
+  </data>
+  <data name="ConfigurationField.ErrorsLengthCanNotBeZero" xml:space="preserve">
+    <value>Ошибка длина не может быть 0</value>
+  </data>
+  <data name="Editor.ConfigurationEmpty" xml:space="preserve">
+    <value>Конфигурация не может быть пустой</value>
+  </data>
+  <data name="Editor.ConfigurationSuccessfullySaved" xml:space="preserve">
+    <value>Конфигурация успешно сохранена</value>
+  </data>
+  <data name="Editor.DeserializationResultEmpty" xml:space="preserve">
+    <value>Результат загрузки не может быть пустым</value>
+  </data>
+  <data name="Editor.ErrorsSavingConfiguration" xml:space="preserve">
+    <value>Ошибки при сохранении конфигурации</value>
+  </data>
+  <data name="Editor.NotSelectFile" xml:space="preserve">
+    <value>Вы не выбрали файл</value>
+  </data>
+  <data name="Editor.SerializationResultEmpty" xml:space="preserve">
+    <value>Результат сохранения не может быть пустым</value>
+  </data>
+  <data name="Editor.ConfigurationPackets" xml:space="preserve">
+    <value>Конфигурации пакетов</value>
+  </data>
+  <data name="ConfigurationClass.ErrorOpcodeCannotBeEmpty" xml:space="preserve">
+    <value>Ошибка опкод не модет быть пустым</value>
+  </data>
+  <data name="ConfigurationClass.Opcode" xml:space="preserve">
+    <value>Опкод</value>
   </data>
 </root>
