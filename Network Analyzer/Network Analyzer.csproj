@@ -79,6 +79,7 @@
     <Compile Include="Models\Configuration\ConfigurationFieldModel.cs" />
     <Compile Include="Models\Configuration\ConfigurationClassModel.cs" />
     <Compile Include="Models\Configuration\ConfigurationModel.cs" />
+    <Compile Include="Models\SelectedEncoding\SelectedEncodingType.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />

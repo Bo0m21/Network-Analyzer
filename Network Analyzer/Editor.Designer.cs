@@ -34,19 +34,19 @@ namespace Network_Analyzer
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.msMenu = new System.Windows.Forms.MenuStrip();
 			this.hexEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.hexEditorEncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +75,10 @@ namespace Network_Analyzer
 			this.PacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.PacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tpConfigurationPackets = new System.Windows.Forms.TabPage();
+			this.dgvConfigurationPackets = new System.Windows.Forms.DataGridView();
+			this.ConfigurationPacketNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationPacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ConfigurationPacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tpStructures = new System.Windows.Forms.TabPage();
 			this.dgvStructures = new System.Windows.Forms.DataGridView();
 			this.StructureNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +92,20 @@ namespace Network_Analyzer
 			this.hbHexEditor = new HexBoxForm.HexBox();
 			this.tpPacketInformation = new System.Windows.Forms.TabPage();
 			this.gbDataTypes = new System.Windows.Forms.GroupBox();
+			this.btnCopyByte = new System.Windows.Forms.Button();
+			this.btnCopyShort = new System.Windows.Forms.Button();
+			this.btnCopyInt = new System.Windows.Forms.Button();
+			this.btnCopyLong = new System.Windows.Forms.Button();
+			this.btnCopyFloat = new System.Windows.Forms.Button();
+			this.btnCopySbyte = new System.Windows.Forms.Button();
+			this.btnCopyUshort = new System.Windows.Forms.Button();
+			this.btnCopyUint = new System.Windows.Forms.Button();
+			this.btnCopyUlong = new System.Windows.Forms.Button();
+			this.btnCopyDouble = new System.Windows.Forms.Button();
+			this.btnCopyString = new System.Windows.Forms.Button();
+			this.btnFieldString = new System.Windows.Forms.Button();
+			this.tbString = new System.Windows.Forms.TextBox();
+			this.lblStringType = new System.Windows.Forms.Label();
 			this.lblSequenceType = new System.Windows.Forms.Label();
 			this.cbSequenceType = new System.Windows.Forms.ComboBox();
 			this.btnFieldDouble = new System.Windows.Forms.Button();
@@ -142,15 +160,12 @@ namespace Network_Analyzer
 			this.lblConfigurationName = new System.Windows.Forms.Label();
 			this.tbConfigurationName = new System.Windows.Forms.TextBox();
 			this.tpBindings = new System.Windows.Forms.TabPage();
-			this.dgvConfigurationPackets = new System.Windows.Forms.DataGridView();
-			this.ConfigurationPacketNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ConfigurationPacketOpcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ConfigurationPacketName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.msMenu.SuspendLayout();
 			this.tcGeneral.SuspendLayout();
 			this.tpPackets.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).BeginInit();
 			this.tpConfigurationPackets.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).BeginInit();
 			this.tpStructures.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvStructures)).BeginInit();
 			this.gbHexEditor.SuspendLayout();
@@ -160,7 +175,6 @@ namespace Network_Analyzer
 			this.tcConfiguration.SuspendLayout();
 			this.tpConfiguration.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationFields)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// msMenu
@@ -467,6 +481,79 @@ namespace Network_Analyzer
 			this.tpConfigurationPackets.TabIndex = 3;
 			this.tpConfigurationPackets.Text = "Editor.ConfigurationPackets";
 			// 
+			// dgvConfigurationPackets
+			// 
+			this.dgvConfigurationPackets.AllowDrop = true;
+			this.dgvConfigurationPackets.AllowUserToAddRows = false;
+			this.dgvConfigurationPackets.AllowUserToDeleteRows = false;
+			this.dgvConfigurationPackets.AllowUserToOrderColumns = true;
+			this.dgvConfigurationPackets.AllowUserToResizeColumns = false;
+			this.dgvConfigurationPackets.AllowUserToResizeRows = false;
+			this.dgvConfigurationPackets.BackgroundColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationPackets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			this.dgvConfigurationPackets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvConfigurationPackets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ConfigurationPacketNumber,
+            this.ConfigurationPacketOpcode,
+            this.ConfigurationPacketName});
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvConfigurationPackets.DefaultCellStyle = dataGridViewCellStyle6;
+			this.dgvConfigurationPackets.Location = new System.Drawing.Point(6, 6);
+			this.dgvConfigurationPackets.Name = "dgvConfigurationPackets";
+			this.dgvConfigurationPackets.ReadOnly = true;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvConfigurationPackets.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			this.dgvConfigurationPackets.RowHeadersVisible = false;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dgvConfigurationPackets.RowsDefaultCellStyle = dataGridViewCellStyle8;
+			this.dgvConfigurationPackets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvConfigurationPackets.Size = new System.Drawing.Size(310, 565);
+			this.dgvConfigurationPackets.TabIndex = 4;
+			this.dgvConfigurationPackets.SelectionChanged += new System.EventHandler(this.DgvConfigurationPackets_SelectionChanged);
+			// 
+			// ConfigurationPacketNumber
+			// 
+			this.ConfigurationPacketNumber.HeaderText = "№";
+			this.ConfigurationPacketNumber.Name = "ConfigurationPacketNumber";
+			this.ConfigurationPacketNumber.ReadOnly = true;
+			this.ConfigurationPacketNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketNumber.Width = 50;
+			// 
+			// ConfigurationPacketOpcode
+			// 
+			this.ConfigurationPacketOpcode.HeaderText = "Editor.PacketOpcode";
+			this.ConfigurationPacketOpcode.Name = "ConfigurationPacketOpcode";
+			this.ConfigurationPacketOpcode.ReadOnly = true;
+			this.ConfigurationPacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketOpcode.Width = 70;
+			// 
+			// ConfigurationPacketName
+			// 
+			this.ConfigurationPacketName.HeaderText = "Editor.PacketName";
+			this.ConfigurationPacketName.Name = "ConfigurationPacketName";
+			this.ConfigurationPacketName.ReadOnly = true;
+			this.ConfigurationPacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.ConfigurationPacketName.Width = 170;
+			// 
 			// tpStructures
 			// 
 			this.tpStructures.BackColor = System.Drawing.SystemColors.Control;
@@ -642,6 +729,20 @@ namespace Network_Analyzer
 			// 
 			// gbDataTypes
 			// 
+			this.gbDataTypes.Controls.Add(this.btnCopyByte);
+			this.gbDataTypes.Controls.Add(this.btnCopyShort);
+			this.gbDataTypes.Controls.Add(this.btnCopyInt);
+			this.gbDataTypes.Controls.Add(this.btnCopyLong);
+			this.gbDataTypes.Controls.Add(this.btnCopyFloat);
+			this.gbDataTypes.Controls.Add(this.btnCopySbyte);
+			this.gbDataTypes.Controls.Add(this.btnCopyUshort);
+			this.gbDataTypes.Controls.Add(this.btnCopyUint);
+			this.gbDataTypes.Controls.Add(this.btnCopyUlong);
+			this.gbDataTypes.Controls.Add(this.btnCopyDouble);
+			this.gbDataTypes.Controls.Add(this.btnCopyString);
+			this.gbDataTypes.Controls.Add(this.btnFieldString);
+			this.gbDataTypes.Controls.Add(this.tbString);
+			this.gbDataTypes.Controls.Add(this.lblStringType);
 			this.gbDataTypes.Controls.Add(this.lblSequenceType);
 			this.gbDataTypes.Controls.Add(this.cbSequenceType);
 			this.gbDataTypes.Controls.Add(this.btnFieldDouble);
@@ -676,10 +777,160 @@ namespace Network_Analyzer
 			this.gbDataTypes.Controls.Add(this.lblByteType);
 			this.gbDataTypes.Location = new System.Drawing.Point(6, 61);
 			this.gbDataTypes.Name = "gbDataTypes";
-			this.gbDataTypes.Size = new System.Drawing.Size(330, 335);
+			this.gbDataTypes.Size = new System.Drawing.Size(330, 376);
 			this.gbDataTypes.TabIndex = 39;
 			this.gbDataTypes.TabStop = false;
 			this.gbDataTypes.Text = "Editor.DataTypes";
+			// 
+			// btnCopyByte
+			// 
+			this.btnCopyByte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyByte.BackgroundImage")));
+			this.btnCopyByte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyByte.Location = new System.Drawing.Point(250, 46);
+			this.btnCopyByte.Name = "btnCopyByte";
+			this.btnCopyByte.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyByte.TabIndex = 68;
+			this.btnCopyByte.UseVisualStyleBackColor = true;
+			this.btnCopyByte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyShort
+			// 
+			this.btnCopyShort.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyShort.BackgroundImage")));
+			this.btnCopyShort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyShort.Location = new System.Drawing.Point(250, 76);
+			this.btnCopyShort.Name = "btnCopyShort";
+			this.btnCopyShort.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyShort.TabIndex = 67;
+			this.btnCopyShort.UseVisualStyleBackColor = true;
+			this.btnCopyShort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyInt
+			// 
+			this.btnCopyInt.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyInt.BackgroundImage")));
+			this.btnCopyInt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyInt.Location = new System.Drawing.Point(250, 106);
+			this.btnCopyInt.Name = "btnCopyInt";
+			this.btnCopyInt.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyInt.TabIndex = 66;
+			this.btnCopyInt.UseVisualStyleBackColor = true;
+			this.btnCopyInt.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyLong
+			// 
+			this.btnCopyLong.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyLong.BackgroundImage")));
+			this.btnCopyLong.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyLong.Location = new System.Drawing.Point(250, 136);
+			this.btnCopyLong.Name = "btnCopyLong";
+			this.btnCopyLong.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyLong.TabIndex = 65;
+			this.btnCopyLong.UseVisualStyleBackColor = true;
+			this.btnCopyLong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyFloat
+			// 
+			this.btnCopyFloat.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyFloat.BackgroundImage")));
+			this.btnCopyFloat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyFloat.Location = new System.Drawing.Point(250, 166);
+			this.btnCopyFloat.Name = "btnCopyFloat";
+			this.btnCopyFloat.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyFloat.TabIndex = 64;
+			this.btnCopyFloat.UseVisualStyleBackColor = true;
+			this.btnCopyFloat.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopySbyte
+			// 
+			this.btnCopySbyte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopySbyte.BackgroundImage")));
+			this.btnCopySbyte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopySbyte.Location = new System.Drawing.Point(250, 196);
+			this.btnCopySbyte.Name = "btnCopySbyte";
+			this.btnCopySbyte.Size = new System.Drawing.Size(34, 24);
+			this.btnCopySbyte.TabIndex = 63;
+			this.btnCopySbyte.UseVisualStyleBackColor = true;
+			this.btnCopySbyte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyUshort
+			// 
+			this.btnCopyUshort.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyUshort.BackgroundImage")));
+			this.btnCopyUshort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyUshort.Location = new System.Drawing.Point(250, 226);
+			this.btnCopyUshort.Name = "btnCopyUshort";
+			this.btnCopyUshort.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyUshort.TabIndex = 62;
+			this.btnCopyUshort.UseVisualStyleBackColor = true;
+			this.btnCopyUshort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyUint
+			// 
+			this.btnCopyUint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyUint.BackgroundImage")));
+			this.btnCopyUint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyUint.Location = new System.Drawing.Point(250, 256);
+			this.btnCopyUint.Name = "btnCopyUint";
+			this.btnCopyUint.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyUint.TabIndex = 61;
+			this.btnCopyUint.UseVisualStyleBackColor = true;
+			this.btnCopyUint.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyUlong
+			// 
+			this.btnCopyUlong.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyUlong.BackgroundImage")));
+			this.btnCopyUlong.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyUlong.Location = new System.Drawing.Point(250, 286);
+			this.btnCopyUlong.Name = "btnCopyUlong";
+			this.btnCopyUlong.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyUlong.TabIndex = 60;
+			this.btnCopyUlong.UseVisualStyleBackColor = true;
+			this.btnCopyUlong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyDouble
+			// 
+			this.btnCopyDouble.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyDouble.BackgroundImage")));
+			this.btnCopyDouble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyDouble.Location = new System.Drawing.Point(250, 316);
+			this.btnCopyDouble.Name = "btnCopyDouble";
+			this.btnCopyDouble.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyDouble.TabIndex = 59;
+			this.btnCopyDouble.UseVisualStyleBackColor = true;
+			this.btnCopyDouble.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnCopyString
+			// 
+			this.btnCopyString.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCopyString.BackgroundImage")));
+			this.btnCopyString.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnCopyString.Location = new System.Drawing.Point(250, 346);
+			this.btnCopyString.Name = "btnCopyString";
+			this.btnCopyString.Size = new System.Drawing.Size(34, 24);
+			this.btnCopyString.TabIndex = 58;
+			this.btnCopyString.UseVisualStyleBackColor = true;
+			this.btnCopyString.Click += new System.EventHandler(this.BtnConfigurationFieldInformationCopy_Click);
+			// 
+			// btnFieldString
+			// 
+			this.btnFieldString.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldString.BackgroundImage")));
+			this.btnFieldString.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldString.Location = new System.Drawing.Point(290, 345);
+			this.btnFieldString.Name = "btnFieldString";
+			this.btnFieldString.Size = new System.Drawing.Size(34, 24);
+			this.btnFieldString.TabIndex = 57;
+			this.btnFieldString.UseVisualStyleBackColor = true;
+			this.btnFieldString.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
+			// 
+			// tbString
+			// 
+			this.tbString.Location = new System.Drawing.Point(59, 349);
+			this.tbString.Name = "tbString";
+			this.tbString.ReadOnly = true;
+			this.tbString.Size = new System.Drawing.Size(185, 20);
+			this.tbString.TabIndex = 56;
+			// 
+			// lblStringType
+			// 
+			this.lblStringType.AutoSize = true;
+			this.lblStringType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.lblStringType.Location = new System.Drawing.Point(6, 350);
+			this.lblStringType.Name = "lblStringType";
+			this.lblStringType.Size = new System.Drawing.Size(74, 15);
+			this.lblStringType.TabIndex = 55;
+			this.lblStringType.Text = "Types.String";
 			// 
 			// lblSequenceType
 			// 
@@ -706,189 +957,199 @@ namespace Network_Analyzer
 			// 
 			// btnFieldDouble
 			// 
-			this.btnFieldDouble.Location = new System.Drawing.Point(247, 307);
+			this.btnFieldDouble.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldDouble.BackgroundImage")));
+			this.btnFieldDouble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldDouble.Location = new System.Drawing.Point(290, 316);
 			this.btnFieldDouble.Name = "btnFieldDouble";
-			this.btnFieldDouble.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldDouble.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldDouble.TabIndex = 52;
-			this.btnFieldDouble.Text = "One";
 			this.btnFieldDouble.UseVisualStyleBackColor = true;
 			this.btnFieldDouble.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbDouble
 			// 
-			this.tbDouble.Location = new System.Drawing.Point(59, 309);
+			this.tbDouble.Location = new System.Drawing.Point(59, 319);
 			this.tbDouble.Name = "tbDouble";
 			this.tbDouble.ReadOnly = true;
-			this.tbDouble.Size = new System.Drawing.Size(182, 20);
+			this.tbDouble.Size = new System.Drawing.Size(185, 20);
 			this.tbDouble.TabIndex = 51;
 			// 
 			// btnFieldUlong
 			// 
-			this.btnFieldUlong.Location = new System.Drawing.Point(247, 278);
+			this.btnFieldUlong.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldUlong.BackgroundImage")));
+			this.btnFieldUlong.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldUlong.Location = new System.Drawing.Point(290, 286);
 			this.btnFieldUlong.Name = "btnFieldUlong";
-			this.btnFieldUlong.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldUlong.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldUlong.TabIndex = 49;
-			this.btnFieldUlong.Text = "One";
 			this.btnFieldUlong.UseVisualStyleBackColor = true;
 			this.btnFieldUlong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUlong
 			// 
-			this.tbUlong.Location = new System.Drawing.Point(59, 280);
+			this.tbUlong.Location = new System.Drawing.Point(59, 286);
 			this.tbUlong.Name = "tbUlong";
 			this.tbUlong.ReadOnly = true;
-			this.tbUlong.Size = new System.Drawing.Size(182, 20);
+			this.tbUlong.Size = new System.Drawing.Size(185, 20);
 			this.tbUlong.TabIndex = 48;
 			// 
 			// btnFieldUint
 			// 
-			this.btnFieldUint.Location = new System.Drawing.Point(247, 249);
+			this.btnFieldUint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldUint.BackgroundImage")));
+			this.btnFieldUint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldUint.Location = new System.Drawing.Point(290, 256);
 			this.btnFieldUint.Name = "btnFieldUint";
-			this.btnFieldUint.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldUint.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldUint.TabIndex = 46;
-			this.btnFieldUint.Text = "One";
 			this.btnFieldUint.UseVisualStyleBackColor = true;
 			this.btnFieldUint.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUint
 			// 
-			this.tbUint.Location = new System.Drawing.Point(59, 251);
+			this.tbUint.Location = new System.Drawing.Point(59, 259);
 			this.tbUint.Name = "tbUint";
 			this.tbUint.ReadOnly = true;
-			this.tbUint.Size = new System.Drawing.Size(182, 20);
+			this.tbUint.Size = new System.Drawing.Size(185, 20);
 			this.tbUint.TabIndex = 45;
 			// 
 			// btnFieldUshort
 			// 
-			this.btnFieldUshort.Location = new System.Drawing.Point(247, 220);
+			this.btnFieldUshort.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldUshort.BackgroundImage")));
+			this.btnFieldUshort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldUshort.Location = new System.Drawing.Point(290, 226);
 			this.btnFieldUshort.Name = "btnFieldUshort";
-			this.btnFieldUshort.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldUshort.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldUshort.TabIndex = 43;
-			this.btnFieldUshort.Text = "One";
 			this.btnFieldUshort.UseVisualStyleBackColor = true;
 			this.btnFieldUshort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbUshort
 			// 
-			this.tbUshort.Location = new System.Drawing.Point(59, 222);
+			this.tbUshort.Location = new System.Drawing.Point(59, 229);
 			this.tbUshort.Name = "tbUshort";
 			this.tbUshort.ReadOnly = true;
-			this.tbUshort.Size = new System.Drawing.Size(182, 20);
+			this.tbUshort.Size = new System.Drawing.Size(185, 20);
 			this.tbUshort.TabIndex = 42;
 			// 
 			// btnFieldSbyte
 			// 
-			this.btnFieldSbyte.Location = new System.Drawing.Point(247, 191);
+			this.btnFieldSbyte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldSbyte.BackgroundImage")));
+			this.btnFieldSbyte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldSbyte.Location = new System.Drawing.Point(290, 196);
 			this.btnFieldSbyte.Name = "btnFieldSbyte";
-			this.btnFieldSbyte.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldSbyte.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldSbyte.TabIndex = 40;
-			this.btnFieldSbyte.Text = "One";
 			this.btnFieldSbyte.UseVisualStyleBackColor = true;
 			this.btnFieldSbyte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbSbyte
 			// 
-			this.tbSbyte.Location = new System.Drawing.Point(59, 193);
+			this.tbSbyte.Location = new System.Drawing.Point(59, 199);
 			this.tbSbyte.Name = "tbSbyte";
 			this.tbSbyte.ReadOnly = true;
-			this.tbSbyte.Size = new System.Drawing.Size(182, 20);
+			this.tbSbyte.Size = new System.Drawing.Size(185, 20);
 			this.tbSbyte.TabIndex = 39;
 			// 
 			// btnFieldFloat
 			// 
-			this.btnFieldFloat.Location = new System.Drawing.Point(247, 162);
+			this.btnFieldFloat.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldFloat.BackgroundImage")));
+			this.btnFieldFloat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldFloat.Location = new System.Drawing.Point(290, 166);
 			this.btnFieldFloat.Name = "btnFieldFloat";
-			this.btnFieldFloat.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldFloat.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldFloat.TabIndex = 37;
-			this.btnFieldFloat.Text = "One";
 			this.btnFieldFloat.UseVisualStyleBackColor = true;
 			this.btnFieldFloat.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbFloat
 			// 
-			this.tbFloat.Location = new System.Drawing.Point(59, 164);
+			this.tbFloat.Location = new System.Drawing.Point(59, 169);
 			this.tbFloat.Name = "tbFloat";
 			this.tbFloat.ReadOnly = true;
-			this.tbFloat.Size = new System.Drawing.Size(182, 20);
+			this.tbFloat.Size = new System.Drawing.Size(185, 20);
 			this.tbFloat.TabIndex = 36;
 			// 
 			// btnFieldLong
 			// 
-			this.btnFieldLong.Location = new System.Drawing.Point(247, 133);
+			this.btnFieldLong.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldLong.BackgroundImage")));
+			this.btnFieldLong.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldLong.Location = new System.Drawing.Point(290, 136);
 			this.btnFieldLong.Name = "btnFieldLong";
-			this.btnFieldLong.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldLong.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldLong.TabIndex = 34;
-			this.btnFieldLong.Text = "One";
 			this.btnFieldLong.UseVisualStyleBackColor = true;
 			this.btnFieldLong.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbLong
 			// 
-			this.tbLong.Location = new System.Drawing.Point(59, 135);
+			this.tbLong.Location = new System.Drawing.Point(59, 139);
 			this.tbLong.Name = "tbLong";
 			this.tbLong.ReadOnly = true;
-			this.tbLong.Size = new System.Drawing.Size(182, 20);
+			this.tbLong.Size = new System.Drawing.Size(185, 20);
 			this.tbLong.TabIndex = 33;
 			// 
 			// btnFieldInt
 			// 
-			this.btnFieldInt.Location = new System.Drawing.Point(247, 104);
+			this.btnFieldInt.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldInt.BackgroundImage")));
+			this.btnFieldInt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldInt.Location = new System.Drawing.Point(290, 106);
 			this.btnFieldInt.Name = "btnFieldInt";
-			this.btnFieldInt.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldInt.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldInt.TabIndex = 31;
-			this.btnFieldInt.Text = "One";
 			this.btnFieldInt.UseVisualStyleBackColor = true;
 			this.btnFieldInt.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbInt
 			// 
-			this.tbInt.Location = new System.Drawing.Point(59, 106);
+			this.tbInt.Location = new System.Drawing.Point(59, 109);
 			this.tbInt.Name = "tbInt";
 			this.tbInt.ReadOnly = true;
-			this.tbInt.Size = new System.Drawing.Size(182, 20);
+			this.tbInt.Size = new System.Drawing.Size(185, 20);
 			this.tbInt.TabIndex = 30;
 			// 
 			// btnFieldShort
 			// 
-			this.btnFieldShort.Location = new System.Drawing.Point(247, 75);
+			this.btnFieldShort.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldShort.BackgroundImage")));
+			this.btnFieldShort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldShort.Location = new System.Drawing.Point(290, 76);
 			this.btnFieldShort.Name = "btnFieldShort";
-			this.btnFieldShort.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldShort.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldShort.TabIndex = 28;
-			this.btnFieldShort.Text = "One";
 			this.btnFieldShort.UseVisualStyleBackColor = true;
 			this.btnFieldShort.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbShort
 			// 
-			this.tbShort.Location = new System.Drawing.Point(59, 77);
+			this.tbShort.Location = new System.Drawing.Point(59, 79);
 			this.tbShort.Name = "tbShort";
 			this.tbShort.ReadOnly = true;
-			this.tbShort.Size = new System.Drawing.Size(182, 20);
+			this.tbShort.Size = new System.Drawing.Size(185, 20);
 			this.tbShort.TabIndex = 27;
 			// 
 			// btnFieldByte
 			// 
-			this.btnFieldByte.Location = new System.Drawing.Point(247, 46);
+			this.btnFieldByte.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFieldByte.BackgroundImage")));
+			this.btnFieldByte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btnFieldByte.Location = new System.Drawing.Point(290, 46);
 			this.btnFieldByte.Name = "btnFieldByte";
-			this.btnFieldByte.Size = new System.Drawing.Size(77, 23);
+			this.btnFieldByte.Size = new System.Drawing.Size(34, 24);
 			this.btnFieldByte.TabIndex = 25;
-			this.btnFieldByte.Text = "One";
 			this.btnFieldByte.UseVisualStyleBackColor = true;
 			this.btnFieldByte.Click += new System.EventHandler(this.BtnConfigurationFieldInformationAdd_Click);
 			// 
 			// tbByte
 			// 
-			this.tbByte.Location = new System.Drawing.Point(59, 48);
+			this.tbByte.Location = new System.Drawing.Point(59, 49);
 			this.tbByte.Name = "tbByte";
 			this.tbByte.ReadOnly = true;
-			this.tbByte.Size = new System.Drawing.Size(182, 20);
+			this.tbByte.Size = new System.Drawing.Size(185, 20);
 			this.tbByte.TabIndex = 24;
 			// 
 			// lblDoubleType
 			// 
 			this.lblDoubleType.AutoSize = true;
 			this.lblDoubleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblDoubleType.Location = new System.Drawing.Point(6, 310);
+			this.lblDoubleType.Location = new System.Drawing.Point(6, 320);
 			this.lblDoubleType.Name = "lblDoubleType";
 			this.lblDoubleType.Size = new System.Drawing.Size(82, 15);
 			this.lblDoubleType.TabIndex = 23;
@@ -898,7 +1159,7 @@ namespace Network_Analyzer
 			// 
 			this.lblFloatType.AutoSize = true;
 			this.lblFloatType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblFloatType.Location = new System.Drawing.Point(6, 165);
+			this.lblFloatType.Location = new System.Drawing.Point(6, 170);
 			this.lblFloatType.Name = "lblFloatType";
 			this.lblFloatType.Size = new System.Drawing.Size(69, 15);
 			this.lblFloatType.TabIndex = 22;
@@ -908,7 +1169,7 @@ namespace Network_Analyzer
 			// 
 			this.lblUlongType.AutoSize = true;
 			this.lblUlongType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblUlongType.Location = new System.Drawing.Point(6, 281);
+			this.lblUlongType.Location = new System.Drawing.Point(6, 287);
 			this.lblUlongType.Name = "lblUlongType";
 			this.lblUlongType.Size = new System.Drawing.Size(75, 15);
 			this.lblUlongType.TabIndex = 21;
@@ -918,7 +1179,7 @@ namespace Network_Analyzer
 			// 
 			this.lblLongType.AutoSize = true;
 			this.lblLongType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblLongType.Location = new System.Drawing.Point(6, 136);
+			this.lblLongType.Location = new System.Drawing.Point(6, 140);
 			this.lblLongType.Name = "lblLongType";
 			this.lblLongType.Size = new System.Drawing.Size(70, 15);
 			this.lblLongType.TabIndex = 20;
@@ -928,7 +1189,7 @@ namespace Network_Analyzer
 			// 
 			this.lblUintType.AutoSize = true;
 			this.lblUintType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblUintType.Location = new System.Drawing.Point(6, 252);
+			this.lblUintType.Location = new System.Drawing.Point(6, 260);
 			this.lblUintType.Name = "lblUintType";
 			this.lblUintType.Size = new System.Drawing.Size(64, 15);
 			this.lblUintType.TabIndex = 19;
@@ -938,7 +1199,7 @@ namespace Network_Analyzer
 			// 
 			this.lblIntType.AutoSize = true;
 			this.lblIntType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblIntType.Location = new System.Drawing.Point(6, 107);
+			this.lblIntType.Location = new System.Drawing.Point(6, 110);
 			this.lblIntType.Name = "lblIntType";
 			this.lblIntType.Size = new System.Drawing.Size(55, 15);
 			this.lblIntType.TabIndex = 18;
@@ -948,7 +1209,7 @@ namespace Network_Analyzer
 			// 
 			this.lblUshortType.AutoSize = true;
 			this.lblUshortType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblUshortType.Location = new System.Drawing.Point(6, 223);
+			this.lblUshortType.Location = new System.Drawing.Point(6, 230);
 			this.lblUshortType.Name = "lblUshortType";
 			this.lblUshortType.Size = new System.Drawing.Size(78, 15);
 			this.lblUshortType.TabIndex = 17;
@@ -958,7 +1219,7 @@ namespace Network_Analyzer
 			// 
 			this.lblShortType.AutoSize = true;
 			this.lblShortType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblShortType.Location = new System.Drawing.Point(6, 78);
+			this.lblShortType.Location = new System.Drawing.Point(6, 80);
 			this.lblShortType.Name = "lblShortType";
 			this.lblShortType.Size = new System.Drawing.Size(71, 15);
 			this.lblShortType.TabIndex = 16;
@@ -968,7 +1229,7 @@ namespace Network_Analyzer
 			// 
 			this.lblSbyteType.AutoSize = true;
 			this.lblSbyteType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblSbyteType.Location = new System.Drawing.Point(6, 194);
+			this.lblSbyteType.Location = new System.Drawing.Point(6, 200);
 			this.lblSbyteType.Name = "lblSbyteType";
 			this.lblSbyteType.Size = new System.Drawing.Size(72, 15);
 			this.lblSbyteType.TabIndex = 15;
@@ -978,7 +1239,7 @@ namespace Network_Analyzer
 			// 
 			this.lblByteType.AutoSize = true;
 			this.lblByteType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.lblByteType.Location = new System.Drawing.Point(6, 49);
+			this.lblByteType.Location = new System.Drawing.Point(6, 50);
 			this.lblByteType.Name = "lblByteType";
 			this.lblByteType.Size = new System.Drawing.Size(65, 15);
 			this.lblByteType.TabIndex = 14;
@@ -1246,79 +1507,6 @@ namespace Network_Analyzer
 			this.tpBindings.TabIndex = 2;
 			this.tpBindings.Text = "Editor.Bindings";
 			// 
-			// dgvConfigurationPackets
-			// 
-			this.dgvConfigurationPackets.AllowDrop = true;
-			this.dgvConfigurationPackets.AllowUserToAddRows = false;
-			this.dgvConfigurationPackets.AllowUserToDeleteRows = false;
-			this.dgvConfigurationPackets.AllowUserToOrderColumns = true;
-			this.dgvConfigurationPackets.AllowUserToResizeColumns = false;
-			this.dgvConfigurationPackets.AllowUserToResizeRows = false;
-			this.dgvConfigurationPackets.BackgroundColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvConfigurationPackets.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-			this.dgvConfigurationPackets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvConfigurationPackets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ConfigurationPacketNumber,
-            this.ConfigurationPacketOpcode,
-            this.ConfigurationPacketName});
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgvConfigurationPackets.DefaultCellStyle = dataGridViewCellStyle6;
-			this.dgvConfigurationPackets.Location = new System.Drawing.Point(6, 6);
-			this.dgvConfigurationPackets.Name = "dgvConfigurationPackets";
-			this.dgvConfigurationPackets.ReadOnly = true;
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvConfigurationPackets.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-			this.dgvConfigurationPackets.RowHeadersVisible = false;
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.dgvConfigurationPackets.RowsDefaultCellStyle = dataGridViewCellStyle8;
-			this.dgvConfigurationPackets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvConfigurationPackets.Size = new System.Drawing.Size(310, 565);
-			this.dgvConfigurationPackets.TabIndex = 4;
-			this.dgvConfigurationPackets.SelectionChanged += new System.EventHandler(this.DgvConfigurationPackets_SelectionChanged);
-			// 
-			// ConfigurationPacketNumber
-			// 
-			this.ConfigurationPacketNumber.HeaderText = "№";
-			this.ConfigurationPacketNumber.Name = "ConfigurationPacketNumber";
-			this.ConfigurationPacketNumber.ReadOnly = true;
-			this.ConfigurationPacketNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationPacketNumber.Width = 50;
-			// 
-			// ConfigurationPacketOpcode
-			// 
-			this.ConfigurationPacketOpcode.HeaderText = "Editor.PacketOpcode";
-			this.ConfigurationPacketOpcode.Name = "ConfigurationPacketOpcode";
-			this.ConfigurationPacketOpcode.ReadOnly = true;
-			this.ConfigurationPacketOpcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationPacketOpcode.Width = 70;
-			// 
-			// ConfigurationPacketName
-			// 
-			this.ConfigurationPacketName.HeaderText = "Editor.PacketName";
-			this.ConfigurationPacketName.Name = "ConfigurationPacketName";
-			this.ConfigurationPacketName.ReadOnly = true;
-			this.ConfigurationPacketName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.ConfigurationPacketName.Width = 170;
-			// 
 			// Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1344,6 +1532,7 @@ namespace Network_Analyzer
 			this.tpPackets.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPackets)).EndInit();
 			this.tpConfigurationPackets.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).EndInit();
 			this.tpStructures.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvStructures)).EndInit();
 			this.gbHexEditor.ResumeLayout(false);
@@ -1357,7 +1546,6 @@ namespace Network_Analyzer
 			this.tpConfiguration.ResumeLayout(false);
 			this.tpConfiguration.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationFields)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dgvConfigurationPackets)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1464,5 +1652,19 @@ namespace Network_Analyzer
 		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketNumber;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketOpcode;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ConfigurationPacketName;
+		private System.Windows.Forms.Button btnFieldString;
+		private System.Windows.Forms.TextBox tbString;
+		private System.Windows.Forms.Label lblStringType;
+		private System.Windows.Forms.Button btnCopyByte;
+		private System.Windows.Forms.Button btnCopyShort;
+		private System.Windows.Forms.Button btnCopyInt;
+		private System.Windows.Forms.Button btnCopyLong;
+		private System.Windows.Forms.Button btnCopyFloat;
+		private System.Windows.Forms.Button btnCopySbyte;
+		private System.Windows.Forms.Button btnCopyUshort;
+		private System.Windows.Forms.Button btnCopyUint;
+		private System.Windows.Forms.Button btnCopyUlong;
+		private System.Windows.Forms.Button btnCopyDouble;
+		private System.Windows.Forms.Button btnCopyString;
 	}
 }

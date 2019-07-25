@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models.Configuration;
 using Network_Analyzer.Models.Connection;
+using Network_Analyzer.Models.SelectedPacket;
 using Network_Analyzer.Services;
 
 namespace Network_Analyzer
@@ -17,7 +18,9 @@ namespace Network_Analyzer
 		private readonly ConfigurationClassModel m_ConfigurationClassModel;
 		private readonly ConfigurationFieldModel m_ConfigurationFieldModel;
 
-		public ConfigurationField(ConnectionPacketModel connectionPacket, ConfigurationModel configurationModel, ConfigurationClassModel configurationClass)
+		private readonly SelectedEncodingType m_SelectedEncodingType;
+
+		public ConfigurationField(ConnectionPacketModel connectionPacket, ConfigurationModel configurationModel, ConfigurationClassModel configurationClass, SelectedEncodingType selectedEncodingType)
 		{
 			InitializeComponent();
 			Localizer.LocalizeForm(this);
@@ -25,9 +28,10 @@ namespace Network_Analyzer
 			m_ConnectionPacketModel = connectionPacket;
 			m_ConfigurationModel = configurationModel;
 			m_ConfigurationClassModel = configurationClass;
+			m_SelectedEncodingType = selectedEncodingType;
 		}
 
-		public ConfigurationField(ConnectionPacketModel connectionPacket, ConfigurationModel configurationModel, ConfigurationClassModel configurationClass, ConfigurationFieldModel configurationFieldModel) : this(connectionPacket, configurationModel, configurationClass)
+		public ConfigurationField(ConnectionPacketModel connectionPacket, ConfigurationModel configurationModel, ConfigurationClassModel configurationClass, ConfigurationFieldModel configurationFieldModel, SelectedEncodingType selectedEncodingType) : this(connectionPacket, configurationModel, configurationClass, selectedEncodingType)
 		{
 			m_ConfigurationFieldModel = configurationFieldModel;
 		}
@@ -159,7 +163,7 @@ namespace Network_Analyzer
 				return;
 			}
 
-			tbValue.Text = m_ConnectionPacketModel.Data.GetValue((string)cbType.SelectedItem, position, reverse);
+			tbValue.Text = m_ConnectionPacketModel.Data.GetValue((string)cbType.SelectedItem, position, reverse, m_SelectedEncodingType);
 		}
 
 		#endregion
@@ -201,7 +205,6 @@ namespace Network_Analyzer
 			{
 				if (!long.TryParse(tbArrayLength.Text, out long arrayLength))
 				{
-
 					lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsPosition");
 					return;
 				}
@@ -220,8 +223,6 @@ namespace Network_Analyzer
 				lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsPosition");
 				return;
 			}
-
-			var configurationFieldPositions = m_ConfigurationClassModel.ConfigurationFields.Where(c => c.Position == position);
 
 			if (m_ConfigurationClassModel.ConfigurationFields.Any(c => c.Position == position && c != m_ConfigurationFieldModel))
 			{
@@ -265,6 +266,8 @@ namespace Network_Analyzer
 				// TODO Сделать проверку имени при получении всех полей и так же сделать чтобы у структур не было зависимости
 			}
 
+			// Сделать проверку наезда полей друг на друга
+			
 			if (m_ConfigurationFieldModel == null)
 			{
 				ConfigurationFieldModel configurationFieldModel = new ConfigurationFieldModel

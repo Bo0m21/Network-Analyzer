@@ -408,9 +408,6 @@
   <data name="Editor.ErrorSelectSearchType" xml:space="preserve">
     <value>Выберите тип поиска</value>
   </data>
-  <data name="Editor.ErrorsSelectEncoding" xml:space="preserve">
-    <value>Ошибки при выборе кодировки</value>
-  </data>
   <data name="Editor.ErrorsValidation" xml:space="preserve">
     <value>Ошибки при валидации</value>
   </data>

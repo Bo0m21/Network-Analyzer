@@ -46,6 +46,8 @@ namespace Network_Analyzer
 		private SelectedPacketEncryptionType m_SelectedPacketEncryptionType;
 		private SelectedPacketType m_SelectedPacketType;
 
+		private SelectedEncodingType m_SelectedEncodingType;
+
 		public Editor(long connectionId)
 		{
 			InitializeComponent();
@@ -61,6 +63,9 @@ namespace Network_Analyzer
 
 			m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
 			m_SelectedPacketType = SelectedPacketType.AllPackets;
+
+			m_SelectedEncodingType = SelectedEncodingType.EncodingAscii;
+			encodingAsciiToolStripMenuItem.Checked = true;
 
 			cbTypePackets.SelectedIndex = 0;
 			cbTypeEncryptionPackets.SelectedIndex = 0;
@@ -88,26 +93,39 @@ namespace Network_Analyzer
 		{
 			ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
-			if (item.Text == Localizer.LocalizeString("Editor.EncodingAscii"))
+			encodingAsciiToolStripMenuItem.Checked = false;
+			encodingUnicodeToolStripMenuItem.Checked = false;
+			encodingUTF8ToolStripMenuItem.Checked = false;
+			encodingWindows1251ToolStripMenuItem.Checked = false;
+
+			if (item.Text == Localizer.LocalizeString("Editor.EncodingUnicode"))
 			{
-				hbHexEditor.ByteCharConverter = new DefaultByteCharConverter();
-			}
-			else if (item.Text == Localizer.LocalizeString("Editor.EncodingUnicode"))
-			{
+				encodingUnicodeToolStripMenuItem.Checked = true;
+				m_SelectedEncodingType = SelectedEncodingType.EncodingUnicode;
 				hbHexEditor.ByteCharConverter = new UnicodeByteCharProvider();
 			}
 			else if (item.Text == Localizer.LocalizeString("Editor.EncodingUTF8"))
 			{
+				encodingUTF8ToolStripMenuItem.Checked = true;
+				m_SelectedEncodingType = SelectedEncodingType.EncodingUTF8;
 				hbHexEditor.ByteCharConverter = new UTF8ByteCharProvider();
 			}
 			else if (item.Text == Localizer.LocalizeString("Editor.EncodingWindows1251"))
 			{
+				encodingWindows1251ToolStripMenuItem.Checked = true;
+				m_SelectedEncodingType = SelectedEncodingType.EncodingWindows1251;
 				hbHexEditor.ByteCharConverter = new Windows1251ByteCharProvider();
 			}
 			else
 			{
-				lblInformation.Text = Localizer.LocalizeString("Editor.ErrorsSelectEncoding");
+				encodingAsciiToolStripMenuItem.Checked = true;
+				m_SelectedEncodingType = SelectedEncodingType.EncodingAscii;
+				hbHexEditor.ByteCharConverter = new DefaultByteCharConverter();
 			}
+
+			HexBoxViewUpdate();
+			InformationViewUpdate();
+			ConfigurationViewUpdate();
 		}
 
 		private void LoadDecryptorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -587,11 +605,27 @@ namespace Network_Analyzer
 			InformationViewUpdate();
 		}
 
+		private void BtnConfigurationFieldInformationCopy_Click(object sender, EventArgs e)
+		{
+			var type = ((Button)sender).Name.Replace("btnCopy", "");
+
+			foreach (var control in gbDataTypes.Controls)
+			{
+				var controlText = control as TextBox;
+
+				if (controlText != null && controlText.Name == "tb" + type)
+				{ 
+					Clipboard.SetText(controlText.Text);
+					break;
+				}
+			}
+		}
+
 		private void BtnConfigurationFieldInformationAdd_Click(object sender, EventArgs e)
 		{
 			var type = ((Button)sender).Name.Replace("btnField", "");
 
-			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel))
+			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
 			{
 				configurationField.SetPosition(hbHexEditor.SelectionStart);
 				configurationField.SetSequenceType(cbSequenceType.Text);
@@ -711,7 +745,7 @@ namespace Network_Analyzer
 
 		private void BtnConfigurationFieldAdd_Click(object sender, EventArgs e)
 		{
-			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel))
+			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
 			{
 				configurationField.SetPosition(hbHexEditor.SelectionStart);
 				configurationField.SetSequenceType(cbSequenceType.Text);
@@ -745,7 +779,7 @@ namespace Network_Analyzer
 			long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value;
 			ConfigurationFieldModel configurationFieldModel = m_CurrentConfigurationClassModel.ConfigurationFields.FirstOrDefault(c => c.Position == position);
 
-			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, configurationFieldModel))
+			using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, configurationFieldModel, m_SelectedEncodingType))
 			{
 				configurationField.ShowDialog();
 			}
@@ -1302,6 +1336,8 @@ namespace Network_Analyzer
 			tbUlong.Text = "0";
 			tbDouble.Text = "0";
 
+			tbString.Text = "";
+
 			if (m_CurrentConnectionPacketModel == null || m_CurrentConnectionPacketModel.Data == null)
 			{
 				return;
@@ -1344,6 +1380,8 @@ namespace Network_Analyzer
 			tbLong.Text = m_CurrentConnectionPacketModel.Data.GetValue(Localizer.LocalizeString("Types.Long"), hbHexEditor.SelectionStart, reverse);
 			tbUlong.Text = m_CurrentConnectionPacketModel.Data.GetValue(Localizer.LocalizeString("Types.Ulong"), hbHexEditor.SelectionStart, reverse);
 			tbDouble.Text = m_CurrentConnectionPacketModel.Data.GetValue(Localizer.LocalizeString("Types.Double"), hbHexEditor.SelectionStart, reverse);
+
+			tbString.Text = m_CurrentConnectionPacketModel.Data.GetValue(Localizer.LocalizeString("Types.String"), hbHexEditor.SelectionStart, reverse, m_SelectedEncodingType);
 		}
 
 		/// <summary>
@@ -1363,6 +1401,7 @@ namespace Network_Analyzer
 				btnFieldUint.Enabled = false;
 				btnFieldUlong.Enabled = false;
 				btnFieldDouble.Enabled = false;
+				btnFieldString.Enabled = false;
 
 				tbConfigurationName.Enabled = false;
 				tbConfigurationDescription.Enabled = false;
@@ -1406,6 +1445,7 @@ namespace Network_Analyzer
 			btnFieldUint.Enabled = true;
 			btnFieldUlong.Enabled = true;
 			btnFieldDouble.Enabled = true;
+			btnFieldString.Enabled = true;
 
 			tbConfigurationName.Enabled = true;
 			tbConfigurationDescription.Enabled = true;

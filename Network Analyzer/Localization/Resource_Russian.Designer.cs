@@ -826,15 +826,6 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ошибки при выборе кодировки.
-        /// </summary>
-        internal static string Editor_ErrorsSelectEncoding {
-            get {
-                return ResourceManager.GetString("Editor.ErrorsSelectEncoding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибки в начальном индексе.
         /// </summary>
         internal static string Editor_ErrorsStartIndex {

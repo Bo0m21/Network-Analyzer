@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Network_Analyzer.Models.SelectedPacket;
 using Network_Analyzer.Services;
 
 namespace Network_Analyzer.Extensions
@@ -198,7 +201,7 @@ namespace Network_Analyzer.Extensions
 		/// <param name="index"></param>
 		/// <param name="reverse"></param>
 		/// <returns></returns>
-		public static string GetValue(this byte[] data, string type, long index, bool reverse)
+		public static string GetValue(this byte[] data, string type, long index, bool reverse, SelectedEncodingType selectedEncodingType = SelectedEncodingType.EncodingAscii)
         {
 	        if (index < data.Length)
 	        {
@@ -211,7 +214,44 @@ namespace Network_Analyzer.Extensions
 	            {
 	                return data.ReadSbyte((int) index).ToString();
 	            }
-	        }
+
+				if (type == Localizer.LocalizeString("Types.String"))
+				{
+					List<byte> bytes = new List<byte>();
+
+					for (long i = index; i < data.Length; i++)
+					{
+						if (data[i] == 0)
+						{
+							break;
+						}
+
+						bytes.Add(data[i]);
+					}
+
+					if (bytes.Count == 0)
+					{
+						return "";
+					}
+
+					if (selectedEncodingType == SelectedEncodingType.EncodingUnicode)
+					{
+						return Encoding.Unicode.GetString(bytes.ToArray());
+					}
+					else if (selectedEncodingType == SelectedEncodingType.EncodingUTF8)
+					{
+						return Encoding.UTF8.GetString(bytes.ToArray());
+					}
+					else if (selectedEncodingType == SelectedEncodingType.EncodingWindows1251)
+					{
+						return Encoding.GetEncoding("Windows-1251").GetString(bytes.ToArray());
+					}
+					else
+					{
+						return Encoding.ASCII.GetString(bytes.ToArray());
+					}
+				}
+			}
 
             if (index + 1 < data.Length)
             {
