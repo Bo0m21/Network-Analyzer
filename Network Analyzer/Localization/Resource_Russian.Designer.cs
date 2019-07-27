@@ -520,7 +520,7 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Описание конфигурации пакета.
+        ///   Ищет локализованную строку, похожую на Описание конфигурации.
         /// </summary>
         internal static string Editor_ConfigurationDescription {
             get {
@@ -628,7 +628,7 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Название конфигурации пакета.
+        ///   Ищет локализованную строку, похожую на Название конфигурации.
         /// </summary>
         internal static string Editor_ConfigurationName {
             get {

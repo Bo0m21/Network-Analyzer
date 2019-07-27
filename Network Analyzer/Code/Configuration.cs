@@ -46,6 +46,7 @@ namespace Network_Analyzer.Extensions
 
 			if (configurationField.Type == Localizer.LocalizeString("Types.String"))
 			{
+				// TODO Дописать проверку
 				if (long.TryParse(configurationField.Common, out long length))
 				{
 					return length;
@@ -61,6 +62,17 @@ namespace Network_Analyzer.Extensions
 		}
 
 		/// <summary>
+		///		Get all fields for confoguration field
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <param name="configurationField"></param>
+		/// <returns></returns>
+		public static List<ConfigurationFieldModel> GetAllFieldForConfigurationField(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
+		{
+			return configuration.GetAllFieldForConfigurationFields(new List<ConfigurationFieldModel> { configurationField });
+		}
+
+		/// <summary>
 		///		Get all fields for configuration class
 		/// </summary>
 		/// <param name="configuration"></param>
@@ -68,10 +80,21 @@ namespace Network_Analyzer.Extensions
 		/// <returns></returns>
 		public static List<ConfigurationFieldModel> GetAllFieldForConfigurationClass(this ConfigurationModel configuration, ConfigurationClassModel configurationClass)
 		{
-			// TODO Обязательно рефакторинг этой хуйни
-			var configurationFields = new List<ConfigurationFieldModel>();
+			return configuration.GetAllFieldForConfigurationFields(configurationClass.ConfigurationFields);
+		}
 
-			foreach (var configurationField in configurationClass.ConfigurationFields)
+		/// <summary>
+		///		Get all fields for confoguration fields
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <param name="configurationFields"></param>
+		/// <returns></returns>
+		private static List<ConfigurationFieldModel> GetAllFieldForConfigurationFields(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields)
+		{
+			// TODO Обязательно рефакторинг этой хуйни
+			var allConfigurationFields = new List<ConfigurationFieldModel>();
+
+			foreach (var configurationField in configurationFields)
 			{
 				if (configurationField.Type == Localizer.LocalizeString("Types.String"))
 				{
@@ -87,10 +110,11 @@ namespace Network_Analyzer.Extensions
 							}
 							else
 							{
+								// TODO Исправить
 								len = 10;
 							}
 
-							configurationFields.Add(new ConfigurationFieldModel()
+							allConfigurationFields.Add(new ConfigurationFieldModel()
 							{
 								Name = configurationField.Name,
 								Description = configurationField.Description,
@@ -105,7 +129,7 @@ namespace Network_Analyzer.Extensions
 					}
 					else
 					{
-						configurationFields.Add(configurationField);
+						allConfigurationFields.Add(configurationField);
 					}
 				}
 				else if (configurationField.Type == Localizer.LocalizeString("Types.Structure"))
@@ -116,12 +140,12 @@ namespace Network_Analyzer.Extensions
 
 						for (int i = 0; i < configurationField.ArrayLength; i++)
 						{
-							configurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position + (lengthstr * i)));
+							allConfigurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position + (lengthstr * i)));
 						}
 					}
 					else
 					{
-						configurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position));
+						allConfigurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position));
 					}
 				}
 				else
@@ -130,7 +154,7 @@ namespace Network_Analyzer.Extensions
 					{
 						for (int i = 0; i < configurationField.ArrayLength; i++)
 						{
-							configurationFields.Add(new ConfigurationFieldModel()
+							allConfigurationFields.Add(new ConfigurationFieldModel()
 							{
 								Name = configurationField.Name,
 								Description = configurationField.Description,
@@ -145,12 +169,12 @@ namespace Network_Analyzer.Extensions
 					}
 					else
 					{
-						configurationFields.Add(configurationField);
+						allConfigurationFields.Add(configurationField);
 					}
 				}
 			}
 
-			return configurationFields;
+			return allConfigurationFields;
 		}
 
 		/// <summary>
@@ -160,7 +184,7 @@ namespace Network_Analyzer.Extensions
 		/// <param name="structureName"></param>
 		/// <param name="position"></param>
 		/// <returns></returns>
-		public static List<ConfigurationFieldModel> GetAllFieldByStructureName(this ConfigurationModel configuration, string structureName, long position)
+		private static List<ConfigurationFieldModel> GetAllFieldByStructureName(this ConfigurationModel configuration, string structureName, long position)
 		{
 			var structure = configuration.ConfigurationStructures.FirstOrDefault(s => s.Name == structureName);
 
@@ -216,6 +240,8 @@ namespace Network_Analyzer.Extensions
 		}
 
 		// TODO Добавить получение длины по структуре по полю и по классу и так же получение полей по структуре и классу
+
+		#region Rename or Delete fields
 
 		/// <summary>
 		///		Rename configuration name all related fields
@@ -315,5 +341,7 @@ namespace Network_Analyzer.Extensions
 				}
 			}
 		}
+
+		#endregion
 	}
 }

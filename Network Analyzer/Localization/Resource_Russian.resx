@@ -487,10 +487,10 @@
     <value>Название</value>
   </data>
   <data name="Editor.ConfigurationDescription" xml:space="preserve">
-    <value>Описание конфигурации пакета</value>
+    <value>Описание конфигурации</value>
   </data>
   <data name="Editor.ConfigurationName" xml:space="preserve">
-    <value>Название конфигурации пакета</value>
+    <value>Название конфигурации</value>
   </data>
   <data name="Editor.ConfigurationFieldPosition" xml:space="preserve">
     <value>Позиция</value>

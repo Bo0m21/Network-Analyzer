@@ -1476,10 +1476,17 @@ namespace Network_Analyzer
 
 			for (int i = 0; i < m_CurrentConfigurationClassModel.ConfigurationFields.Count; i++)
 			{
-				ConfigurationFieldModel configurationFieldModel = m_CurrentConfigurationClassModel.ConfigurationFields[i];
+				ConfigurationFieldModel configurationField = m_CurrentConfigurationClassModel.ConfigurationFields[i];
+				string configurationFieldValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationField.Type, configurationField.Position, configurationField.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
+				dgvConfigurationFields.Rows.Add(configurationField.Position, configurationField.Type, configurationField.Name, configurationFieldValue);
 
-				string configurationFieldValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationFieldModel.Type, configurationFieldModel.Position, configurationFieldModel.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
-				dgvConfigurationFields.Rows.Add(configurationFieldModel.Position, configurationFieldModel.Type, configurationFieldModel.Name, configurationFieldValue);
+				List<ConfigurationFieldModel> configurationFields = m_ConfigurationModel.GetAllFieldForConfigurationField(configurationField);
+				foreach (var configurationFieldItem in configurationFields)
+				{
+					string configurationFieldItemValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationFieldItem.Type, configurationFieldItem.Position, configurationFieldItem.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
+					dgvConfigurationFields.Rows.Add(configurationFieldItem.Position, configurationFieldItem.Type, configurationFieldItem.Name, configurationFieldItemValue);
+					dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Gainsboro;
+				}
 			}
 		}
 

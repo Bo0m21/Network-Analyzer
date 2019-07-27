@@ -251,6 +251,11 @@ namespace Network_Analyzer.Extensions
 						return Encoding.ASCII.GetString(bytes.ToArray());
 					}
 				}
+
+				if (type == Localizer.LocalizeString("Types.Structure"))
+				{
+					return "";
+				}
 			}
 
             if (index + 1 < data.Length)
