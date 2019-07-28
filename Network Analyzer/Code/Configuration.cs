@@ -61,106 +61,106 @@ namespace Network_Analyzer.Extensions
 			return 0;
 		}
 
-		/// <summary>
-		///		Get all fields for confoguration field
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="configurationField"></param>
-		/// <returns></returns>
-		public static List<ConfigurationFieldModel> GetAllFieldForConfigurationField(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
+        ///  <summary>
+        /// 		Get all fields for configuration field
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="configurationField"></param>
+        ///  <param name="position"></param>
+        ///  <returns></returns>
+        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationFieldModel configurationField, long position = 0)
 		{
-			return configuration.GetAllFieldForConfigurationFields(new List<ConfigurationFieldModel> { configurationField });
+			return configuration.GetAllFieldForConfiguration(new List<ConfigurationFieldModel> { configurationField }, position);
 		}
 
-		/// <summary>
-		///		Get all fields for configuration class
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="configurationClass"></param>
-		/// <returns></returns>
-		public static List<ConfigurationFieldModel> GetAllFieldForConfigurationClass(this ConfigurationModel configuration, ConfigurationClassModel configurationClass)
+        ///  <summary>
+        /// 		Get all fields for configuration class
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="configurationClass"></param>
+        ///  <param name="position"></param>
+        ///  <returns></returns>
+        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long position = 0)
 		{
-			return configuration.GetAllFieldForConfigurationFields(configurationClass.ConfigurationFields);
+			return configuration.GetAllFieldForConfiguration(configurationClass.ConfigurationFields, position);
 		}
 
-		/// <summary>
-		///		Get all fields for confoguration fields
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="configurationFields"></param>
-		/// <returns></returns>
-		private static List<ConfigurationFieldModel> GetAllFieldForConfigurationFields(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields)
+        ///  <summary>
+        /// 		Get all fields for configuration fields
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="configurationFields"></param>
+        ///  <param name="position"></param>
+        ///  <returns></returns>
+        private static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields, long position = 0)
 		{
-			// TODO Обязательно рефакторинг этой хуйни
 			var allConfigurationFields = new List<ConfigurationFieldModel>();
 
 			foreach (var configurationField in configurationFields)
 			{
-				if (configurationField.Type == Localizer.LocalizeString("Types.String"))
+                if (configurationField.Type == Localizer.LocalizeString("Types.Structure") || configurationField.IsArray)
+                {
+                    allConfigurationFields.Add(new ConfigurationFieldModel
+                    {
+                        Name = configurationField.Name,
+                        Description = configurationField.Description,
+                        Type = configurationField.Type,
+                        SequenceType = configurationField.SequenceType,
+                        Position = configurationField.Position + position,
+                        IsArray = configurationField.IsArray,
+                        ArrayLength = configurationField.ArrayLength,
+                        Common = configurationField.Common
+                    });
+                }
+
+                if (configurationField.Type == Localizer.LocalizeString("Types.Structure"))
 				{
-					if (configurationField.IsArray)
-					{
-						for (int i = 0; i < configurationField.ArrayLength; i++)
-						{
-							long len = 0;
+                    var structure = configuration.ConfigurationStructures.FirstOrDefault(s => s.Name == configurationField.Common);
 
-							if (long.TryParse(configurationField.Common, out long newLen))
-							{
-								len = newLen;
-							}
-							else
-							{
-								// TODO Исправить
-								len = 10;
-							}
+                    if (structure != null)
+                    {
+                        if (configurationField.IsArray)
+                        {
+                            for (int i = 0; i < configurationField.ArrayLength; i++)
+                            {
+                                var structureFields = configuration.GetAllFieldForConfiguration(structure,
+                                    configurationField.Position + position + (configuration.GetLengthByType(configurationField) * i));
 
-							allConfigurationFields.Add(new ConfigurationFieldModel()
-							{
-								Name = configurationField.Name,
-								Description = configurationField.Description,
-								Type = configurationField.Type,
-								SequenceType = configurationField.SequenceType,
-								Position = configurationField.Position + (len * i),
-								IsArray = configurationField.IsArray,
-								ArrayLength = configurationField.ArrayLength,
-								Common = configurationField.Common
-							});
-						}
-					}
-					else
-					{
-						allConfigurationFields.Add(configurationField);
-					}
-				}
-				else if (configurationField.Type == Localizer.LocalizeString("Types.Structure"))
-				{
-					if (configurationField.IsArray)
-					{
-						var lengthstr = configuration.GetLengthByType(configurationField);
+                                for (int j = 0; j < structureFields.Count; j++)
+                                {
+                                    structureFields[j].Name = configurationField.Name + "[" + i + "]" + "." + structureFields[j].Name;
+                                }
 
-						for (int i = 0; i < configurationField.ArrayLength; i++)
-						{
-							allConfigurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position + (lengthstr * i)));
-						}
-					}
-					else
-					{
-						allConfigurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position));
-					}
+                                allConfigurationFields.AddRange(structureFields);
+                            }
+                        }
+					    else
+                        {
+                            var structureFields = configuration.GetAllFieldForConfiguration(structure,
+                                configurationField.Position + position);
+
+                            for (int i = 0; i < structureFields.Count; i++)
+                            {
+                                structureFields[i].Name = configurationField.Name + "." + structureFields[i].Name;
+                            }
+
+                            allConfigurationFields.AddRange(structureFields);
+                        }
+                    }
 				}
 				else
 				{
 					if (configurationField.IsArray)
 					{
-						for (int i = 0; i < configurationField.ArrayLength; i++)
+                        for (int i = 0; i < configurationField.ArrayLength; i++)
 						{
-							allConfigurationFields.Add(new ConfigurationFieldModel()
-							{
-								Name = configurationField.Name,
+							allConfigurationFields.Add(new ConfigurationFieldModel
+                            {
+								Name = configurationField.Name + "[" + i + "]",
 								Description = configurationField.Description,
 								Type = configurationField.Type,
 								SequenceType = configurationField.SequenceType,
-								Position = configurationField.Position + (configuration.GetLengthByType(configurationField) * i),
+								Position = configurationField.Position + position + (configuration.GetLengthByType(configurationField) * i),
 								IsArray = configurationField.IsArray,
 								ArrayLength = configurationField.ArrayLength,
 								Common = configurationField.Common
@@ -169,7 +169,17 @@ namespace Network_Analyzer.Extensions
 					}
 					else
 					{
-						allConfigurationFields.Add(configurationField);
+						allConfigurationFields.Add(new ConfigurationFieldModel
+                        {
+                            Name = configurationField.Name,
+                            Description = configurationField.Description,
+                            Type = configurationField.Type,
+                            SequenceType = configurationField.SequenceType,
+                            Position = configurationField.Position + position,
+                            IsArray = configurationField.IsArray,
+                            ArrayLength = configurationField.ArrayLength,
+                            Common = configurationField.Common
+                        });
 					}
 				}
 			}
@@ -177,79 +187,103 @@ namespace Network_Analyzer.Extensions
 			return allConfigurationFields;
 		}
 
-		/// <summary>
-		///		Get all field by structure name
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="structureName"></param>
-		/// <param name="position"></param>
-		/// <returns></returns>
-		private static List<ConfigurationFieldModel> GetAllFieldByStructureName(this ConfigurationModel configuration, string structureName, long position)
-		{
-			var structure = configuration.ConfigurationStructures.FirstOrDefault(s => s.Name == structureName);
+        ///  <summary>
+        /// 		Get length by structure name
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="structureName"></param>
+        ///  <returns></returns>
+        private static long GetLengthByStructureName(this ConfigurationModel configuration, string structureName)
+        {
+            var structure = configuration.ConfigurationStructures.FirstOrDefault(s => s.Name == structureName);
 
-			if (structure == null)
-			{
-				return new List<ConfigurationFieldModel>();
-			}
+            if (structure == null)
+            {
+                return 0;
+            }
 
-			var configurationFields = new List<ConfigurationFieldModel>();
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(structure, 0).LastOrDefault();
 
-			foreach (var configurationField in structure.ConfigurationFields)
-			{
-				if (configurationField.Type != Localizer.LocalizeString("Types.Structure"))
-				{
-					configurationFields.Add(new ConfigurationFieldModel()
-					{
-						Name = configurationField.Name,
-						Description = configurationField.Description,
-						Type = configurationField.Type,
-						SequenceType = configurationField.SequenceType,
-						Position = configurationField.Position + position,
-						IsArray = configurationField.IsArray,
-						ArrayLength = configurationField.ArrayLength,
-						Common = configurationField.Common
-					});
-				}
-				else
-				{
-					configurationFields.AddRange(configuration.GetAllFieldByStructureName(configurationField.Common, configurationField.Position + position));
-				}
-			}
+            if (lastConfigurationField != null)
+            {
+                return lastConfigurationField.Position + configuration.GetLengthByType(lastConfigurationField);
+            }
 
-			return configurationFields;
-		}
+            return 0;
+        }
 
-		/// <summary>
-		///		Get length by structure name
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="structureName"></param>
-		/// <returns></returns>
-		private static long GetLengthByStructureName(this ConfigurationModel configuration, string structureName)
-		{
-			List<ConfigurationFieldModel> configurationFields = configuration.GetAllFieldByStructureName(structureName, 0);
-			ConfigurationFieldModel configurationFieldModel = configurationFields.OrderBy(c => c.Position).LastOrDefault();
+        ///  <summary>
+        /// 		Get length for configuration class
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="configurationClass"></param>
+        ///  <returns></returns>
+        public static long GetLengthForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass)
+        {
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationClass, 0).LastOrDefault();
 
-			if (configurationFieldModel != null)
-			{
-				return configurationFieldModel.Position + configuration.GetLengthByType(configurationFieldModel);
-			}
+            if (lastConfigurationField != null)
+            {
+                return lastConfigurationField.Position + configuration.GetLengthByType(lastConfigurationField);
+            }
 
-			return 0;
-		}
+            return 0;
+        }
 
-		// TODO Добавить получение длины по структуре по полю и по классу и так же получение полей по структуре и классу
+        ///  <summary>
+        /// 		Get length for configuration field
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="configurationField"></param>
+        ///  <returns></returns>
+        public static long GetLengthForConfiguration(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
+        {
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationField, 0).LastOrDefault();
 
-		#region Rename or Delete fields
+            if (lastConfigurationField != null)
+            {
+                return (lastConfigurationField.Position - configurationField.Position) + configuration.GetLengthByType(lastConfigurationField);
+            }
 
-		/// <summary>
-		///		Rename configuration name all related fields
-		/// </summary>
-		/// <param name="configurationModel"></param>
-		/// <param name="oldConfigurationName"></param>
-		/// <param name="newConfigurationName"></param>
-		public static void RenameConfigurationNameAllRelatedFields(this ConfigurationModel configurationModel, string oldConfigurationName, string newConfigurationName)
+            return 0;
+        }
+
+        /// <summary>
+        ///     Get entry field by index and length
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="configurationClass"></param>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static ConfigurationFieldModel GetEntryFieldByIndex(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long index, long length = 0)
+        {
+            List<ConfigurationFieldModel> configurationFields = configuration.GetAllFieldForConfiguration(configurationClass);
+
+            foreach (var configurationField in configurationFields)
+            {
+                long positionField = configurationField.Position;
+                long lengthField = configuration.GetLengthForConfiguration(configurationField) - 1;
+
+                // TODO Дописать все прокврерки с длиной length и исправить структуры и массивы
+                if (positionField <= index && positionField + lengthField >= index)
+                {
+                    return configurationField;
+                }
+            }
+
+            return null;
+        }
+
+        #region Rename or Delete fields
+
+        /// <summary>
+        ///		Rename configuration name all related fields
+        /// </summary>
+        /// <param name="configurationModel"></param>
+        /// <param name="oldConfigurationName"></param>
+        /// <param name="newConfigurationName"></param>
+        public static void RenameConfigurationNameAllRelatedFields(this ConfigurationModel configurationModel, string oldConfigurationName, string newConfigurationName)
 		{
 			// Rename all related fields in configuration packet
 			for (int i = 0; i < configurationModel.ConfigurationPackets.Count(); i++)

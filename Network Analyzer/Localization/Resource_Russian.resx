@@ -729,4 +729,7 @@
   <data name="ConfigurationClass.Opcode" xml:space="preserve">
     <value>Опкод</value>
   </data>
+  <data name="Editor.HexEditorLongField" xml:space="preserve">
+    <value>Длинное поле в редакторе</value>
+  </data>
 </root>

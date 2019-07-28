@@ -19,7 +19,7 @@ namespace Network_Analyzer.Localization {
     // с помощью такого средства, как ResGen или Visual Studio.
     // Чтобы добавить или удалить член, измените файл .ResX и снова запустите ResGen
     // с параметром /str или перестройте свой проект VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resource_Russian {
@@ -876,6 +876,15 @@ namespace Network_Analyzer.Localization {
         internal static string Editor_HexEditorEncoding {
             get {
                 return ResourceManager.GetString("Editor.HexEditorEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Длинное поле в редакторе.
+        /// </summary>
+        internal static string Editor_HexEditorLongField {
+            get {
+                return ResourceManager.GetString("Editor.HexEditorLongField", resourceCulture);
             }
         }
         

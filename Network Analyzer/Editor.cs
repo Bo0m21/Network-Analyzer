@@ -58,7 +58,7 @@ namespace Network_Analyzer
 
 		private void Editor_Load(object sender, EventArgs e)
 		{
-			m_SelectedTabControlGeneralType = SelectedTabControlGeneralType.Packets;
+            m_SelectedTabControlGeneralType = SelectedTabControlGeneralType.Packets;
 			m_SelectedTabControlConfigurationType = SelectedTabControlConfigurationType.PacketInformation;
 
 			m_SelectedPacketEncryptionType = SelectedPacketEncryptionType.Encrypted;
@@ -477,11 +477,40 @@ namespace Network_Analyzer
 			ConfigurationViewUpdate();
 		}
 
-		#endregion
+        #endregion
 
-		#region Hex-box Tab
+        #region Hex-box Tab
 
-		private void BtnSearchStart_Click(object sender, EventArgs e)
+        private void HbHexEditor_DoubleClick(object sender, EventArgs e)
+        {
+            var entryConfigurationField = m_ConfigurationModel.GetEntryFieldByIndex(m_CurrentConfigurationClassModel, hbHexEditor.SelectionStart);
+
+            if (entryConfigurationField != null)
+            {
+                foreach (DataGridViewRow dataGridViewRow in dgvConfigurationFields.Rows)
+                {
+                    if (dataGridViewRow.Cells["ConfigurationFieldPosition"].Value == null)
+                    {
+                        continue;
+                    }
+
+                    var position = (long)dataGridViewRow.Cells["ConfigurationFieldPosition"].Value;
+
+                    if (entryConfigurationField.Position == position)
+                    {
+                        foreach (DataGridViewRow dataGridViewRowSelected in dgvConfigurationFields.Rows)
+                        {
+                            dataGridViewRowSelected.Selected = false;
+                        }
+
+                        dataGridViewRow.Selected = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void BtnSearchStart_Click(object sender, EventArgs e)
 		{
 			if (string.IsNullOrEmpty(tbSearch.Text))
 			{
@@ -572,11 +601,14 @@ namespace Network_Analyzer
 		{
 			if (m_CurrentConfigurationClassModel != null)
 			{
-				var configurationFields = m_ConfigurationModel.GetAllFieldForConfigurationClass(m_CurrentConfigurationClassModel);
+				var configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel);
 
 				foreach (var configurationField in configurationFields)
-				{
-					hbHexEditor.FillPaint(e.Graphics, configurationField.Position, m_ConfigurationModel.GetLengthByType(configurationField), new SolidBrush(Color.FromArgb(146, 250, 91)));
+                {
+                    if (configurationField.Type != Localizer.LocalizeString("Types.Structure") && !configurationField.IsArray)
+                    {
+                        hbHexEditor.FillPaint(e.Graphics, configurationField.Position, m_ConfigurationModel.GetLengthForConfiguration(configurationField), new SolidBrush(Color.FromArgb(146, 250, 91)));
+                    }
 				}
 
 				// TODO Доделать выбор и изменение цвета
@@ -586,8 +618,8 @@ namespace Network_Analyzer
 		}
 
 		private void HbHexEditor_SelectionStartChanged(object sender, EventArgs e)
-		{
-			InformationViewUpdate();
+        {
+            InformationViewUpdate();
 		}
 
 		private void HbHexEditor_SelectionLengthChanged(object sender, EventArgs e)
@@ -683,7 +715,43 @@ namespace Network_Analyzer
 			StructuresGridViewUpdate();
 		}
 
-		private void BtnConfigurationAdd_Click(object sender, EventArgs e)
+        private void DgvConfigurationFields_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].DefaultCellStyle.BackColor == Color.Gainsboro)
+            {
+                btnConfigurationFieldAdd.Enabled = false;
+                btnConfigurationFieldEdit.Enabled = false;
+                btnConfigurationFieldDelete.Enabled = false;
+            }
+            else
+            {
+                btnConfigurationFieldAdd.Enabled = true;
+                btnConfigurationFieldEdit.Enabled = true;
+                btnConfigurationFieldDelete.Enabled = true;
+            }
+        }
+
+        private void DgvConfigurationFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value != null)
+            {
+                ConfigurationFieldModel configurationField = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel).ElementAt(dgvConfigurationFields.CurrentCell.RowIndex);
+                long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value;
+
+                hbHexEditor.SelectionLength = m_ConfigurationModel.GetLengthForConfiguration(configurationField);
+                hbHexEditor.SelectionStart = position;
+            }
+        }
+
+        private void CbHexEditorLongField_CheckedChanged(object sender, EventArgs e)
+        {
+            SetCurrentConnectionPacketModel();
+            SetCurrentConfigurationClassModel();
+
+            HexBoxViewUpdate();
+        }
+
+        private void BtnConfigurationAdd_Click(object sender, EventArgs e)
 		{
 			List<ConfigurationClassModel> configurationClassModels = new List<ConfigurationClassModel>();
 
@@ -1053,15 +1121,19 @@ namespace Network_Analyzer
 				ConfigurationClassModel configurationClass = m_ConfigurationModel.ConfigurationPackets.FirstOrDefault(c => c.Opcode == configurationPacketOpcode);
 
 				if (configurationClass != null)
-				{
-					// TODO Сделать подсчет количества байт в структуре
-					// Можно сделать после того как допишу добавление в конфигуратион код получение длины по классу
-					m_CurrentConnectionPacketModel = new ConnectionPacketModel
-					{
-						Data = new byte[65536] // 65536
-					};
+                {
+                    m_CurrentConnectionPacketModel = new ConnectionPacketModel();
 
-					m_CurrentConfigurationClassModel = configurationClass;
+                    if (cbHexEditorLongField.Checked)
+                    {
+                        m_CurrentConnectionPacketModel.Data = new byte[65536];
+                    }
+                    else
+                    {
+                        m_CurrentConnectionPacketModel.Data = new byte[m_ConfigurationModel.GetLengthForConfiguration(configurationClass)];
+                    }
+
+                    m_CurrentConfigurationClassModel = configurationClass;
 				}
 				else
 				{
@@ -1096,15 +1168,19 @@ namespace Network_Analyzer
 				ConfigurationClassModel configurationClass = GetStructuresBySearchSettings().FirstOrDefault(p => p.Name == structureName);
 
 				if (configurationClass != null)
-				{
-					// TODO Сделать подсчет количества байт в структуре
-					// Можно сделать после того как допишу добавление в конфигуратион код получение длины по классу
-					m_CurrentConnectionPacketModel = new ConnectionPacketModel
-					{
-						Data = new byte[65536] // 65536
-					};
+                {
+                    m_CurrentConnectionPacketModel = new ConnectionPacketModel();
 
-					m_CurrentConfigurationClassModel = configurationClass;
+                    if (cbHexEditorLongField.Checked)
+                    {
+                        m_CurrentConnectionPacketModel.Data = new byte[65536];
+                    }
+                    else
+                    {
+                        m_CurrentConnectionPacketModel.Data = new byte[m_ConfigurationModel.GetLengthForConfiguration(configurationClass)];
+                    }
+
+                    m_CurrentConfigurationClassModel = configurationClass;
 				}
 				else
 				{
@@ -1406,6 +1482,7 @@ namespace Network_Analyzer
 				tbConfigurationName.Enabled = false;
 				tbConfigurationDescription.Enabled = false;
 				dgvConfigurationFields.Enabled = false;
+                cbHexEditorLongField.Enabled = false;
 				btnConfigurationFieldAdd.Enabled = false;
 				btnConfigurationFieldEdit.Enabled = false;
 				btnConfigurationFieldDelete.Enabled = false;
@@ -1432,7 +1509,7 @@ namespace Network_Analyzer
 				tbConfigurationDescription.Clear();
 				dgvConfigurationFields.Rows.Clear();
 
-				return;
+                return;
 			}
 
 			btnFieldByte.Enabled = true;
@@ -1450,7 +1527,8 @@ namespace Network_Analyzer
 			tbConfigurationName.Enabled = true;
 			tbConfigurationDescription.Enabled = true;
 			dgvConfigurationFields.Enabled = true;
-			btnConfigurationFieldAdd.Enabled = true;
+            cbHexEditorLongField.Enabled = true;
+            btnConfigurationFieldAdd.Enabled = true;
 			btnConfigurationFieldEdit.Enabled = true;
 			btnConfigurationFieldDelete.Enabled = true;
 			btnConfigurationAdd.Enabled = true;
@@ -1458,8 +1536,9 @@ namespace Network_Analyzer
 
 			if (m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.Packets)
 			{
+                cbHexEditorLongField.Enabled = false;
 				btnConfigurationAdd.Enabled = false;
-			}
+            }
 			else if (m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.ConfigurationPackets ||
 					 m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.Structures)
 			{
@@ -1471,23 +1550,19 @@ namespace Network_Analyzer
 
 			dgvConfigurationFields.Rows.Clear();
 
-			m_CurrentConfigurationClassModel.ConfigurationFields = m_CurrentConfigurationClassModel
-				.ConfigurationFields.OrderBy(c => c.Position).ToList();
+            m_CurrentConfigurationClassModel.ConfigurationFields = m_CurrentConfigurationClassModel.ConfigurationFields.OrderBy(c => c.Position).ToList();
+            List<ConfigurationFieldModel> configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel);
 
-			for (int i = 0; i < m_CurrentConfigurationClassModel.ConfigurationFields.Count; i++)
-			{
-				ConfigurationFieldModel configurationField = m_CurrentConfigurationClassModel.ConfigurationFields[i];
-				string configurationFieldValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationField.Type, configurationField.Position, configurationField.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
-				dgvConfigurationFields.Rows.Add(configurationField.Position, configurationField.Type, configurationField.Name, configurationFieldValue);
+            for (int i = 0; i < configurationFields.Count; i++)
+            {
+                string configurationFieldItemValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationFields[i].Type, configurationFields[i].Position, configurationFields[i].SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
+                dgvConfigurationFields.Rows.Add(configurationFields[i].Position, configurationFields[i].Type, configurationFields[i].Name, configurationFieldItemValue);
 
-				List<ConfigurationFieldModel> configurationFields = m_ConfigurationModel.GetAllFieldForConfigurationField(configurationField);
-				foreach (var configurationFieldItem in configurationFields)
-				{
-					string configurationFieldItemValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationFieldItem.Type, configurationFieldItem.Position, configurationFieldItem.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
-					dgvConfigurationFields.Rows.Add(configurationFieldItem.Position, configurationFieldItem.Type, configurationFieldItem.Name, configurationFieldItemValue);
-					dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Gainsboro;
-				}
-			}
+                if (i > 0)
+                {
+                    dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Gainsboro;
+                }
+            }
 		}
 
 		#endregion
@@ -1578,6 +1653,6 @@ namespace Network_Analyzer
 			}
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

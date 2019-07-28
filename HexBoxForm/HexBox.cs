@@ -2390,10 +2390,10 @@ namespace HexBoxForm
             if (_byteProvider == null)
                 return;
 
-			if(start + length < _startByte || start > _endByte)
+			if(start + length < _startByte || start > _endByte + 1)
 				return;
 
-			for (long viewByte = _startByte, indexView = 0; viewByte < _endByte; viewByte++, indexView++)
+			for (long viewByte = _startByte, indexView = 0; viewByte < _endByte + 1; viewByte++, indexView++)
 			{
 				if (viewByte >= start && viewByte <= start + length - 1)
 				{
