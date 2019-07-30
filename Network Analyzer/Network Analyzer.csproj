@@ -84,6 +84,7 @@
     <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Models\Search\SelectedSearchType.cs" />
+    <Compile Include="Models\Colors.cs" />
     <Compile Include="Models\SelectedTabControl\SelectedTabControlConfigurationType.cs" />
     <Compile Include="Models\SelectedTabControl\SelectedTabControlGeneralType.cs" />
     <Compile Include="Code\Settings.cs" />

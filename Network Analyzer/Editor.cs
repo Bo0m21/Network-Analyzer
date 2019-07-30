@@ -601,23 +601,26 @@ namespace Network_Analyzer
 		{
 			if (m_CurrentConfigurationClassModel != null)
 			{
-				var configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel);
+				var configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel, display: true);
 
-				foreach (var configurationField in configurationFields)
+                foreach (var configurationField in configurationFields)
                 {
+                    SolidBrush color = new SolidBrush(Colors.Success.GetColor());
+
+                    if (!m_ConfigurationModel.CheckFieldForUniquenessSpace(configurationFields, configurationField))
+                    {
+                        color = new SolidBrush(Colors.Error.GetColor());
+                    }
+
                     if (configurationField.Type != Localizer.LocalizeString("Types.Structure") && !configurationField.IsArray)
                     {
-                        hbHexEditor.FillPaint(e.Graphics, configurationField.Position, m_ConfigurationModel.GetLengthForConfiguration(configurationField), new SolidBrush(Color.FromArgb(146, 250, 91)));
+                        hbHexEditor.FillPaint(e.Graphics, configurationField.Position, m_ConfigurationModel.GetLengthForConfiguration(configurationField), color);
                     }
-				}
+                }
+            }
+        }
 
-				// TODO Доделать выбор и изменение цвета
-				//new SolidBrush(Color.FromArgb(89, 202, 250)
-				//new SolidBrush(Color.FromArgb(146, 250, 91)
-			}
-		}
-
-		private void HbHexEditor_SelectionStartChanged(object sender, EventArgs e)
+        private void HbHexEditor_SelectionStartChanged(object sender, EventArgs e)
         {
             InformationViewUpdate();
 		}
@@ -717,17 +720,22 @@ namespace Network_Analyzer
 
         private void DgvConfigurationFields_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].DefaultCellStyle.BackColor == Color.Gainsboro)
+            if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldName"].Value != null)
             {
-                btnConfigurationFieldAdd.Enabled = false;
-                btnConfigurationFieldEdit.Enabled = false;
-                btnConfigurationFieldDelete.Enabled = false;
-            }
-            else
-            {
-                btnConfigurationFieldAdd.Enabled = true;
-                btnConfigurationFieldEdit.Enabled = true;
-                btnConfigurationFieldDelete.Enabled = true;
+                string configurationFieldName = (string)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldName"].Value;
+
+                if (configurationFieldName.Contains("."))
+                {
+                    btnConfigurationFieldAdd.Enabled = false;
+                    btnConfigurationFieldEdit.Enabled = false;
+                    btnConfigurationFieldDelete.Enabled = false;
+                }
+                else
+                {
+                    btnConfigurationFieldAdd.Enabled = true;
+                    btnConfigurationFieldEdit.Enabled = true;
+                    btnConfigurationFieldDelete.Enabled = true;
+                }
             }
         }
 
@@ -735,7 +743,7 @@ namespace Network_Analyzer
         {
             if (dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value != null)
             {
-                ConfigurationFieldModel configurationField = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel).ElementAt(dgvConfigurationFields.CurrentCell.RowIndex);
+                ConfigurationFieldModel configurationField = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel, display: true).ElementAt(dgvConfigurationFields.CurrentCell.RowIndex);
                 long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value;
 
                 hbHexEditor.SelectionLength = m_ConfigurationModel.GetLengthForConfiguration(configurationField);
@@ -1228,13 +1236,13 @@ namespace Network_Analyzer
 					dgvPackets.Rows[i].Cells["PacketId"].Value = packets[i].Id;
 
 					if (packets[i].Type == ConnectionPacketType.ClientToServer)
-					{
-						dgvPackets.Rows[i].Cells["PacketNumber"].Style.BackColor = Color.FromArgb(135, 255, 135);
-					}
+                    {
+                        dgvPackets.Rows[i].Cells["PacketNumber"].Style.BackColor = Colors.ClientToServer.GetColor();
+                    }
 					else if (packets[i].Type == ConnectionPacketType.ServerToClient)
-					{
-						dgvPackets.Rows[i].Cells["PacketNumber"].Style.BackColor = Color.FromArgb(135, 255, 255);
-					}
+                    {
+                        dgvPackets.Rows[i].Cells["PacketNumber"].Style.BackColor = Colors.ServerToClient.GetColor();
+                    }
 
 					if (m_SelectedPacketEncryptionType == SelectedPacketEncryptionType.Encrypted)
 					{
@@ -1551,19 +1559,26 @@ namespace Network_Analyzer
 			dgvConfigurationFields.Rows.Clear();
 
             m_CurrentConfigurationClassModel.ConfigurationFields = m_CurrentConfigurationClassModel.ConfigurationFields.OrderBy(c => c.Position).ToList();
-            List<ConfigurationFieldModel> configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel);
+            List<ConfigurationFieldModel> configurationFields = m_ConfigurationModel.GetAllFieldForConfiguration(m_CurrentConfigurationClassModel, display: true);
 
-            for (int i = 0; i < configurationFields.Count; i++)
+            foreach (var configurationField in configurationFields)
             {
-                string configurationFieldItemValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationFields[i].Type, configurationFields[i].Position, configurationFields[i].SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
-                dgvConfigurationFields.Rows.Add(configurationFields[i].Position, configurationFields[i].Type, configurationFields[i].Name, configurationFieldItemValue);
+                string configurationFieldItemValue = m_CurrentConnectionPacketModel.Data.GetValue(configurationField.Type, configurationField.Position, configurationField.SequenceType != Localizer.LocalizeString("SequenceTypes.LittleEndian"));
+                dgvConfigurationFields.Rows.Add(configurationField.Position, configurationField.Type, configurationField.Name, configurationFieldItemValue);
 
-                if (i > 0)
+                if (!m_ConfigurationModel.CheckFieldForUniquenessSpace(configurationFields, configurationField))
                 {
-                    dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Gainsboro;
+                    dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Colors.Error.GetColor();
+                }
+                else
+                {
+                    if (configurationField.Name.Contains("."))
+                    {
+                        dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Colors.BlockedElement.GetColor();
+                    }
                 }
             }
-		}
+        }
 
 		#endregion
 

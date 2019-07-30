@@ -1,7 +1,9 @@
 ﻿using Network_Analyzer.Models.Configuration;
 using Network_Analyzer.Services;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Network_Analyzer.Models.SelectedTabControl;
 
 namespace Network_Analyzer.Extensions
 {
@@ -10,13 +12,50 @@ namespace Network_Analyzer.Extensions
 	/// </summary>
 	public static class ConfigurationExtension
 	{
-		/// <summary>
-		///		Get length by type
-		/// </summary>
-		/// <param name="configuration"></param>
-		/// <param name="configurationField"></param>
-		/// <returns></returns>
-		public static long GetLengthByType(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
+        /// <summary>
+        ///     Get color by enum colors
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public static Color GetColor(this Colors color)
+        {
+            if (color == Colors.Error)
+            {
+                return Color.FromArgb(255, 90, 90);
+            }
+            else if (color == Colors.Warning)
+            {
+                return Color.FromArgb(245, 250, 90);
+            }
+            else if(color == Colors.Success)
+            {
+                return Color.FromArgb(146, 250, 90);
+            }
+            else if (color == Colors.BlockedElement)
+            {
+                return Color.Gainsboro;
+            }
+            else if (color == Colors.ServerToClient)
+            {
+                return Color.FromArgb(73, 235, 231);
+            }
+            else if (color == Colors.ClientToServer)
+            {
+                return Color.FromArgb(87, 142, 255);
+            }
+            else
+            {
+                return Color.FromArgb(0, 0, 0);
+            }
+        }
+
+        /// <summary>
+        ///		Get length by type
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="configurationField"></param>
+        /// <returns></returns>
+        public static long GetLengthByType(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
 		{
 			if (configurationField.Type == Localizer.LocalizeString("Types.Byte") ||
 				configurationField.Type == Localizer.LocalizeString("Types.Sbyte"))
@@ -68,9 +107,9 @@ namespace Network_Analyzer.Extensions
         ///  <param name="configurationField"></param>
         ///  <param name="position"></param>
         ///  <returns></returns>
-        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationFieldModel configurationField, long position = 0)
+        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationFieldModel configurationField, long position = 0, bool display = false)
 		{
-			return configuration.GetAllFieldForConfiguration(new List<ConfigurationFieldModel> { configurationField }, position);
+			return configuration.GetAllFieldForConfiguration(new List<ConfigurationFieldModel> { configurationField }, position, display);
 		}
 
         ///  <summary>
@@ -80,9 +119,9 @@ namespace Network_Analyzer.Extensions
         ///  <param name="configurationClass"></param>
         ///  <param name="position"></param>
         ///  <returns></returns>
-        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long position = 0)
+        public static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long position = 0, bool display = false)
 		{
-			return configuration.GetAllFieldForConfiguration(configurationClass.ConfigurationFields, position);
+			return configuration.GetAllFieldForConfiguration(configurationClass.ConfigurationFields, position, display);
 		}
 
         ///  <summary>
@@ -92,13 +131,13 @@ namespace Network_Analyzer.Extensions
         ///  <param name="configurationFields"></param>
         ///  <param name="position"></param>
         ///  <returns></returns>
-        private static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields, long position = 0)
+        private static List<ConfigurationFieldModel> GetAllFieldForConfiguration(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields, long position = 0, bool display = false)
 		{
 			var allConfigurationFields = new List<ConfigurationFieldModel>();
 
 			foreach (var configurationField in configurationFields)
 			{
-                if (configurationField.Type == Localizer.LocalizeString("Types.Structure") || configurationField.IsArray)
+                if ((configurationField.Type == Localizer.LocalizeString("Types.Structure") || configurationField.IsArray) && display)
                 {
                     allConfigurationFields.Add(new ConfigurationFieldModel
                     {
@@ -202,7 +241,7 @@ namespace Network_Analyzer.Extensions
                 return 0;
             }
 
-            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(structure, 0).LastOrDefault();
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(structure, 0).OrderBy(o => o.Position).LastOrDefault();
 
             if (lastConfigurationField != null)
             {
@@ -220,7 +259,7 @@ namespace Network_Analyzer.Extensions
         ///  <returns></returns>
         public static long GetLengthForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass)
         {
-            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationClass, 0).LastOrDefault();
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationClass, 0).OrderBy(o => o.Position).LastOrDefault();
 
             if (lastConfigurationField != null)
             {
@@ -238,7 +277,7 @@ namespace Network_Analyzer.Extensions
         ///  <returns></returns>
         public static long GetLengthForConfiguration(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
         {
-            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationField, 0).LastOrDefault();
+            ConfigurationFieldModel lastConfigurationField = configuration.GetAllFieldForConfiguration(configurationField, 0).OrderBy(o => o.Position).LastOrDefault();
 
             if (lastConfigurationField != null)
             {
@@ -249,14 +288,13 @@ namespace Network_Analyzer.Extensions
         }
 
         /// <summary>
-        ///     Get entry field by index and length
+        ///     Get entry field by index
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="configurationClass"></param>
         /// <param name="index"></param>
-        /// <param name="length"></param>
         /// <returns></returns>
-        public static ConfigurationFieldModel GetEntryFieldByIndex(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long index, long length = 0)
+        public static ConfigurationFieldModel GetEntryFieldByIndex(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long index)
         {
             List<ConfigurationFieldModel> configurationFields = configuration.GetAllFieldForConfiguration(configurationClass);
 
@@ -265,7 +303,6 @@ namespace Network_Analyzer.Extensions
                 long positionField = configurationField.Position;
                 long lengthField = configuration.GetLengthForConfiguration(configurationField) - 1;
 
-                // TODO Дописать все прокврерки с длиной length и исправить структуры и массивы
                 if (positionField <= index && positionField + lengthField >= index)
                 {
                     return configurationField;
@@ -273,6 +310,60 @@ namespace Network_Analyzer.Extensions
             }
 
             return null;
+        }
+
+        /// <summary>
+        ///     Check field for uniqueness of space
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="configurationFields"></param>
+        /// <param name="configurationField"></param>
+        /// <returns></returns>
+        public static bool CheckFieldForUniquenessSpace(this ConfigurationModel configuration, List<ConfigurationFieldModel> configurationFields, ConfigurationFieldModel configurationField)
+        {
+            if (configurationField.Type == Localizer.LocalizeString("Types.Structure") || configurationField.IsArray)
+            {
+                return true;
+            }
+
+            foreach (var checkConfigurationField in configurationFields)
+            {
+                if (checkConfigurationField.Type == Localizer.LocalizeString("Types.Structure") || checkConfigurationField.IsArray)
+                {
+                    continue;
+                }
+
+                if (configurationField == checkConfigurationField)
+                {
+                    continue;
+                }
+
+                var configurationFieldLength = configuration.GetLengthByType(configurationField) - 1;
+                var configurationFieldPosition = configurationField.Position;
+
+                var checkConfigurationFieldLength = configuration.GetLengthByType(checkConfigurationField) - 1;
+                var checkConfigurationFieldPosition = checkConfigurationField.Position;
+
+                if (configurationFieldPosition >= checkConfigurationFieldPosition &&
+                    configurationFieldPosition <= checkConfigurationFieldPosition + checkConfigurationFieldLength)
+                {
+                    return false;
+                }
+
+                if (configurationFieldPosition + configurationFieldLength >= checkConfigurationFieldPosition &&
+                    configurationFieldPosition + configurationFieldLength <= checkConfigurationFieldPosition + checkConfigurationFieldLength)
+                {
+                    return false;
+                }
+
+                if (configurationFieldPosition <= checkConfigurationFieldPosition &&
+                    configurationFieldPosition + configurationFieldLength >= checkConfigurationFieldPosition + checkConfigurationFieldLength)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #region Rename or Delete fields
