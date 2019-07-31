@@ -112,7 +112,7 @@ namespace Network_Analyzer
 			cbCommon.ResetText();
 			cbCommon.Items.Clear();
 
-			if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
+			if (cbType.Text == Localizer.LocalizeString("Types.String"))
 			{
 				foreach (var configurationField in m_ConfigurationClassModel.ConfigurationFields)
 				{
@@ -125,7 +125,7 @@ namespace Network_Analyzer
 				lblCommon.Text = Localizer.LocalizeString("ConfigurationField.CommonString");
 				cbCommon.Enabled = true;
 			}
-			else if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Structure"))
+			else if (cbType.Text == Localizer.LocalizeString("Types.Structure"))
 			{
 				foreach (var configurationStructure in m_ConfigurationModel.ConfigurationStructures)
 				{
@@ -156,7 +156,7 @@ namespace Network_Analyzer
 
 		private void UpdateValue()
 		{
-			bool reverse = (string)cbSequenceType.SelectedItem != Localizer.LocalizeString("SequenceTypes.LittleEndian");
+			bool reverse = cbSequenceType.Text != Localizer.LocalizeString("SequenceTypes.LittleEndian");
 
 			if (!long.TryParse(tbPosition.Text, out long position))
 			{
@@ -164,7 +164,7 @@ namespace Network_Analyzer
 				return;
 			}
 
-			tbValue.Text = m_ConnectionPacketModel.Data.GetValue((string)cbType.SelectedItem, position, reverse, m_SelectedEncodingType);
+			tbValue.Text = m_ConnectionPacketModel.Data.GetValue(cbType.Text, position, reverse, m_SelectedEncodingType);
 		}
 
 		#endregion
@@ -219,7 +219,19 @@ namespace Network_Analyzer
 				lengthArr = arrayLength;
 			}
 
-			if (!long.TryParse(tbPosition.Text, out long position))
+            if (string.IsNullOrEmpty(cbSequenceType.Text))
+            {
+                lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsSequenceType");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cbType.Text))
+            {
+                lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsType");
+                return;
+            }
+
+            if (!long.TryParse(tbPosition.Text, out long position))
 			{
 				lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsPosition");
 				return;
@@ -231,7 +243,7 @@ namespace Network_Analyzer
 				return;
 			}
 
-			if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.String"))
+            if (cbType.Text == Localizer.LocalizeString("Types.String"))
 			{
 				if (string.IsNullOrEmpty(cbCommon.Text))
 				{
@@ -248,7 +260,7 @@ namespace Network_Analyzer
 				}
 			}
 
-			if ((string)cbType.SelectedItem == Localizer.LocalizeString("Types.Structure"))
+			if (cbType.Text == Localizer.LocalizeString("Types.Structure"))
 			{
 				if (string.IsNullOrEmpty(cbCommon.Text))
 				{
@@ -267,16 +279,22 @@ namespace Network_Analyzer
 				// TODO Сделать проверку имени при получении всех полей и так же сделать чтобы у структур не было зависимости
 			}
 
-			// Сделать проверку наезда полей друг на друга
-			
-			if (m_ConfigurationFieldModel == null)
+            var fieldLength = m_ConfigurationModel.GetLengthByType(cbType.Text, cbCommon.Text);
+
+            if (m_ConfigurationModel.GetEntryFieldByIndex(m_ConfigurationClassModel, position, fieldLength) != null)
+            {
+                lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsPositionAlreadyUse");
+                return;
+            }
+
+            if (m_ConfigurationFieldModel == null)
 			{
 				ConfigurationFieldModel configurationFieldModel = new ConfigurationFieldModel
 				{
 					Name = tbName.Text,
 					Description = tbDescription.Text,
 					Type = cbType.Text,
-					SequenceType = (string)cbSequenceType.SelectedItem,
+					SequenceType = cbSequenceType.Text,
 					Position = position,
 					IsArray = cbArray.Checked,
 					ArrayLength = lengthArr,
@@ -299,7 +317,7 @@ namespace Network_Analyzer
 				m_ConfigurationFieldModel.Name = newName;
 				m_ConfigurationFieldModel.Description = tbDescription.Text;
 				m_ConfigurationFieldModel.Type = cbType.Text;
-				m_ConfigurationFieldModel.SequenceType = (string)cbSequenceType.SelectedItem;
+				m_ConfigurationFieldModel.SequenceType = cbSequenceType.Text;
 				m_ConfigurationFieldModel.Position = position;
 				m_ConfigurationFieldModel.IsArray = cbArray.Checked;
 				m_ConfigurationFieldModel.ArrayLength = lengthArr;

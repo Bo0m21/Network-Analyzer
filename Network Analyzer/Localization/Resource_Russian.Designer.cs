@@ -340,11 +340,29 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка тип последовательности не может быть пустым.
+        /// </summary>
+        internal static string ConfigurationField_ErrorsSequenceType {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorsSequenceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка структура не может быть пустой.
         /// </summary>
         internal static string ConfigurationField_ErrorsStructureEmpty {
             get {
                 return ResourceManager.GetString("ConfigurationField.ErrorsStructureEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка тип не может быть пустым.
+        /// </summary>
+        internal static string ConfigurationField_ErrorsType {
+            get {
+                return ResourceManager.GetString("ConfigurationField.ErrorsType", resourceCulture);
             }
         }
         

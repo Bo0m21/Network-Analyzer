@@ -49,51 +49,63 @@ namespace Network_Analyzer.Code
         }
 
         /// <summary>
-        ///		Get length by type
+        ///         Get length by configuration field
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="configurationField"></param>
         /// <returns></returns>
         public static long GetLengthByType(this ConfigurationModel configuration, ConfigurationFieldModel configurationField)
+        {
+            return configuration.GetLengthByType(configurationField.Type, configurationField.Common);
+        }
+
+        ///  <summary>
+        /// 		Get length by type and common
+        ///  </summary>
+        ///  <param name="configuration"></param>
+        ///  <param name="type"></param>
+        ///  <param name="common"></param>
+        ///  <returns></returns>
+        public static long GetLengthByType(this ConfigurationModel configuration, string type, string common)
 		{
-			if (configurationField.Type == Localizer.LocalizeString("Types.Byte") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Sbyte"))
+			if (type == Localizer.LocalizeString("Types.Byte") ||
+				type == Localizer.LocalizeString("Types.Sbyte"))
 			{
 				return 1;
 			}
 
-			if (configurationField.Type == Localizer.LocalizeString("Types.Short") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Ushort"))
+			if (type == Localizer.LocalizeString("Types.Short") ||
+				type == Localizer.LocalizeString("Types.Ushort"))
 			{
 				return 2;
 			}
 
-			if (configurationField.Type == Localizer.LocalizeString("Types.Int") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Uint") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Float"))
+			if (type == Localizer.LocalizeString("Types.Int") ||
+				type == Localizer.LocalizeString("Types.Uint") ||
+				type == Localizer.LocalizeString("Types.Float"))
 			{
 				return 4;
 			}
 
-			if (configurationField.Type == Localizer.LocalizeString("Types.Long") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Ulong") ||
-				configurationField.Type == Localizer.LocalizeString("Types.Double"))
+			if (type == Localizer.LocalizeString("Types.Long") ||
+				type == Localizer.LocalizeString("Types.Ulong") ||
+				type == Localizer.LocalizeString("Types.Double"))
 			{
 				return 8;
 			}
 
-			if (configurationField.Type == Localizer.LocalizeString("Types.String"))
+			if (type == Localizer.LocalizeString("Types.String"))
 			{
 				// TODO Дописать проверку
-				if (long.TryParse(configurationField.Common, out long length))
+				if (long.TryParse(common, out long length))
 				{
 					return length;
 				}
 			}
 
-			if (configurationField.Type == Localizer.LocalizeString("Types.Structure"))
+			if (type == Localizer.LocalizeString("Types.Structure"))
 			{
-				return configuration.GetLengthByStructureName(configurationField.Common);
+				return configuration.GetLengthByStructureName(common);
 			}
 
 			return 0;
@@ -293,16 +305,29 @@ namespace Network_Analyzer.Code
         /// <param name="configurationClass"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static ConfigurationFieldModel GetEntryFieldByIndex(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long index)
+        public static ConfigurationFieldModel GetEntryFieldByIndex(this ConfigurationModel configuration, ConfigurationClassModel configurationClass, long configurationFieldPosition, long configurationFieldLength = 0)
         {
             List<ConfigurationFieldModel> configurationFields = configuration.GetAllFieldForConfiguration(configurationClass);
 
             foreach (var configurationField in configurationFields)
             {
-                long positionField = configurationField.Position;
-                long lengthField = configuration.GetLengthForConfiguration(configurationField) - 1;
+                long checkConfigurationFieldLength = configuration.GetLengthForConfiguration(configurationField) - 1;
+                long checkConfigurationFieldPosition = configurationField.Position;
 
-                if (positionField <= index && positionField + lengthField >= index)
+                if (configurationFieldPosition >= checkConfigurationFieldPosition &&
+                    configurationFieldPosition <= checkConfigurationFieldPosition + checkConfigurationFieldLength)
+                {
+                    return configurationField;
+                }
+
+                if (configurationFieldPosition + configurationFieldLength >= checkConfigurationFieldPosition &&
+                    configurationFieldPosition + configurationFieldLength <= checkConfigurationFieldPosition + checkConfigurationFieldLength)
+                {
+                    return configurationField;
+                }
+
+                if (configurationFieldPosition <= checkConfigurationFieldPosition &&
+                    configurationFieldPosition + configurationFieldLength >= checkConfigurationFieldPosition + checkConfigurationFieldLength)
                 {
                     return configurationField;
                 }

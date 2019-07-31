@@ -732,4 +732,10 @@
   <data name="Editor.HexEditorLongField" xml:space="preserve">
     <value>Длинное поле в редакторе</value>
   </data>
+  <data name="ConfigurationField.ErrorsSequenceType" xml:space="preserve">
+    <value>Ошибка тип последовательности не может быть пустым</value>
+  </data>
+  <data name="ConfigurationField.ErrorsType" xml:space="preserve">
+    <value>Ошибка тип не может быть пустым</value>
+  </data>
 </root>
