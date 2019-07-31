@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Network_Analyzer.Code;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models.Configuration;
 using Network_Analyzer.Models.Connection;
+using Network_Analyzer.Models.SelectedEncoding;
 using Network_Analyzer.Models.SelectedPacket;
-using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {

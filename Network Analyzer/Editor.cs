@@ -9,16 +9,19 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using HexBoxForm;
-using Network_Analyzer.Decryptor;
-using Network_Analyzer.Decryptor.Decryptors;
+using Network_Analyzer.Code;
+using Network_Analyzer.Decryptors;
 using Network_Analyzer.Extensions;
+using Network_Analyzer.Globals;
+using Network_Analyzer.Interfaces;
+using Network_Analyzer.Models;
 using Network_Analyzer.Models.Configuration;
 using Network_Analyzer.Models.Connection;
+using Network_Analyzer.Models.Decryptor;
 using Network_Analyzer.Models.Search;
+using Network_Analyzer.Models.SelectedEncoding;
 using Network_Analyzer.Models.SelectedPacket;
 using Network_Analyzer.Models.SelectedTabControl;
-using Network_Analyzer.Network.Data;
-using Network_Analyzer.Services;
 using Newtonsoft.Json;
 
 namespace Network_Analyzer

@@ -1,11 +1,10 @@
-﻿using Network_Analyzer.Models.Configuration;
-using Network_Analyzer.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Network_Analyzer.Models.SelectedTabControl;
+using Network_Analyzer.Models;
+using Network_Analyzer.Models.Configuration;
 
-namespace Network_Analyzer.Extensions
+namespace Network_Analyzer.Code
 {
 	/// <summary>
 	///     Class configuration extensions
