@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Models.SelectedPacket
+﻿namespace Network_Analyzer.Models.SelectedEncoding
 {
     /// <summary>
     ///     Selected type encoding

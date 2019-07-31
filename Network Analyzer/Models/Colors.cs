@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Models.SelectedTabControl
+﻿namespace Network_Analyzer.Models
 {
 	/// <summary>
 	///     Selected color for view

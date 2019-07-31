@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models;
 
-namespace Network_Analyzer.Services
+namespace Network_Analyzer.Code
 {
     /// <summary>
     ///     Class for work with setting values

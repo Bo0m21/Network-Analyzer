@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace Network_Analyzer.Services
+namespace Network_Analyzer.Code
 {
     /// <summary>
     ///     Class for translate project

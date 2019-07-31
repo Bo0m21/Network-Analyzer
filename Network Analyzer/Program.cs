@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Network_Analyzer.Code;
 using Network_Analyzer.Models;
-using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
@@ -14,7 +14,7 @@ namespace Network_Analyzer
         private static void Main()
         {
             // Loading settings
-            Services.Settings.LoadSettings();
+            Code.Settings.LoadSettings();
 
             // Loading localizer from resources
             //Localizer.LoadLocalizer(Configuration.Language, "Network_Analyzer.Localization.Resource");
@@ -28,7 +28,7 @@ namespace Network_Analyzer
             Application.Run(new Main());
 
             // Saving settings
-            Services.Settings.SaveSettings();
+            Code.Settings.SaveSettings();
         }
     }
 }

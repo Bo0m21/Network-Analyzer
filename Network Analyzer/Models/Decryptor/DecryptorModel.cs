@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Decryptor
+﻿namespace Network_Analyzer.Models.Decryptor
 {
     /// <summary>
     ///     Class decryptor model

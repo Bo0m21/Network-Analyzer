@@ -1,10 +1,10 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using Network_Analyzer.Network.Listeners.Authentication;
-using Network_Analyzer.Network.Listeners.Clients;
+using Network_Analyzer.Network.Authentication;
+using Network_Analyzer.Network.Clients;
 
-namespace Network_Analyzer.Network.Listeners
+namespace Network_Analyzer.Network
 {
     /// <summary>Listens on a specific port on the proxy server for incoming SOCKS4 and SOCKS5 requests.</summary>
     /// <remarks>This class also implements the SOCKS4a protocol.</remarks>

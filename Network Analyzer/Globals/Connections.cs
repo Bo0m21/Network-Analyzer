@@ -2,7 +2,7 @@
 using System.Linq;
 using Network_Analyzer.Models.Connection;
 
-namespace Network_Analyzer.Network.Data
+namespace Network_Analyzer.Globals
 {
     /// <summary>
     ///     This is class connections which save data

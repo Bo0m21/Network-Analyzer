@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Network_Analyzer.Models.Decryptor;
 
-namespace Network_Analyzer.Decryptor
+namespace Network_Analyzer.Interfaces
 {
     /// <summary>
     ///     This interfave for about decryptor

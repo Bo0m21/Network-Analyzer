@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Network_Analyzer.Interfaces;
+using Network_Analyzer.Models.Decryptor;
 
-namespace Network_Analyzer.Decryptor.Decryptors
+namespace Network_Analyzer.Decryptors
 {
 	// TODO Переписать
     public class R2Decryptor : IDecryptor

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Network_Analyzer.Code;
 using Network_Analyzer.Extensions;
 using Network_Analyzer.Models;
-using Network_Analyzer.Services;
 
 namespace Network_Analyzer
 {
@@ -22,10 +22,10 @@ namespace Network_Analyzer
                 cbProgramLanguage.Items.Add(language.ToString());
             }
 
-            cbProgramLanguage.Text = Services.Settings.Language;
-            tbAddressListener.Text = Services.Settings.Address;
-            tbPortListener.Text = Services.Settings.Port;
-            tbFolderSaved.Text = Services.Settings.Folder;
+            cbProgramLanguage.Text = Code.Settings.Language;
+            tbAddressListener.Text = Code.Settings.Address;
+            tbPortListener.Text = Code.Settings.Port;
+            tbFolderSaved.Text = Code.Settings.Folder;
 
             lblInformation.Text = Localizer.LocalizeString("Settings.SettingsLoadedSuccessfully");
         }
@@ -63,12 +63,12 @@ namespace Network_Analyzer
                     return;
                 }
 
-                Services.Settings.Language = cbProgramLanguage.Text;
-                Services.Settings.Address = tbAddressListener.Text;
-                Services.Settings.Port = tbPortListener.Text;
-                Services.Settings.Folder = tbFolderSaved.Text;
+                Code.Settings.Language = cbProgramLanguage.Text;
+                Code.Settings.Address = tbAddressListener.Text;
+                Code.Settings.Port = tbPortListener.Text;
+                Code.Settings.Folder = tbFolderSaved.Text;
 
-                Services.Settings.SaveSettings();
+                Code.Settings.SaveSettings();
 
                 lblInformation.Text = Localizer.LocalizeString("Settings.SettingsSavedSuccessfully");
             }
