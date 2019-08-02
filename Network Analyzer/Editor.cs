@@ -727,7 +727,7 @@ namespace Network_Analyzer
             {
                 string configurationFieldName = (string)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldName"].Value;
 
-                if (configurationFieldName.Contains("."))
+                if (configurationFieldName.Contains(".") || configurationFieldName.Contains("["))
                 {
                     btnConfigurationFieldAdd.Enabled = false;
                     btnConfigurationFieldEdit.Enabled = false;
@@ -760,6 +760,22 @@ namespace Network_Analyzer
             SetCurrentConfigurationClassModel();
 
             HexBoxViewUpdate();
+        }
+
+        private void CbConfigurationHighlights_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbConfigurationHighlights.Checked)
+            {
+                for (int i = 0; i < dgvPackets.RowCount; i++)
+                {
+                    dgvPackets.Rows[i].Cells["PacketName"].Style.BackColor = Color.White;
+                }
+            }
+
+
+            PacketsGridViewUpdate();
+            ConfigurationPacketsGridViewUpdate();
+            StructuresGridViewUpdate();
         }
 
         private void BtnConfigurationAdd_Click(object sender, EventArgs e)
@@ -1263,6 +1279,24 @@ namespace Network_Analyzer
 							if (configurationPacketModel != null && !string.IsNullOrEmpty(configurationPacketModel.Name))
 							{
 								dgvPackets.Rows[i].Cells["PacketName"].Value = configurationPacketModel.Name;
+
+                                if (cbConfigurationHighlights.Checked)
+                                {
+                                    long totalLength = m_ConfigurationModel.GetAllLengthForConfiguration(configurationPacketModel);
+
+                                    if (totalLength < packets[i].Data.Length)
+                                    {
+                                        dgvPackets.Rows[i].Cells["PacketName"].Style.BackColor = Colors.Warning.GetColor();
+                                    }
+                                    else if (totalLength > packets[i].Data.Length)
+                                    {
+                                        dgvPackets.Rows[i].Cells["PacketName"].Style.BackColor = Colors.Error.GetColor();
+                                    }
+                                    else
+                                    {
+                                        dgvPackets.Rows[i].Cells["PacketName"].Style.BackColor = Colors.Success.GetColor();
+                                    }
+                                }
 							}
 							else
 							{
@@ -1494,7 +1528,8 @@ namespace Network_Analyzer
 				tbConfigurationDescription.Enabled = false;
 				dgvConfigurationFields.Enabled = false;
                 cbHexEditorLongField.Enabled = false;
-				btnConfigurationFieldAdd.Enabled = false;
+                cbConfigurationHighlights.Enabled = false;
+                btnConfigurationFieldAdd.Enabled = false;
 				btnConfigurationFieldEdit.Enabled = false;
 				btnConfigurationFieldDelete.Enabled = false;
 				btnConfigurationAdd.Enabled = false;
@@ -1539,6 +1574,7 @@ namespace Network_Analyzer
 			tbConfigurationDescription.Enabled = true;
 			dgvConfigurationFields.Enabled = true;
             cbHexEditorLongField.Enabled = true;
+            cbConfigurationHighlights.Enabled = true;
             btnConfigurationFieldAdd.Enabled = true;
 			btnConfigurationFieldEdit.Enabled = true;
 			btnConfigurationFieldDelete.Enabled = true;
@@ -1554,7 +1590,8 @@ namespace Network_Analyzer
 					 m_SelectedTabControlGeneralType == SelectedTabControlGeneralType.Structures)
 			{
 				btnConfigurationAdd.Enabled = true;
-			}
+                cbConfigurationHighlights.Enabled = false;
+            }
 
 			tbConfigurationName.Text = m_CurrentConfigurationClassModel.Name;
 			tbConfigurationDescription.Text = m_CurrentConfigurationClassModel.Descreption;
@@ -1575,7 +1612,7 @@ namespace Network_Analyzer
                 }
                 else
                 {
-                    if (configurationField.Name.Contains("."))
+                    if (configurationField.Name.Contains(".") || configurationField.Name.Contains("["))
                     {
                         dgvConfigurationFields.Rows[dgvConfigurationFields.Rows.Count - 1].DefaultCellStyle.BackColor = Colors.BlockedElement.GetColor();
                     }

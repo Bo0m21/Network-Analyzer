@@ -211,8 +211,6 @@ namespace Network_Analyzer.Code
 								Type = configurationField.Type,
 								SequenceType = configurationField.SequenceType,
 								Position = configurationField.Position + position + (configuration.GetLengthByType(configurationField) * i),
-								IsArray = configurationField.IsArray,
-								ArrayLength = configurationField.ArrayLength,
 								Common = configurationField.Common
 							});
 						}
@@ -226,8 +224,6 @@ namespace Network_Analyzer.Code
                             Type = configurationField.Type,
                             SequenceType = configurationField.SequenceType,
                             Position = configurationField.Position + position,
-                            IsArray = configurationField.IsArray,
-                            ArrayLength = configurationField.ArrayLength,
                             Common = configurationField.Common
                         });
 					}
@@ -296,6 +292,31 @@ namespace Network_Analyzer.Code
             }
 
             return 0;
+        }
+
+        /// <summary>
+        ///     Get sum all fields for check packet
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="configurationClass"></param>
+        /// <returns></returns>
+        public static long GetAllLengthForConfiguration(this ConfigurationModel configuration, ConfigurationClassModel configurationClass)
+        {
+            List<ConfigurationFieldModel> configurationFields = configuration.GetAllFieldForConfiguration(configurationClass, 0);
+
+            long totalLength = 0;
+
+            foreach (var configurationField in configurationFields)
+            {
+                if (configurationField.Type == Localizer.LocalizeString("Types.Structure") || configurationField.IsArray)
+                {
+                    continue;
+                }
+
+                totalLength += configuration.GetLengthByType(configurationField);
+            }
+
+            return totalLength;
         }
 
         /// <summary>

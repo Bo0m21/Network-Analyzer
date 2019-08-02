@@ -637,6 +637,15 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Подсветка конфигураций.
+        /// </summary>
+        internal static string Editor_ConfigurationHighlights {
+            get {
+                return ResourceManager.GetString("Editor.ConfigurationHighlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Конфигурация успешно загружена.
         /// </summary>
         internal static string Editor_ConfigurationLoadedSuccessfully {

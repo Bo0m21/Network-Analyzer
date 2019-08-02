@@ -738,4 +738,7 @@
   <data name="ConfigurationField.ErrorsType" xml:space="preserve">
     <value>Ошибка тип не может быть пустым</value>
   </data>
+  <data name="Editor.ConfigurationHighlights" xml:space="preserve">
+    <value>Подсветка конфигураций</value>
+  </data>
 </root>
