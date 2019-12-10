@@ -57,9 +57,8 @@ namespace Network_Analyzer_Backend.Controllers
                         new Claim(ClaimTypes.Name, user.Id.ToString()),
                         new Claim(ClaimTypes.Role, user.Role)
                     }),
-                    Expires = DateTime.UtcNow.AddDays(7),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -105,7 +104,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="userEdit"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public ActionResult<UserViewModel> Create([FromBody] UserEditModel userEdit)
         {
@@ -153,7 +152,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Authorize(Roles = Roles.Admin + ", " + Roles.Manager)]
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public ActionResult Delete(long id)
         {

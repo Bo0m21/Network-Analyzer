@@ -60,7 +60,6 @@ namespace Network_Analyzer_Backend
             // configure DI for application services
             services.AddScoped<IConnectionPacketService, ConnectionPacketService>();
             services.AddScoped<IConnectionService, ConnectionService>();
-            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
 
             // configure AutoMapper
