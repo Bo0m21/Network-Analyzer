@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Network_Analyzer.Code;
@@ -8,11 +7,10 @@ using Network_Analyzer.Extensions;
 using Network_Analyzer.Models.Configuration;
 using Network_Analyzer.Models.Connection;
 using Network_Analyzer.Models.SelectedEncoding;
-using Network_Analyzer.Models.SelectedPacket;
 
 namespace Network_Analyzer
 {
-	public partial class ConfigurationField : Form
+    public partial class ConfigurationField : Form
 	{
 		private readonly ConnectionPacketModel m_ConnectionPacketModel;
 		private readonly ConfigurationModel m_ConfigurationModel;

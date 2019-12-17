@@ -19,7 +19,7 @@ namespace Network_Analyzer.Localization {
     // с помощью такого средства, как ResGen или Visual Studio.
     // Чтобы добавить или удалить член, измените файл .ResX и снова запустите ResGen
     // с параметром /str или перестройте свой проект VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resource_Russian {
@@ -57,6 +57,87 @@ namespace Network_Analyzer.Localization {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Все поля успешно очищены.
+        /// </summary>
+        internal static string Authentication_AllFieldCleared {
+            get {
+                return ResourceManager.GetString("Authentication.AllFieldCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Войти.
+        /// </summary>
+        internal static string Authentication_Auth {
+            get {
+                return ResourceManager.GetString("Authentication.Auth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Очистить.
+        /// </summary>
+        internal static string Authentication_Clear {
+            get {
+                return ResourceManager.GetString("Authentication.Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибки при авторизации.
+        /// </summary>
+        internal static string Authentication_ErrorsAuthentication {
+            get {
+                return ResourceManager.GetString("Authentication.ErrorsAuthentication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        internal static string Authentication_Information {
+            get {
+                return ResourceManager.GetString("Authentication.Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Логин:.
+        /// </summary>
+        internal static string Authentication_Login {
+            get {
+                return ResourceManager.GetString("Authentication.Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пароль:.
+        /// </summary>
+        internal static string Authentication_Password {
+            get {
+                return ResourceManager.GetString("Authentication.Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запомнить меня.
+        /// </summary>
+        internal static string Authentication_Remember {
+            get {
+                return ResourceManager.GetString("Authentication.Remember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Network Analyzer - Авторизация.
+        /// </summary>
+        internal static string Authentication_Text {
+            get {
+                return ResourceManager.GetString("Authentication.Text", resourceCulture);
             }
         }
         

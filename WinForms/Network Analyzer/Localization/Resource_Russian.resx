@@ -741,4 +741,31 @@
   <data name="Editor.ConfigurationHighlights" xml:space="preserve">
     <value>Подсветка конфигураций</value>
   </data>
+  <data name="Authentication.AllFieldCleared" xml:space="preserve">
+    <value>Все поля успешно очищены</value>
+  </data>
+  <data name="Authentication.Auth" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="Authentication.Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="Authentication.Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="Authentication.Login" xml:space="preserve">
+    <value>Логин:</value>
+  </data>
+  <data name="Authentication.Password" xml:space="preserve">
+    <value>Пароль:</value>
+  </data>
+  <data name="Authentication.Remember" xml:space="preserve">
+    <value>Запомнить меня</value>
+  </data>
+  <data name="Authentication.Text" xml:space="preserve">
+    <value>Network Analyzer - Авторизация</value>
+  </data>
+  <data name="Authentication.ErrorsAuthentication" xml:space="preserve">
+    <value>Ошибки при авторизации</value>
+  </data>
 </root>

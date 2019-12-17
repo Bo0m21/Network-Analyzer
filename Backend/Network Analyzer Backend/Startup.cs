@@ -110,7 +110,7 @@ namespace Network_Analyzer_Backend
                 app.UseDeveloperExceptionPage();
             }
 
-            // cnfig for swagger
+            // config for swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

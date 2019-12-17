@@ -27,6 +27,24 @@ namespace Network_Analyzer_Database
                     this.SaveChanges();
                 }
             }
+
+            var userBase1 = Users.FirstOrDefault(u => u.Username == "string1");
+
+            if (userBase1 == null)
+            {
+                using (System.Security.Cryptography.HMACSHA512 hmac = new System.Security.Cryptography.HMACSHA512())
+                {
+                    Users.Add(new User()
+                    {
+                        Username = "string1",
+                        PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("string1")),
+                        PasswordSalt = hmac.Key,
+                        Role = "Admin"
+                    });
+
+                    this.SaveChanges();
+                }
+            }
         }
 
         public DbSet<Connection> Connections { get; set; }

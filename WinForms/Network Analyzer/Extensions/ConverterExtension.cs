@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Network_Analyzer.Code;
 using Network_Analyzer.Models.SelectedEncoding;
-using Network_Analyzer.Models.SelectedPacket;
 
 namespace Network_Analyzer.Extensions
 {

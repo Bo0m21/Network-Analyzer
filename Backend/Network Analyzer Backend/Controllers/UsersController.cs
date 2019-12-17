@@ -1,15 +1,12 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
+using Network_Analyzer_Backend.Models.BaseModels;
 using Network_Analyzer_Backend.Models.Users;
 using Network_Analyzer_Database.Models;
 
@@ -34,68 +31,24 @@ namespace Network_Analyzer_Backend.Controllers
         }
 
         /// <summary>
-        ///     Authenticate user by username and password
-        /// </summary>
-        /// <param name="userAuth"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [Route("Authenticate")]
-        [HttpPost]
-        public ActionResult<UserAuthResModel> Authenticate([FromBody] UserAuthReqModel userAuth)
-        {
-            try
-            {
-                User user = _userService.Authenticate(userAuth.Username, userAuth.Password);
-
-                JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-                byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-
-                SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[]
-                    {
-                        new Claim(ClaimTypes.Name, user.Id.ToString()),
-                        new Claim(ClaimTypes.Role, user.Role)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-
-                SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-                string tokenString = tokenHandler.WriteToken(token);
-
-                return Ok(new UserAuthResModel
-                {
-                    Username = user.Username,
-                    Token = tokenString
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(new {message = ex.Message});
-            }
-        }
-
-        /// <summary>
         ///     Get user by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin + ", " + Roles.Manager)]
         [HttpGet("{id}")]
-        public ActionResult<UserViewModel> GetUser(long id)
+        public ActionResult<UserViewResModel> GetUser(long id)
         {
             try
             {
                 User user = _userService.GetUser(id);
-                UserViewModel userViewModel = _mapper.Map<UserViewModel>(user);
+                UserViewResModel userViewModel = _mapper.Map<UserViewResModel>(user);
                 return userViewModel;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(new {message = ex.Message});
+                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
             }
         }
 
@@ -106,20 +59,20 @@ namespace Network_Analyzer_Backend.Controllers
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin)]
         [HttpPost]
-        public ActionResult<UserViewModel> Create([FromBody] UserEditModel userEdit)
+        public ActionResult<UserViewResModel> CreateUser([FromBody] UserEditReqModel userEdit)
         {
             User user = _mapper.Map<User>(userEdit);
 
             try
             {
                 User userCreate = _userService.Create(user, userEdit.Password);
-                UserViewModel userCreateViewModel = _mapper.Map<UserViewModel>(userCreate);
+                UserViewResModel userCreateViewModel = _mapper.Map<UserViewResModel>(userCreate);
                 return userCreateViewModel;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(new {message = ex.Message});
+                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
             }
         }
 
@@ -130,7 +83,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="userEdit"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public ActionResult Update(long id, [FromBody] UserEditModel userEdit)
+        public ActionResult<BaseResponseModel> UpdateUser(long id, [FromBody] UserEditReqModel userEdit)
         {
             User user = _mapper.Map<User>(userEdit);
             user.Id = id;
@@ -143,7 +96,7 @@ namespace Network_Analyzer_Backend.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(new {message = ex.Message});
+                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
             }
         }
 
@@ -154,7 +107,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
-        public ActionResult Delete(long id)
+        public ActionResult DeleteUser(long id)
         {
             try
             {

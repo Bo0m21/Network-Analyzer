@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-//using Network_Analyzer_Backend.Models.ConnectionPackets;
-//using Network_Analyzer_Backend.Models.Connections;
-//using Network_Analyzer_Backend.Models.Entities;
-//using Network_Analyzer_Backend.Models.Users;
+using Network_Analyzer_Backend.Models.Users;
+using Network_Analyzer_Database.Models;
 
 namespace Network_Analyzer_Backend.Helpers
 {
@@ -16,17 +14,17 @@ namespace Network_Analyzer_Backend.Helpers
             //CreateMap<Connection, ConnectionViewModel>();
             //CreateMap<ConnectionViewModel, Connection>();
 
-            //CreateMap<User, UserAuthReqModel>();
-            //CreateMap<UserAuthReqModel, User>();
+            CreateMap<User, UserAuthReqModel>();
+            CreateMap<UserAuthReqModel, User>();
 
-            //CreateMap<User, UserAuthResModel>();
-            //CreateMap<UserAuthResModel, User>();
+            CreateMap<User, UserAuthResModel>();
+            CreateMap<UserAuthResModel, User>();
 
-            //CreateMap<User, UserEditModel>();
-            //CreateMap<UserEditModel, User>();
+            CreateMap<User, UserEditReqModel>();
+            CreateMap<UserEditReqModel, User>();
 
-            //CreateMap<User, UserViewModel>();
-            //CreateMap<UserViewModel, User>();
+            CreateMap<User, UserViewResModel>();
+            CreateMap<UserViewResModel, User>();
         }
     }
 }

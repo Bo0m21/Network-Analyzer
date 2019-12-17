@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
+using Network_Analyzer_Backend.Models.Exceptions;
 using Network_Analyzer_Database;
 using Network_Analyzer_Database.Models;
 
@@ -28,7 +29,7 @@ namespace Network_Analyzer_Backend.Services
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return null;
+                throw new BadRequestException("Username or password can't be empty");
             }
 
             User user = _databaseContext.Users.SingleOrDefault(x => x.Username == username);
@@ -36,13 +37,13 @@ namespace Network_Analyzer_Backend.Services
             // Check if username exists
             if (user == null)
             {
-                throw new Exception("Username or password is incorrect");
+                throw new BadRequestException("Username or password is incorrect");
             }
 
             // Check if password is correct
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
-                throw new Exception("Username or password is incorrect");
+                throw new BadRequestException("Username or password is incorrect");
             }
 
             // Authentication successful
@@ -56,14 +57,7 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         public User GetUser(long id)
         {
-            User user = _databaseContext.Users.FirstOrDefault(u => u.Id == id);
-
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            return user;
+            return _databaseContext.Users.FirstOrDefault(u => u.Id == id);
         }
 
         /// <summary>
@@ -74,19 +68,24 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         public User Create(User user, string password)
         {
+            if (string.IsNullOrWhiteSpace(user?.Username))
+            {
+                throw new BadRequestException("Username is required");
+            }
+
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new Exception("Password is required");
+                throw new BadRequestException("Password is required");
             }
 
             if (_databaseContext.Users.Any(x => x.Username == user.Username))
             {
-                throw new Exception("Username \"" + user.Username + "\" is already taken");
+                throw new BadRequestException("Username \"" + user.Username + "\" is already taken");
             }
 
             if (_databaseContext.Users.Any(x => x.Email == user.Email))
             {
-                throw new Exception("Email \"" + user.Email + "\" is already taken");
+                throw new BadRequestException("Email \"" + user.Email + "\" is already taken");
             }
 
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -113,7 +112,13 @@ namespace Network_Analyzer_Backend.Services
 
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new BadRequestException("User not found");
+            }
+
+            // Check if password is correct
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                throw new BadRequestException("Password is incorrect");
             }
 
             if (userParam.Username != user.Username)
@@ -121,7 +126,7 @@ namespace Network_Analyzer_Backend.Services
                 // Username has changed so check if the new username is already taken
                 if (_databaseContext.Users.Any(x => x.Username == userParam.Username))
                 {
-                    throw new Exception("Username " + userParam.Username + " is already taken");
+                    throw new BadRequestException("Username " + userParam.Username + " is already taken");
                 }
             }
 
@@ -130,22 +135,13 @@ namespace Network_Analyzer_Backend.Services
                 // Email has changed so check if the new email is already taken
                 if (_databaseContext.Users.Any(x => x.Email == userParam.Email))
                 {
-                    throw new Exception("Email " + userParam.Email + " is already taken");
+                    throw new BadRequestException("Email " + userParam.Email + " is already taken");
                 }
             }
 
             // Update user properties
             user.Username = userParam.Username;
             user.Email = userParam.Email;
-
-            // Update password if it was entered
-            if (!string.IsNullOrWhiteSpace(password))
-            {
-                CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-            }
 
             _databaseContext.Users.Update(user);
             _databaseContext.SaveChanges();
@@ -176,16 +172,6 @@ namespace Network_Analyzer_Backend.Services
         /// <param name="passwordSalt"></param>
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            if (password == null)
-            {
-                throw new ArgumentNullException("password");
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-            }
-
             using (HMACSHA512 hmac = new HMACSHA512())
             {
                 passwordSalt = hmac.Key;
@@ -202,24 +188,19 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
-            if (password == null)
-            {
-                throw new ArgumentNullException("password");
-            }
-
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+                throw new Exception("Value cannot be empty or whitespace only string.");
             }
 
             if (storedHash.Length != 64)
             {
-                throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+                throw new Exception("Invalid length of password hash (64 bytes expected).");
             }
 
             if (storedSalt.Length != 128)
             {
-                throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+                throw new Exception("Invalid length of password salt (128 bytes expected).");
             }
 
             using (HMACSHA512 hmac = new HMACSHA512(storedSalt))

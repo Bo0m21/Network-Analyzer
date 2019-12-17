@@ -43,8 +43,7 @@ namespace Network_Analyzer
             lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
             lblInformation.Text = Localizer.LocalizeString("Main.LoadedSuccessfully");
-            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " +
-                              Assembly.GetEntryAssembly()?.GetName().Version;
+            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " + Assembly.GetEntryAssembly()?.GetName().Version;
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)

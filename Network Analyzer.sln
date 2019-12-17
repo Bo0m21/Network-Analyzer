@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{E4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network Analyzer Database", "Backend\Network Analyzer Database\Network Analyzer Database.csproj", "{AB80F1F7-E3D1-4C67-875A-742E34F64B47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppForTested", "ConsoleAppForTested\ConsoleAppForTested.csproj", "{B2716926-2F2A-499F-91B6-5034A2D72C49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{AB80F1F7-E3D1-4C67-875A-742E34F64B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB80F1F7-E3D1-4C67-875A-742E34F64B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB80F1F7-E3D1-4C67-875A-742E34F64B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2716926-2F2A-499F-91B6-5034A2D72C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2716926-2F2A-499F-91B6-5034A2D72C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2716926-2F2A-499F-91B6-5034A2D72C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2716926-2F2A-499F-91B6-5034A2D72C49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{26C5F25F-B450-4CAF-AD8B-B8D11AE73457} = {E44A2CC2-F641-4924-9EE4-E3E549762B2B}
 		{42240347-3106-4B2A-9423-08B5CCD040C7} = {F98C15DC-F05F-4A5F-8465-3DB0BEF782F3}
 		{AB80F1F7-E3D1-4C67-875A-742E34F64B47} = {F98C15DC-F05F-4A5F-8465-3DB0BEF782F3}
+		{B2716926-2F2A-499F-91B6-5034A2D72C49} = {E44A2CC2-F641-4924-9EE4-E3E549762B2B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3EA43055-F614-4082-817A-A21E8D9B9364}
