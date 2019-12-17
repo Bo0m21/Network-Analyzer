@@ -2,7 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -15,7 +14,6 @@ using Network_Analyzer_Database.Models;
 
 namespace Network_Analyzer_Backend.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase
@@ -36,7 +34,6 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="userAuth"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [Route("Authenticate")]
         [HttpPost]
         public ActionResult<UserAuthResModel> Authenticate([FromBody] UserAuthReqModel userAuth)

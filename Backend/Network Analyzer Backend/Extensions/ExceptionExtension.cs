@@ -10,6 +10,13 @@ namespace Network_Analyzer_Backend.Extensions
     /// </summary>
     public static class ExceptionExtension
     {
+        /// <summary>
+        /// Method for logging other exceptions
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="exception"></param>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
         public static void TreatmentException(this ILogger logger, Exception exception, out int code, out string message)
         {
             if (exception.GetType() == typeof(BadRequestException))
@@ -17,21 +24,11 @@ namespace Network_Analyzer_Backend.Extensions
                 code = (int)HttpStatusCode.BadRequest;
                 message = exception.Message;
             }
-           
-
-
-
-            switch (exception)
+            else    // Logging other exceptions
             {
-                case BadRequestException _:
-                    code = (int)HttpStatusCode.BadRequest;
-                    message = exception.Message;
-                    break;
-
-                default:
-                    code = 500;
-                    message = "HI!";
-                    break;
+                code = (int)HttpStatusCode.InternalServerError;
+                message = "Internal Server Error";
+                logger.LogError(exception, exception.Message);
             }
         }
     }

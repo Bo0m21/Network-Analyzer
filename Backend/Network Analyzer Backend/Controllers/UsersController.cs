@@ -3,7 +3,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
 using Network_Analyzer_Backend.Models.BaseModels;
@@ -19,14 +18,12 @@ namespace Network_Analyzer_Backend.Controllers
     {
         private readonly ILogger<UsersController> _logger;
         private readonly IMapper _mapper;
-        private readonly AppSettings _appSettings;
         private readonly IUserService _userService;
 
-        public UsersController(ILogger<UsersController> logger, IMapper mapper, IOptions<AppSettings> appSettings, IUserService userService)
+        public UsersController(ILogger<UsersController> logger, IMapper mapper, IUserService userService)
         {
             _logger = logger;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
             _userService = userService;
         }
 
