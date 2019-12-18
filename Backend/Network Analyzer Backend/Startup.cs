@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
+using Network_Analyzer_Backend.Middleware;
 using Network_Analyzer_Backend.Services;
 using Network_Analyzer_Database;
 using System.Text;
@@ -99,7 +100,7 @@ namespace Network_Analyzer_Backend
             });
 
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,6 +110,9 @@ namespace Network_Analyzer_Backend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // register middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // config for swagger
             app.UseSwagger();

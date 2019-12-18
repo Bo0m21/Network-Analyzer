@@ -1,8 +1,6 @@
-﻿using Network_Analyzer_Backend.Models.BaseModels;
-
-namespace Network_Analyzer_Backend.Models.Users
+﻿namespace Network_Analyzer_Backend.Models.Users
 {
-    public class UserViewResModel : BaseResponseModel
+    public class UserViewResModel
     {
         public long Id { get; set; }
         public string Username { get; set; }

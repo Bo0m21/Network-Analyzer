@@ -92,16 +92,19 @@ namespace Network_Analyzer_Backend.Controllers
         [HttpPost("CreateConnection")]
         public ActionResult<ConnectionViewModel> CreateConnection([FromBody] ConnectionEditReqModel connectionEdit)
         {
-            Connection connection = _mapper.Map<Connection>(connectionEdit);
-
             try
             {
+                Connection connection = _mapper.Map<Connection>(connectionEdit);
+
                 string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
                 if (!long.TryParse(claimUserId, out long userId))
                 {
                     throw new BadRequestException("User not found");
                 }
+
+                // If user exist
+                connection.UserId = userId;
 
                 Connection connectionCreate = _connectionService.Create(connection);
                 ConnectionViewModel connectionCreateViewModel = _mapper.Map<ConnectionViewModel>(connectionCreate);
@@ -154,7 +157,16 @@ namespace Network_Analyzer_Backend.Controllers
         {
             try
             {
-                _connectionService.Delete(id);
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                Connection connection = _connectionService.GetConnection(userId, id);
+                _connectionService.Delete(connection.Id);
+
                 return Ok();
             }
             catch (Exception ex)

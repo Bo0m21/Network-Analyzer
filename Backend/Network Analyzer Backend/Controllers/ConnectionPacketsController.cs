@@ -20,12 +20,14 @@ namespace Network_Analyzer_Backend.Controllers
     {
         private readonly ILogger<ConnectionPacketsController> _logger;
         private readonly IMapper _mapper;
+        private readonly IConnectionService _connectionService;
         private readonly IConnectionPacketService _connectionPacketService;
 
-        public ConnectionPacketsController(ILogger<ConnectionPacketsController> logger, IMapper mapper, IConnectionPacketService connectionPacketService)
+        public ConnectionPacketsController(ILogger<ConnectionPacketsController> logger, IMapper mapper, IConnectionService connectionService, IConnectionPacketService connectionPacketService)
         {
             _logger = logger;
             _mapper = mapper;
+            _connectionService = connectionService;
             _connectionPacketService = connectionPacketService;
         }
 
@@ -92,18 +94,21 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="connectionPacketEdit"></param>
         /// <returns></returns>
         [HttpPost("CreateConnectionPacket")]
-        public ActionResult<ConnectionPacketViewModel> CreateConnectionPacket([FromBody] ConnectionPacketEditReqModel connectionPacketEdit)
+        public ActionResult<ConnectionPacketViewModel> CreateConnectionPacket(long connectionId, [FromBody] ConnectionPacketEditReqModel connectionPacketEdit)
         {
-            ConnectionPacket connectionPacket = _mapper.Map<ConnectionPacket>(connectionPacketEdit);
-
             try
             {
+                ConnectionPacket connectionPacket = _mapper.Map<ConnectionPacket>(connectionPacketEdit);
+
                 string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
                 if (!long.TryParse(claimUserId, out long userId))
                 {
                     throw new BadRequestException("User not found");
                 }
+
+                Connection connection = _connectionService.GetConnection(userId, connectionId);
+                connectionPacket.ConnectionId = connection.Id;
 
                 ConnectionPacket connectionPacketCreate = _connectionPacketService.Create(connectionPacket);
                 ConnectionPacketViewModel connectionPacketCreateViewModel = _mapper.Map<ConnectionPacketViewModel>(connectionPacketCreate);
@@ -122,11 +127,20 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("DeleteConnectionPacket")]
-        public ActionResult DeleteConnectionPacket(long id)
+        public ActionResult DeleteConnectionPacket(long connectionId, long id)
         {
             try
             {
-                _connectionPacketService.Delete(id);
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                Connection connection = _connectionService.GetConnection(userId, connectionId);
+                _connectionPacketService.Delete(connection.Id);
+
                 return Ok();
             }
             catch (Exception ex)

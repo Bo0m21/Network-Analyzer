@@ -1,8 +1,6 @@
-﻿using Network_Analyzer_Backend.Models.BaseModels;
-
-namespace Network_Analyzer_Backend.Models.Users
+﻿namespace Network_Analyzer_Backend.Models.Users
 {
-    public class UserEditReqModel : BaseRequestModel
+    public class UserEditReqModel
     {
         public string Username { get; set; }
         public string Email { get; set; }

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Network_Analyzer_Backend.Extensions;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
-using Network_Analyzer_Backend.Models.BaseModels;
 using Network_Analyzer_Backend.Models.Users;
 using Network_Analyzer_Database.Models;
 
@@ -59,11 +58,11 @@ namespace Network_Analyzer_Backend.Controllers
         [HttpPost("CreateUser")]
         public ActionResult<UserViewResModel> CreateUser([FromBody] UserEditReqModel userEdit)
         {
-            User user = _mapper.Map<User>(userEdit);
-
             try
             {
+                User user = _mapper.Map<User>(userEdit);
                 User userCreate = _userService.Create(user, userEdit.Password);
+
                 UserViewResModel userCreateViewModel = _mapper.Map<UserViewResModel>(userCreate);
                 return userCreateViewModel;
             }
@@ -81,13 +80,13 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="userEdit"></param>
         /// <returns></returns>
         [HttpPut("UpdateUser")]
-        public ActionResult<BaseResponseModel> UpdateUser(long id, [FromBody] UserEditReqModel userEdit)
+        public ActionResult UpdateUser(long id, [FromBody] UserEditReqModel userEdit)
         {
-            User user = _mapper.Map<User>(userEdit);
-            user.Id = id;
-
             try
             {
+                User user = _mapper.Map<User>(userEdit);
+                user.Id = id;
+
                 _userService.Update(user, userEdit.Password);
                 return Ok();
             }

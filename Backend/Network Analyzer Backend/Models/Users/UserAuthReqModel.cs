@@ -1,8 +1,6 @@
-﻿using Network_Analyzer_Backend.Models.BaseModels;
-
-namespace Network_Analyzer_Backend.Models.Users
+﻿namespace Network_Analyzer_Backend.Models.Users
 {
-    public class UserAuthReqModel : BaseRequestModel
+    public class UserAuthReqModel
     {
         public string Username { get; set; }
         public string Password { get; set; }
