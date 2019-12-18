@@ -83,5 +83,79 @@ namespace Network_Analyzer_Backend.Controllers
                 return StatusCode(code, message);
             }
         }
+
+        /// <summary>
+        ///     Create connection
+        /// </summary>
+        /// <param name="connectionEdit"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult<ConnectionViewModel> CreateConnection([FromBody] ConnectionEditReqModel connectionEdit)
+        {
+            Connection connection = _mapper.Map<Connection>(connectionEdit);
+
+            try
+            {
+                Connection connectionCreate = _connectionService.Create(connection);
+                ConnectionViewModel connectionCreateViewModel = _mapper.Map<ConnectionViewModel>(connectionCreate);
+                return connectionCreateViewModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Close connection by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        [Route("CloseConnection123213213123")]
+        public ActionResult CloseConnection(long id)
+        {
+            try
+            {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                Connection connection = _connectionService.GetConnection(userId, id);
+                connection.Disconnected = DateTime.Now;
+
+                _connectionService.Update(connection);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Delete connection by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public ActionResult DeleteConnection(long id)
+        {
+            try
+            {
+                _connectionService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Network_Analyzer_Backend.Helpers;
@@ -148,7 +147,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        ///     Delete user
+        ///     Delete user by id
         /// </summary>
         /// <param name="id"></param>
         public void Delete(long id)

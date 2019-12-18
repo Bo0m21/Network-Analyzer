@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Network_Analyzer_Backend.Interfaces;
 using Network_Analyzer_Backend.Models.Exceptions;
@@ -18,7 +17,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        ///     Get connection packet
+        ///     Get connection packet by user id and connection id and connection packet id
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="connectionId"></param>
@@ -44,7 +43,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        ///     Get all connection packets
+        ///     Get connection packets by user id and connection id
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="connectionId"></param>
@@ -88,14 +87,16 @@ namespace Network_Analyzer_Backend.Services
             }
 
             // Update connection packet properties
-            // TODO I don't know
+            connectionPacket.Data = connectionPacketParam.Data;
+            connectionPacket.Type = connectionPacketParam.Type;
+            connectionPacket.IsDeleted = connectionPacketParam.IsDeleted;
 
             _databaseContext.ConnectionPackets.Update(connectionPacket);
             _databaseContext.SaveChanges();
         }
 
         /// <summary>
-        ///     Delete connection packet
+        ///     Delete connection packet by id
         /// </summary>
         /// <param name="id"></param>
         public void Delete(long id)

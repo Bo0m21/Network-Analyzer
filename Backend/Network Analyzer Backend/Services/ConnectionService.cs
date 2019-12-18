@@ -18,7 +18,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        ///     Get connection
+        ///     Get connection by user id and connection id
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="id"></param>
@@ -36,7 +36,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        ///     Get all connections by user id
+        ///     Get connections by user id
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -74,14 +74,18 @@ namespace Network_Analyzer_Backend.Services
             }
 
             // Update connection properties
-            connection.Disconnected = DateTime.Now;
+            connection.SourceAddress = connectionParam.SourceAddress;
+            connection.DestinationAddress = connectionParam.DestinationAddress;
+            connection.Created = connectionParam.Created;
+            connection.Disconnected = connectionParam.Disconnected;
+            connection.IsDeleted = connectionParam.IsDeleted;
 
             _databaseContext.Connections.Update(connection);
             _databaseContext.SaveChanges();
         }
 
         /// <summary>
-        ///     Delete connection
+        ///     Delete connection by id
         /// </summary>
         /// <param name="id"></param>
         public void Delete(long id)
