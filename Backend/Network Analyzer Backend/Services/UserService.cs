@@ -157,7 +157,7 @@ namespace Network_Analyzer_Backend.Services
 
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new BadRequestException("User not found");
             }
 
             user.IsDeleted = true;
@@ -190,17 +190,17 @@ namespace Network_Analyzer_Backend.Services
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new Exception("Value cannot be empty or whitespace only string.");
+                throw new BadRequestException("Value cannot be empty or whitespace only string.");
             }
 
             if (storedHash.Length != 64)
             {
-                throw new Exception("Invalid length of password hash (64 bytes expected).");
+                throw new BadRequestException("Invalid length of password hash (64 bytes expected).");
             }
 
             if (storedSalt.Length != 128)
             {
-                throw new Exception("Invalid length of password salt (128 bytes expected).");
+                throw new BadRequestException("Invalid length of password salt (128 bytes expected).");
             }
 
             using (HMACSHA512 hmac = new HMACSHA512(storedSalt))

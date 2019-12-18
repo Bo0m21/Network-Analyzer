@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Network_Analyzer_Backend.Extensions;
 using Network_Analyzer_Backend.Helpers;
 using Network_Analyzer_Backend.Interfaces;
 using Network_Analyzer_Backend.Models.BaseModels;
@@ -44,8 +45,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
 
@@ -68,8 +69,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
 
@@ -92,8 +93,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return Ok(new { Result = false, Message = "An error occurred while processing the request" });
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
 
@@ -113,8 +114,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(new {message = ex.Message});
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
     }
