@@ -5,8 +5,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Network_Analyzer_Backend.Extensions;
 using Network_Analyzer_Backend.Interfaces;
 using Network_Analyzer_Backend.Models.ConnectionPackets;
+using Network_Analyzer_Backend.Models.Exceptions;
 using Network_Analyzer_Database.Models;
 
 namespace Network_Analyzer_Backend.Controllers
@@ -42,7 +44,7 @@ namespace Network_Analyzer_Backend.Controllers
 
                 if (!long.TryParse(claimUserId, out long userId))
                 {
-                    throw new Exception("User not found");
+                    throw new BadRequestException("User not found");
                 }
 
                 ConnectionPacket connectionPacket = _connectionPacketService.GetConnectionPacket(userId, connectionId, id);
@@ -51,8 +53,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(new { message = ex.Message });
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
 
@@ -70,7 +72,7 @@ namespace Network_Analyzer_Backend.Controllers
 
                 if (!long.TryParse(claimUserId, out long userId))
                 {
-                    throw new Exception("User not found");
+                    throw new BadRequestException("User not found");
                 }
 
                 IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(connectionId, userId);
@@ -79,8 +81,8 @@ namespace Network_Analyzer_Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(new { message = ex.Message });
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
             }
         }
     }

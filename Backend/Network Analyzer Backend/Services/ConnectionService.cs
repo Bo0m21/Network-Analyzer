@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Network_Analyzer_Backend.Interfaces;
+using Network_Analyzer_Backend.Models.Exceptions;
 using Network_Analyzer_Database;
 using Network_Analyzer_Database.Models;
 
@@ -28,7 +29,7 @@ namespace Network_Analyzer_Backend.Services
 
             if (connection == null)
             {
-                throw new Exception("Connection not found");
+                throw new BadRequestException("Connection not found");
             }
 
             return connection;
@@ -69,7 +70,7 @@ namespace Network_Analyzer_Backend.Services
 
             if (connection == null)
             {
-                throw new Exception("Connection not found");
+                throw new BadRequestException("Connection not found");
             }
 
             // Update connection properties
@@ -89,7 +90,7 @@ namespace Network_Analyzer_Backend.Services
 
             if (connection == null)
             {
-                throw new Exception("Connection not found");
+                throw new BadRequestException("Connection not found");
             }
 
             connection.IsDeleted = true;
