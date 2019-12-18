@@ -56,7 +56,14 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         public User GetUser(long id)
         {
-            return _databaseContext.Users.FirstOrDefault(u => u.Id == id);
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                throw new BadRequestException("User not found");
+            }
+
+            return user;
         }
 
         /// <summary>

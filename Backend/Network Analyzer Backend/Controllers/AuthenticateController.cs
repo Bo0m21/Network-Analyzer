@@ -34,7 +34,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="userAuth"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("Authenticate")]
         public ActionResult<UserAuthResModel> Authenticate([FromBody] UserAuthReqModel userAuth)
         {
             try

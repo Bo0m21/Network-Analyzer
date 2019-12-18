@@ -34,7 +34,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin + ", " + Roles.Manager)]
-        [HttpGet("{id}")]
+        [HttpGet("GetUser")]
         public ActionResult<UserViewResModel> GetUser(long id)
         {
             try
@@ -56,7 +56,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="userEdit"></param>
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin)]
-        [HttpPost]
+        [HttpPost("CreateUser")]
         public ActionResult<UserViewResModel> CreateUser([FromBody] UserEditReqModel userEdit)
         {
             User user = _mapper.Map<User>(userEdit);
@@ -80,7 +80,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="id"></param>
         /// <param name="userEdit"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("UpdateUser")]
         public ActionResult<BaseResponseModel> UpdateUser(long id, [FromBody] UserEditReqModel userEdit)
         {
             User user = _mapper.Map<User>(userEdit);
@@ -104,7 +104,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize(Roles = Roles.Admin)]
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteUser")]
         public ActionResult DeleteUser(long id)
         {
             try

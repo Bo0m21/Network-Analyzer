@@ -35,7 +35,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="connectionId"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("GetConnectionPacket")]
         public ActionResult<ConnectionPacketViewModel> GetConnectionPacket(long connectionId, long id)
         {
             try
@@ -63,8 +63,8 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="connectionId"></param>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult<List<ConnectionPacketViewModel>> GetConnections(long connectionId)
+        [HttpGet("GetConnectionPackets")]
+        public ActionResult<List<ConnectionPacketViewModel>> GetConnectionPackets(long connectionId)
         {
             try
             {
@@ -78,6 +78,56 @@ namespace Network_Analyzer_Backend.Controllers
                 IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(connectionId, userId);
                 List<ConnectionPacketViewModel> connectionPacketsViewModel = _mapper.Map<List<ConnectionPacketViewModel>>(connectionPackets);
                 return connectionPacketsViewModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Create connection packet
+        /// </summary>
+        /// <param name="connectionPacketEdit"></param>
+        /// <returns></returns>
+        [HttpPost("CreateConnectionPacket")]
+        public ActionResult<ConnectionPacketViewModel> CreateConnectionPacket([FromBody] ConnectionPacketEditReqModel connectionPacketEdit)
+        {
+            ConnectionPacket connectionPacket = _mapper.Map<ConnectionPacket>(connectionPacketEdit);
+
+            try
+            {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                ConnectionPacket connectionPacketCreate = _connectionPacketService.Create(connectionPacket);
+                ConnectionPacketViewModel connectionPacketCreateViewModel = _mapper.Map<ConnectionPacketViewModel>(connectionPacketCreate);
+                return connectionPacketCreateViewModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Delete connection packet by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("DeleteConnectionPacket")]
+        public ActionResult DeleteConnectionPacket(long id)
+        {
+            try
+            {
+                _connectionPacketService.Delete(id);
+                return Ok();
             }
             catch (Exception ex)
             {

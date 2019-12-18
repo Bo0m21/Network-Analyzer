@@ -34,7 +34,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("GetConnection")]
         public ActionResult<ConnectionViewModel> GetConnection(long id)
         {
             try
@@ -61,7 +61,7 @@ namespace Network_Analyzer_Backend.Controllers
         ///     Get connections
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("GetConnections")]
         public ActionResult<List<ConnectionViewModel>> GetConnections()
         {
             try
@@ -89,13 +89,20 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="connectionEdit"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("CreateConnection")]
         public ActionResult<ConnectionViewModel> CreateConnection([FromBody] ConnectionEditReqModel connectionEdit)
         {
             Connection connection = _mapper.Map<Connection>(connectionEdit);
 
             try
             {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
                 Connection connectionCreate = _connectionService.Create(connection);
                 ConnectionViewModel connectionCreateViewModel = _mapper.Map<ConnectionViewModel>(connectionCreate);
                 return connectionCreateViewModel;
@@ -112,8 +119,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        [Route("CloseConnection123213213123")]
+        [HttpGet("CloseConnection")]
         public ActionResult CloseConnection(long id)
         {
             try
@@ -143,7 +149,7 @@ namespace Network_Analyzer_Backend.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteConnection")]
         public ActionResult DeleteConnection(long id)
         {
             try
