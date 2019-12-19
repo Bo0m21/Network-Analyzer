@@ -1,9 +1,5 @@
 ﻿using Network_Analyzer_WinForms.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Network_Analyzer_WinForms.Extensions
 {
@@ -12,17 +8,18 @@ namespace Network_Analyzer_WinForms.Extensions
     /// </summary>
     public static class ExceptionExtension
     {
-        public static string TreatmentException(this Exception exception)
+        public static string GetExceptionMessage(this Exception exception)
         {
-            if (exception.GetType() == typeof(AggregateException) && exception.InnerException != null)
+            if (exception.GetType() == typeof(AggregateException))
             {
-                if (exception.InnerException.GetType() == typeof(ApiException))
+                if (exception.InnerException != null && exception.InnerException.GetType() == typeof(ApiException))
                 {
-                    var sadasd = exception.InnerException.ToString();
+                    return exception.InnerException.Message.ToString();
                 }
             }
-            else    // Logging other exceptions
+            else if (exception.GetType() == typeof(ApiException))
             {
+                return exception.Message.ToString();
             }
 
             return "";

@@ -33,6 +33,16 @@ namespace Network_Analyzer_WinForms.Services
             });
         }
 
+        public string BaseUrl
+        {
+            get { return _baseUrl; }
+            set { _baseUrl = value; }
+        }
+
+        /// <summary>
+        /// Get one inctance service
+        /// </summary>
+        /// <returns></returns>
         public static BackendServce GetService()
         {
             if (_backendServce == null)
@@ -43,10 +53,18 @@ namespace Network_Analyzer_WinForms.Services
             return _backendServce;
         }
 
-        public string BaseUrl
+        /// <summary>
+        /// Set autharization token
+        /// </summary>
+        /// <param name="token"></param>
+        public void SetToken(string token)
         {
-            get { return _baseUrl; }
-            set { _baseUrl = value; }
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new System.Exception("Token in not valid");
+            }
+
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
         }
 
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
@@ -1089,7 +1107,7 @@ namespace Network_Analyzer_WinForms.Services
                 catch (Newtonsoft.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                    throw new ApiException(message);
                 }
             }
             else
@@ -1108,7 +1126,7 @@ namespace Network_Analyzer_WinForms.Services
                 catch (Newtonsoft.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
-                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                    throw new ApiException(message);
                 }
             }
         }

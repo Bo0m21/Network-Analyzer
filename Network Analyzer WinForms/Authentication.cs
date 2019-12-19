@@ -19,31 +19,33 @@ namespace Network_Analyzer_WinForms
             _backendServce = BackendServce.GetService();
         }
 
-        private void btnAuth_Click(object sender, System.EventArgs e)
+        private async void btnAuth_Click(object sender, EventArgs e)
         {
             try
             {
-                var asdsadsad = _backendServce.AuthenticateAsync(new UserAuthReqModel()
+                UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel()
                 {
                     Username = tbLogin.Text,
                     Password = tbPassword.Text
-                }).Result;
+                });
 
+                _backendServce.SetToken(userAuthResponce.Token);
 
+                // Hide this form
+                Hide();
+
+                // Starting main form
+                Main mainForm = new Main();
+                mainForm.ShowDialog();
             }
             catch (Exception ex)
             {
-                var message = ex.TreatmentException();
-
-
-
                 Trace.TraceError(ex.Message);
-
-                lblInformation.Text = Localizer.LocalizeString("Authentication.ErrorsAuthentication");
+                lblInformation.Text = ExceptionExtension.GetExceptionMessage(ex);
             }
         }
 
-        private void btnClear_Click(object sender, System.EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
             tbLogin.Clear();
             tbPassword.Clear();
