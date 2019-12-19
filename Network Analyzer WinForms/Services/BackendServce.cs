@@ -121,7 +121,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (UserAuthResModel)System.Convert.ChangeType(responseData_, typeof(UserAuthResModel));
+                            var result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<UserAuthResModel>(responseData_);
                             return result_;
                         }
                         else

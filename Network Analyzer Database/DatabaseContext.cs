@@ -28,7 +28,7 @@ namespace Network_Analyzer_Database
                 }
             }
 
-            var userBase1 = Users.FirstOrDefault(u => u.Username == "string1");
+            var userBase1 = Users.FirstOrDefault(u => u.Username == "123456");
 
             if (userBase1 == null)
             {
@@ -36,8 +36,8 @@ namespace Network_Analyzer_Database
                 {
                     Users.Add(new User()
                     {
-                        Username = "string1",
-                        PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("string1")),
+                        Username = "123456",
+                        PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes("123456")),
                         PasswordSalt = hmac.Key,
                         Role = "Admin"
                     });

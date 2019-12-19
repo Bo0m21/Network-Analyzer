@@ -16,6 +16,10 @@ namespace Network_Analyzer_WinForms
             InitializeComponent();
             Localizer.LocalizeForm(this);
 
+            // TODO For tested
+            tbLogin.Text = "string";
+            tbPassword.Text = "string";
+
             _backendServce = BackendServce.GetService();
         }
 
