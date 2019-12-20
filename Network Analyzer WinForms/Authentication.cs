@@ -27,6 +27,7 @@ namespace Network_Analyzer_WinForms
         {
             try
             {
+                preLoad.Visible = true;
                 UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel()
                 {
                     Username = tbLogin.Text,
@@ -38,12 +39,14 @@ namespace Network_Analyzer_WinForms
                 // Hide this form
                 Hide();
 
+                preLoad.Visible = false;
                 // Starting main form
                 Main mainForm = new Main();
                 mainForm.ShowDialog();
             }
             catch (Exception ex)
             {
+                preLoad.Visible = false;
                 Trace.TraceError(ex.Message);
                 lblInformation.Text = ExceptionExtension.GetExceptionMessage(ex);
             }

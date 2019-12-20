@@ -16,5 +16,6 @@ namespace Network_Analyzer_WinForms
         {
             InitializeComponent();
         }
+
     }
 }
