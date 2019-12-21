@@ -17,12 +17,12 @@ namespace Network_Analyzer_WinForms
     {
         private readonly object m_TimerDataGridViewUpdateLock = new object();
 
-        private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
+        private readonly BackendServce _backendServce;
+        private readonly ConnectionService _connectionService;
 
         private SocksListener m_SocksListener;
 
-        private BackendServce _backendServce;
-        private ConnectionService _connectionService;
+        private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
 
         public Main()
         {
@@ -52,7 +52,9 @@ namespace Network_Analyzer_WinForms
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"), Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"),
+                Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Information);
 
             if (dialogResult == DialogResult.OK)
             {

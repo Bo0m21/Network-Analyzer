@@ -1,5 +1,5 @@
-﻿using Network_Analyzer_Database.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Network_Analyzer_Database.Models;
 
 namespace Network_Analyzer_Backend.Interfaces
 {

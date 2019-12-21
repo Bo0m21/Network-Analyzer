@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Network_Analyzer_Backend.Extensions;
-using System;
-using System.Threading.Tasks;
 
 namespace Network_Analyzer_Backend.Middleware
 {
@@ -11,8 +11,8 @@ namespace Network_Analyzer_Backend.Middleware
     /// </summary>
     public class ExceptionMiddleware
     {
-        private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly RequestDelegate _next;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {

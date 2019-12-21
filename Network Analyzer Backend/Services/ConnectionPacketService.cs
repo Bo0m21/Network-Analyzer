@@ -25,14 +25,16 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         public ConnectionPacket GetConnectionPacket(long userId, long connectionId, long id)
         {
-            Connection connection = _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == connectionId);
+            Connection connection =
+                _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == connectionId);
 
             if (connection == null)
             {
                 throw new BadRequestException("Connection not found");
             }
 
-            ConnectionPacket connectionPacket = _databaseContext.ConnectionPackets.FirstOrDefault(u => u.ConnectionId == connectionId && u.Id == id);
+            ConnectionPacket connectionPacket =
+                _databaseContext.ConnectionPackets.FirstOrDefault(u => u.ConnectionId == connectionId && u.Id == id);
 
             if (connectionPacket == null)
             {
@@ -50,7 +52,8 @@ namespace Network_Analyzer_Backend.Services
         /// <returns></returns>
         public IEnumerable<ConnectionPacket> GetConnectionPackets(long userId, long connectionId)
         {
-            Connection connection = _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == connectionId);
+            Connection connection =
+                _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == connectionId);
 
             if (connection == null)
             {

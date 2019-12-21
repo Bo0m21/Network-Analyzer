@@ -18,12 +18,13 @@ namespace Network_Analyzer_Backend.Controllers
     [ApiController]
     public class ConnectionPacketsController : ControllerBase
     {
+        private readonly IConnectionPacketService _connectionPacketService;
+        private readonly IConnectionService _connectionService;
         private readonly ILogger<ConnectionPacketsController> _logger;
         private readonly IMapper _mapper;
-        private readonly IConnectionService _connectionService;
-        private readonly IConnectionPacketService _connectionPacketService;
 
-        public ConnectionPacketsController(ILogger<ConnectionPacketsController> logger, IMapper mapper, IConnectionService connectionService, IConnectionPacketService connectionPacketService)
+        public ConnectionPacketsController(ILogger<ConnectionPacketsController> logger, IMapper mapper,
+            IConnectionService connectionService, IConnectionPacketService connectionPacketService)
         {
             _logger = logger;
             _mapper = mapper;
@@ -49,8 +50,10 @@ namespace Network_Analyzer_Backend.Controllers
                     throw new BadRequestException("User not found");
                 }
 
-                ConnectionPacket connectionPacket = _connectionPacketService.GetConnectionPacket(userId, connectionId, id);
-                ConnectionPacketViewModel connectionPacketViewModel = _mapper.Map<ConnectionPacketViewModel>(connectionPacket);
+                ConnectionPacket connectionPacket =
+                    _connectionPacketService.GetConnectionPacket(userId, connectionId, id);
+                ConnectionPacketViewModel connectionPacketViewModel =
+                    _mapper.Map<ConnectionPacketViewModel>(connectionPacket);
                 return connectionPacketViewModel;
             }
             catch (Exception ex)
@@ -77,8 +80,10 @@ namespace Network_Analyzer_Backend.Controllers
                     throw new BadRequestException("User not found");
                 }
 
-                IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(connectionId, userId);
-                List<ConnectionPacketViewModel> connectionPacketsViewModel = _mapper.Map<List<ConnectionPacketViewModel>>(connectionPackets);
+                IEnumerable<ConnectionPacket> connectionPackets =
+                    _connectionPacketService.GetConnectionPackets(connectionId, userId);
+                List<ConnectionPacketViewModel> connectionPacketsViewModel =
+                    _mapper.Map<List<ConnectionPacketViewModel>>(connectionPackets);
                 return connectionPacketsViewModel;
             }
             catch (Exception ex)
@@ -94,7 +99,8 @@ namespace Network_Analyzer_Backend.Controllers
         /// <param name="connectionPacketEdit"></param>
         /// <returns></returns>
         [HttpPost("CreateConnectionPacket")]
-        public ActionResult<ConnectionPacketViewModel> CreateConnectionPacket(long connectionId, [FromBody] ConnectionPacketEditReqModel connectionPacketEdit)
+        public ActionResult<ConnectionPacketViewModel> CreateConnectionPacket(long connectionId,
+            [FromBody] ConnectionPacketEditReqModel connectionPacketEdit)
         {
             try
             {
@@ -111,7 +117,8 @@ namespace Network_Analyzer_Backend.Controllers
                 connectionPacket.ConnectionId = connection.Id;
 
                 ConnectionPacket connectionPacketCreate = _connectionPacketService.Create(connectionPacket);
-                ConnectionPacketViewModel connectionPacketCreateViewModel = _mapper.Map<ConnectionPacketViewModel>(connectionPacketCreate);
+                ConnectionPacketViewModel connectionPacketCreateViewModel =
+                    _mapper.Map<ConnectionPacketViewModel>(connectionPacketCreate);
                 return connectionPacketCreateViewModel;
             }
             catch (Exception ex)

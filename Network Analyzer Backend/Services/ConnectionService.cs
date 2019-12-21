@@ -85,7 +85,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        /// Close connection
+        ///     Close connection
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="id"></param>
@@ -106,7 +106,7 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
-        /// Close connections
+        ///     Close connections
         /// </summary>
         /// <param name="userId"></param>
         public void CloseConnections(long userId)

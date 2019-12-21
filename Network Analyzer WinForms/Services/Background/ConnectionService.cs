@@ -4,30 +4,31 @@ using System.Diagnostics;
 using System.Threading;
 using Network_Analyzer_WinForms.Models.Connection;
 using Network_Analyzer_WinForms.Network;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Network_Analyzer_WinForms.Services.Background
 {
     /// <summary>
-    /// Background connection service for updating connections in database
+    ///     Background connection service for updating connections in database
     /// </summary>
     public class ConnectionService
     {
         private readonly object m_TimerTreatmentConnectionsLock = new object();
 
-        private System.Windows.Forms.Timer m_TimerTreatmentConnections;
+        private readonly BackendServce _backendServce;
 
-        private BackendServce _backendServce;
+        private readonly Timer m_TimerTreatmentConnections;
 
         public ConnectionService()
         {
-            m_TimerTreatmentConnections = new System.Windows.Forms.Timer();
+            m_TimerTreatmentConnections = new Timer();
             m_TimerTreatmentConnections.Tick += TimerTreatmentConnections_Tick;
 
             _backendServce = BackendServce.GetService();
         }
 
         /// <summary>
-        /// Start treatment connections
+        ///     Start treatment connections
         /// </summary>
         public void StartService()
         {
@@ -35,7 +36,7 @@ namespace Network_Analyzer_WinForms.Services.Background
         }
 
         /// <summary>
-        /// Stop treatment service
+        ///     Stop treatment service
         /// </summary>
         public void StopService()
         {
@@ -43,7 +44,7 @@ namespace Network_Analyzer_WinForms.Services.Background
         }
 
         /// <summary>
-        /// Treatment connections
+        ///     Treatment connections
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -63,7 +64,7 @@ namespace Network_Analyzer_WinForms.Services.Background
                 {
                     if (connections[i].DatabaseId == 0)
                     {
-                        ConnectionViewModel connection = _backendServce.CreateConnectionAsync(new ConnectionEditReqModel()
+                        ConnectionViewModel connection = _backendServce.CreateConnectionAsync(new ConnectionEditReqModel
                         {
                             Created = DateTime.Now,
                             SourceAddress = connections[i].SourceAddress,
@@ -88,12 +89,12 @@ namespace Network_Analyzer_WinForms.Services.Background
                     {
                         if (connections[i].ConnectionPackets[j].DatabaseId == 0)
                         {
-                            ConnectionPacketViewModel connectionPacket = _backendServce.CreateConnectionPacketAsync(connections[i].DatabaseId, new ConnectionPacketEditReqModel
-                            {
-                                Data = connections[i].ConnectionPackets[j].Data,
-                                Type = ConnectionPacketType.ClientToServer
-
-                            }).Result;
+                            ConnectionPacketViewModel connectionPacket = _backendServce.CreateConnectionPacketAsync(
+                                connections[i].DatabaseId, new ConnectionPacketEditReqModel
+                                {
+                                    Data = connections[i].ConnectionPackets[j].Data,
+                                    Type = ConnectionPacketType.ClientToServer
+                                }).Result;
 
                             connections[i].ConnectionPackets[j].DatabaseId = connectionPacket.Id;
                             treatmentConnecionPacketCounter++;
