@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Network_Analyzer.Extensions
+namespace Network_Analyzer_WinForms.Extensions
 {
     /// <summary>
     ///     Class array extensions

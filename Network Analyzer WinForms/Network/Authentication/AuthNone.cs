@@ -1,6 +1,6 @@
 using System.Net.Sockets;
 
-namespace Network_Analyzer.Network.Authentication
+namespace Network_Analyzer_WinForms.Network.Authentication
 {
     /// <summary>Authenticates a user on a SOCKS5 server according to the 'No Authentication' subprotocol.</summary>
     internal sealed class AuthNone : AuthBase

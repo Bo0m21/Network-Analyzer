@@ -37,8 +37,8 @@ namespace Network_Analyzer_WinForms
             Main mainForm = new Main();
             mainForm.ShowDialog();
 
-            // Show this form
-            Show();
+            // Cloae application
+            Application.Exit();
         }
 
         private async void btnAuth_Click(object sender, EventArgs e)
@@ -60,9 +60,8 @@ namespace Network_Analyzer_WinForms
                 Main mainForm = new Main();
                 mainForm.ShowDialog();
 
-
-                // Show this form
-                Show();
+                // Cloae application
+                Application.Exit();
             }
             catch (Exception ex)
             {

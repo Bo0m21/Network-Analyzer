@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Network_Analyzer.Models.Connection;
+using Network_Analyzer_WinForms.Models.Connection;
 
-namespace Network_Analyzer.Globals
+namespace Network_Analyzer_WinForms.Globals
 {
     /// <summary>
     ///     This is class connections which save data

@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer.Models.Connection
+﻿namespace Network_Analyzer_WinForms.Models.Connection
 {
     /// <summary>
     ///     Type connection packet type

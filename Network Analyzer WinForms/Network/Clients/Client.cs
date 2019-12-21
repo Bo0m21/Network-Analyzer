@@ -1,10 +1,10 @@
 using System;
 using System.Net.Sockets;
-using Network_Analyzer.Extensions;
-using Network_Analyzer.Globals;
-using Network_Analyzer.Models.Connection;
+using Network_Analyzer_WinForms.Extensions;
+using Network_Analyzer_WinForms.Globals;
+using Network_Analyzer_WinForms.Models.Connection;
 
-namespace Network_Analyzer.Network.Clients
+namespace Network_Analyzer_WinForms.Network.Clients
 {
     /// <summary>
     ///     Specifies the basic methods and properties of a <c>Client</c> object. This is class and must be inherited.

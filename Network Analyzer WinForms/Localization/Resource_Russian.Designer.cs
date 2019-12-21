@@ -39,7 +39,7 @@ namespace Network_Analyzer_WinForms.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Network_Analyzer.Localization.Resource_Russian", typeof(Resource_Russian).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Network_Analyzer_WinForms.Localization.Resource_Russian", typeof(Resource_Russian).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -1591,6 +1591,15 @@ namespace Network_Analyzer_WinForms.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Информационное сообщение.
+        /// </summary>
+        internal static string Main_InformationBox {
+            get {
+                return ResourceManager.GetString("Main.InformationBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Слушатель соединений уже запущен.
         /// </summary>
         internal static string Main_ListenerAlreadyStarted {
@@ -1731,6 +1740,15 @@ namespace Network_Analyzer_WinForms.Localization {
         internal static string Main_Version {
             get {
                 return ResourceManager.GetString("Main.Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы действиетльно хотите выйти?.
+        /// </summary>
+        internal static string Main_WantToExitMessage {
+            get {
+                return ResourceManager.GetString("Main.WantToExitMessage", resourceCulture);
             }
         }
         

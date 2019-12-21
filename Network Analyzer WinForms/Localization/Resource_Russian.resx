@@ -768,4 +768,10 @@
   <data name="Authentication.ErrorsAuthentication" xml:space="preserve">
     <value>Ошибки при авторизации</value>
   </data>
+  <data name="Main.InformationBox" xml:space="preserve">
+    <value>Информационное сообщение</value>
+  </data>
+  <data name="Main.WantToExitMessage" xml:space="preserve">
+    <value>Вы действиетльно хотите выйти?</value>
+  </data>
 </root>

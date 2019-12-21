@@ -1,9 +1,9 @@
 using System;
 using System.Net.Sockets;
-using Network_Analyzer.Network.Authentication;
-using Network_Analyzer.Network.Handlers;
+using Network_Analyzer_WinForms.Network.Authentication;
+using Network_Analyzer_WinForms.Network.Handlers;
 
-namespace Network_Analyzer.Network.Clients
+namespace Network_Analyzer_WinForms.Network.Clients
 {
     /// <summary>Relays data between a remote host and a local client, using the SOCKS protocols.</summary>
     /// <remarks>This class implements the SOCKS4, SOCKS4a and SOCKS5 protocols.</remarks>

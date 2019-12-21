@@ -42,8 +42,17 @@ namespace Network_Analyzer_WinForms
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //m_SocksListener?.Dispose();
-            //m_TimerDataGridViewUpdate.Stop();
+            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"), Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+            if (dialogResult == DialogResult.OK)
+            {
+                //m_SocksListener?.Dispose();
+                //m_TimerDataGridViewUpdate.Stop();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

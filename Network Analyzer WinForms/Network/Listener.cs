@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Net;
 using System.Net.Sockets;
-using Network_Analyzer.Network.Clients;
+using Network_Analyzer_WinForms.Network.Clients;
 
-namespace Network_Analyzer.Network
+namespace Network_Analyzer_WinForms.Network
 {
     /// <summary>
     ///     Specifies the basic methods and properties of a <c>Listener</c> object. This is an abstract class and must be

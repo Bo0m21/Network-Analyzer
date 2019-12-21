@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Network_Analyzer.Models.Connection
+namespace Network_Analyzer_WinForms.Models.Connection
 {
     /// <summary>
     ///     This class has information and packets for connection

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Network_Analyzer.Network.Authentication
+namespace Network_Analyzer_WinForms.Network.Authentication
 {
     /// <summary>Stores a dictionary with username/password combinations.</summary>
     /// <remarks>This class can be used by a SOCKS5 listener.</remarks>
