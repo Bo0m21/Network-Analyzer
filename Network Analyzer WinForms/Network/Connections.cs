@@ -2,7 +2,7 @@
 using System.Linq;
 using Network_Analyzer_WinForms.Models.Connection;
 
-namespace Network_Analyzer_WinForms.Globals
+namespace Network_Analyzer_WinForms.Network
 {
     /// <summary>
     ///     This is class connections which save data
@@ -15,26 +15,6 @@ namespace Network_Analyzer_WinForms.Globals
         private static readonly List<ConnectionModel> _connections = new List<ConnectionModel>();
 
         /// <summary>
-        ///     Get new connection id
-        /// </summary>
-        /// <returns>New connection id</returns>
-        public static long GetNewConnectionId()
-        {
-            return _connections.Count + 1;
-        }
-
-        /// <summary>
-        ///     Get new packet id for connection
-        /// </summary>
-        /// <param name="connectionId">Connection id</param>
-        /// <returns>New packet id for connection</returns>
-        public static long GetNewPacketId(long connectionId)
-        {
-            ConnectionModel connection = GetConnection(connectionId);
-            return connection.ConnectionPackets.Count + 1;
-        }
-
-        /// <summary>
         ///     Get all connections
         /// </summary>
         /// <returns>List connections</returns>
@@ -44,28 +24,23 @@ namespace Network_Analyzer_WinForms.Globals
         }
 
         /// <summary>
-        ///     Get connection at id
+        ///     Get new connection id
         /// </summary>
-        /// <param name="id">Id connection in collection</param>
-        /// <returns>Return connection or null</returns>
-        public static ConnectionModel GetConnection(long id)
+        /// <returns>New connection id</returns>
+        public static long GetConnectionId()
         {
-            return _connections.FirstOrDefault(c => c.Id == id);
+            return _connections.Count + 1;
         }
 
         /// <summary>
-        ///     Get connection at index
+        ///     Get new packet id for connection
         /// </summary>
-        /// <param name="index">Index connection in collection</param>
-        /// <returns>Return connection or null</returns>
-        public static ConnectionModel GetConnectionAtIndex(int index)
+        /// <param name="connectionId">Connection id</param>
+        /// <returns>New packet id for connection</returns>
+        public static long GetConnectionPacketId(long connectionId)
         {
-            if (index < 0 || index >= _connections.Count)
-            {
-                return null;
-            }
-
-            return _connections[index];
+            ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == connectionId);
+            return connection.ConnectionPackets.Count + 1;
         }
 
         /// <summary>
@@ -80,24 +55,6 @@ namespace Network_Analyzer_WinForms.Globals
             {
                 _connections.Add(newConnection);
                 // TODO: Сделать ивент по приходу новых соединений
-            }
-        }
-
-        /// <summary>
-        ///     Add new connections
-        /// </summary>
-        /// <param name="newConnections">New connections</param>
-        public static void AddConnectionList(List<ConnectionModel> newConnections)
-        {
-            foreach (ConnectionModel newConnection in newConnections)
-            {
-                ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == newConnection.Id);
-
-                if (connection == null)
-                {
-                    _connections.Add(newConnection);
-                    // TODO: Сделать ивент по приходу новых соединений
-                }
             }
         }
 
@@ -143,23 +100,6 @@ namespace Network_Analyzer_WinForms.Globals
                 // Если мы ждем пакет от сервера и нам пришел дистконнект то выходим из ожидания
                 // Служит так же для перехвата и редактирования пакетов
             }
-        }
-
-        /// <summary>
-        ///     Get count connections
-        /// </summary>
-        /// <returns>Count connections</returns>
-        public static int GetCount()
-        {
-            return _connections.Count;
-        }
-
-        /// <summary>
-        ///     Clear all connections
-        /// </summary>
-        public static void Clear()
-        {
-            _connections.Clear();
         }
     }
 }
