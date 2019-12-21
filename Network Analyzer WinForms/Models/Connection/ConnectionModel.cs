@@ -19,6 +19,11 @@ namespace Network_Analyzer_WinForms.Models.Connection
         public long Id { get; set; }
 
         /// <summary>
+        ///     Database identity connection
+        /// </summary>
+        public long DatabaseId { get; set; }
+
+        /// <summary>
         ///     Source ip and port
         /// </summary>
         /// <returns>Return source ip and port about this connection.</returns>
@@ -47,6 +52,12 @@ namespace Network_Analyzer_WinForms.Models.Connection
         /// </summary>
         /// <returns>Return information disconnected about this connection.</returns>
         public bool IsDisconnected { get; set; }
+
+        /// <summary>
+        ///     Mark that connection is disconnected in database
+        /// </summary>
+        /// <returns>Return information disconnected about this connection in database.</returns>
+        public bool IsDatabaseDisconnected { get; set; }
 
         /// <summary>
         ///     Gets the packets in the connection.

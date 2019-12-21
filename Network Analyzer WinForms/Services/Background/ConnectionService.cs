@@ -105,6 +105,21 @@ namespace Network_Analyzer_WinForms.Services.Background
                         }
                     }
                 }
+
+                // Disconnect connection packets in database
+                for (int i = 0; i < connections.Count; i++)
+                {
+                    if (connections[i].DatabaseId == 0)
+                    {
+                        continue;
+                    }
+
+                    if (connections[i].IsDisconnected && connections[i].IsDisconnected == false)
+                    {
+                        _backendServce.CloseConnectionAsync(connections[i].DatabaseId);
+                        connections[i].IsDatabaseDisconnected = true;
+                    }
+                }
             }
             catch (Exception ex)
             {

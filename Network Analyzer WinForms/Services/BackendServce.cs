@@ -121,8 +121,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<UserAuthResModel>(responseData_);
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<UserAuthResModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -198,8 +197,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (ConnectionPacketViewModel)System.Convert.ChangeType(responseData_, typeof(ConnectionPacketViewModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<ConnectionPacketViewModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -271,8 +269,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (System.Collections.Generic.ICollection<ConnectionPacketViewModel>)System.Convert.ChangeType(responseData_, typeof(System.Collections.Generic.ICollection<ConnectionPacketViewModel>));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.ICollection<ConnectionPacketViewModel>>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -347,8 +344,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (ConnectionPacketViewModel)System.Convert.ChangeType(responseData_, typeof(ConnectionPacketViewModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<ConnectionPacketViewModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -492,8 +488,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (ConnectionViewModel)System.Convert.ChangeType(responseData_, typeof(ConnectionViewModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<ConnectionViewModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -560,8 +555,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (System.Collections.Generic.ICollection<ConnectionViewModel>)System.Convert.ChangeType(responseData_, typeof(System.Collections.Generic.ICollection<ConnectionViewModel>));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.ICollection<ConnectionViewModel>>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -631,8 +625,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (ConnectionViewModel)System.Convert.ChangeType(responseData_, typeof(ConnectionViewModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<ConnectionViewModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -674,6 +667,69 @@ namespace Network_Analyzer_WinForms.Services
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            return;
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException(responseData_);
+                        }
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task CloseAllConnectionAsync()
+        {
+            return CloseAllConnectionAsync(System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task CloseAllConnectionAsync(System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Connections/CloseAllConnection");
 
             var client_ = _httpClient;
             try
@@ -840,8 +896,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (UserViewResModel)System.Convert.ChangeType(responseData_, typeof(UserViewResModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewResModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -911,8 +966,7 @@ namespace Network_Analyzer_WinForms.Services
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (UserViewResModel)System.Convert.ChangeType(responseData_, typeof(UserViewResModel));
-                            return result_;
+                            return Newtonsoft.Json.JsonConvert.DeserializeObject<UserViewResModel>(responseData_);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1191,9 +1245,9 @@ namespace Network_Analyzer_WinForms.Services
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum ConnectionPacketType
     {
-        _1 = 1,
+        ClientToServer = 1,
 
-        _2 = 2,
+        ServerToClient = 2,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
@@ -1231,11 +1285,17 @@ namespace Network_Analyzer_WinForms.Services
         [Newtonsoft.Json.JsonProperty("destinationAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DestinationAddress { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("send", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Send { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("received", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Received { get; set; }
+
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Created { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("disconnected", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? Disconnected { get; set; }
+        [Newtonsoft.Json.JsonProperty("isDisconnected", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsDisconnected { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]

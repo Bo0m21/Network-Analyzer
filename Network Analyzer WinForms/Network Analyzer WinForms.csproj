@@ -58,7 +58,7 @@
     </Compile>
     <Compile Include="Extensions\ArrayExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
-    <Compile Include="Globals\Connections.cs" />
+    <Compile Include="Network\Connections.cs" />
     <Compile Include="Localization\Resource_Russian.Designer.cs">
       <DependentUpon>Resource_Russian.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -88,6 +88,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BackendServce.cs" />
+    <Compile Include="Services\Background\ConnectionService.cs" />
     <Compile Include="Utilities\Localizer.cs" />
     <EmbeddedResource Include="Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>

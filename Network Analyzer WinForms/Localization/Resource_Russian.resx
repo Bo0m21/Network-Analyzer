@@ -774,4 +774,10 @@
   <data name="Main.WantToExitMessage" xml:space="preserve">
     <value>Вы действиетльно хотите выйти?</value>
   </data>
+  <data name="ConnectionService.Synchronization" xml:space="preserve">
+    <value>Синхронизация соединений</value>
+  </data>
+  <data name="ConnectionService.Synchronized" xml:space="preserve">
+    <value>Соединения синхронезированы</value>
+  </data>
 </root>

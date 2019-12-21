@@ -32,10 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btnStartListener = new System.Windows.Forms.Button();
-            this.btnClearConnentions = new System.Windows.Forms.Button();
-            this.btnUpdateDataGridView = new System.Windows.Forms.Button();
-            this.cbAutoUpdateDataGridView = new System.Windows.Forms.CheckBox();
-            this.lblAllConnections = new System.Windows.Forms.Label();
             this.Disconnected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Send = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Received = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,9 +40,6 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
-            this.cbAutoSaveConnections = new System.Windows.Forms.CheckBox();
-            this.btnSaveConnections = new System.Windows.Forms.Button();
-            this.btnLoadConnections = new System.Windows.Forms.Button();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvConnections = new System.Windows.Forms.DataGridView();
             this.btnStopListener = new System.Windows.Forms.Button();
@@ -57,19 +50,16 @@
             this.startListenerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopListenerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionsWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectionsGridWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearConnentionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateDataGridViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbConnectionsGridWork = new System.Windows.Forms.GroupBox();
             this.gbConnections = new System.Windows.Forms.GroupBox();
+            this.btnUpdateDataGridView = new System.Windows.Forms.Button();
+            this.cbAutoUpdateDataGridView = new System.Windows.Forms.CheckBox();
+            this.lblAllConnections = new System.Windows.Forms.Label();
             this.gbConnectionsWork.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
             this.gbControl.SuspendLayout();
             this.msMenu.SuspendLayout();
-            this.gbConnectionsGridWork.SuspendLayout();
             this.gbConnections.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,43 +71,7 @@
             this.btnStartListener.TabIndex = 0;
             this.btnStartListener.Text = "Main.StartListener";
             this.btnStartListener.UseVisualStyleBackColor = true;
-            // 
-            // btnClearConnentions
-            // 
-            this.btnClearConnentions.Location = new System.Drawing.Point(6, 19);
-            this.btnClearConnentions.Name = "btnClearConnentions";
-            this.btnClearConnentions.Size = new System.Drawing.Size(190, 23);
-            this.btnClearConnentions.TabIndex = 9;
-            this.btnClearConnentions.Text = "Main.ClearConnentions";
-            this.btnClearConnentions.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateDataGridView
-            // 
-            this.btnUpdateDataGridView.Location = new System.Drawing.Point(6, 48);
-            this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
-            this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
-            this.btnUpdateDataGridView.TabIndex = 6;
-            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
-            this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
-            // 
-            // cbAutoUpdateDataGridView
-            // 
-            this.cbAutoUpdateDataGridView.AutoSize = true;
-            this.cbAutoUpdateDataGridView.Location = new System.Drawing.Point(6, 77);
-            this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
-            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(174, 17);
-            this.cbAutoUpdateDataGridView.TabIndex = 3;
-            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
-            this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
-            // 
-            // lblAllConnections
-            // 
-            this.lblAllConnections.Location = new System.Drawing.Point(497, 0);
-            this.lblAllConnections.Name = "lblAllConnections";
-            this.lblAllConnections.Size = new System.Drawing.Size(135, 13);
-            this.lblAllConnections.TabIndex = 7;
-            this.lblAllConnections.Text = "Main.AllConnections";
-            this.lblAllConnections.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.btnStartListener.Click += new System.EventHandler(this.BtnStartListener_Click);
             // 
             // Disconnected
             // 
@@ -178,43 +132,14 @@
             // 
             // gbConnectionsWork
             // 
-            this.gbConnectionsWork.Controls.Add(this.cbAutoSaveConnections);
-            this.gbConnectionsWork.Controls.Add(this.btnSaveConnections);
-            this.gbConnectionsWork.Controls.Add(this.btnLoadConnections);
+            this.gbConnectionsWork.Controls.Add(this.cbAutoUpdateDataGridView);
+            this.gbConnectionsWork.Controls.Add(this.btnUpdateDataGridView);
             this.gbConnectionsWork.Location = new System.Drawing.Point(12, 116);
             this.gbConnectionsWork.Name = "gbConnectionsWork";
-            this.gbConnectionsWork.Size = new System.Drawing.Size(202, 100);
+            this.gbConnectionsWork.Size = new System.Drawing.Size(202, 71);
             this.gbConnectionsWork.TabIndex = 15;
             this.gbConnectionsWork.TabStop = false;
             this.gbConnectionsWork.Text = "Main.ConnectionsWork";
-            // 
-            // cbAutoSaveConnections
-            // 
-            this.cbAutoSaveConnections.AutoSize = true;
-            this.cbAutoSaveConnections.Location = new System.Drawing.Point(6, 77);
-            this.cbAutoSaveConnections.Name = "cbAutoSaveConnections";
-            this.cbAutoSaveConnections.Size = new System.Drawing.Size(158, 17);
-            this.cbAutoSaveConnections.TabIndex = 4;
-            this.cbAutoSaveConnections.Text = "Main.AutoSaveConnections";
-            this.cbAutoSaveConnections.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveConnections
-            // 
-            this.btnSaveConnections.Location = new System.Drawing.Point(6, 48);
-            this.btnSaveConnections.Name = "btnSaveConnections";
-            this.btnSaveConnections.Size = new System.Drawing.Size(190, 23);
-            this.btnSaveConnections.TabIndex = 1;
-            this.btnSaveConnections.Text = "Main.SaveConnections";
-            this.btnSaveConnections.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadConnections
-            // 
-            this.btnLoadConnections.Location = new System.Drawing.Point(6, 19);
-            this.btnLoadConnections.Name = "btnLoadConnections";
-            this.btnLoadConnections.Size = new System.Drawing.Size(190, 23);
-            this.btnLoadConnections.TabIndex = 0;
-            this.btnLoadConnections.Text = "Main.LoadConnections";
-            this.btnLoadConnections.UseVisualStyleBackColor = true;
             // 
             // Number
             // 
@@ -259,6 +184,8 @@
             this.dgvConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConnections.Size = new System.Drawing.Size(626, 265);
             this.dgvConnections.TabIndex = 1;
+            this.dgvConnections.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConnections_CellDoubleClick);
+            this.dgvConnections.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvConnections_KeyDown);
             // 
             // btnStopListener
             // 
@@ -269,6 +196,7 @@
             this.btnStopListener.TabIndex = 1;
             this.btnStopListener.Text = "Main.StopListener";
             this.btnStopListener.UseVisualStyleBackColor = true;
+            this.btnStopListener.Click += new System.EventHandler(this.BtnStopListener_Click);
             // 
             // lblInformation
             // 
@@ -296,7 +224,6 @@
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listenerWorkToolStripMenuItem,
             this.connectionsWorkToolStripMenuItem,
-            this.connectionsGridWorkToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
@@ -316,79 +243,43 @@
             // startListenerToolStripMenuItem
             // 
             this.startListenerToolStripMenuItem.Name = "startListenerToolStripMenuItem";
-            this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startListenerToolStripMenuItem.Text = "Main.StartListener";
+            this.startListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStartListener_Click);
             // 
             // stopListenerToolStripMenuItem
             // 
             this.stopListenerToolStripMenuItem.Name = "stopListenerToolStripMenuItem";
-            this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stopListenerToolStripMenuItem.Text = "Main.StopListener";
+            this.stopListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStopListener_Click);
             // 
             // connectionsWorkToolStripMenuItem
             // 
             this.connectionsWorkToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadConnectionsToolStripMenuItem,
-            this.saveConnectionsToolStripMenuItem});
+            this.updateDataGridViewToolStripMenuItem});
             this.connectionsWorkToolStripMenuItem.Name = "connectionsWorkToolStripMenuItem";
             this.connectionsWorkToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
             this.connectionsWorkToolStripMenuItem.Text = "Main.ConnectionsWork";
-            // 
-            // loadConnectionsToolStripMenuItem
-            // 
-            this.loadConnectionsToolStripMenuItem.Name = "loadConnectionsToolStripMenuItem";
-            this.loadConnectionsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.loadConnectionsToolStripMenuItem.Text = "Main.LoadConnections";
-            // 
-            // saveConnectionsToolStripMenuItem
-            // 
-            this.saveConnectionsToolStripMenuItem.Name = "saveConnectionsToolStripMenuItem";
-            this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.saveConnectionsToolStripMenuItem.Text = "Main.SaveConnections";
-            // 
-            // connectionsGridWorkToolStripMenuItem
-            // 
-            this.connectionsGridWorkToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearConnentionsToolStripMenuItem,
-            this.updateDataGridViewToolStripMenuItem});
-            this.connectionsGridWorkToolStripMenuItem.Name = "connectionsGridWorkToolStripMenuItem";
-            this.connectionsGridWorkToolStripMenuItem.Size = new System.Drawing.Size(166, 20);
-            this.connectionsGridWorkToolStripMenuItem.Text = "Main.ConnectionsGridWork";
-            // 
-            // clearConnentionsToolStripMenuItem
-            // 
-            this.clearConnentionsToolStripMenuItem.Name = "clearConnentionsToolStripMenuItem";
-            this.clearConnentionsToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.clearConnentionsToolStripMenuItem.Text = "Main.ClearConnentions";
             // 
             // updateDataGridViewToolStripMenuItem
             // 
             this.updateDataGridViewToolStripMenuItem.Name = "updateDataGridViewToolStripMenuItem";
             this.updateDataGridViewToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.updateDataGridViewToolStripMenuItem.Text = "Main.UpdateDataGridView";
+            this.updateDataGridViewToolStripMenuItem.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
             this.settingsToolStripMenuItem.Text = "Main.Settings";
-            // 
-            // gbConnectionsGridWork
-            // 
-            this.gbConnectionsGridWork.Controls.Add(this.btnClearConnentions);
-            this.gbConnectionsGridWork.Controls.Add(this.btnUpdateDataGridView);
-            this.gbConnectionsGridWork.Controls.Add(this.cbAutoUpdateDataGridView);
-            this.gbConnectionsGridWork.Location = new System.Drawing.Point(12, 222);
-            this.gbConnectionsGridWork.Name = "gbConnectionsGridWork";
-            this.gbConnectionsGridWork.Size = new System.Drawing.Size(202, 100);
-            this.gbConnectionsGridWork.TabIndex = 16;
-            this.gbConnectionsGridWork.TabStop = false;
-            this.gbConnectionsGridWork.Text = "Main.ConnectionsGridWork";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // gbConnections
             // 
-            this.gbConnections.Controls.Add(this.dgvConnections);
             this.gbConnections.Controls.Add(this.lblAllConnections);
+            this.gbConnections.Controls.Add(this.dgvConnections);
             this.gbConnections.Location = new System.Drawing.Point(220, 32);
             this.gbConnections.Name = "gbConnections";
             this.gbConnections.Size = new System.Drawing.Size(638, 290);
@@ -396,18 +287,49 @@
             this.gbConnections.TabStop = false;
             this.gbConnections.Text = "Main.Connections";
             // 
+            // btnUpdateDataGridView
+            // 
+            this.btnUpdateDataGridView.Location = new System.Drawing.Point(6, 19);
+            this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
+            this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
+            this.btnUpdateDataGridView.TabIndex = 21;
+            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
+            this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.btnUpdateDataGridView.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
+            // 
+            // cbAutoUpdateDataGridView
+            // 
+            this.cbAutoUpdateDataGridView.AutoSize = true;
+            this.cbAutoUpdateDataGridView.Location = new System.Drawing.Point(6, 48);
+            this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
+            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(174, 17);
+            this.cbAutoUpdateDataGridView.TabIndex = 20;
+            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
+            this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.cbAutoUpdateDataGridView.CheckedChanged += new System.EventHandler(this.CbAutoUpdateDataGridView_CheckedChanged);
+            // 
+            // lblAllConnections
+            // 
+            this.lblAllConnections.Location = new System.Drawing.Point(497, 0);
+            this.lblAllConnections.Name = "lblAllConnections";
+            this.lblAllConnections.Size = new System.Drawing.Size(135, 13);
+            this.lblAllConnections.TabIndex = 20;
+            this.lblAllConnections.Text = "Main.AllConnections";
+            this.lblAllConnections.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 479);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(870, 347);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.gbConnectionsWork);
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.gbControl);
             this.Controls.Add(this.msMenu);
-            this.Controls.Add(this.gbConnectionsGridWork);
             this.Controls.Add(this.gbConnections);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -420,8 +342,6 @@
             this.gbControl.ResumeLayout(false);
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
-            this.gbConnectionsGridWork.ResumeLayout(false);
-            this.gbConnectionsGridWork.PerformLayout();
             this.gbConnections.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -431,10 +351,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnStartListener;
-        private System.Windows.Forms.Button btnClearConnentions;
-        private System.Windows.Forms.Button btnUpdateDataGridView;
-        private System.Windows.Forms.CheckBox cbAutoUpdateDataGridView;
-        private System.Windows.Forms.Label lblAllConnections;
         private System.Windows.Forms.DataGridViewTextBoxColumn Disconnected;
         private System.Windows.Forms.DataGridViewTextBoxColumn Send;
         private System.Windows.Forms.DataGridViewTextBoxColumn Received;
@@ -443,9 +359,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.GroupBox gbConnectionsWork;
-        private System.Windows.Forms.CheckBox cbAutoSaveConnections;
-        private System.Windows.Forms.Button btnSaveConnections;
-        private System.Windows.Forms.Button btnLoadConnections;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridView dgvConnections;
         private System.Windows.Forms.Button btnStopListener;
@@ -456,13 +369,11 @@
         private System.Windows.Forms.ToolStripMenuItem startListenerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopListenerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionsWorkToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadConnectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveConnectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectionsGridWorkToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearConnentionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateDataGridViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gbConnectionsGridWork;
         private System.Windows.Forms.GroupBox gbConnections;
+        private System.Windows.Forms.Button btnUpdateDataGridView;
+        private System.Windows.Forms.CheckBox cbAutoUpdateDataGridView;
+        private System.Windows.Forms.Label lblAllConnections;
     }
 }

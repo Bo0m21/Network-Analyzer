@@ -538,6 +538,24 @@ namespace Network_Analyzer_WinForms.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Синхронизация соединений.
+        /// </summary>
+        internal static string ConnectionService_Synchronization {
+            get {
+                return ResourceManager.GetString("ConnectionService.Synchronization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения синхронезированы.
+        /// </summary>
+        internal static string ConnectionService_Synchronized {
+            get {
+                return ResourceManager.GetString("ConnectionService.Synchronized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Автоматический скролл.
         /// </summary>
         internal static string Editor_AutoScroll {

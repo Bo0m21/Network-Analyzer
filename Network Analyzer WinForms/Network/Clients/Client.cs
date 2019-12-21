@@ -1,7 +1,6 @@
 using System;
 using System.Net.Sockets;
 using Network_Analyzer_WinForms.Extensions;
-using Network_Analyzer_WinForms.Globals;
 using Network_Analyzer_WinForms.Models.Connection;
 
 namespace Network_Analyzer_WinForms.Network.Clients
@@ -138,7 +137,7 @@ namespace Network_Analyzer_WinForms.Network.Clients
             {
                 lock (_syncLock)
                 {
-                    Id = Connections.GetNewConnectionId();
+                    Id = Connections.GetConnectionId();
 
                     ConnectionModel connection = new ConnectionModel
                     {
@@ -178,7 +177,7 @@ namespace Network_Analyzer_WinForms.Network.Clients
 
                 lock (_syncLock)
                 {
-                    long packetId = Connections.GetNewPacketId(Id);
+                    long packetId = Connections.GetConnectionPacketId(Id);
 
                     ConnectionPacketModel packet = new ConnectionPacketModel
                     {
@@ -241,7 +240,7 @@ namespace Network_Analyzer_WinForms.Network.Clients
 
                 lock (_syncLock)
                 {
-                    long packetId = Connections.GetNewPacketId(Id);
+                    long packetId = Connections.GetConnectionPacketId(Id);
 
                     ConnectionPacketModel packet = new ConnectionPacketModel
                     {

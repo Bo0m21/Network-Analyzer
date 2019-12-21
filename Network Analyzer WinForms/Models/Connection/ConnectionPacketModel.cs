@@ -11,6 +11,11 @@
         public long Id { get; set; }
 
         /// <summary>
+        ///     Database identity connection
+        /// </summary>
+        public long DatabaseId { get; set; }
+
+        /// <summary>
         ///     Data has array bytes
         /// </summary>
         public byte[] Data { get; set; }
