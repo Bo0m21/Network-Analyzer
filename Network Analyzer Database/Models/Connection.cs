@@ -34,9 +34,9 @@ namespace Network_Analyzer_Database.Models
         public DateTime? Created { get; set; }
 
         /// <summary>
-        ///     Date that connection is disconnected
+        ///     Mark that connection is disconnected
         /// </summary>
-        public DateTime? Disconnected { get; set; }
+        public bool IsDisconnected { get; set; }
 
         /// <summary>
         ///     Mark that connection is deleted

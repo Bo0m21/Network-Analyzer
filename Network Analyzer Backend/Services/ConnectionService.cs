@@ -77,10 +77,49 @@ namespace Network_Analyzer_Backend.Services
             connection.SourceAddress = connectionParam.SourceAddress;
             connection.DestinationAddress = connectionParam.DestinationAddress;
             connection.Created = connectionParam.Created;
-            connection.Disconnected = connectionParam.Disconnected;
+            connection.IsDisconnected = connectionParam.IsDisconnected;
             connection.IsDeleted = connectionParam.IsDeleted;
 
             _databaseContext.Connections.Update(connection);
+            _databaseContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Close connection
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="id"></param>
+        public void CloseConnection(long userId, long id)
+        {
+            Connection connection = _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == id);
+
+            if (connection == null)
+            {
+                throw new BadRequestException("Connection not found");
+            }
+
+            // Update disconnected properties
+            connection.IsDisconnected = true;
+
+            _databaseContext.Connections.Update(connection);
+            _databaseContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Close connections
+        /// </summary>
+        /// <param name="userId"></param>
+        public void CloseConnections(long userId)
+        {
+            List<Connection> connections = _databaseContext.Connections.Where(c => c.UserId == userId).ToList();
+
+            foreach (Connection connection in connections)
+            {
+                // Update disconnected properties
+                connection.IsDisconnected = true;
+                _databaseContext.Connections.Update(connection);
+            }
+
             _databaseContext.SaveChanges();
         }
 

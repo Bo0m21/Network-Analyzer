@@ -9,6 +9,8 @@ namespace Network_Analyzer_Backend.Interfaces
         IEnumerable<Connection> GetConnections(long userId);
         Connection Create(Connection connection);
         void Update(Connection connectionParam);
+        void CloseConnection(long userId, long id);
+        void CloseConnections(long userId);
         void Delete(long id);
     }
 }

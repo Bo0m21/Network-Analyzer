@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using Network_Analyzer_Backend.Extensions;
 using Network_Analyzer_Backend.Interfaces;
 using Network_Analyzer_Backend.Models.Connections;
 using Network_Analyzer_Backend.Models.Exceptions;
+using Network_Analyzer_Database.Enums;
 using Network_Analyzer_Database.Models;
 
 namespace Network_Analyzer_Backend.Controllers
@@ -21,12 +23,14 @@ namespace Network_Analyzer_Backend.Controllers
         private readonly ILogger<ConnectionsController> _logger;
         private readonly IMapper _mapper;
         private readonly IConnectionService _connectionService;
+        private readonly IConnectionPacketService _connectionPacketService;
 
-        public ConnectionsController(ILogger<ConnectionsController> logger, IMapper mapper, IConnectionService connectionService)
+        public ConnectionsController(ILogger<ConnectionsController> logger, IMapper mapper, IConnectionService connectionService, IConnectionPacketService connectionPacketService)
         {
             _logger = logger;
             _mapper = mapper;
             _connectionService = connectionService;
+            _connectionPacketService = connectionPacketService;
         }
 
         /// <summary>
@@ -48,6 +52,12 @@ namespace Network_Analyzer_Backend.Controllers
 
                 Connection connection = _connectionService.GetConnection(userId, id);
                 ConnectionViewModel connectionViewModel = _mapper.Map<ConnectionViewModel>(connection);
+
+                IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(userId, connectionViewModel.Id);
+
+                connectionViewModel.Send = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ClientToServer).Sum(cp => cp.Data.Length);
+                connectionViewModel.Received = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
+
                 return connectionViewModel;
             }
             catch (Exception ex)
@@ -75,6 +85,15 @@ namespace Network_Analyzer_Backend.Controllers
 
                 IEnumerable<Connection> connections = _connectionService.GetConnections(userId);
                 List<ConnectionViewModel> connectionsViewModel = _mapper.Map<List<ConnectionViewModel>>(connections);
+
+                for (int i = 0; i < connectionsViewModel.Count; i++)
+                {
+                    IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(userId, connectionsViewModel[i].Id);
+
+                    connectionsViewModel[i].Send = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ClientToServer).Sum(cp => cp.Data.Length);
+                    connectionsViewModel[i].Received = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
+                }
+
                 return connectionsViewModel;
             }
             catch (Exception ex)
@@ -134,10 +153,35 @@ namespace Network_Analyzer_Backend.Controllers
                     throw new BadRequestException("User not found");
                 }
 
-                Connection connection = _connectionService.GetConnection(userId, id);
-                connection.Disconnected = DateTime.Now;
+                _connectionService.CloseConnection(userId, id);
 
-                _connectionService.Update(connection);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Close all connections
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("CloseAllConnection")]
+        public ActionResult CloseAllConnection()
+        {
+            try
+            {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                _connectionService.CloseConnections(userId);
+
                 return Ok();
             }
             catch (Exception ex)
