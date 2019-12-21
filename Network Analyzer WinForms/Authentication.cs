@@ -16,11 +16,29 @@ namespace Network_Analyzer_WinForms
             InitializeComponent();
             Localizer.LocalizeForm(this);
 
-            // TODO For tested
-            tbLogin.Text = "string";
-            tbPassword.Text = "string";
-
             _backendServce = BackendServce.GetService();
+        }
+
+        // Method for test
+        private async void Authentication_Load(object sender, EventArgs e)
+        {
+            UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel()
+            {
+                Username = "string",
+                Password = "string"
+            });
+
+            _backendServce.SetToken(userAuthResponce.Token);
+
+            // Hide this form
+            Hide();
+
+            // Starting main form
+            Main mainForm = new Main();
+            mainForm.ShowDialog();
+
+            // Show this form
+            Show();
         }
 
         private async void btnAuth_Click(object sender, EventArgs e)
@@ -41,6 +59,10 @@ namespace Network_Analyzer_WinForms
                 // Starting main form
                 Main mainForm = new Main();
                 mainForm.ShowDialog();
+
+
+                // Show this form
+                Show();
             }
             catch (Exception ex)
             {
