@@ -1,9 +1,9 @@
-﻿using Network_Analyzer_WinForms.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
+using Network_Analyzer_WinForms.Models;
 
 namespace Network_Analyzer_WinForms.Utilities
 {
@@ -27,9 +27,9 @@ namespace Network_Analyzer_WinForms.Utilities
 
             List<string> resList = assembly.GetManifestResourceNames().ToList();
 
-            if (resList.Count(x => x.Equals(fullResourseName + delimeter + languagePrefix.ToString() + ".resources")) == 1)
+            if (resList.Count(x => x.Equals(fullResourseName + delimeter + languagePrefix + ".resources")) == 1)
             {
-                fullResourseName += delimeter + languagePrefix.ToString();
+                fullResourseName += delimeter + languagePrefix;
             }
 
             _mainResourse = new ResourceManager(fullResourseName, assembly);
@@ -84,7 +84,7 @@ namespace Network_Analyzer_WinForms.Utilities
 
                 if (control is DataGridView)
                 {
-                    foreach (DataGridViewColumn dataGridViewColumn in ((DataGridView)control).Columns)
+                    foreach (DataGridViewColumn dataGridViewColumn in ((DataGridView) control).Columns)
                     {
                         dataGridViewColumn.HeaderText = LocalizeString(dataGridViewColumn.HeaderText);
                     }
@@ -92,7 +92,7 @@ namespace Network_Analyzer_WinForms.Utilities
 
                 if (control is MenuStrip)
                 {
-                    List<ToolStripMenuItem> toolStripItems = GetAllMenuItems(((MenuStrip)control).Items);
+                    List<ToolStripMenuItem> toolStripItems = GetAllMenuItems(((MenuStrip) control).Items);
 
                     foreach (ToolStripItem toolStripItem in toolStripItems)
                     {
@@ -102,11 +102,11 @@ namespace Network_Analyzer_WinForms.Utilities
 
                 if (control is ComboBox)
                 {
-                    for (int i = 0; i < ((ComboBox)control).Items.Count; i++)
+                    for (int i = 0; i < ((ComboBox) control).Items.Count; i++)
                     {
-                        if (((ComboBox)control).Items[i] is string)
+                        if (((ComboBox) control).Items[i] is string)
                         {
-                            ((ComboBox)control).Items[i] = LocalizeString((string)((ComboBox)control).Items[i]);
+                            ((ComboBox) control).Items[i] = LocalizeString((string) ((ComboBox) control).Items[i]);
                         }
                     }
                 }

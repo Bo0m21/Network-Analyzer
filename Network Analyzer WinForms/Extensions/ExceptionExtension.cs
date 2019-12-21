@@ -1,5 +1,5 @@
-﻿using Network_Analyzer_WinForms.Services;
-using System;
+﻿using System;
+using Network_Analyzer_WinForms.Services;
 
 namespace Network_Analyzer_WinForms.Extensions
 {
@@ -14,12 +14,12 @@ namespace Network_Analyzer_WinForms.Extensions
             {
                 if (exception.InnerException != null && exception.InnerException.GetType() == typeof(ApiException))
                 {
-                    return exception.InnerException.Message.ToString();
+                    return exception.InnerException.Message;
                 }
             }
             else if (exception.GetType() == typeof(ApiException))
             {
-                return exception.Message.ToString();
+                return exception.Message;
             }
 
             return "";

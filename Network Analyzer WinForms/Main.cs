@@ -1,15 +1,8 @@
-﻿using Network_Analyzer_WinForms.Services;
-using Network_Analyzer_WinForms.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Network_Analyzer_WinForms.Services;
+using Network_Analyzer_WinForms.Utilities;
 
 namespace Network_Analyzer_WinForms
 {
@@ -37,12 +30,15 @@ namespace Network_Analyzer_WinForms
             //lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
             lblInformation.Text = Localizer.LocalizeString("Main.LoadedSuccessfully");
-            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " + Assembly.GetEntryAssembly()?.GetName().Version;
+            lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " +
+                              Assembly.GetEntryAssembly()?.GetName().Version;
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"), Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"),
+                Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Information);
 
             if (dialogResult == DialogResult.OK)
             {

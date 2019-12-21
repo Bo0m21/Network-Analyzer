@@ -1,15 +1,15 @@
-﻿using Network_Analyzer_WinForms.Extensions;
-using Network_Analyzer_WinForms.Services;
-using Network_Analyzer_WinForms.Utilities;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Network_Analyzer_WinForms.Extensions;
+using Network_Analyzer_WinForms.Services;
+using Network_Analyzer_WinForms.Utilities;
 
 namespace Network_Analyzer_WinForms
 {
     public partial class Authentication : Form
     {
-        private BackendServce _backendServce;
+        private readonly BackendServce _backendServce;
 
         public Authentication()
         {
@@ -22,7 +22,7 @@ namespace Network_Analyzer_WinForms
         // Method for test
         private async void Authentication_Load(object sender, EventArgs e)
         {
-            UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel()
+            UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel
             {
                 Username = "string",
                 Password = "string"
@@ -45,7 +45,7 @@ namespace Network_Analyzer_WinForms
         {
             try
             {
-                UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel()
+                UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel
                 {
                     Username = tbLogin.Text,
                     Password = tbPassword.Text
@@ -66,7 +66,7 @@ namespace Network_Analyzer_WinForms
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
-                lblInformation.Text = ExceptionExtension.GetExceptionMessage(ex);
+                lblInformation.Text = ex.GetExceptionMessage();
             }
         }
 

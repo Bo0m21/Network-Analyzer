@@ -1,17 +1,17 @@
-﻿using Network_Analyzer_WinForms.Models;
-using Network_Analyzer_WinForms.Utilities;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Network_Analyzer_WinForms.Models;
+using Network_Analyzer_WinForms.Utilities;
 
 namespace Network_Analyzer_WinForms
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// Главная точка входа для приложения.
+        ///     Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             // TODO Сделать загрузку конфигов и языка
 
