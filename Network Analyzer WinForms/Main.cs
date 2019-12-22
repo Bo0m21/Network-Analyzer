@@ -183,16 +183,19 @@ namespace Network_Analyzer_WinForms
                 int? columnIndex = dgvConnections?.CurrentCell?.ColumnIndex;
                 int? firstDisplayedScrollingRowIndex = dgvConnections?.FirstDisplayedScrollingRowIndex;
 
+                // Add connections in grid
                 while (dgvConnections.Rows.Count < connections.Count)
                 {
                     dgvConnections.Rows.Add();
                 }
 
+                // Remove connections in grid
                 while (dgvConnections.Rows.Count > connections.Count)
                 {
                     dgvConnections.Rows.RemoveAt(0);
                 }
 
+                // Update all connections
                 for (int i = 0; i < connections.Count; i++)
                 {
                     dgvConnections.Rows[i].Cells["Number"].Value = i + 1;
@@ -204,6 +207,7 @@ namespace Network_Analyzer_WinForms
                     dgvConnections.Rows[i].Cells["Disconnected"].Value = connections[i].IsDisconnected ? Localizer.LocalizeString("Main.Connections.Yes") : Localizer.LocalizeString("Main.Connections.No");
                 }
 
+                // Install first row in scroll
                 if (firstDisplayedScrollingRowIndex.HasValue && firstDisplayedScrollingRowIndex.Value != -1)
                 {
                     if (firstDisplayedScrollingRowIndex + 1 <= dgvConnections.RowCount)
@@ -216,6 +220,7 @@ namespace Network_Analyzer_WinForms
                     }
                 }
 
+                // Install selected row on grid
                 if (rowIndex.HasValue && columnIndex.HasValue)
                 {
                     if (rowIndex.Value + 1 <= dgvConnections.RowCount && columnIndex.Value + 1 <= dgvConnections.ColumnCount)

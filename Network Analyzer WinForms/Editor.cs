@@ -6,8 +6,8 @@ namespace Network_Analyzer_WinForms
 {
     public partial class Editor : Form
     {
-        private readonly BackendServce _backendServce;
         private readonly ConnectionViewModel _connection;
+        private readonly BackendServce _backendServce;
 
         public Editor(ConnectionViewModel connection)
         {
