@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Network_Analyzer_WinForms.Extensions;
 using Network_Analyzer_WinForms.Services;
+using Network_Analyzer_WinForms.Services.Background;
 using Network_Analyzer_WinForms.Utilities;
 
 namespace Network_Analyzer_WinForms
@@ -10,6 +11,7 @@ namespace Network_Analyzer_WinForms
     public partial class Authentication : Form
     {
         private readonly BackendServce _backendServce;
+        private readonly ConnectionService _connectionService;
 
         public Authentication()
         {
@@ -17,6 +19,7 @@ namespace Network_Analyzer_WinForms
             Localizer.LocalizeForm(this);
 
             _backendServce = BackendServce.GetService();
+            _connectionService = ConnectionService.GetService();
         }
 
         // Method for test
@@ -29,6 +32,9 @@ namespace Network_Analyzer_WinForms
             });
 
             _backendServce.SetToken(userAuthResponce.Token);
+
+            // Start background connection service
+            _connectionService.StartService();
 
             // Hide this form
             Hide();
@@ -52,6 +58,9 @@ namespace Network_Analyzer_WinForms
                 });
 
                 _backendServce.SetToken(userAuthResponce.Token);
+
+                // Start background connection service
+                _connectionService.StartService();
 
                 // Hide this form
                 Hide();

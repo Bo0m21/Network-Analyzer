@@ -13,18 +13,29 @@ namespace Network_Analyzer_WinForms.Services.Background
     /// </summary>
     public class ConnectionService
     {
-        private readonly object m_TimerTreatmentConnectionsLock = new object();
+        private static ConnectionService _connectionService;
 
         private readonly BackendServce _backendServce;
-
         private readonly Timer m_TimerTreatmentConnections;
 
-        public ConnectionService()
+        private readonly object m_TimerTreatmentConnectionsLock = new object();
+
+        private ConnectionService()
         {
             m_TimerTreatmentConnections = new Timer();
             m_TimerTreatmentConnections.Tick += TimerTreatmentConnections_Tick;
 
             _backendServce = BackendServce.GetService();
+        }
+
+        public static ConnectionService GetService()
+        {
+            if (_connectionService == null)
+            {
+                _connectionService = new ConnectionService();
+            }
+
+            return _connectionService;
         }
 
         /// <summary>
@@ -126,7 +137,6 @@ namespace Network_Analyzer_WinForms.Services.Background
             {
                 Trace.TraceError(ex.Message);
                 StopService();
-                //lblInformation.Text = Localizer.LocalizeString("Main.ErrorsSavingConnections");
             }
             finally
             {

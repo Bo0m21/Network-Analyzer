@@ -8,21 +8,18 @@ using System.Threading;
 using System.Windows.Forms;
 using Network_Analyzer_WinForms.Network;
 using Network_Analyzer_WinForms.Services;
-using Network_Analyzer_WinForms.Services.Background;
 using Network_Analyzer_WinForms.Utilities;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Network_Analyzer_WinForms
 {
     public partial class Main : Form
     {
+        private readonly BackendServce _backendServce;
         private readonly object m_TimerDataGridViewUpdateLock = new object();
 
-        private readonly BackendServce _backendServce;
-        private readonly ConnectionService _connectionService;
-
         private SocksListener m_SocksListener;
-
-        private System.Windows.Forms.Timer m_TimerDataGridViewUpdate;
+        private Timer m_TimerDataGridViewUpdate;
 
         public Main()
         {
@@ -30,16 +27,12 @@ namespace Network_Analyzer_WinForms
             Localizer.LocalizeForm(this);
 
             _backendServce = BackendServce.GetService();
-            _connectionService = new ConnectionService();
-
-            // Start background connection service
-            _connectionService.StartService();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             // Create timer for update connections
-            m_TimerDataGridViewUpdate = new System.Windows.Forms.Timer();
+            m_TimerDataGridViewUpdate = new Timer();
             m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
             m_TimerDataGridViewUpdate.Interval = 1000;
 
@@ -53,8 +46,7 @@ namespace Network_Analyzer_WinForms
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"),
-                Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Information);
+                Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
             if (dialogResult == DialogResult.OK)
             {
@@ -187,20 +179,22 @@ namespace Network_Analyzer_WinForms
                 List<ConnectionViewModel> connections = _backendServce.GetConnectionsAsync().Result.ToList();
                 lblAllConnections.Text = Localizer.LocalizeString("Main.AllConnections") + " " + connections.Count;
 
-                //var inded = dgvConnections?.CurrentCell?.RowIndex;
+                int? rowIndex = dgvConnections?.CurrentCell?.RowIndex;
+                int? columnIndex = dgvConnections?.CurrentCell?.ColumnIndex;
+                int? firstDisplayedScrollingRowIndex = dgvConnections?.FirstDisplayedScrollingRowIndex;
+
+                while (dgvConnections.Rows.Count < connections.Count)
+                {
+                    dgvConnections.Rows.Add();
+                }
+
+                while (dgvConnections.Rows.Count > connections.Count)
+                {
+                    dgvConnections.Rows.RemoveAt(0);
+                }
 
                 for (int i = 0; i < connections.Count; i++)
                 {
-                    while (dgvConnections.Rows.Count < i + 1)
-                    {
-                        dgvConnections.Rows.Add();
-                    }
-
-                    while (dgvConnections.Rows.Count > i + 1)
-                    {
-                        dgvConnections.Rows.RemoveAt(0);
-                    }
-
                     dgvConnections.Rows[i].Cells["Number"].Value = i + 1;
                     dgvConnections.Rows[i].Cells["Id"].Value = connections[i].Id;
                     dgvConnections.Rows[i].Cells["ClientAddress"].Value = connections[i].SourceAddress;
@@ -210,10 +204,29 @@ namespace Network_Analyzer_WinForms
                     dgvConnections.Rows[i].Cells["Disconnected"].Value = connections[i].IsDisconnected ? Localizer.LocalizeString("Main.Connections.Yes") : Localizer.LocalizeString("Main.Connections.No");
                 }
 
-                //if (inded.HasValue)
-                //{
-                //    dgvConnections.Rows[inded.Value].Selected = true;
-                //}
+                if (firstDisplayedScrollingRowIndex.HasValue && firstDisplayedScrollingRowIndex.Value != -1)
+                {
+                    if (firstDisplayedScrollingRowIndex + 1 <= dgvConnections.RowCount)
+                    {
+                        dgvConnections.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex.Value;
+                    }
+                    else
+                    {
+                        dgvConnections.FirstDisplayedScrollingRowIndex = 0;
+                    }
+                }
+
+                if (rowIndex.HasValue && columnIndex.HasValue)
+                {
+                    if (rowIndex.Value + 1 <= dgvConnections.RowCount && columnIndex.Value + 1 <= dgvConnections.ColumnCount)
+                    {
+                        dgvConnections.CurrentCell = dgvConnections[columnIndex.Value, rowIndex.Value];
+                    }
+                    else
+                    {
+                        dgvConnections.CurrentCell = dgvConnections[0, 0];
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -246,22 +259,22 @@ namespace Network_Analyzer_WinForms
 
             if (index.HasValue)
             {
-                MessageBox.Show("For tested");
-                //ConnectionModel connection = Connections.GetConnectionAtIndex(index.Value);
+                long connectionIndex = (long)dgvConnections.Rows[index.Value].Cells["Id"].Value;
+                ConnectionViewModel connection = _backendServce.GetConnectionAsync(connectionIndex).Result;
 
-                //if (connection != null)
-                //{
-                //    using (Editor editor = new Editor(connection.Id))
-                //    {
-                //        Hide();
-                //        editor.ShowDialog();
-                //        Show();
-                //    }
-                //}
-                //else
-                //{
-                //    lblInformation.Text = Localizer.LocalizeString("Main.NoConnectionFoundForEditing");
-                //}
+                if (connection != null)
+                {
+                    using (Editor editor = new Editor(connection))
+                    {
+                        Hide();
+                        editor.ShowDialog();
+                        Show();
+                    }
+                }
+                else
+                {
+                    lblInformation.Text = Localizer.LocalizeString("Main.NoConnectionFoundForEditing");
+                }
             }
             else
             {

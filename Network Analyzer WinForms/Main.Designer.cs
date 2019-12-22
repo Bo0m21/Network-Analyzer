@@ -40,6 +40,8 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblVersion = new System.Windows.Forms.Label();
             this.gbConnectionsWork = new System.Windows.Forms.GroupBox();
+            this.cbAutoUpdateDataGridView = new System.Windows.Forms.CheckBox();
+            this.btnUpdateDataGridView = new System.Windows.Forms.Button();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvConnections = new System.Windows.Forms.DataGridView();
             this.btnStopListener = new System.Windows.Forms.Button();
@@ -53,8 +55,6 @@
             this.updateDataGridViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbConnections = new System.Windows.Forms.GroupBox();
-            this.btnUpdateDataGridView = new System.Windows.Forms.Button();
-            this.cbAutoUpdateDataGridView = new System.Windows.Forms.CheckBox();
             this.lblAllConnections = new System.Windows.Forms.Label();
             this.gbConnectionsWork.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnections)).BeginInit();
@@ -141,6 +141,27 @@
             this.gbConnectionsWork.TabStop = false;
             this.gbConnectionsWork.Text = "Main.ConnectionsWork";
             // 
+            // cbAutoUpdateDataGridView
+            // 
+            this.cbAutoUpdateDataGridView.AutoSize = true;
+            this.cbAutoUpdateDataGridView.Location = new System.Drawing.Point(6, 48);
+            this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
+            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(174, 17);
+            this.cbAutoUpdateDataGridView.TabIndex = 20;
+            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
+            this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.cbAutoUpdateDataGridView.CheckedChanged += new System.EventHandler(this.CbAutoUpdateDataGridView_CheckedChanged);
+            // 
+            // btnUpdateDataGridView
+            // 
+            this.btnUpdateDataGridView.Location = new System.Drawing.Point(6, 19);
+            this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
+            this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
+            this.btnUpdateDataGridView.TabIndex = 21;
+            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
+            this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
+            this.btnUpdateDataGridView.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
+            // 
             // Number
             // 
             this.Number.HeaderText = "№";
@@ -181,6 +202,7 @@
             this.dgvConnections.RowHeadersVisible = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvConnections.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvConnections.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvConnections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConnections.Size = new System.Drawing.Size(626, 265);
             this.dgvConnections.TabIndex = 1;
@@ -243,14 +265,14 @@
             // startListenerToolStripMenuItem
             // 
             this.startListenerToolStripMenuItem.Name = "startListenerToolStripMenuItem";
-            this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.startListenerToolStripMenuItem.Text = "Main.StartListener";
             this.startListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStartListener_Click);
             // 
             // stopListenerToolStripMenuItem
             // 
             this.stopListenerToolStripMenuItem.Name = "stopListenerToolStripMenuItem";
-            this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stopListenerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.stopListenerToolStripMenuItem.Text = "Main.StopListener";
             this.stopListenerToolStripMenuItem.Click += new System.EventHandler(this.BtnStopListener_Click);
             // 
@@ -286,27 +308,6 @@
             this.gbConnections.TabIndex = 17;
             this.gbConnections.TabStop = false;
             this.gbConnections.Text = "Main.Connections";
-            // 
-            // btnUpdateDataGridView
-            // 
-            this.btnUpdateDataGridView.Location = new System.Drawing.Point(6, 19);
-            this.btnUpdateDataGridView.Name = "btnUpdateDataGridView";
-            this.btnUpdateDataGridView.Size = new System.Drawing.Size(190, 23);
-            this.btnUpdateDataGridView.TabIndex = 21;
-            this.btnUpdateDataGridView.Text = "Main.UpdateDataGridView";
-            this.btnUpdateDataGridView.UseVisualStyleBackColor = true;
-            this.btnUpdateDataGridView.Click += new System.EventHandler(this.BtnUpdateDataGridView_Click);
-            // 
-            // cbAutoUpdateDataGridView
-            // 
-            this.cbAutoUpdateDataGridView.AutoSize = true;
-            this.cbAutoUpdateDataGridView.Location = new System.Drawing.Point(6, 48);
-            this.cbAutoUpdateDataGridView.Name = "cbAutoUpdateDataGridView";
-            this.cbAutoUpdateDataGridView.Size = new System.Drawing.Size(174, 17);
-            this.cbAutoUpdateDataGridView.TabIndex = 20;
-            this.cbAutoUpdateDataGridView.Text = "Main.AutoUpdateDataGridView";
-            this.cbAutoUpdateDataGridView.UseVisualStyleBackColor = true;
-            this.cbAutoUpdateDataGridView.CheckedChanged += new System.EventHandler(this.CbAutoUpdateDataGridView_CheckedChanged);
             // 
             // lblAllConnections
             // 
