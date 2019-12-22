@@ -81,7 +81,7 @@ namespace Network_Analyzer_Backend.Controllers
                 }
 
                 IEnumerable<ConnectionPacket> connectionPackets =
-                    _connectionPacketService.GetConnectionPackets(connectionId, userId);
+                    _connectionPacketService.GetConnectionPackets(userId, connectionId);
                 List<ConnectionPacketViewModel> connectionPacketsViewModel =
                     _mapper.Map<List<ConnectionPacketViewModel>>(connectionPackets);
                 return connectionPacketsViewModel;
