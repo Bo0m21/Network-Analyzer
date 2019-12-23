@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network Analyzer Database",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network Analyzer WinForms", "Network Analyzer WinForms\Network Analyzer WinForms.csproj", "{1F0A6248-ED7E-4270-A437-D3B732C463F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network Analyzer HexBox", "Network Analyzer HexBox\Network Analyzer HexBox.csproj", "{06214A2B-B73B-452A-94CF-4F1A23905643}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network Analyzer HexBox", "Network Analyzer HexBox\Network Analyzer HexBox.csproj", "{280D700F-D23D-4C25-9CB4-8971CE93F979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{1F0A6248-ED7E-4270-A437-D3B732C463F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F0A6248-ED7E-4270-A437-D3B732C463F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F0A6248-ED7E-4270-A437-D3B732C463F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06214A2B-B73B-452A-94CF-4F1A23905643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06214A2B-B73B-452A-94CF-4F1A23905643}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06214A2B-B73B-452A-94CF-4F1A23905643}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06214A2B-B73B-452A-94CF-4F1A23905643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280D700F-D23D-4C25-9CB4-8971CE93F979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280D700F-D23D-4C25-9CB4-8971CE93F979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280D700F-D23D-4C25-9CB4-8971CE93F979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280D700F-D23D-4C25-9CB4-8971CE93F979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
