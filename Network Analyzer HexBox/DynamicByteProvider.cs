@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Byte provider for a small amount of data.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     internal static class Util
     {

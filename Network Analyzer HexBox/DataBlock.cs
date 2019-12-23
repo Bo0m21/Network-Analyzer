@@ -1,4 +1,4 @@
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     internal abstract class DataBlock
     {

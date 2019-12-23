@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Implements a fully editable byte provider for file data of any size.

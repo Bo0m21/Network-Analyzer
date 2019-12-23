@@ -1,4 +1,4 @@
-﻿namespace HexBoxForm
+﻿namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Specifies the case of hex characters in the HexBox control

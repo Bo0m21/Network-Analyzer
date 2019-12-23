@@ -1,6 +1,6 @@
 using System;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     internal sealed class MemoryDataBlock : DataBlock
     {

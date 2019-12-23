@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     internal static class NativeMethods
     {

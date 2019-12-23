@@ -1,4 +1,4 @@
-﻿namespace HexBoxForm
+﻿namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Represents a position in the HexBox control

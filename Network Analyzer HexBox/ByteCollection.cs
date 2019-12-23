@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Represents a collection of bytes.

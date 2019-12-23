@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
 	/// <summary>
 	/// Represents a hex box control.

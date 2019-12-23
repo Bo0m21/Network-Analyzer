@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     The interface for objects that can translate between characters and bytes.

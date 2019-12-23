@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Byte provider for (big) files.

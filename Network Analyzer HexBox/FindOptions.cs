@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     /// <summary>
     ///     Defines the type of the Find operation.

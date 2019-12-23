@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace HexBoxForm
+namespace Network_Analyzer_HexBox
 {
     internal class DataMap : ICollection, IEnumerable
     {
