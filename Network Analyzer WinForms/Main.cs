@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Network_Analyzer_WinForms.Network;
 using Network_Analyzer_WinForms.Services;
+using Network_Analyzer_WinForms.Services.Background;
 using Network_Analyzer_WinForms.Utilities;
 using Timer = System.Windows.Forms.Timer;
 
@@ -15,11 +16,13 @@ namespace Network_Analyzer_WinForms
 {
     public partial class Main : Form
     {
+        private object _timerDataGridViewUpdateLock = new object();
+        private Timer _timerDataGridViewUpdate;
+
         private readonly BackendServce _backendServce;
-        private readonly object m_TimerDataGridViewUpdateLock = new object();
+        private readonly SynchronizationService _synchronizationService;
 
         private SocksListener m_SocksListener;
-        private Timer m_TimerDataGridViewUpdate;
 
         public Main()
         {
@@ -27,14 +30,18 @@ namespace Network_Analyzer_WinForms
             Localizer.LocalizeForm(this);
 
             _backendServce = BackendServce.GetService();
+            _synchronizationService = SynchronizationService.GetService();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             // Create timer for update connections
-            m_TimerDataGridViewUpdate = new Timer();
-            m_TimerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
-            m_TimerDataGridViewUpdate.Interval = 1000;
+            _timerDataGridViewUpdate = new Timer();
+            _timerDataGridViewUpdate.Interval = 1000;
+            _timerDataGridViewUpdate.Tick += TimerDataGridViewUpdate_Tick;
+
+            // Start synchronization service
+            _synchronizationService.StartSynchronization();
 
             // Update all connections
             DataGridViewUpdate();
@@ -51,7 +58,7 @@ namespace Network_Analyzer_WinForms
             if (dialogResult == DialogResult.OK)
             {
                 m_SocksListener?.Dispose();
-                m_TimerDataGridViewUpdate.Stop();
+                _timerDataGridViewUpdate.Stop();
             }
             else
             {
@@ -144,7 +151,7 @@ namespace Network_Analyzer_WinForms
         {
             if (cbAutoUpdateDataGridView.Checked)
             {
-                m_TimerDataGridViewUpdate.Start();
+                _timerDataGridViewUpdate.Start();
 
                 btnUpdateDataGridView.Enabled = false;
                 updateDataGridViewToolStripMenuItem.Enabled = false;
@@ -153,7 +160,7 @@ namespace Network_Analyzer_WinForms
             }
             else
             {
-                m_TimerDataGridViewUpdate.Stop();
+                _timerDataGridViewUpdate.Stop();
 
                 btnUpdateDataGridView.Enabled = true;
                 updateDataGridViewToolStripMenuItem.Enabled = true;
@@ -169,7 +176,7 @@ namespace Network_Analyzer_WinForms
 
         private void DataGridViewUpdate()
         {
-            if (!Monitor.TryEnter(m_TimerDataGridViewUpdateLock))
+            if (!Monitor.TryEnter(_timerDataGridViewUpdateLock))
             {
                 return;
             }
@@ -240,7 +247,7 @@ namespace Network_Analyzer_WinForms
             }
             finally
             {
-                Monitor.Exit(m_TimerDataGridViewUpdateLock);
+                Monitor.Exit(_timerDataGridViewUpdateLock);
             }
         }
 

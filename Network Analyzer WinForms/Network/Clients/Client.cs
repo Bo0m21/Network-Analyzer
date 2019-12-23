@@ -177,7 +177,7 @@ namespace Network_Analyzer_WinForms.Network.Clients
 
                 lock (_syncLock)
                 {
-                    long packetId = Connections.GetConnectionPacketId(Id);
+                    long packetId = Connections.GetConnectionPacketId();
 
                     ConnectionPacketModel packet = new ConnectionPacketModel
                     {
@@ -240,7 +240,7 @@ namespace Network_Analyzer_WinForms.Network.Clients
 
                 lock (_syncLock)
                 {
-                    long packetId = Connections.GetConnectionPacketId(Id);
+                    long packetId = Connections.GetConnectionPacketId();
 
                     ConnectionPacketModel packet = new ConnectionPacketModel
                     {

@@ -127,7 +127,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Authentication";
             this.Text = "Authentication.Text";
-            this.Load += new System.EventHandler(this.Authentication_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

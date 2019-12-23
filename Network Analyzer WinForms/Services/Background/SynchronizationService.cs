@@ -9,59 +9,75 @@ using Timer = System.Windows.Forms.Timer;
 namespace Network_Analyzer_WinForms.Services.Background
 {
     /// <summary>
-    ///     Background connection service for updating connections in database
+    ///     Background synchronization service for updating connections in database
     /// </summary>
-    public class ConnectionService
+    public class SynchronizationService
     {
-        private static ConnectionService _connectionService;
+        private static SynchronizationService _synchronizationService;
+
+        private readonly object _timerSynchronizationLock = new object();
+        private readonly Timer _timerSynchronization;
 
         private readonly BackendServce _backendServce;
-        private readonly Timer m_TimerTreatmentConnections;
 
-        private readonly object m_TimerTreatmentConnectionsLock = new object();
+        private bool _synchronizationStatus { get; set; }
 
-        private ConnectionService()
+        private SynchronizationService()
         {
-            m_TimerTreatmentConnections = new Timer();
-            m_TimerTreatmentConnections.Tick += TimerTreatmentConnections_Tick;
+            _timerSynchronization = new Timer();
+            _timerSynchronization.Interval = 1000;
+            _timerSynchronization.Tick += TimerSynchronizationTick;
 
             _backendServce = BackendServce.GetService();
         }
 
-        public static ConnectionService GetService()
+        /// <summary>
+        ///     Get single service instance
+        /// </summary>
+        /// <returns></returns>
+        public static SynchronizationService GetService()
         {
-            if (_connectionService == null)
+            if (_synchronizationService == null)
             {
-                _connectionService = new ConnectionService();
+                _synchronizationService = new SynchronizationService();
             }
 
-            return _connectionService;
+            return _synchronizationService;
         }
 
         /// <summary>
-        ///     Start treatment connections
+        ///     Start synchronization connections
         /// </summary>
-        public void StartService()
+        public void StartSynchronization()
         {
-            m_TimerTreatmentConnections.Start();
+            _timerSynchronization.Start();
         }
 
         /// <summary>
-        ///     Stop treatment service
+        ///     Stop synchronization service
         /// </summary>
-        public void StopService()
+        public void StopSynchronization()
         {
-            m_TimerTreatmentConnections.Stop();
+            _timerSynchronization.Stop();
         }
 
         /// <summary>
-        ///     Treatment connections
+        ///     Get synchronization status
+        /// </summary>
+        /// <returns></returns>
+        public bool GetSynchronizationStatus()
+        {
+            return _synchronizationStatus;
+        }
+
+        /// <summary>
+        ///     Synchronization connections
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TimerTreatmentConnections_Tick(object sender, EventArgs e)
+        private void TimerSynchronizationTick(object sender, EventArgs e)
         {
-            if (!Monitor.TryEnter(m_TimerTreatmentConnectionsLock))
+            if (!Monitor.TryEnter(_timerSynchronizationLock))
             {
                 return;
             }
@@ -69,12 +85,15 @@ namespace Network_Analyzer_WinForms.Services.Background
             try
             {
                 List<ConnectionModel> connections = Connections.GetConnections();
+                bool synchronizationStatus = true;
 
-                // Create all connections in database
+                // Synchronize all connections in database
                 for (int i = 0; i < connections.Count; i++)
                 {
                     if (connections[i].DatabaseId == 0)
                     {
+                        synchronizationStatus = false;
+
                         ConnectionViewModel connection = _backendServce.CreateConnectionAsync(new ConnectionEditReqModel
                         {
                             Created = DateTime.Now,
@@ -86,11 +105,12 @@ namespace Network_Analyzer_WinForms.Services.Background
                     }
                 }
 
-                // Create all connection packets in database
+                // Synchronize all connection packets in database
                 for (int i = 0; i < connections.Count; i++)
                 {
                     if (connections[i].DatabaseId == 0)
                     {
+                        synchronizationStatus = false;
                         continue;
                     }
 
@@ -100,6 +120,8 @@ namespace Network_Analyzer_WinForms.Services.Background
                     {
                         if (connections[i].ConnectionPackets[j].DatabaseId == 0)
                         {
+                            synchronizationStatus = false;
+
                             ConnectionPacketViewModel connectionPacket = _backendServce.CreateConnectionPacketAsync(
                                 connections[i].DatabaseId, new ConnectionPacketEditReqModel
                                 {
@@ -118,29 +140,33 @@ namespace Network_Analyzer_WinForms.Services.Background
                     }
                 }
 
-                // Disconnect connection packets in database
+                // Synchronize disconnect connection packets in database
                 for (int i = 0; i < connections.Count; i++)
                 {
                     if (connections[i].DatabaseId == 0)
                     {
+                        synchronizationStatus = false;
                         continue;
                     }
 
                     if (connections[i].IsDisconnected && connections[i].IsDisconnected == false)
                     {
+                        synchronizationStatus = false;
+
                         _backendServce.CloseConnectionAsync(connections[i].DatabaseId);
                         connections[i].IsDatabaseDisconnected = true;
                     }
                 }
+
+                _synchronizationStatus = synchronizationStatus;
             }
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
-                StopService();
             }
             finally
             {
-                Monitor.Exit(m_TimerTreatmentConnectionsLock);
+                Monitor.Exit(_timerSynchronizationLock);
             }
         }
     }

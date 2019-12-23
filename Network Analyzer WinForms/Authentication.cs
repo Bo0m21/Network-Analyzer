@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Network_Analyzer_WinForms.Extensions;
 using Network_Analyzer_WinForms.Services;
-using Network_Analyzer_WinForms.Services.Background;
 using Network_Analyzer_WinForms.Utilities;
 
 namespace Network_Analyzer_WinForms
@@ -11,40 +10,17 @@ namespace Network_Analyzer_WinForms
     public partial class Authentication : Form
     {
         private readonly BackendServce _backendServce;
-        private readonly ConnectionService _connectionService;
 
         public Authentication()
         {
             InitializeComponent();
             Localizer.LocalizeForm(this);
 
+            // For tested
+            tbLogin.Text = "string";
+            tbPassword.Text = "string";
+
             _backendServce = BackendServce.GetService();
-            _connectionService = ConnectionService.GetService();
-        }
-
-        // Method for test
-        private async void Authentication_Load(object sender, EventArgs e)
-        {
-            UserAuthResModel userAuthResponce = await _backendServce.AuthenticateAsync(new UserAuthReqModel
-            {
-                Username = "string",
-                Password = "string"
-            });
-
-            _backendServce.SetToken(userAuthResponce.Token);
-
-            // Start background connection service
-            _connectionService.StartService();
-
-            // Hide this form
-            Hide();
-
-            // Starting main form
-            Main mainForm = new Main();
-            mainForm.ShowDialog();
-
-            // Cloae application
-            Application.Exit();
         }
 
         private async void btnAuth_Click(object sender, EventArgs e)
@@ -58,9 +34,6 @@ namespace Network_Analyzer_WinForms
                 });
 
                 _backendServce.SetToken(userAuthResponce.Token);
-
-                // Start background connection service
-                _connectionService.StartService();
 
                 // Hide this form
                 Hide();

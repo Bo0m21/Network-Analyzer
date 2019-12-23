@@ -15,6 +15,16 @@ namespace Network_Analyzer_WinForms.Network
         private static readonly List<ConnectionModel> _connections = new List<ConnectionModel>();
 
         /// <summary>
+        ///     Connection id
+        /// </summary>
+        private static long _connectionId { get; set; }
+
+        /// <summary>
+        ///     Connection packet id
+        /// </summary>
+        private static long _connectionPacketId { get; set; }
+
+        /// <summary>
         ///     Get all connections
         /// </summary>
         /// <returns>List connections</returns>
@@ -29,18 +39,18 @@ namespace Network_Analyzer_WinForms.Network
         /// <returns>New connection id</returns>
         public static long GetConnectionId()
         {
-            return _connections.Count + 1;
+            _connectionId = _connectionId + 1;
+            return _connectionId;
         }
 
         /// <summary>
         ///     Get new packet id for connection
         /// </summary>
-        /// <param name="connectionId">Connection id</param>
         /// <returns>New packet id for connection</returns>
-        public static long GetConnectionPacketId(long connectionId)
+        public static long GetConnectionPacketId()
         {
-            ConnectionModel connection = _connections.FirstOrDefault(c => c.Id == connectionId);
-            return connection.ConnectionPackets.Count + 1;
+            _connectionPacketId = _connectionPacketId + 1;
+            return _connectionPacketId;
         }
 
         /// <summary>
@@ -54,7 +64,6 @@ namespace Network_Analyzer_WinForms.Network
             if (connection == null)
             {
                 _connections.Add(newConnection);
-                // TODO: Сделать ивент по приходу новых соединений
             }
         }
 
@@ -79,9 +88,6 @@ namespace Network_Analyzer_WinForms.Network
                 {
                     connection.Received += newConnectionPacket.Data.Length;
                 }
-
-                // TODO: Сделать ивент по приходу новых пакетов
-                // Этот ивент будет служить перехватчиком для редактирования пакетов
             }
         }
 
@@ -96,9 +102,6 @@ namespace Network_Analyzer_WinForms.Network
             if (connection != null)
             {
                 connection.IsDisconnected = true;
-                // TODO: Сделать ивент по приходу разрыва соединения
-                // Если мы ждем пакет от сервера и нам пришел дистконнект то выходим из ожидания
-                // Служит так же для перехвата и редактирования пакетов
             }
         }
     }
