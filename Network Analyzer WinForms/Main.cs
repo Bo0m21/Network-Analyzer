@@ -6,6 +6,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Network_Analyzer;
 using Network_Analyzer_WinForms.Network;
 using Network_Analyzer_WinForms.Services;
 using Network_Analyzer_WinForms.Services.Background;
@@ -276,12 +277,12 @@ namespace Network_Analyzer_WinForms
 
                 if (connection != null)
                 {
-                    //using (Editor editor = new Editor(connection))
-                    //{
-                    //    Hide();
-                    //    editor.ShowDialog();
-                    //    Show();
-                    //}
+                    using (Editor editor = new Editor(connection))
+                    {
+                        Hide();
+                        editor.ShowDialog();
+                        Show();
+                    }
                 }
                 else
                 {

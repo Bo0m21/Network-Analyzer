@@ -20,8 +20,10 @@ using Network_Analyzer_WinForms.Models.SelectedEncoding;
 using Network_Analyzer_WinForms.Models.SelectedPacket;
 using Network_Analyzer_WinForms.Models.SelectedTabControl;
 using Network_Analyzer_WinForms.Network;
+using Network_Analyzer_WinForms.Services;
 using Network_Analyzer_WinForms.Utilities;
 using Newtonsoft.Json;
+using ConnectionPacketType = Network_Analyzer_WinForms.Models.Connection.ConnectionPacketType;
 
 namespace Network_Analyzer
 {
@@ -50,11 +52,12 @@ namespace Network_Analyzer
 
         private SelectedEncodingType m_SelectedEncodingType;
 
-        public Editor(long connectionId)
+        public Editor(ConnectionViewModel connection)
         {
             InitializeComponent();
             Localizer.LocalizeForm(this);
 
+            m_ConnectionModel = new ConnectionModel();
             //m_ConnectionModel = Connections.GetConnection(connectionId);
         }
 
@@ -662,14 +665,14 @@ namespace Network_Analyzer
         {
             var type = ((Button)sender).Name.Replace("btnField", "");
 
-            //using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
-            //{
-            //    configurationField.SetPosition(hbHexEditor.SelectionStart);
-            //    configurationField.SetSequenceType(cbSequenceType.Text);
-            //    configurationField.SetType(type);
+            using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
+            {
+                configurationField.SetPosition(hbHexEditor.SelectionStart);
+                configurationField.SetSequenceType(cbSequenceType.Text);
+                configurationField.SetType(type);
 
-            //    configurationField.ShowDialog();
-            //}
+                configurationField.ShowDialog();
+            }
 
             PacketsGridViewUpdate();
             ConfigurationPacketsGridViewUpdate();
@@ -791,10 +794,10 @@ namespace Network_Analyzer
                 configurationClassModels = m_ConfigurationModel.ConfigurationStructures;
             }
 
-            //using (ConfigurationClass configurationClass = new ConfigurationClass(m_ConfigurationModel, m_CurrentConnectionPacketModel, configurationClassModels, m_SelectedTabControlGeneralType))
-            //{
-            //    configurationClass.ShowDialog();
-            //}
+            using (ConfigurationClass configurationClass = new ConfigurationClass(m_ConfigurationModel, m_CurrentConnectionPacketModel, configurationClassModels, m_SelectedTabControlGeneralType))
+            {
+                configurationClass.ShowDialog();
+            }
 
             PacketsGridViewUpdate();
             ConfigurationPacketsGridViewUpdate();
@@ -839,13 +842,13 @@ namespace Network_Analyzer
 
         private void BtnConfigurationFieldAdd_Click(object sender, EventArgs e)
         {
-            //using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
-            //{
-            //    configurationField.SetPosition(hbHexEditor.SelectionStart);
-            //    configurationField.SetSequenceType(cbSequenceType.Text);
+            using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, m_SelectedEncodingType))
+            {
+                configurationField.SetPosition(hbHexEditor.SelectionStart);
+                configurationField.SetSequenceType(cbSequenceType.Text);
 
-            //    configurationField.ShowDialog();
-            //}
+                configurationField.ShowDialog();
+            }
 
             PacketsGridViewUpdate();
             ConfigurationPacketsGridViewUpdate();
@@ -873,10 +876,10 @@ namespace Network_Analyzer
             long position = (long)dgvConfigurationFields.Rows[dgvConfigurationFields.CurrentCell.RowIndex].Cells["ConfigurationFieldPosition"].Value;
             ConfigurationFieldModel configurationFieldModel = m_CurrentConfigurationClassModel.ConfigurationFields.FirstOrDefault(c => c.Position == position);
 
-            //using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, configurationFieldModel, m_SelectedEncodingType))
-            //{
-            //    configurationField.ShowDialog();
-            //}
+            using (ConfigurationField configurationField = new ConfigurationField(m_CurrentConnectionPacketModel, m_ConfigurationModel, m_CurrentConfigurationClassModel, configurationFieldModel, m_SelectedEncodingType))
+            {
+                configurationField.ShowDialog();
+            }
 
             PacketsGridViewUpdate();
             ConfigurationPacketsGridViewUpdate();

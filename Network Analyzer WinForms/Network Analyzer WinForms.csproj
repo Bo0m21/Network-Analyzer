@@ -56,6 +56,18 @@
     <Compile Include="Authentication.Designer.cs">
       <DependentUpon>Authentication.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigurationClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationClass.Designer.cs">
+      <DependentUpon>ConfigurationClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationField.Designer.cs">
+      <DependentUpon>ConfigurationField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +127,12 @@
     <Compile Include="Utilities\Localizer.cs" />
     <EmbeddedResource Include="Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationClass.resx">
+      <DependentUpon>ConfigurationClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationField.resx">
+      <DependentUpon>ConfigurationField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
