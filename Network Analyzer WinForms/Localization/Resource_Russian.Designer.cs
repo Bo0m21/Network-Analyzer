@@ -1735,6 +1735,15 @@ namespace Network_Analyzer_WinForms.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Синхронизация еще не закончена.
+        /// </summary>
+        internal static string Main_SynchronizationNotFinished {
+            get {
+                return ResourceManager.GetString("Main.SynchronizationNotFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Network Analyzer - Соединения | 2019 © Bo0m21.
         /// </summary>
         internal static string Main_Text {
@@ -1767,6 +1776,15 @@ namespace Network_Analyzer_WinForms.Localization {
         internal static string Main_WantToExitMessage {
             get {
                 return ResourceManager.GetString("Main.WantToExitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предупреждение.
+        /// </summary>
+        internal static string Main_WarningBox {
+            get {
+                return ResourceManager.GetString("Main.WarningBox", resourceCulture);
             }
         }
         

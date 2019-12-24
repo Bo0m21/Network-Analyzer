@@ -22,7 +22,7 @@ namespace Network_Analyzer_WinForms
         private readonly BackendServce _backendServce;
         private readonly SynchronizationService _synchronizationService;
 
-        private SocksListener m_SocksListener;
+        private SocksListener _socksListener;
 
         public Main()
         {
@@ -52,36 +52,41 @@ namespace Network_Analyzer_WinForms
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.WantToExitMessage"),
-                Localizer.LocalizeString("Main.InformationBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            bool synchronizationStatus = _synchronizationService.GetSynchronizationStatus();
 
-            if (dialogResult == DialogResult.OK)
+            if (!synchronizationStatus)
             {
-                m_SocksListener?.Dispose();
-                _timerDataGridViewUpdate.Stop();
+                DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.SynchronizationNotFinished") + Environment.NewLine + Localizer.LocalizeString("Main.WantToExitMessage"),
+                    Localizer.LocalizeString("Main.WarningBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
-            else
-            {
-                e.Cancel = true;
-            }
+
+            _socksListener?.Dispose();
+            _timerDataGridViewUpdate.Stop();
+            _synchronizationService.StopSynchronization();
         }
 
         private void BtnStartListener_Click(object sender, EventArgs e)
         {
             try
             {
-                if (m_SocksListener != null && !m_SocksListener.IsDisposed && m_SocksListener.Listening)
+                if (_socksListener != null && !_socksListener.IsDisposed && _socksListener.Listening)
                 {
                     lblInformation.Text = Localizer.LocalizeString("Main.ListenerAlreadyStarted");
                     return;
                 }
 
-                m_SocksListener?.Dispose();
+                _socksListener?.Dispose();
 
                 _backendServce.CloseAllConnectionAsync();
 
-                m_SocksListener = new SocksListener(IPAddress.Parse("127.0.0.1"), 35000);
-                m_SocksListener.Start();
+                _socksListener = new SocksListener(IPAddress.Parse("127.0.0.1"), 35000);
+                _socksListener.Start();
 
                 btnStartListener.Enabled = false;
                 btnStopListener.Enabled = true;
@@ -94,7 +99,7 @@ namespace Network_Analyzer_WinForms
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
-                m_SocksListener?.Dispose();
+                _socksListener?.Dispose();
 
                 _backendServce.CloseAllConnectionAsync();
 
@@ -112,7 +117,7 @@ namespace Network_Analyzer_WinForms
         {
             try
             {
-                m_SocksListener?.Dispose();
+                _socksListener?.Dispose();
 
                 _backendServce.CloseAllConnectionAsync();
 

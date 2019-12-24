@@ -780,4 +780,10 @@
   <data name="ConnectionService.Synchronized" xml:space="preserve">
     <value>Соединения синхронезированы</value>
   </data>
+  <data name="Main.SynchronizationNotFinished" xml:space="preserve">
+    <value>Синхронизация еще не закончена</value>
+  </data>
+  <data name="Main.WarningBox" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
 </root>

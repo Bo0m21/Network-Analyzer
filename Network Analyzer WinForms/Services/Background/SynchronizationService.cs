@@ -126,7 +126,7 @@ namespace Network_Analyzer_WinForms.Services.Background
                                 connections[i].DatabaseId, new ConnectionPacketEditReqModel
                                 {
                                     Data = connections[i].ConnectionPackets[j].Data,
-                                    Type = ConnectionPacketType.ClientToServer
+                                    Type = connections[i].ConnectionPackets[j].Type == Models.Connection.ConnectionPacketType.ClientToServer ? ConnectionPacketType.ClientToServer : ConnectionPacketType.ServerToClient
                                 }).Result;
 
                             connections[i].ConnectionPackets[j].DatabaseId = connectionPacket.Id;
