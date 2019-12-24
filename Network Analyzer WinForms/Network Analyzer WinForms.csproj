@@ -63,7 +63,24 @@
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ArrayExtension.cs" />
+    <Compile Include="Extensions\Configuration.cs" />
+    <Compile Include="Extensions\ConverterExtension.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\SearchExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Interfaces\IDecryptor.cs" />
+    <Compile Include="Models\Colors.cs" />
+    <Compile Include="Models\Configuration\ConfigurationClassModel.cs" />
+    <Compile Include="Models\Configuration\ConfigurationFieldModel.cs" />
+    <Compile Include="Models\Configuration\ConfigurationModel.cs" />
+    <Compile Include="Models\Decryptor\DecryptorModel.cs" />
+    <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\Search\SelectedSearchType.cs" />
+    <Compile Include="Models\SelectedEncoding\SelectedEncodingType.cs" />
+    <Compile Include="Models\SelectedPacket\SelectedPacketEncryptionType.cs" />
+    <Compile Include="Models\SelectedPacket\SelectedPacketType.cs" />
+    <Compile Include="Models\SelectedTabControl\SelectedTabControlConfigurationType.cs" />
+    <Compile Include="Models\SelectedTabControl\SelectedTabControlGeneralType.cs" />
     <Compile Include="Network\Connections.cs" />
     <Compile Include="Localization\Resource_Russian.Designer.cs">
       <DependentUpon>Resource_Russian.resx</DependentUpon>
@@ -132,6 +149,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Network Analyzer HexBox\Network Analyzer HexBox.csproj">
+      <Project>{280d700f-d23d-4c25-9cb4-8971ce93f979}</Project>
+      <Name>Network Analyzer HexBox</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

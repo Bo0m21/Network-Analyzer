@@ -276,12 +276,12 @@ namespace Network_Analyzer_WinForms
 
                 if (connection != null)
                 {
-                    using (Editor editor = new Editor(connection))
-                    {
-                        Hide();
-                        editor.ShowDialog();
-                        Show();
-                    }
+                    //using (Editor editor = new Editor(connection))
+                    //{
+                    //    Hide();
+                    //    editor.ShowDialog();
+                    //    Show();
+                    //}
                 }
                 else
                 {
