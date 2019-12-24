@@ -87,9 +87,10 @@ namespace Network_Analyzer_WinForms.Services.Background
                 List<ConnectionModel> connections = Connections.GetConnections();
                 bool synchronizationStatus = true;
 
-                // Synchronize all connections in database
+                // Synchronize all connections and connection packets in database
                 for (int i = 0; i < connections.Count; i++)
                 {
+                    // Synchronize connection in database
                     if (connections[i].DatabaseId == 0)
                     {
                         synchronizationStatus = false;
@@ -103,52 +104,26 @@ namespace Network_Analyzer_WinForms.Services.Background
 
                         connections[i].DatabaseId = connection.Id;
                     }
-                }
 
-                // Synchronize all connection packets in database
-                for (int i = 0; i < connections.Count; i++)
-                {
-                    if (connections[i].DatabaseId == 0)
-                    {
-                        synchronizationStatus = false;
-                        continue;
-                    }
-
-                    int treatmentConnecionPacketCounter = 0;
-
+                    // Synchronize connection packets in database
                     for (int j = 0; j < connections[i].ConnectionPackets.Count; j++)
                     {
                         if (connections[i].ConnectionPackets[j].DatabaseId == 0)
                         {
                             synchronizationStatus = false;
 
-                            ConnectionPacketViewModel connectionPacket = _backendServce.CreateConnectionPacketAsync(
-                                connections[i].DatabaseId, new ConnectionPacketEditReqModel
-                                {
-                                    Data = connections[i].ConnectionPackets[j].Data,
-                                    Type = connections[i].ConnectionPackets[j].Type == Models.Connection.ConnectionPacketType.ClientToServer ? ConnectionPacketType.ClientToServer : ConnectionPacketType.ServerToClient
-                                }).Result;
+                            ConnectionPacketViewModel connectionPacket = _backendServce.CreateConnectionPacketAsync(connections[i].DatabaseId, new ConnectionPacketEditReqModel
+                            {
+                                Data = connections[i].ConnectionPackets[j].Data,
+                                Type = connections[i].ConnectionPackets[j].Type == Models.Connection.ConnectionPacketType.ClientToServer ?
+                                    ConnectionPacketType.ClientToServer : ConnectionPacketType.ServerToClient
+                            }).Result;
 
                             connections[i].ConnectionPackets[j].DatabaseId = connectionPacket.Id;
-                            treatmentConnecionPacketCounter++;
-
-                            if (treatmentConnecionPacketCounter == 5)
-                            {
-                                break;
-                            }
                         }
                     }
-                }
 
-                // Synchronize disconnect connection packets in database
-                for (int i = 0; i < connections.Count; i++)
-                {
-                    if (connections[i].DatabaseId == 0)
-                    {
-                        synchronizationStatus = false;
-                        continue;
-                    }
-
+                    // Synchronize disconnect connection in database
                     if (connections[i].IsDisconnected && connections[i].IsDisconnected == false)
                     {
                         synchronizationStatus = false;
