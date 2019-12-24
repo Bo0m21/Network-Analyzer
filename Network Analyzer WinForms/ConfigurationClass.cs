@@ -7,7 +7,7 @@ using Network_Analyzer_WinForms.Models.Connection;
 using Network_Analyzer_WinForms.Models.SelectedTabControl;
 using Network_Analyzer_WinForms.Utilities;
 
-namespace Network_Analyzer
+namespace м
 {
 	public partial class ConfigurationClass : Form
 	{

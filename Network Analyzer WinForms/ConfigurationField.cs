@@ -8,7 +8,7 @@ using Network_Analyzer_WinForms.Models.Connection;
 using Network_Analyzer_WinForms.Models.SelectedEncoding;
 using Network_Analyzer_WinForms.Utilities;
 
-namespace Network_Analyzer
+namespace Network_Analyzer_WinForms
 {
     public partial class ConfigurationField : Form
 	{

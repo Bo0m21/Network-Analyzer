@@ -1,4 +1,4 @@
-﻿namespace Network_Analyzer
+﻿namespace Network_Analyzer_WinForms
 {
 	partial class ConfigurationClass
 	{

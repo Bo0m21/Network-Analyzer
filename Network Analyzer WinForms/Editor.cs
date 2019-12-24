@@ -25,7 +25,7 @@ using Network_Analyzer_WinForms.Utilities;
 using Newtonsoft.Json;
 using ConnectionPacketType = Network_Analyzer_WinForms.Models.Connection.ConnectionPacketType;
 
-namespace Network_Analyzer
+namespace Network_Analyzer_WinForms
 {
     public partial class Editor : Form
     {

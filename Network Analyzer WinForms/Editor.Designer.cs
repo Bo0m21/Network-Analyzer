@@ -1,6 +1,6 @@
 ﻿using Network_Analyzer_HexBox;
 
-namespace Network_Analyzer
+namespace Network_Analyzer_WinForms
 {
     partial class Editor
     {
