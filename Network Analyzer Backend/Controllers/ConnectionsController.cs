@@ -20,13 +20,12 @@ namespace Network_Analyzer_Backend.Controllers
     [ApiController]
     public class ConnectionsController : ControllerBase
     {
-        private readonly IConnectionPacketService _connectionPacketService;
-        private readonly IConnectionService _connectionService;
         private readonly ILogger<ConnectionsController> _logger;
         private readonly IMapper _mapper;
+        private readonly IConnectionService _connectionService;
+        private readonly IConnectionPacketService _connectionPacketService;
 
-        public ConnectionsController(ILogger<ConnectionsController> logger, IMapper mapper,
-            IConnectionService connectionService, IConnectionPacketService connectionPacketService)
+        public ConnectionsController(ILogger<ConnectionsController> logger, IMapper mapper, IConnectionService connectionService, IConnectionPacketService connectionPacketService)
         {
             _logger = logger;
             _mapper = mapper;
@@ -54,13 +53,10 @@ namespace Network_Analyzer_Backend.Controllers
                 Connection connection = _connectionService.GetConnection(userId, id);
                 ConnectionViewModel connectionViewModel = _mapper.Map<ConnectionViewModel>(connection);
 
-                IEnumerable<ConnectionPacket> connectionPackets =
-                    _connectionPacketService.GetConnectionPackets(userId, connectionViewModel.Id);
+                IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(userId, connectionViewModel.Id);
 
-                connectionViewModel.Send = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ClientToServer)
-                    .Sum(cp => cp.Data.Length);
-                connectionViewModel.Received = connectionPackets
-                    .Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
+                connectionViewModel.Send = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ClientToServer).Sum(cp => cp.Data.Length);
+                connectionViewModel.Received = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
 
                 return connectionViewModel;
             }
@@ -92,13 +88,10 @@ namespace Network_Analyzer_Backend.Controllers
 
                 for (int i = 0; i < connectionsViewModel.Count; i++)
                 {
-                    IEnumerable<ConnectionPacket> connectionPackets =
-                        _connectionPacketService.GetConnectionPackets(userId, connectionsViewModel[i].Id);
+                    IEnumerable<ConnectionPacket> connectionPackets = _connectionPacketService.GetConnectionPackets(userId, connectionsViewModel[i].Id);
 
-                    connectionsViewModel[i].Send = connectionPackets
-                        .Where(cp => cp.Type == ConnectionPacketType.ClientToServer).Sum(cp => cp.Data.Length);
-                    connectionsViewModel[i].Received = connectionPackets
-                        .Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
+                    connectionsViewModel[i].Send = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ClientToServer).Sum(cp => cp.Data.Length);
+                    connectionsViewModel[i].Received = connectionPackets.Where(cp => cp.Type == ConnectionPacketType.ServerToClient).Sum(cp => cp.Data.Length);
                 }
 
                 return connectionsViewModel;
@@ -159,6 +152,7 @@ namespace Network_Analyzer_Backend.Controllers
 
                 Connection connectionCreate = _connectionService.Create(connection);
                 ConnectionViewModel connectionCreateViewModel = _mapper.Map<ConnectionViewModel>(connectionCreate);
+
                 return connectionCreateViewModel;
             }
             catch (Exception ex)

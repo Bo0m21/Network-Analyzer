@@ -11,8 +11,8 @@ namespace Network_Analyzer_Backend.Middleware
     /// </summary>
     public class ExceptionMiddleware
     {
-        private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {

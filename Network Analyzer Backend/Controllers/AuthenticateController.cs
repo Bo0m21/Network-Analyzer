@@ -18,12 +18,11 @@ namespace Network_Analyzer_Backend.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly AppSettings _appSettings;
         private readonly ILogger<AuthenticateController> _logger;
+        private readonly AppSettings _appSettings;
         private readonly IUserService _userService;
 
-        public AuthenticateController(ILogger<AuthenticateController> logger, IOptions<AppSettings> appSettings,
-            IUserService userService)
+        public AuthenticateController(ILogger<AuthenticateController> logger, IOptions<AppSettings> appSettings, IUserService userService)
         {
             _logger = logger;
             _appSettings = appSettings.Value;
@@ -53,14 +52,13 @@ namespace Network_Analyzer_Backend.Controllers
                         new Claim(ClaimTypes.Role, user.Role)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
                 string tokenString = tokenHandler.WriteToken(token);
 
-                return Ok(new UserAuthResModel {Username = user.Username, Token = tokenString});
+                return Ok(new UserAuthResModel { Username = user.Username, Token = tokenString });
             }
             catch (Exception ex)
             {
