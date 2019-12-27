@@ -16,11 +16,11 @@ namespace Network_Analyzer_WinForms
 {
     public partial class Main : Form
     {
-        private object _timerDataGridViewUpdateLock = new object();
-        private Timer _timerDataGridViewUpdate;
-
         private readonly BackendServce _backendServce;
         private readonly SynchronizationService _synchronizationService;
+
+        private object _timerDataGridViewUpdateLock = new object();
+        private Timer _timerDataGridViewUpdate;
 
         private SocksListener _socksListener;
 
@@ -43,9 +43,6 @@ namespace Network_Analyzer_WinForms
             // Start synchronization service
             _synchronizationService.StartSynchronization();
 
-            // Update all connections
-            DataGridViewUpdate();
-
             lblInformation.Text = Localizer.LocalizeString("Main.LoadedSuccessfully");
             lblVersion.Text = Localizer.LocalizeString("Main.Version") + " " + Assembly.GetEntryAssembly()?.GetName().Version;
         }
@@ -56,8 +53,7 @@ namespace Network_Analyzer_WinForms
 
             if (!synchronizationStatus)
             {
-                DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.SynchronizationNotFinished") + Environment.NewLine + Localizer.LocalizeString("Main.WantToExitMessage"),
-                    Localizer.LocalizeString("Main.WarningBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Main.SynchronizationNotFinished") + Environment.NewLine + Localizer.LocalizeString("Main.WantToExitMessage"), Localizer.LocalizeString("Main.WarningBox"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Cancel)
                 {
@@ -277,20 +273,12 @@ namespace Network_Analyzer_WinForms
             if (index.HasValue)
             {
                 long connectionIndex = (long)dgvConnections.Rows[index.Value].Cells["Id"].Value;
-                ConnectionViewModel connection = _backendServce.GetConnectionAsync(connectionIndex).Result;
 
-                if (connection != null)
+                using (Editor editor = new Editor(connectionIndex))
                 {
-                    using (Editor editor = new Editor(connection))
-                    {
-                        Hide();
-                        editor.ShowDialog();
-                        Show();
-                    }
-                }
-                else
-                {
-                    lblInformation.Text = Localizer.LocalizeString("Main.NoConnectionFoundForEditing");
+                    Hide();
+                    editor.ShowDialog();
+                    Show();
                 }
             }
             else
