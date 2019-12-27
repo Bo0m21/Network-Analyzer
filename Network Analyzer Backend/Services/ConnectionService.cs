@@ -46,6 +46,16 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
+        ///     Get connections count by user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public int GetConnectionsCount(long userId)
+        {
+            return _databaseContext.Connections.Where(c => c.UserId == userId).Count();
+        }
+
+        /// <summary>
         ///     Create connection
         /// </summary>
         /// <param name="connection"></param>

@@ -64,7 +64,7 @@ namespace Network_Analyzer_Backend.Controllers
         }
 
         /// <summary>
-        ///     Get connections
+        ///     Get connection packets
         /// </summary>
         /// <param name="connectionId"></param>
         /// <returns></returns>
@@ -85,6 +85,32 @@ namespace Network_Analyzer_Backend.Controllers
                 List<ConnectionPacketViewModel> connectionPacketsViewModel =
                     _mapper.Map<List<ConnectionPacketViewModel>>(connectionPackets);
                 return connectionPacketsViewModel;
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
+        ///     Get connections packets count
+        /// </summary>
+        /// <param name="connectionId"></param>
+        /// <returns></returns>
+        [HttpGet("GetConnectionPacketsCount")]
+        public ActionResult<int> GetConnectionPacketsCount(long connectionId)
+        {
+            try
+            {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                return _connectionPacketService.GetConnectionPacketsCount(userId, connectionId);
             }
             catch (Exception ex)
             {

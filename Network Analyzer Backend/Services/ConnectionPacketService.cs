@@ -64,6 +64,25 @@ namespace Network_Analyzer_Backend.Services
         }
 
         /// <summary>
+        ///     Get connection packets count by user id and connection id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="connectionId"></param>
+        /// <returns></returns>
+        public int GetConnectionPacketsCount(long userId, long connectionId)
+        {
+            Connection connection =
+                _databaseContext.Connections.FirstOrDefault(c => c.UserId == userId && c.Id == connectionId);
+
+            if (connection == null)
+            {
+                throw new BadRequestException("Connection not found");
+            }
+
+            return _databaseContext.ConnectionPackets.Where(c => c.ConnectionId == connectionId).Count();
+        }
+
+        /// <summary>
         ///     Create connection packet
         /// </summary>
         /// <param name="connectionPacket"></param>

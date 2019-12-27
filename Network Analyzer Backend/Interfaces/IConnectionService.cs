@@ -7,6 +7,7 @@ namespace Network_Analyzer_Backend.Interfaces
     {
         Connection GetConnection(long userId, long id);
         IEnumerable<Connection> GetConnections(long userId);
+        int GetConnectionsCount(long userId);
         Connection Create(Connection connection);
         void Update(Connection connectionParam);
         void CloseConnection(long userId, long id);

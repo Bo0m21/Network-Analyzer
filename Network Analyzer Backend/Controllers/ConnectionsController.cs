@@ -111,6 +111,31 @@ namespace Network_Analyzer_Backend.Controllers
         }
 
         /// <summary>
+        ///     Get connections count
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetConnectionsCount")]
+        public ActionResult<int> GetConnectionsCount()
+        {
+            try
+            {
+                string claimUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+                if (!long.TryParse(claimUserId, out long userId))
+                {
+                    throw new BadRequestException("User not found");
+                }
+
+                return _connectionService.GetConnectionsCount(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.TreatmentException(ex, out int code, out string message);
+                return StatusCode(code, message);
+            }
+        }
+
+        /// <summary>
         ///     Create connection
         /// </summary>
         /// <param name="connectionEdit"></param>
