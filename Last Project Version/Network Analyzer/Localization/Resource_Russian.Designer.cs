@@ -826,6 +826,69 @@ namespace Network_Analyzer.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Соединения не могут быть пустыми.
+        /// </summary>
+        internal static string Editor_DumpConnectionsEmpty {
+            get {
+                return ResourceManager.GetString("Editor.DumpConnectionsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дамп соединений не был сохранен.
+        /// </summary>
+        internal static string Editor_DumpConnectionsNotSaved {
+            get {
+                return ResourceManager.GetString("Editor.DumpConnectionsNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дамп соединений успешно сохранен.
+        /// </summary>
+        internal static string Editor_DumpConnectionsSuccessfullySaved {
+            get {
+                return ResourceManager.GetString("Editor.DumpConnectionsSuccessfullySaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дампер.
+        /// </summary>
+        internal static string Editor_Dumper {
+            get {
+                return ResourceManager.GetString("Editor.Dumper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы хотитете выгрузить пакеты по опкоду.
+        /// </summary>
+        internal static string Editor_DumpQuestion {
+            get {
+                return ResourceManager.GetString("Editor.DumpQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Результат сохранения не может быть пустым.
+        /// </summary>
+        internal static string Editor_DumpSerializationResultEmpty {
+            get {
+                return ResourceManager.GetString("Editor.DumpSerializationResultEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дамп пакетов.
+        /// </summary>
+        internal static string Editor_DumpTitle {
+            get {
+                return ResourceManager.GetString("Editor.DumpTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ASCII.
         /// </summary>
         internal static string Editor_EncodingAscii {

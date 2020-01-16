@@ -768,4 +768,25 @@
   <data name="Authentication.ErrorsAuthentication" xml:space="preserve">
     <value>Ошибки при авторизации</value>
   </data>
+  <data name="Editor.Dumper" xml:space="preserve">
+    <value>Дампер</value>
+  </data>
+  <data name="Editor.DumpQuestion" xml:space="preserve">
+    <value>Вы хотитете выгрузить пакеты по опкоду</value>
+  </data>
+  <data name="Editor.DumpTitle" xml:space="preserve">
+    <value>Дамп пакетов</value>
+  </data>
+  <data name="Editor.DumpConnectionsEmpty" xml:space="preserve">
+    <value>Соединения не могут быть пустыми</value>
+  </data>
+  <data name="Editor.DumpConnectionsNotSaved" xml:space="preserve">
+    <value>Дамп соединений не был сохранен</value>
+  </data>
+  <data name="Editor.DumpConnectionsSuccessfullySaved" xml:space="preserve">
+    <value>Дамп соединений успешно сохранен</value>
+  </data>
+  <data name="Editor.DumpSerializationResultEmpty" xml:space="preserve">
+    <value>Результат сохранения не может быть пустым</value>
+  </data>
 </root>

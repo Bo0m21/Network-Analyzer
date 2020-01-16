@@ -284,6 +284,51 @@ namespace Network_Analyzer
 			lblInformation.Text = Localizer.LocalizeString("Editor.ConfigurationCreateSuccessfully");
 		}
 
+		private void DumperToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (m_Decryptor == null)
+			{
+				cbTypeEncryptionPackets.SelectedIndex = 0;
+
+				lblInformation.Text = Localizer.LocalizeString("Editor.ErrorLoadingDecryptor");
+				return;
+			}
+
+			DialogResult dialogResult = MessageBox.Show(Localizer.LocalizeString("Editor.DumpQuestion") + ": " + m_CurrentConnectionPacketModel.Opcode + "?", Localizer.LocalizeString("Editor.DumpTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if (dialogResult == DialogResult.Yes)
+			{
+				if (m_ConnectionModel.DecryptedPackets.Count == 0)
+				{
+					lblInformation.Text = Localizer.LocalizeString("Editor.DumpConnectionsEmpty");
+					return;
+				}
+
+				string dumpConnectionsJson = JsonConvert.SerializeObject(m_ConnectionModel.DecryptedPackets);
+
+				if (string.IsNullOrEmpty(dumpConnectionsJson))
+				{
+					lblInformation.Text = Localizer.LocalizeString("Editor.DumpSerializationResultEmpty");
+					return;
+				}
+
+				using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+				{
+					saveFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+
+					if (saveFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						File.WriteAllText(saveFileDialog.FileName, dumpConnectionsJson);
+						lblInformation.Text = Localizer.LocalizeString("Editor.DumpConnectionsSuccessfullySaved");
+					}
+				}
+			}
+			else
+			{
+				lblInformation.Text = Localizer.LocalizeString("Editor.DumpConnectionsNotSaved");
+			}
+		}
+
 		#endregion
 
 		#region Tab Controls
