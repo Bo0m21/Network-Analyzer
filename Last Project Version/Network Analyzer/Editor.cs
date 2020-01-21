@@ -531,7 +531,7 @@ namespace Network_Analyzer
 
         private void HbHexEditor_DoubleClick(object sender, EventArgs e)
         {
-            var entryConfigurationField = m_ConfigurationModel.GetEntryFieldByIndex(m_CurrentConfigurationClassModel, hbHexEditor.SelectionStart);
+            var entryConfigurationField = m_ConfigurationModel.GetEntryFieldByIndex(m_CurrentConfigurationClassModel, null, hbHexEditor.SelectionStart);
 
             if (entryConfigurationField != null)
             {

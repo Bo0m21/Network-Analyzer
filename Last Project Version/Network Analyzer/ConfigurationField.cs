@@ -280,7 +280,7 @@ namespace Network_Analyzer
 
             var fieldLength = m_ConfigurationModel.GetLengthByType(cbType.Text, cbCommon.Text);
 
-            if (m_ConfigurationModel.GetEntryFieldByIndex(m_ConfigurationClassModel, position, fieldLength) != null)
+            if (m_ConfigurationModel.GetEntryFieldByIndex(m_ConfigurationClassModel, m_ConfigurationFieldModel, position, fieldLength) != null)
             {
                 lblInformation.Text = Localizer.LocalizeString("ConfigurationField.ErrorsPositionAlreadyUse");
                 return;
